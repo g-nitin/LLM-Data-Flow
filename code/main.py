@@ -110,8 +110,8 @@ class ProceduralText:
             "seconds",
             "degree",
             "degrees",
-            "f",
-            "c",
+            # "f",
+            # "c",
             "fahrenheit",
             "celsius",
         }
