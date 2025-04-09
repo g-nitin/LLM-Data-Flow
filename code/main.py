@@ -9,8 +9,8 @@ import networkx as nx
 import spacy
 
 # Load spaCy model for NLP processing
-# nlp = spacy.load("en_core_web_sm")
-nlp = spacy.load("en_core_web_trf")
+nlp = spacy.load("en_core_web_sm")
+# nlp = spacy.load("en_core_web_trf")
 
 
 @dataclass
@@ -49,13 +49,16 @@ class ProceduralText:
 
         # Log all variables
         loguru.logger.info(
-            f"\n{len(self.steps)} steps:\n{pformat(self.steps)}"
+            f"\n{len(self.steps)} steps:\n{pformat(list(zip(range(1, len(self.steps)), self.steps)))}"
             f"\nParsed {len(self.entities)} entities:\n{pformat(self.entities)}"
             f"\nStep dependencies:\n{pformat(list(self.step_dependencies.edges()))}"
         )
 
     def _extract_entities_from_step(self, step_idx, step_text):
-        """Extract entities from a step using NLP techniques"""
+        """
+        Extract entities from a step using NLP techniques with filtering for recipes
+        Note that the method is specific to RECIPES.
+        """
         doc = nlp(step_text)
 
         # Extract all potential entities (nouns and noun phrases)
@@ -71,16 +74,86 @@ class ProceduralText:
             if token.pos_ == "NOUN" and not token.is_stop:
                 potential_entities.append(token.text.lower())
 
+        # Define patterns to filter out
+        measurement_units = {
+            "cup",
+            "cups",
+            "tablespoon",
+            "tablespoons",
+            "teaspoon",
+            "teaspoons",
+            "ounce",
+            "ounces",
+            "pound",
+            "pounds",
+            "gram",
+            "grams",
+            "kilogram",
+            "kilograms",
+            "milliliter",
+            "milliliters",
+            "liter",
+            "liters",
+            "pint",
+            "pints",
+            "quart",
+            "quarts",
+            "gallon",
+            "gallons",
+            "inch",
+            "inches",
+            "minute",
+            "minutes",
+            "hour",
+            "hours",
+            "second",
+            "seconds",
+            "degree",
+            "degrees",
+            "f",
+            "c",
+            "fahrenheit",
+            "celsius",
+        }
+
+        # Patterns for measurements with numbers
+        measurement_patterns = [
+            r"\d+\s*-*\s*\d*\s*(minute|minutes|min|mins|hour|hours|second|seconds|sec|secs)",
+            r"\d+\s*(cup|cups|tablespoon|tbsp|teaspoon|tsp|ounce|oz|pound|lb|gram|g|kg|ml|l)",
+            r"\d+\s*-*\s*\d*\s*(degree|degrees|°)\s*[fc]",
+        ]
+
         # Process each potential entity
         for entity_name in potential_entities:
-            # Skip very common words or short entities
-            if len(entity_name) < 3 or entity_name in {
-                "step",
-                "time",
-                "minute",
-                "hour",
-                "second",
-            }:
+            # Skip very common words, short entities, or measurement units
+            if (
+                len(entity_name) < 3
+                or entity_name in measurement_units
+                or any(word in entity_name for word in measurement_units)
+                or any(
+                    re.search(pattern, entity_name, re.IGNORECASE)
+                    for pattern in measurement_patterns
+                )
+                or entity_name
+                in {"step", "time", "texture", "pan", "mixture", "batter"}
+            ):
+                loguru.logger.debug(f"Skipping entity due to filtering: {entity_name}")
+                continue
+
+            # Skip entities that are just numbers or measurements
+            if re.match(r"^\d+(\.\d+)?$", entity_name) or re.match(
+                r"^\d+/\d+$", entity_name
+            ):
+                loguru.logger.debug(
+                    f"Skipping entity due to being a number: {entity_name}"
+                )
+                continue
+
+            # Skip temperature references
+            if "degree" in entity_name or "°" in entity_name:
+                loguru.logger.debug(
+                    f"Skipping entity due to being a temperature: {entity_name}"
+                )
                 continue
 
             # Create or update entity
