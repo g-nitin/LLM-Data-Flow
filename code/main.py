@@ -1,16 +1,21 @@
+import json
+import os
 import random
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from pprint import pformat
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import loguru
+import matplotlib.pyplot as plt
 import networkx as nx
 import spacy
+from tqdm import tqdm
 
 # Load spaCy model for NLP processing
-nlp = spacy.load("en_core_web_sm")
-# nlp = spacy.load("en_core_web_trf")
+# nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_trf")
 
 
 @dataclass
@@ -761,61 +766,293 @@ class QuestionGenerator:
         return questions
 
 
-# Example usage
-def analyze_recipe(recipe_name, steps, goal):
-    loguru.logger.info(f"\n----- Analyzing Recipe: {recipe_name} -----")
+def read_recipe_from_json(file_path: str) -> Dict[str, Any]:
+    """
+    Read a recipe from a JSON file.
 
+    :param file_path: Path to the JSON file
+    :return: Dictionary containing the recipe data
+    """
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def process_recipe_folder(
+    folder_path: str, output_folder: str, limit: Optional[int] = None
+) -> None:
+    """
+    Process all recipe JSON files in a folder.
+
+    :param folder_path: Path to the folder containing recipe JSON files
+    :param output_folder: Path to the folder where output JSON files will be saved
+    :param limit: Optional limit on the number of recipes to process
+    """
+    # Create output folder if it doesn't exist
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Get all JSON files in the folder
+    json_files = [f for f in os.listdir(folder_path) if f.endswith(".json")]
+
+    if limit:
+        json_files = json_files[:limit]
+
+    # Process each file
+    all_entities = Counter()
+    recipe_stats = []
+
+    for file_name in tqdm(json_files, desc="Processing recipes"):
+        file_path = os.path.join(folder_path, file_name)
+        recipe_data = read_recipe_from_json(file_path)
+
+        # Extract relevant information
+        title = recipe_data.get("title", "Untitled Recipe")
+        instructions = recipe_data.get("instructions_list", [])
+
+        if not instructions:
+            loguru.logger.warning(f"No instructions found in {file_name}, skipping.")
+            continue
+
+        # Process the recipe
+        try:
+            result = process_single_recipe(title, instructions)
+
+            # Count entities
+            for entity in result["entities"].keys():
+                all_entities[entity] += 1
+
+            # Save the processed recipe
+            output_path = os.path.join(output_folder, file_name)
+            with open(output_path, "w", encoding="utf-8") as f:
+                json.dump(result, f, indent=2)
+
+            # Collect stats
+            recipe_stats.append(
+                {
+                    "title": title,
+                    "num_steps": len(instructions),
+                    "num_entities": len(result["entities"]),
+                    "num_questions": len(result["questions"]),
+                }
+            )
+
+            loguru.logger.info(
+                f"Processed {title} - {len(instructions)} steps, {len(result['entities'])} entities"
+            )
+
+        except Exception as e:
+            loguru.logger.error(f"Error processing {file_name}: {str(e)}")
+
+    # Save the entity counts
+    with open(
+        os.path.join(output_folder, "all_entities.json"), "w", encoding="utf-8"
+    ) as f:
+        json.dump(
+            {"entities": list(all_entities.keys()), "entity_counts": all_entities},
+            f,
+            indent=2,
+        )
+
+    # Plot entity frequency
+    plot_entity_frequency(all_entities, output_folder)
+
+    # Save processing statistics
+    with open(
+        os.path.join(output_folder, "processing_stats.json"), "w", encoding="utf-8"
+    ) as f:
+        json.dump(
+            {
+                "total_recipes": len(recipe_stats),
+                "total_entities": len(all_entities),
+                "recipes": recipe_stats,
+            },
+            f,
+            indent=2,
+        )
+
+
+def process_single_recipe(title: str, instructions: List[str]) -> Dict[str, Any]:
+    """
+    Process a single recipe and generate questions.
+
+    :param title: Recipe title
+    :param instructions: List of recipe instructions
+    :return: Dictionary with processed recipe data
+    """
     # Create procedural text
-    proc_text = ProceduralText(goal, steps)
+    proc_text = ProceduralText(title, instructions)
 
     # Generate questions
     question_gen = QuestionGenerator(proc_text)
-    questions = question_gen.generate_all_questions(num_per_type=1)
+    questions = question_gen.generate_all_questions(
+        num_per_type=2
+    )  # Generate 2 questions per type
 
-    # Print questions and answers
+    # Format instructions as a dictionary with step numbers
+    formatted_instructions = {i + 1: step for i, step in enumerate(instructions)}
+
+    # Format entities for output
+    formatted_entities = {}
+    for entity_name, entity in proc_text.entities.items():
+        formatted_entities[entity_name] = {
+            "step_introduced": entity.step_introduced + 1,  # Convert to 1-indexed
+            "states": entity.states,
+            "used_in": [step + 1 for step in entity.used_in],  # Convert to 1-indexed
+            "defined_in": [
+                step + 1 for step in entity.defined_in
+            ],  # Convert to 1-indexed
+            "consumed_in": [
+                step + 1 for step in entity.consumed_in
+            ],  # Convert to 1-indexed
+        }
+
+    # Format questions for output
+    formatted_questions = []
     for q_type, (question, answer) in questions:
-        logging_str = f"\n{q_type}:\nQ: {question}\nA: {answer}\n"
+        if answer is not None:  # Only include valid questions
+            formatted_questions.append(
+                {"type": q_type, "question": question, "answer": answer}
+            )
+
+    # Create the output dictionary
+    result = {
+        "title": title,
+        "instructions": formatted_instructions,
+        "entities": formatted_entities,
+        "questions": formatted_questions,
+        "metadata": {
+            "num_steps": len(instructions),
+            "num_entities": len(formatted_entities),
+            "num_questions": len(formatted_questions),
+        },
+    }
+
+    return result
+
+
+def filter_questions_by_confidence(questions, min_confidence=0.7):
+    """
+    Filter questions based on a confidence score.
+
+    :param questions: List of (question_type, (question, answer)) tuples
+    :param min_confidence: Minimum confidence threshold
+    :return: Filtered list of questions
+    """
+    filtered_questions = []
+
+    for q_type, (question, answer) in questions:
         if answer is None:
-            loguru.logger.warning(logging_str)
-        else:
-            loguru.logger.info(logging_str)
+            continue
+
+        # Assign confidence based on question type and answer
+        confidence = 0.8  # Default confidence
+
+        # Adjust confidence based on question type
+        if q_type == "Interval Analysis" and isinstance(answer, str):
+            confidence = 0.9  # Time intervals are usually clear
+        elif q_type == "Taint Analysis":
+            confidence = 0.6  # Taint analysis can be subjective
+
+        # Include questions above the confidence threshold
+        if confidence >= min_confidence:
+            filtered_questions.append((q_type, (question, answer, confidence)))
+
+    return filtered_questions
+
+
+def plot_entity_frequency(entity_counter: Counter, output_folder: str) -> None:
+    """
+    Plot the frequency of entities and save the plot.
+
+    :param entity_counter: Counter object with entity counts
+    :param output_folder: Folder where to save the plot
+    """
+    # Get the most common entities (top 20)
+    most_common = entity_counter.most_common(20)
+
+    if not most_common:
+        loguru.logger.warning("No entities to plot.")
+        return
+
+    entities, counts = zip(*most_common)
+
+    # Create the plot
+    plt.figure(figsize=(12, 8))
+    bars = plt.bar(range(len(entities)), counts, color="skyblue")
+
+    # Add count labels on top of bars
+    for bar in bars:
+        height = bar.get_height()
+        plt.text(
+            bar.get_x() + bar.get_width() / 2.0,
+            height + 0.1,
+            str(int(height)),
+            ha="center",
+            va="bottom",
+        )
+
+    plt.xticks(range(len(entities)), entities, rotation=45, ha="right")
+    plt.title("Top 20 Most Frequent Entities")
+    plt.xlabel("Entity")
+    plt.ylabel("Frequency")
+    plt.tight_layout()
+
+    # Save the plot
+    plot_path = os.path.join(output_folder, "entity_frequency.png")
+    plt.savefig(plot_path)
+    loguru.logger.info(f"Entity frequency plot saved to {plot_path}")
+
+    # Create a more detailed plot for the top 50 entities
+    if len(entity_counter) > 20:
+        top_50 = entity_counter.most_common(50)
+        entities_50, counts_50 = zip(*top_50)
+
+        plt.figure(figsize=(15, 10))
+        plt.bar(range(len(entities_50)), counts_50, color="lightgreen")
+        plt.xticks(range(len(entities_50)), entities_50, rotation=45)
+        plt.title("Top 50 Most Frequent Entities")
+        plt.xlabel("Entity")
+        plt.ylabel("Frequency")
+        plt.tight_layout()
+
+        plot_path_50 = os.path.join(output_folder, "entity_frequency_top50.png")
+        plt.savefig(plot_path_50)
+        loguru.logger.info(f"Extended entity frequency plot saved to {plot_path_50}")
 
 
 def main():
-    # Setup logging
-    # loguru.logger.add("code/debug.log", level="DEBUG")
+    import argparse
 
-    # Read in json file from cl
-    # parser = argparse.ArgumentParser(description="Analyze procedural text.")
-    # parser.add_argument(
-    #     "--json_file",
-    #     type=str,
-    #     help="Path to the JSON file containing the procedural text.",
-    # )
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        description="Process recipe JSON files and generate questions"
+    )
+    parser.add_argument("input_folder", help="Folder containing recipe JSON files")
+    parser.add_argument(
+        "output_folder", help="Folder where processed recipes will be saved"
+    )
+    parser.add_argument(
+        "--limit", type=int, help="Limit the number of recipes to process"
+    )
+    parser.add_argument(
+        "--log-level",
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        help="Set the logging level",
+    )
 
-    # Test with sample recipes
-    recipes = [
-        {
-            "name": "Bake Banana Bread",
-            "goal": "Bake a delicious banana bread",
-            "steps": [
-                "Preheat the oven to 350 degree F (this takes about 5 minutes).",  # 1
-                "Peel two ripe bananas.",  # 2
-                "Mash the peeled bananas in a bowl.",  # 3
-                "(Optional) Warm 1/2 cup of milk for a moister texture.",  # 4
-                "While the oven is preheating, measure 1 cup of sugar and 2 cups of flour.",  # 5
-                "Combine the mashed bananas, sugar, flour, and the optional milk if used.",  # 6
-                "Crack 1 raw egg into the mixture and stir thoroughly.",  # 7
-                "Pour the batter into a greased loaf pan and bake for 30--35 minutes.",  # 8
-                "Let the baked loaf cool for 10 minutes before slicing.",  # 9
-            ],
-        },
-    ]
+    args = parser.parse_args()
 
-    # Run analysis on each recipe
-    for recipe in recipes:
-        analyze_recipe(recipe["name"], recipe["steps"], recipe["goal"])
+    # Configure logging
+    loguru.logger.remove()
+    loguru.logger.add(
+        os.path.join(args.output_folder, "processing.log"),
+        level=args.log_level,
+    )
+    loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level=args.log_level)
+
+    # Process the recipes
+    process_recipe_folder(args.input_folder, args.output_folder, args.limit)
+
+    loguru.logger.info("Recipe processing complete!")
 
 
 if __name__ == "__main__":

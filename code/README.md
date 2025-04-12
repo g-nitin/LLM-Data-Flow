@@ -37,3 +37,12 @@ This codebase provides a framework for analyzing procedural texts (like recipes 
 3. For each analysis type, it identifies relevant patterns in the procedural text
 4. It generates natural language questions with ground truth answers
 5. These questions test understanding of the procedural flow and entity relationships
+
+
+## Running
+
+An example of processing up to 100 recipes from the input folder, save the results to the output folder, and log at the INFO level.
+
+```bash
+uv run python recipe_processor.py /path/to/recipes /path/to/output --limit 100 --log-level INFO
+```
