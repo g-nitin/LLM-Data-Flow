@@ -6,6 +6,7 @@ import re
 from collections import Counter
 from dataclasses import dataclass, field
 from pprint import pformat
+from shutil import rmtree
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 import loguru
@@ -950,73 +951,172 @@ def process_recipe_folder(
     folder_path: str, output_folder: str, limit: Optional[int] = None
 ) -> None:
     """
-    Process all recipe JSON files in a folder.
+    Process recipe JSON files in a folder until reaching the specified limit of questions for each type.
 
     :param folder_path: Path to the folder containing recipe JSON files
     :param output_folder: Path to the folder where output JSON files will be saved
-    :param limit: Optional limit on the number of recipes to process
+    :param limit: Optional limit on the number of questions to collect for each type
     """
-    # Create output folder if it doesn't exist
+    # Delete output folder if it exists
+    if os.path.exists(output_folder):
+        rmtree(output_folder)
+        loguru.logger.info(f"Deleting existing output folder: {output_folder}")
+
+    loguru.logger.info(f"Creating new output folder: {output_folder}")
     os.makedirs(output_folder, exist_ok=True)
 
     # Get all JSON files in the folder
     json_files = [f for f in os.listdir(folder_path) if f.endswith(".json")]
+    random.shuffle(json_files)  # Shuffle to get a random selection
 
-    if limit:
-        # Pick random files
-        json_files = random.sample(json_files, min(len(json_files), limit))
+    # Track questions by type
+    question_counts = {
+        "Reaching Definitions": 0,
+        "Very Busy Expressions": 0,
+        "Available Expressions": 0,
+        "Live Variable Analysis": 0,
+        "Interval Analysis": 0,
+        "Type-State Analysis": 0,
+        "Taint Analysis": 0,
+        "Concurrency Analysis": 0,
+    }
 
-    # Process each file
+    # Process each file until we reach the limit for all question types
     all_entities = Counter()
     recipe_stats = []
+    processed_recipes = 0
+    all_questions = []  # Store all generated questions
 
-    for file_name in tqdm(json_files, desc="Processing recipes"):
-        file_path = os.path.join(folder_path, file_name)
-        recipe_data = read_recipe_from_json(file_path)
+    # Define the target: we want at least 'limit' questions of each type
+    target_reached = False
 
-        # Extract relevant information
-        title = recipe_data.get("title", "Untitled Recipe")
-        instructions = recipe_data.get("instructions_list", [])
-        if not instructions:
-            loguru.logger.warning(f"No instructions found in {file_name}, skipping.")
-            continue
+    with tqdm(
+        total=limit * len(question_counts) if limit else len(json_files),
+        desc="Collecting questions",
+    ) as pbar:
+        for file_name in json_files:
+            # Check if we've reached the target for all question types
+            if limit and all(count >= limit for count in question_counts.values()):
+                target_reached = True
+                break
 
-        # Check if instructions are too short
-        if len(instructions) < 3:
-            loguru.logger.warning(
-                f"Recipe {file_name} has fewer than 3 steps, skipping."
-            )
-            continue
+            file_path = os.path.join(folder_path, file_name)
+            recipe_data = read_recipe_from_json(file_path)
 
-        # Process the recipe
-        try:
-            result = process_single_recipe(title, instructions)
+            # Extract relevant information
+            title = recipe_data.get("title", "Untitled Recipe")
+            instructions = recipe_data.get("instructions_list", [])
 
-            # Count entities
-            for entity in result["entities"].keys():
-                all_entities[entity] += 1
+            # Skip recipes with no instructions or too few steps
+            if not instructions:
+                loguru.logger.warning(
+                    f"No instructions found in {file_name}, skipping."
+                )
+                continue
 
-            # Save the processed recipe
-            output_path = os.path.join(output_folder, file_name)
-            with open(output_path, "w", encoding="utf-8") as f:
-                json.dump(result, f, indent=2)
+            if len(instructions) < 3:
+                loguru.logger.warning(
+                    f"Recipe {file_name} has fewer than 3 steps, skipping."
+                )
+                continue
 
-            # Collect stats
-            recipe_stats.append(
-                {
-                    "title": title,
-                    "num_steps": len(instructions),
-                    "num_entities": len(result["entities"]),
-                    "num_questions": len(result["questions"]),
-                }
-            )
+            # Process the recipe
+            try:
+                # Create procedural text
+                proc_text = ProceduralText(title, instructions)
 
-            loguru.logger.info(
-                f"Processed {title} - {len(instructions)} steps, {len(result['entities'])} entities"
-            )
+                # Generate questions
+                question_gen = QuestionGenerator(proc_text)
+                questions = question_gen.generate_all_questions(num_per_type=1)
 
-        except Exception as e:
-            loguru.logger.error(f"Error processing {file_name}: {str(e)}")
+                # Count valid questions by type and update progress
+                valid_questions = []
+                for q_type, (question, answer) in questions:
+                    if answer is not None:  # Only include valid questions
+                        valid_questions.append(
+                            {"type": q_type, "question": question, "answer": answer}
+                        )
+
+                        # Only increment if we haven't reached the limit for this type
+                        if limit and question_counts[q_type] < limit:
+                            question_counts[q_type] += 1
+                            pbar.update(1)
+
+                            # Add to our collection of all questions
+                            all_questions.append(
+                                {
+                                    "type": q_type,
+                                    "question": question,
+                                    "answer": answer,
+                                    "recipe": title,
+                                }
+                            )
+
+                # If this recipe generated valid questions, process and save it
+                if valid_questions:
+                    # Format instructions as a dictionary with step numbers
+                    formatted_instructions = {
+                        i + 1: step for i, step in enumerate(instructions)
+                    }
+
+                    # Format entities for output
+                    formatted_entities = {}
+                    for entity_name, entity in proc_text.entities.items():
+                        formatted_entities[entity_name] = {
+                            "step_introduced": entity.step_introduced
+                            + 1,  # Convert to 1-indexed
+                            "states": entity.states,
+                            "used_in": [
+                                step + 1 for step in entity.used_in
+                            ],  # Convert to 1-indexed
+                            "defined_in": [
+                                step + 1 for step in entity.defined_in
+                            ],  # Convert to 1-indexed
+                            "consumed_in": [
+                                step + 1 for step in entity.consumed_in
+                            ],  # Convert to 1-indexed
+                        }
+
+                    # Count entities
+                    for entity in formatted_entities.keys():
+                        all_entities[entity] += 1
+
+                    # Create the output dictionary
+                    result = {
+                        "title": title,
+                        "instructions": formatted_instructions,
+                        "questions": valid_questions,
+                        "entities": formatted_entities,
+                        "metadata": {
+                            "num_steps": len(instructions),
+                            "num_entities": len(formatted_entities),
+                            "num_questions": len(valid_questions),
+                        },
+                    }
+
+                    # Save the processed recipe
+                    output_path = os.path.join(output_folder, file_name)
+                    with open(output_path, "w", encoding="utf-8") as f:
+                        json.dump(result, f, indent=2)
+
+                    # Collect stats
+                    recipe_stats.append(
+                        {
+                            "title": title,
+                            "num_steps": len(instructions),
+                            "num_entities": len(formatted_entities),
+                            "num_questions": len(valid_questions),
+                        }
+                    )
+
+                    loguru.logger.info(
+                        f"Processed {title} - {len(instructions)} steps, {len(formatted_entities)} entities, {len(valid_questions)} questions"
+                    )
+
+                    processed_recipes += 1
+
+            except Exception as e:
+                loguru.logger.error(f"Error processing {file_name}: {str(e)}")
 
     # Save the entity counts
     with open(
@@ -1031,18 +1131,42 @@ def process_recipe_folder(
     # Plot entity frequency
     plot_entity_frequency(all_entities, output_folder)
 
+    # Save all collected questions
+    with open(
+        os.path.join(output_folder, "all_questions.json"), "w", encoding="utf-8"
+    ) as f:
+        json.dump(all_questions, f, indent=2)
+
+    # Save question counts by type
+    with open(
+        os.path.join(output_folder, "question_counts.json"), "w", encoding="utf-8"
+    ) as f:
+        json.dump(question_counts, f, indent=2)
+
     # Save processing statistics
     with open(
         os.path.join(output_folder, "processing_stats.json"), "w", encoding="utf-8"
     ) as f:
         json.dump(
             {
-                "total_recipes": len(recipe_stats),
+                "total_recipes_processed": processed_recipes,
                 "total_entities": len(all_entities),
+                "question_counts": question_counts,
+                "target_reached": target_reached,
                 "recipes": recipe_stats,
             },
             f,
             indent=2,
+        )
+
+    # Log summary
+    loguru.logger.info(f"Successfully processed {processed_recipes} recipes")
+    loguru.logger.info(f"Question counts by type: {question_counts}")
+    if target_reached:
+        loguru.logger.info(f"Target of {limit} questions per type reached!")
+    else:
+        loguru.logger.warning(
+            f"Target of {limit} questions per type NOT reached. Exhausted all available recipes."
         )
 
 
@@ -1055,7 +1179,10 @@ def main():
         "output_folder", help="Folder where processed recipes will be saved"
     )
     parser.add_argument(
-        "--limit", default=500, type=int, help="Limit the number of recipes to process"
+        "--limit",
+        default=500,
+        type=int,
+        help="The limit on the number of questions per type",
     )
     parser.add_argument(
         "--log-level",
