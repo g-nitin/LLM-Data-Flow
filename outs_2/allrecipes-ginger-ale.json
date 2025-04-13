@@ -1,0 +1,453 @@
+{
+  "title": "Ginger Ale",
+  "instructions": {
+    "1": "Cut small pieces of peeled ginger root and place in a press (like the kind used for garlic). Press ginger root to produce 1 tablespoon of juice and place in small bowl. Add strained lemon juice, vanilla extract and Stevia Extract In The Raw. Stir to combine.",
+    "2": "Open 2-liter bottle of seltzer and pour out 1/2 cup to make room for soda flavor mixture. Using a funnel, pour mixture into soda bottle and quickly screw on cap.",
+    "3": "Careful! The carbonated water will react explosively with the natural ingredients in flavor mixture.",
+    "4": "Allow for ingredients to mix with water and for some gas to be released from bottle prior to uncapping - by unscrewing cap just a small amount to hear hissssss. Pour over ice and enjoy!"
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the ingredients from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is press from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is soda flavor mixture still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to allow the ingredients in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using ginger in Step 1 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "small pieces": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "peeled ginger root": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "press": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "kind": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ginger root": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "strained lemon juice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vanilla extract": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "stevia extract": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "raw": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pieces": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "root": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "extract": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "seltzer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "room": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "soda flavor mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "funnel": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "soda bottle": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cap": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bottle": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "soda": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flavor": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "carbonated water": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "natural ingredients": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flavor mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ingredients": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "gas": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "uncapping": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "hissssss": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "ice": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 37,
+    "num_questions": 5
+  }
+}

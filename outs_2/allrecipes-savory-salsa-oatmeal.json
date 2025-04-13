@@ -1,0 +1,370 @@
+{
+  "title": "Savory Salsa Oatmeal",
+  "instructions": {
+    "1": "Combine water, oats, and 1/8 teaspoon salt in a microwave-safe bowl. Cook on high in the microwave until the water is absorbed and oats are tender, 2 1/2 to 3 minutes.",
+    "2": "Cook onion, red bell pepper, olives, and black beans in a nonstick skillet over medium heat, stirring occasionally, until softened, about 5 minutes. Season with salt and pepper. Stir onion mixture, salsa, and Cheddar cheese into cooked oatmeal.",
+    "3": "Heat a nonstick skillet over medium heat; cook egg to desired doneness, 3 to 5 minutes. Top oatmeal with fried egg. Garnish with diced avocado and sour cream."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the oatmeal from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is olives from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is egg still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to heat the skillet in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using egg in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oats": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "microwave - safe bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "red bell pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "olives": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "black beans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "nonstick skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salsa": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheddar cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooked oatmeal": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bell": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oatmeal": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "desired doneness": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fried egg": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "diced avocado": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "doneness": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "avocado": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 29,
+    "num_questions": 6
+  }
+}

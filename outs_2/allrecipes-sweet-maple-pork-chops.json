@@ -1,0 +1,387 @@
+{
+  "title": "Sweet Maple Pork Chops",
+  "instructions": {
+    "1": "Mix the egg, 3 cups heavy cream, salt, and pepper in a shallow bowl. Season the pork chops with salt and pepper, and dip in the cream mixture. Then dredge in the oats to coat. Repeat to coat chops completely.",
+    "2": "Heat the oil in a skillet over medium-high heat. Use tongs to place the coated chops in the hot oil, and fry until browned on both sides. Remove from heat, and set aside.",
+    "3": "Melt the butter in a skillet over medium heat (you may use the same skillet if the oil has been drained), and cook the pork chops, onion, and garlic until onion is tender. Pour in the maple syrup, and mix in mushrooms and basil. Season with salt and pepper. Cover, reduce heat to low, and cook 10 minutes, or until pork chops are done. Remove chops from skillet, reserving sauce.",
+    "4": "Mix the remaining cream into the skillet with reserved sauce. Bring to a boil. Cook and stir until thickened. Serve over the pork chops."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the pork from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chops from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is pork from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is mushrooms still needed after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 3?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to mix the sauce in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using egg in Step 1 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "egg": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallow bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pork chops": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oats": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chops": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "cream": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pork": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tongs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coated chops": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "hot oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sides": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "maple syrup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "maple": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "syrup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "remaining cream": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "reserved sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 29,
+    "num_questions": 7
+  }
+}

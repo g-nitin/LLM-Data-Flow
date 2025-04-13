@@ -1,0 +1,414 @@
+{
+  "title": "Broiled Asparagus with Lemon Tarragon Dressing",
+  "instructions": {
+    "1": "Preheat the oven's broiler and set the oven rack at about 6 inches from the heat source.",
+    "2": "Toss the asparagus with 4 teaspoons olive oil, salt, and pepper. Spread out onto the prepared baking sheet, and broil in the preheated oven until the asparagus spears are just tender and begin to turn lightly brown, about 8 minutes. Turn the spears over halfway through cooking.",
+    "3": "While the spears are cooking, prepare the dressing by whisking together the lemon juice, shallot, tarragon, mustard, and olive oil in a small bowl; season to taste with salt and pepper. Once the asparagus is done, place it onto a serving platter and pour the dressing overtop."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the salt from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is asparagus from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is small bowl still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "8 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to cook the asparagus in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we toss (Step 2) and cook (Step 3) at the same time?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "oven broiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven rack": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "heat source": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "broiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "source": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "asparagus": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "prepared baking sheet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "asparagus spears": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spears": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "olive": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "dressing": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lemon juice": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "shallot": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tarragon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "olive oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "serving platter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "platter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "overtop": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 33,
+    "num_questions": 6
+  }
+}

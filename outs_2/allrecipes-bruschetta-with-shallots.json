@@ -1,0 +1,328 @@
+{
+  "title": "Bruschetta with Shallots",
+  "instructions": {
+    "1": "In a large bowl, toss together the roma tomatoes, minced garlic, shallots, basil, lemon juice, salt, pepper and 1/3 cup olive oil.",
+    "2": "Place the slivered garlic and 1/4 cup olive oil in small saucepan over medium heat. Slowly cook and stir 2 to 3 minutes. Discard garlic.",
+    "3": "Toast the bread slices, and brush with the olive oil heated with garlic. Top slices with the roma tomato mixture."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the roma from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oil from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is lemon from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is bread still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "2-3 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to toast the garlic in Step 3?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "large bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "roma tomatoes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "minced garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lemon juice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "roma": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "slivered garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "olive": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread slices": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "olive oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "slices": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "roma tomato mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomato": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 25,
+    "num_questions": 6
+  }
+}

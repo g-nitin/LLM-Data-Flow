@@ -1,0 +1,326 @@
+{
+  "title": "Veggies with Creamy Chive and Onion Sauce",
+  "instructions": {
+    "1": "Bring carrots and cauliflower to boil in 1 inch water in Dutch oven or large deep skillet; cover. Cook 2 min. Add broccoli; cook, covered, 3 to 5 min. or until vegetables are crisp-tender.",
+    "2": "Meanwhile, heat oil in small saucepan on medium-high heat. Add onions; cook and stir 1 min. Add cream cheese spread and milk; cook and stir 2-3 min. or until cream cheese is melted, stirring frequently.",
+    "3": "Drain vegetables; place in serving dish. Top with cream cheese sauce."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the min from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is large deep skillet from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is spread still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "3 min"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to drain the cream in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we heat (Step 2) and drain (Step 3) at the same time?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "carrots": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cauliflower": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dutch oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large deep skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "broccoli": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "min": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cream cheese spread": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spread": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "serving dish": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cream cheese sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dish": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 25,
+    "num_questions": 6
+  }
+}

@@ -1,0 +1,567 @@
+{
+  "title": "Butter Chicken (Murgh Makhani)",
+  "instructions": {
+    "1": "Gather the ingredients.",
+    "2": "Make a spice mix by combining garam masala, tandoori masala, curry powder, cumin, cardamom, cayenne, salt, and black pepper in a small bowl; set aside.",
+    "3": "Place chicken in a large bowl and add 1/2 of the spice mixture; turn to coat evenly.",
+    "4": "Melt 1 tablespoon butter in a large skillet over medium heat. Add chicken; cook and stir until lightly browned, about 10 minutes. Remove from heat.",
+    "5": "Melt remaining 2 tablespoons butter in a large saucepan over medium heat. Add onion; cook and stir until soft and translucent, about 5 minutes. Stir in remainder of the spice mixture, garlic, lemon juice, and ginger; cook and stir until combined, about 1 minute.",
+    "6": "Stir tomato puree into onion mixture and cook, stirring frequently, about 2 minutes. Pour in half-and-half and yogurt. Reduce heat to low and simmer sauce, stirring frequently, about 10 minutes. Remove from heat.",
+    "7": "Blend cashews in a blender until finely ground. Add sauce to the blender; puree until smooth.",
+    "8": "Pour blended sauce over chicken in the skillet. Simmer until thickened, 10 to 15 minutes. Garnish with cilantro."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 8, is the chicken from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chicken from Step 3 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is spice mixture from Step 3 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onion still needed after Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "1 minute"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to pour the chicken in Step 8?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "spice mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garam masala": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tandoori masala": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "curry powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cumin": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cardamom": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spice": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garam": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "masala": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tandoori": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "curry": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "spice mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large skillet": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        8
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "large saucepan": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "remainder": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "lemon juice": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tomato puree": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "onion mixture": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "- half": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "yogurt": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7,
+        8
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "tomato": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "puree": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cashews": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "blended sauce": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 46,
+    "num_questions": 6
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "title": "Skinny Mojito with Truvia\u00ae Natural Sweetener",
+  "instructions": {
+    "1": "In a cocktail shaker add all the ingredients together except soda water and fill halfway with ice. Shake vigorously.",
+    "2": "Double strain into glass filled with ice, add splash of soda water and garnish."
+  },
+  "entities": {
+    "a cocktail shaker": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "all the ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "soda water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cocktail": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shaker": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "double strain": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "glass": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "splash": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "strain": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the ice from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is soda water from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is soda still needed after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to fill the ice in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the soda from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is ingredients from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is glass still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to fill the ice in Step 2?",
+      "answer": false
+    }
+  ],
+  "metadata": {
+    "num_steps": 2,
+    "num_entities": 13,
+    "num_questions": 8
+  }
+}

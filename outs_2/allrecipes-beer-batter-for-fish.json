@@ -1,0 +1,338 @@
+{
+  "title": "Beer Batter for Fish",
+  "instructions": {
+    "1": "In a medium bowl, stir together flour, baking powder, baking soda, and cornstarch.",
+    "2": "In a large bowl, beat together eggs and milk. Mix in beer. Stir in flour mixture. Season with salt, black pepper, and garlic powder.",
+    "3": "In an electric deep fryer or a heavy saucepan, heat oil to 375 degrees F (190 degrees C).",
+    "4": "Coat fish in batter, and submerge in hot oil. Fry until golden brown, about 4 to 5 minutes. Serve."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the oil from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is flour from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is flour mixture still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 4?",
+      "answer": "4-5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to beat the flour in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 2 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "medium bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "electric deep fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "heavy saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fish": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "hot oil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 26,
+    "num_questions": 6
+  }
+}

@@ -1,0 +1,426 @@
+{
+  "title": "Shami Kebab",
+  "instructions": {
+    "1": "Place lentils in a container. Pour in enough water to cover and let soak, at least 30 minutes. Drain.",
+    "2": "Combine drained lentils, 4 1/4 cups water, ground chicken, onion, green chile peppers, ginger-garlic paste, garam masala, and salt in a large pot. Bring to a boil; reduce heat and let simmer until water has been mostly absorbed and lentils are soft, 20 to 25 minutes.",
+    "3": "Place the lentil mixture in a food processor and pulse until smooth. Stir in cilantro.",
+    "4": "Shape mixture into patties and dip into beaten eggs.",
+    "5": "Heat oil in a large skillet over medium heat. Pan-fry patties in batches until golden brown, about 3 minutes per side."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the lentils from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is water from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is lentil mixture still needed after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "20-25 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to combine the lentils in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 4 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "lentils": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "container": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "drained lentils": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ground chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "green chile peppers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger - garlic paste": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garam masala": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "large pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chile": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "peppers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "paste": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garam": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "masala": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lentil mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "food processor": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lentil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "food": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "processor": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "patties": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "beaten eggs": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "large skillet": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 34,
+    "num_questions": 6
+  }
+}

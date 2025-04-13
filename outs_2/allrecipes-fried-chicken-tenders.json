@@ -1,0 +1,472 @@
+{
+  "title": "Fried Chicken Tenders",
+  "instructions": {
+    "1": "Prepare the breading station: Place flour in a shallow bowl. Place eggs and water in a second shallow bowl. Place bread crumbs in a third shallow bowl, and mix in ground black pepper and cayenne pepper.",
+    "2": "Coat chicken in flour, then eggs, and then bread crumbs, one piece at a time, and set aside.",
+    "3": "Heat oil in a deep fryer to 375 degrees F (190 degrees C).",
+    "4": "Fry chicken in small batches until the pieces are golden brown, 6 to 8 minutes. Remove chicken to drain on paper towels or a wire rack.",
+    "5": "Make the dipping sauce: Combine mayonnaise, sour cream, horseradish, mustard, and Worcestershire sauce in a small bowl. Mix well, and serve with chicken."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the bowl from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is water from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is flour still needed after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 4?",
+      "answer": "6-8 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to coat the eggs in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 1 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "breading station": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallow bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread crumbs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ground black pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "breading": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "station": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "crumbs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "deep fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "small batches": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pieces": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "paper towels": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wire rack": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "paper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "towels": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "dipping sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "mayonnaise": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "horseradish": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "worcestershire sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dipping": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 38,
+    "num_questions": 6
+  }
+}

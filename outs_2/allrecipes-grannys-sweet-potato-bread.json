@@ -1,0 +1,430 @@
+{
+  "title": "Granny's Sweet Potato Bread",
+  "instructions": {
+    "1": "Preheat the oven to 375 degrees F (190 degrees C). Wrap sweet potato in aluminum foil.",
+    "2": "Bake sweet potato in the preheated oven until easily pierced with a fork, about 1 hour. Set aside to cool.",
+    "3": "Whisk white sugar and canola oil together in a bowl. Add eggs; mix well. Sift in flour, cinnamon, and nutmeg. Slowly whisk in water until incorporated.",
+    "4": "Peel sweet potato; mash into batter. Fold in 1/2 cup chopped pecans.",
+    "5": "Reduce oven temperature to 320 degrees F (160 degrees C). Coat a 9x5-inch loaf pan with cooking spray.",
+    "6": "Pour batter into the prepared loaf pan.",
+    "7": "Bake in the preheated oven until a toothpick inserted into the center comes out clean, about 1 hour.",
+    "8": "Heat brown sugar and butter in a small saucepan over low heat until sugar is dissolved, about 5 minutes. Stir in remaining 1/2 cup chopped pecans to combine. Remove from heat. Pour glaze over bread."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the oven from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is sweet potato from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is sugar from Step 3 still available in Step 6?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is butter still needed after Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 7?",
+      "answer": "1 hour"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to pour the loaf in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2,
+        5,
+        7
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sweet potato": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "aluminum foil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "potato": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1,
+        4
+      ],
+      "consumed_in": []
+    },
+    "aluminum": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "foil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fork": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "white sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "canola oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "canola": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pecans": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        8
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "oven temperature": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cooking spray": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "loaf": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cooking": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "spray": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "prepared loaf pan": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "toothpick": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "glaze": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 33,
+    "num_questions": 7
+  }
+}

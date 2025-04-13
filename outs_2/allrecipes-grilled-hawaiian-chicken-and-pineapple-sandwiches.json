@@ -1,0 +1,516 @@
+{
+  "title": "Grilled Hawaiian Chicken and Pineapple Sandwiches",
+  "instructions": {
+    "1": "Pour marinade into a large resealable bag. Add chicken breasts, coat with marinade, squeeze out excess air, and seal the bag. Marinate in the refrigerator for at least 1 hour, or overnight.",
+    "2": "When ready to cook, preheat an outdoor grill for medium-high heat and lightly oil the grate with cooking spray.",
+    "3": "Remove chicken from marinade and shake off excess. Discard remaining marinade.",
+    "4": "Cook chicken on the preheated grill until no longer pink in the center and the juices run clear, about 10 minutes, turning halfway through. An instant-read thermometer inserted into the center should read at least 165 degrees F (74 degrees C).",
+    "5": "When you turn the chicken, place pineapple slices onto the grill; cook for about 2 minutes per side. Toast rolls on the grill if desired.",
+    "6": "Place a grilled pineapple slice onto each chicken breast, then top with provolone. Close the lid and cook until cheese is melted, about 1 minute.",
+    "7": "Transfer chicken breasts, pineapple rings, and cheese to bottom rolls, then top with lettuce and tomato. Spread dressing onto top rolls and place onto sandwiches."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the chicken breasts from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chicken from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is refrigerator from Step 1 still available in Step 6?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is lid still needed after Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "2 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to transfer the chicken in Step 7?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "marinade": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large resealable bag": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken breasts": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        7
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "excess air": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bag": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "breasts": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        7
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "air": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "outdoor grill": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "grate": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking spray": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spray": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "excess": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "remaining marinade": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "preheated grill": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "juices": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "instant - read thermometer": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "read": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "thermometer": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pineapple slices": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "toast rolls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "pineapple": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6,
+        7
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "slices": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "toast": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "rolls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        7
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "grilled pineapple slice": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "chicken breast": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "provolone": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "lid": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "slice": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "breast": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pineapple rings": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lettuce": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "tomato": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dressing": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "sandwiches": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "rings": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 7,
+    "num_entities": 41,
+    "num_questions": 6
+  }
+}

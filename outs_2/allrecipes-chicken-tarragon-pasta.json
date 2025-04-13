@@ -1,0 +1,319 @@
+{
+  "title": "Chicken Tarragon Pasta",
+  "instructions": {
+    "1": "Bring a large pot of lightly salted water to a boil. Place noodles in the pot, cook 8 to 10 minutes, until al dente, and drain.",
+    "2": "Melt the butter in a large skillet over medium heat. Stir in the shallots, red bell pepper, yellow bell pepper, and garlic. Cook 5 minutes, until tender but crisp. Remove vegetables from skillet, and set aside.",
+    "3": "Place the chicken in the skillet. Season with tarragon, salt, and pepper. Cook 10 minutes, or until juices run clear.",
+    "4": "Return the vegetables to the skillet with the chicken. Mix in the half and half, Monterey Jack cheese, and Parmesan cheese. Continue cooking 5 minutes, until cheese is melted. Serve over the cooked noodles."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the chicken from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is skillet from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is large pot from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is monterey jack cheese still needed after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 4?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to return the chicken in Step 4?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "large pot": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lightly salted water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "noodles": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pot": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "large skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "red bell pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "yellow bell pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bell": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tarragon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "juices": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "monterey jack cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "parmesan cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cooked noodles": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 24,
+    "num_questions": 6
+  }
+}

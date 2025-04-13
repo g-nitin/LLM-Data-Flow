@@ -1,0 +1,394 @@
+{
+  "title": "Creamed Spinach with Jalapenos",
+  "instructions": {
+    "1": "Preheat oven to 300 degrees F (150 degrees C). Butter a small casserole dish.",
+    "2": "Place the spinach in a microwave-safe bowl, and cook in the microwave 5 minutes on High, until heated through. Drain, reserving 1/2 cup liquid.",
+    "3": "Melt 2 tablespoons butter in a small saucepan over medium heat, and stir in the bread crumbs until coated. Remove from heat, and set aside.",
+    "4": "Melt remaining 2 tablespoons butter in a medium saucepan over medium heat. Stir in flour. Mix in onion and garlic, and cook 1 minute. Gradually stir in reserved spinach liquid, evaporated milk, cheese, and jalapeno. Season with celery salt and pepper. Mix in the spinach. Transfer to the prepared casserole dish, and top with bread crumbs.",
+    "5": "Bake 45 minutes in the preheated oven, until bubbly and lightly browned."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the casserole from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is jalapeno still needed after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to melt the spinach in Step 4?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small casserole dish": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "casserole": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dish": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "spinach": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "microwave - safe bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "high": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "liquid": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bread crumbs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "crumbs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "medium saucepan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "reserved spinach liquid": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "evaporated milk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "jalapeno": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "celery salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "prepared casserole dish": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "celery": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 31,
+    "num_questions": 5
+  }
+}

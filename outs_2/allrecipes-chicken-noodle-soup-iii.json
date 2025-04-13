@@ -1,0 +1,440 @@
+{
+  "title": "Chicken Noodle Soup III",
+  "instructions": {
+    "1": "In a small skillet over medium heat, cook shallots in oil until brown and fragrant. Remove from heat and set aside.",
+    "2": "Bring a large pot of water to a boil. Cook noodles in boiling water until just tender, 8 to 10 minutes; drain and rinse under cold water. Set aside.",
+    "3": "Bring a small pot of water to a boil; have ready a bowl of ice water. Blanch bean sprouts by plunging them into boiling water for 1 minute, then into cold water. Drain and set aside.",
+    "4": "In a large saucepan over medium heat, bring chicken broth to a simmer.",
+    "5": "Divide noodles evenly between 6 bowls. Top with bean sprouts and shredded chicken. Pour the heated broth into the bowls. Drizzle with the shallot mixture and garnish with the green onion. Season with salt and pepper. Serve at once."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the chicken from Step 4 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is shallots from Step 1 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan still needed after Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "8-10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 4, is it still valid to divide the broth in Step 5?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "small skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "noodles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boiling water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cold water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boiling": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "small pot": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ice water": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bean sprouts": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ice": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bean": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sprouts": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large saucepan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "chicken broth": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "simmer": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "broth": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "6 bowls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "shredded chicken": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "heated broth": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bowls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "shallot mixture": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "green onion": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "shallot": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 35,
+    "num_questions": 5
+  }
+}

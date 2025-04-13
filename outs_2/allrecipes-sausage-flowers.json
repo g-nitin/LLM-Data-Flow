@@ -1,0 +1,352 @@
+{
+  "title": "Sausage Flowers",
+  "instructions": {
+    "1": "Preheat the oven to 350 degrees F (175 degrees C). Lightly grease a mini muffin pan.",
+    "2": "Cook sausage in a large, deep skillet over medium-high heat until evenly browned; drain and remove from heat.",
+    "3": "Stir Monterey Jack cheese and Colby cheese into warm sausage until melted; stir in salsa.",
+    "4": "Gently press wonton wrappers into the prepared pan so edges are extending. Place a heaping 1 tablespoon sausage mixture into each wrapper.",
+    "5": "Bake in the preheated oven until wonton edges begin to brown, about 10 minutes.",
+    "6": "Transfer sausage flowers to a serving platter; dollop each with about 1 tablespoon sour cream. Sprinkle with green onions."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the wonton from Step 4 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is sausage from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is wrapper from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onions still needed after Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to stir the sausage in Step 3?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mini muffin pan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "muffin": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sausage": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "large , deep skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "monterey jack cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "colby cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "warm sausage": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "salsa": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "wonton wrappers": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "prepared pan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "edges": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wrapper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wonton": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wrappers": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "wonton edges": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sausage flowers": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "serving platter": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "green onions": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "flowers": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "platter": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 27,
+    "num_questions": 6
+  }
+}

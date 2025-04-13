@@ -1,0 +1,90 @@
+{
+  "title": "Marshmallow Fruit Salad",
+  "instructions": {
+    "1": "In a large bowl, stir all ingredients together.",
+    "2": "Cover and refrigerate at least 4 hours."
+  },
+  "entities": {
+    "a large bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "all ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    }
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is ingredients from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is a large bowl still needed after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "4 hours"
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is ingredients from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is ingredients still needed after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "4 hours"
+    }
+  ],
+  "metadata": {
+    "num_steps": 2,
+    "num_entities": 4,
+    "num_questions": 6
+  }
+}

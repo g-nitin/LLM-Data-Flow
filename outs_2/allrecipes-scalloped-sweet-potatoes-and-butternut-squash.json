@@ -1,0 +1,461 @@
+{
+  "title": "Scalloped Sweet Potatoes and Butternut Squash",
+  "instructions": {
+    "1": "Preheat the oven to 350 degrees F (175 degrees C). Grease an 8x8-inch baking dish.",
+    "2": "Brush sweet potatoes and squash with olive oil. Arrange sweet potatoes on a baking sheet; set squash aside.",
+    "3": "Bake sweet potatoes in the preheated oven for 5 minutes. Add squash to sweet potatoes; cook until almost tender, 10 to 15 minutes. Remove and cool.",
+    "4": "Heat butter in a saucepan over medium heat; cook and stir onion in butter until tender, about 10 minutes. Add milk, flour, and sage; season with garlic salt and black pepper. Cook and stir until flour is dissolved and sauce is thickened, 5 to 10 minutes.",
+    "5": "Remove and discard skins from sweet potatoes and squash. Thinly slice sweet potatoes and squash. Arrange sweet potato slices in the bottom of the prepared baking dish. Layer 1/2 of the squash atop sweet potatoes. Pour a little less than 1/2 of the cream sauce over squash. Sprinkle with 1/2 of the Asiago cheese. Repeat layering with remaining squash, cream sauce, and Asiago cheese, respectively. Cover the dish with aluminum foil.",
+    "6": "Bake in the preheated oven for 25 minutes. Remove foil and bake until cheese is melted and bubbling, about 10 more minutes."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the oven from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is potatoes from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is squash from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is prepared baking dish still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 4?",
+      "answer": "5-10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 4, is it still valid to remove the sauce in Step 5?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dish": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sweet potatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "squash": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "olive oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "baking sheet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "potatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sage": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "garlic salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "skins": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sweet potato slices": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "prepared baking dish": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cream sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "asiago cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "remaining squash": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "aluminum foil": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "potato": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "slices": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "aluminum": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "foil": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": [
+        6
+      ]
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 36,
+    "num_questions": 6
+  }
+}

@@ -1,0 +1,600 @@
+{
+  "title": "Elizabeth's Extreme Chocolate Lover's Cake",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F (175 degrees C). Grease and flour two 9-inch pans. Sift together the flour, baking soda and salt. Set aside. In the top of a double boiler, heat 6 ounces chocolate, stirring occasionally, until chocolate is melted and smooth. Remove from heat and allow to cool to lukewarm.",
+    "2": "In a large bowl, cream together the butter and brown sugar until light and fluffy. Beat in the eggs one at a time, then stir in 1 1/2 teaspoons vanilla. Stir in the melted chocolate. Beat in the flour mixture alternately with the sour cream. Stir in boiling water (batter will be thin). Pour batter into prepared pans.",
+    "3": "Bake in the preheated oven for 35 to 40 minutes, or until a toothpick inserted into the center of the cake comes out clean. Let cool in pan for 10 minutes, then turn out onto a wire rack and cool completely.",
+    "4": "Make the Chocolate Buttercream Frosting: In the top of a double boiler, heat 6 ounces chocolate, stirring occasionally, until chocolate is melted and smooth. Remove from heat and allow to cool to lukewarm. In a large bowl, whip the butter for about 10 minutes until it is super fluffy, beat in egg yolk. Gradually blend in the confectioners' sugar, alternating with 2 tablespoons vanilla and 2 tablespoons cream, then blend in the melted chocolate. Beat in the softened cream cheese.",
+    "5": "Make the Ganache: In a large saucepan, combine chocolate chips and 1 cup heavy cream. Heat, stirring constantly, until chocolate is melted and smooth. Remove from heat and set aside.",
+    "6": "Assemble the cake: When cake is completely cooled, cover the bottom cake layer with as much ganache as desired. Refrigerate for 5 minutes, or until ganache has set. Spread frosting over the ganache. Cover with top layer of cake. Frost top and sides with buttercream, and garnish with more ganache."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the cream from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is cream from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is salt from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is confectioners still needed after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 3?",
+      "answer": "35-40 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to make the melted chocolate in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using egg yolk in Step 4 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "double boiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chocolate": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pans": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "boiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "melted chocolate": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boiling water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "prepared pans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "toothpick": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cake": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "wire rack": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chocolate buttercream frosting": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "egg yolk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "confectioners ' sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "softened cream cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "buttercream": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "frosting": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "yolk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "confectioners": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "ganache": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "large saucepan": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chocolate chips": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chips": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cake layer": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "layer": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "sides": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 48,
+    "num_questions": 7
+  }
+}

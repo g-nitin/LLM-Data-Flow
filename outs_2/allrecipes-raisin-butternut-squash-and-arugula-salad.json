@@ -1,0 +1,540 @@
+{
+  "title": "Raisin, Butternut Squash, and Arugula Salad",
+  "instructions": {
+    "1": "Preheat oven to 375 degrees F. Line a baking sheet with aluminum foil; set aside.",
+    "2": "In a medium bowl combine melted butter, brown sugar, and cayenne pepper.",
+    "3": "Toss butternut (if using frozen butternut follow package instructions for proper thawing) with butter, brown sugar and cayenne mixture.",
+    "4": "Transfer to prepared baking sheet.",
+    "5": "Bake in preheated oven for 20 to 30 minutes, until just tender.",
+    "6": "Remove and let cool.",
+    "7": "In a large bowl, slowly whisk walnut oil into lemon juice. Season with salt and pepper. Toss arugula or spinach in vinaigrette.",
+    "8": "To serve, divide dressed greens among serving plates. Top each with 1/2 cups roasted butternut squash, 1/4 cup Sun-Maid\u00ae Natural Raisins, and 1 tablespoon crumbled blue cheese. Serve immediately."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the pepper from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is butter from Step 2 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sugar still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "20-30 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to toss the brown sugar in Step 3?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking sheet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "aluminum foil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "aluminum": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "foil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "medium bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "melted butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butternut": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "frozen butternut": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "package instructions": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "proper thawing": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cayenne mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "package": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "instructions": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "thawing": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "prepared baking sheet": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "walnut oil": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lemon juice": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "arugula": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "spinach": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "vinaigrette": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "walnut": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dressed greens": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "serving plates": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "greens": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "plates": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "squash": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 44,
+    "num_questions": 5
+  }
+}

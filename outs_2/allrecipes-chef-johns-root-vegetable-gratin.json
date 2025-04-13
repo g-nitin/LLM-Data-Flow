@@ -1,0 +1,522 @@
+{
+  "title": "Chef John's Root Vegetable Gratin",
+  "instructions": {
+    "1": "Preheat the oven to 375 degrees F (190 degrees C).",
+    "2": "Bring a large pot of generously salted water to a boil. Add the vegetables, and cook uncovered for 3 minutes. Drain in a colander, then immediately immerse in ice water for several minutes until cold to stop the cooking process. Once the vegetables are cold, drain well, and set aside.",
+    "3": "Cook garlic and butter in a large skillet over medium heat until garlic starts sizzling, about 3 minutes.",
+    "4": "Stir in chicken broth, heavy cream, thyme, nutmeg, and cayenne pepper; cook until mixture begins to simmer, about 5 minutes.",
+    "5": "Coat a 9x13-inch baking dish with olive oil and spread vegetables evenly over the oil.",
+    "6": "Pour broth and cream mixture over vegetables and top with half of the grated Parmigiano-Reggiano cheese.",
+    "7": "Cover baking dish loosely with aluminum foil, place on a baking sheet, and bake in the preheated oven for 40 minutes.",
+    "8": "Remove baking dish from the oven and top with remaining Parmigiano-Reggiano. Bake uncovered until vegetables are browned, bubbling, and tender, about an additional 30 minutes.",
+    "9": "Remove from the oven and let rest for 20 minutes."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 8, is the baking dish from Step 7 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is large pot from Step 2 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is remaining parmigiano - reggiano still needed after Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 3?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to remove the oven in Step 8?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using remaining parmigiano - reggiano in Step 8 introduce a potential safety concern to the recipe?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        9,
+        7,
+        8
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "generously salted water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        5,
+        6,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "colander": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ice water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking process": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pot": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ice": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chicken broth": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "heavy cream": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "broth": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "olive oil": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        7,
+        8
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dish": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        7
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": [
+        8
+      ]
+    },
+    "cream mixture": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "grated parmigiano - reggiano cheese": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "baking dish": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7,
+        8
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "aluminum foil": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "baking sheet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "aluminum": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "foil": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "remaining parmigiano - reggiano": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 41,
+    "num_questions": 7
+  }
+}

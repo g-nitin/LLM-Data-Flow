@@ -1,0 +1,814 @@
+{
+  "title": "Bombay to Bangkok Vegetable Curry",
+  "instructions": {
+    "1": "Place shredded coconut in a dry wok or large frying pan over medium heat. Stir continuously until the coconut turns a light golden brown. Pour coconut into a small bowl as soon as it is toasted, to prevent burning.",
+    "2": "Replace the wok or frying pan on the stove. Heat coconut oil over medium heat until melted, then add onion, garlic, ginger and curry powder. Stir-fry 1-2 minutes, or until onion begins to soften.",
+    "3": "Turn up the heat to high. Add the stock, plus the lime leaves, chili sauce, soy sauce, sugar, and most of the toasted coconut (reserve 1 to 1 1/2 tablespoons). Stir everything together.",
+    "4": "Add the sweet potato or yam, cauliflower, carrots, and eggplant (if using). Allow to reach a boil, then reduce heat to medium. Allow to simmer for 2-3 minutes.",
+    "5": "Add the red pepper and tofu or tempeh, stirring to incorporate. Cover and allow to simmer for 15 minutes, until sweet potato and eggplant are fully cooked.",
+    "6": "Add the peas and green beans (if using), and cook another 2-3 minutes, or until peas have softened but are still bright green. Don't worry if the curry seems too thick with vegetables at this point. Simply stir them in the best you can. The curry will thin out.",
+    "7": "Turn heat down to low and add the coconut milk and extract, stirring well. Add up to 1 1/2 cups coconut milk, depending on how much sauce you want with your curry.",
+    "8": "Stir in lime juice. Remove from heat and taste for saltiness and spice, adding more soy sauce or chili sauce (or fresh-cut chilies) if desired.",
+    "9": "To serve, scoop the curry onto individual plates or into serving bowls. Top with a sprinkling of the reserved toasted coconut. Serve with jasmine or basmati rice."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the coconut from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is curry from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is sauce from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is lime leaves still needed after Step 8?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 2?",
+      "answer": "2 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to replace the coconut in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggplant in Step 4 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "shredded coconut": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dry wok": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large frying pan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "coconut": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        3,
+        7,
+        9
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "light golden brown": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "wok": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "frying": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "brown": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "frying pan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "stove": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coconut oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "curry powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "curry": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        9,
+        2,
+        6,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "stock": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lime leaves": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chili sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "soy sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "toasted coconut": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lime": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "leaves": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chili": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        7,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "soy": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        8
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sweet potato": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "yam": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cauliflower": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "carrots": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "eggplant": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "boil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "medium": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "potato": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "red pepper": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tofu": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tempeh": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "peas": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "green beans": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "point": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "coconut milk": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lime juice": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "saltiness": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "spice": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "fresh - cut chilies": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "chilies": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "individual plates": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "serving bowls": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "sprinkling": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "reserved toasted coconut": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "jasmine basmati rice": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "plates": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "bowls": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "jasmine": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "basmati": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "rice": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 67,
+    "num_questions": 7
+  }
+}

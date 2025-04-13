@@ -1,0 +1,782 @@
+{
+  "title": "Kevin Rathbun's Blueberry Buttermilk Tart with Blueberry Sorbet",
+  "instructions": {
+    "1": "Preheat oven to 450 degrees F.",
+    "2": "Fit piecrust into a 9-inch tart pan according to package directions. Trim off excess pastry along edges. Line pastry with aluminum foil, and fill with pie weights.",
+    "3": "Bake for 7 to 8 minutes. Remove weights and foil; bake 3 additional minutes. Cool on a wire rack.",
+    "4": "Decrease temperature to 325 degrees F.",
+    "5": "Whisk together eggs, SPLENDA\u00ae Sugar Blend for Baking, buttermilk, lemon juice, zest, cream, and butter. Add flour and salt, whisking until blended.",
+    "6": "Place blueberries evenly in bottom of tart shell. Pour buttermilk mixture over blueberries.",
+    "7": "Bake 25 to 30 minutes or until tart is set. Cool on a wire rack. Serve with a scoop (1/2-cup) of Blueberry Sorbet. Save remaining sorbet for another dessert.",
+    "8": "To make sorbet: combine water and SPLENDA\u00ae Brown Sugar Blend in a small saucepan; cook over medium heat, stirring constantly, until SPLENDA\u00ae Brown Sugar Blend dissolves. Set aside.",
+    "9": "Combine blueberries and 2 tablespoons lemon juice in a saucepan; heat mixture over medium heat 3 to 5 minutes or until the blueberries are soft.",
+    "10": "Process half the blueberry mixture, SPLENDA\u00ae Brown Sugar Blend mixture, lemon juice and zest in a blender or food processor. Pour mixture through a wire-mesh strainer into a bowl, discarding pulp. Repeat procedure with remaining ingredients. Cover and chill.",
+    "11": "Pour into container of an ice cream freezer. Freeze according to manufacturers directions."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 9, is the blueberries from Step 6 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is juice from Step 5 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is pie weights from Step 2 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sorbet still needed after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 9?",
+      "answer": "3-5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to process the juice in Step 10?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 5 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "piecrust": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "package directions": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "excess pastry": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "edges": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pastry": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "aluminum foil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pie weights": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tart": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        6
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "package": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "directions": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        11
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "aluminum": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "foil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pie": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "weights": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "wire rack": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        7
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        10,
+        3,
+        7
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        7
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "splenda \u00ae sugar blend": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "buttermilk": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "lemon juice": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        10,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "zest": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        10,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        11,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "lemon": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        9,
+        10,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        9,
+        10,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "blueberries": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        9,
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "tart shell": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "buttermilk mixture": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "shell": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "scoop": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "blueberry sorbet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "remaining sorbet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dessert": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "sorbet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7,
+        8
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "splenda \u00ae brown sugar blend": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        9,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "blueberry mixture": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "splenda \u00ae brown sugar blend mixture": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "food processor": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "wire - mesh strainer": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "pulp": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "procedure": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "remaining ingredients": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "blueberry": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "food": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "processor": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "mesh": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "strainer": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "ingredients": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "container": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "ice cream freezer": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "manufacturers directions": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "ice": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "freezer": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "manufacturers": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 11,
+    "num_entities": 64,
+    "num_questions": 7
+  }
+}

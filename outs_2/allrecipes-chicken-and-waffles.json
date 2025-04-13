@@ -1,0 +1,779 @@
+{
+  "title": "Chicken and Waffles",
+  "instructions": {
+    "1": "Whisk together eggs, cream, cayenne pepper, 1 tablespoon salt, and black pepper in a large bowl until well combined; set aside. Shake together flour, cornstarch, and 1 tablespoon salt in a paper bag; set aside.",
+    "2": "Dip chicken into beaten egg mixture, then place into flour mixture in the bag and shake to coat. Place breaded chicken onto a wire rack; do not stack. Let chicken rest for 20 minutes to allow coating to set.",
+    "3": "Heat about 3 inches oil in a deep fryer or large saucepan to 375 degrees F (190 degrees C). In small batches, fry chicken until golden brown, 5 to 8 minutes. Remove chicken to a paper towel-lined plate to drain. Set aside or keep warm in a low oven.",
+    "4": "Combine mayonnaise, maple syrup, horseradish, and mustard powder in a medium bowl. Set aside.",
+    "5": "Preheat the oven's broiler.",
+    "6": "Place bacon in a large, deep skillet and cook over medium-high heat, turning occasionally, until evenly browned, about 10 minutes. Drain bacon on a paper towel-lined plate.",
+    "7": "Place 4 waffles on a cookie sheet. Top each waffle with 2 chicken tenders, 3 bacon slices, and 2 cheese slices.",
+    "8": "Cook under the preheated broiler until cheese is melted, 3 to 5 minutes.",
+    "9": "Spread 3 tablespoons maple mayonnaise on each of the remaining 4 waffles and place on top of sandwich."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the paper towel - lined plate from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is paper from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is beaten egg mixture from Step 2 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is maple still needed after Step 9?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 6?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 4, is it still valid to spread the mayonnaise in Step 9?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using beaten egg mixture in Step 2 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "eggs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "paper bag": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "paper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3,
+        6
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bag": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "beaten egg mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "breaded chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "wire rack": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coating": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "deep fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "small batches": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "paper towel - lined plate": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "low oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fryer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "towel": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "plate": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mayonnaise": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        9,
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "maple syrup": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "horseradish": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "mustard powder": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "medium bowl": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "maple": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        9,
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "syrup": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "oven broiler": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "broiler": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bacon": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "large , deep skillet": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "4 waffles": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cookie sheet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "waffle": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "2 chicken tenders": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "3 bacon slices": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "2 cheese slices": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "waffles": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        9,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cookie": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "tenders": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "slices": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7,
+        8
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "preheated broiler": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "remaining 4 waffles": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "sandwich": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 64,
+    "num_questions": 7
+  }
+}

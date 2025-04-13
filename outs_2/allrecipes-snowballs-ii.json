@@ -1,0 +1,395 @@
+{
+  "title": "Best Snowball Cookies",
+  "instructions": {
+    "1": "Gather all ingredients. Preheat the oven to 350 degrees F (175 degrees C).",
+    "2": "Beat butter, 1/2 cup powdered sugar, and vanilla with an electric mixer in a large bowl until smooth.",
+    "3": "Gradually mix in flour, pecans, and salt until completely incorporated.",
+    "4": "Roll dough into walnut-sized balls and place 2 inches apart onto ungreased baking sheets.",
+    "5": "Bake in the preheated oven until bottoms are light golden brown but tops are still pale, 12 to 15 minutes. (Try not to let cookies get too brown: it's better to undercook them than to overcook them.)",
+    "6": "Remove cookies from the oven and let sit on the baking sheets briefly before removing to wire racks.",
+    "7": "Place 1/3 cup powdered sugar in a shallow bowl; roll hot cookies in sugar to coat, then return to the wire racks to cool.",
+    "8": "Once cooled, roll cookies in the powdered sugar once more."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the bowl from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is mixer from Step 2 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is large bowl still needed after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "12-15 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 6, is it still valid to place the wire in Step 7?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "electric mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pecans": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "walnut - sized balls": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "ungreased baking sheets": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "walnut": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "balls": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sheets": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bottoms": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tops": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cookies": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        7,
+        8
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": [
+        6
+      ]
+    },
+    "baking sheets": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "wire racks": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "racks": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "shallow bowl": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "hot cookies": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "powdered sugar": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 30,
+    "num_questions": 6
+  }
+}

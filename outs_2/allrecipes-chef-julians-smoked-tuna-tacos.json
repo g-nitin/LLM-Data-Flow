@@ -1,0 +1,782 @@
+{
+  "title": "Chef Julian's Smoked Tuna Tacos",
+  "instructions": {
+    "1": "Preheat a smoker to 225 degrees F (110 degrees C) according to manufacturer's instructions.",
+    "2": "Mix brown sugar and 1/4 cup salt together in a bowl.",
+    "3": "Score ahi tuna skin with a sharp knife; rub with brown sugar and salt mixture.",
+    "4": "Smoke tuna until an instant-read thermometer inserted into the center reads 140 degrees F to 155 degrees F (60 degrees C to 68 degrees C), about 1 hour.",
+    "5": "Mix masa corn flour and water together in a bowl until a slightly sticky dough forms. Divide dough into large balls.",
+    "6": "Heat a lightly oiled griddle over medium-high heat. Flatten balls of masa to 1/4-inch thickness and cook until golden brown, 3 to 4 minutes per side. Cool sopes on a wire rack.",
+    "7": "Preheat a grill for medium-high heat and lightly oil the grate.",
+    "8": "Place tomatillos, half the onion, and 1 jalapeno pepper on the grill; cook until charred on all sides, about 5 minutes. Transfer to a blender; blend into a smooth sauce. Season with salt.",
+    "9": "Dice remaining onion and jalapeno. Mix with tomatoes, avocados, and cilantro in a bowl. Season with lime juice and salt.",
+    "10": "Place cooked sopes on serving plates. Top with smoked tuna, tomatillo sauce, and avocado mixture. Garnish with shredded cabbage and queso fresco."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the bowl from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is tuna from Step 3 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is masa corn flour from Step 5 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is fresco still needed after Step 6?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 6?",
+      "answer": "3-4 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to smoke the tuna in Step 4?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "smoker": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "manufacturer instructions": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "manufacturer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "instructions": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        9,
+        2,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        9,
+        2,
+        3,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ahi tuna skin": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sharp knife": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "salt mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ahi": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tuna": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        10,
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "skin": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "knife": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "instant - read thermometer": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "read": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "thermometer": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "masa corn flour": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "slightly sticky dough": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "large balls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "masa": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "corn": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "balls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "lightly oiled griddle": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "sopes": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        10,
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "wire rack": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "griddle": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "thickness": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "wire": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "rack": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "grate": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "tomatillos": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        9,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "1 jalapeno pepper": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "sides": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "smooth sauce": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "jalapeno": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        9,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        10,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "remaining onion": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "avocados": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "lime juice": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "lime": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "juice": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cooked sopes": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "serving plates": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "smoked tuna": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "tomatillo sauce": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "avocado mixture": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "shredded cabbage": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "queso fresco": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "serving": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "plates": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "tomatillo": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "avocado": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "cabbage": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "fresco": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 10,
+    "num_entities": 65,
+    "num_questions": 6
+  }
+}

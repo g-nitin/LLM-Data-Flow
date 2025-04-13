@@ -1,0 +1,814 @@
+{
+  "title": "Grandmother Stougaard's Caramel Pecan Sweet Rolls",
+  "instructions": {
+    "1": "Heat milk in a small saucepan over medium heat just until a skin starts to form on the top, then remove from heat. Stir in 1/4 cup margarine and salt. Cool until lukewarm.",
+    "2": "Place 1/8 cup warm water in a small bowl; stir in 1/2 teaspoon white sugar. Sprinkle yeast over surface; let stand until foamy, 5 to 10 minutes.",
+    "3": "Beat cooled milk and yeast mixtures together with an electric mixer on medium speed in a large bowl for 2 minutes. Add egg; beat well. Stir in flour, 1/2 cup at a time, using a large wooden spoon, mixing well after each addition until a dough forms; transfer to a floured surface.",
+    "4": "Knead dough, adding more flour if necessary, until smooth and elastic, about 8 minutes. Place in an oiled bowl and turn to coat. Cover bowl; let rise until doubled in volume, 1 to 2 hours.",
+    "5": "Punch down dough and let rest on the counter while you prepare the caramel topping.",
+    "6": "Combine brown sugar, 3 tablespoons margarine, corn syrup, and 1 1/2 tablespoons water in a medium bowl until smooth; spread an even layer onto the bottom of a 9x9-inch baking dish. Top with pecan halves, placed in rows facing upside down. Set aside.",
+    "7": "Roll out dough on a lightly floured surface to a 9x12-inch rectangle; spread with 2 tablespoons margarine. Combine 1/4 cup white sugar and cinnamon in a small bowl; sprinkle over margarine. Roll up dough to form a log, starting at one long end. Pinch seam together to seal. Cut roll into 1-inch rounds; place rounds into the prepared baking dish. Set in a warm place to rise until doubled in volume, about 30 minutes.",
+    "8": "Preheat the oven to 350 degrees F (175 degrees C).",
+    "9": "Bake in the preheated oven until golden brown, 20 to 25 minutes. Place a cutting board or a clean cookie sheet over baking dish and invert to release rolls while still warm so caramel topping is on top."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the bowl from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is margarine from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is log from Step 7 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is medium bowl still needed after Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 9?",
+      "answer": "20-25 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to beat the surface in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using egg in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bake (Step 9) and preheat (Step 8) at the same time?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "milk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skin": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "margarine": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        6,
+        7
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "yeast": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "surface": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "water": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        6
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        6,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooled milk yeast mixtures": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "electric mixer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "medium speed": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "large wooden spoon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "addition": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "floured surface": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mixtures": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "speed": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "spoon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oiled bowl": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "volume": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "counter": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "caramel topping": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        9,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "caramel": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        9,
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "topping": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "corn syrup": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "medium bowl": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "layer": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pecan halves": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "rows": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "corn": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "syrup": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        9,
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "dish": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        9,
+        6,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pecan": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "halves": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "lightly floured surface": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "log": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "long end": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "seam": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "roll": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "rounds": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "prepared baking dish": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "warm place": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "rectangle": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "end": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "place": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "preheated oven": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cutting board": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "clean cookie sheet": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "baking dish": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "rolls": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cutting": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "board": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cookie": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 66,
+    "num_questions": 8
+  }
+}

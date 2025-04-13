@@ -1,0 +1,514 @@
+{
+  "title": "Sloppy Joes from Ball Park\u00ae Buns",
+  "instructions": {
+    "1": "Preheat oven to 425 degrees F.",
+    "2": "In a large skillet, saute beef on medium heat until brown and cooked through.",
+    "3": "Add in onions, garlic, carrots and red bell peppers and cook for 8 to 10 minutes until vegetables are tender.",
+    "4": "While vegetables are cooking, combine tomato sauce, ketchup, Worcestershire sauce, vinegar, brown sugar and cayenne pepper in a large bowl.",
+    "5": "Add the tomato sauce mixture to saute pan and simmer for 15 to 20 minutes.",
+    "6": "Add salt and pepper to taste.",
+    "7": "To make the ranch coleslaw, combine ranch dressing and vinegar in a medium bowl.",
+    "8": "Fold in slaw mix and set aside.",
+    "9": "Toast buns in oven until golden brown.",
+    "10": "Place pickles, if desired, on bottom bun. Add sloppy joe mix and top with ranch coleslaw, if desired."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the tomato from Step 4 being used?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is ketchup from Step 4 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is ketchup still needed after Step 10?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 5?",
+      "answer": "15-20 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 7, is it still valid to place the coleslaw in Step 10?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 4) and place (Step 10) at the same time?",
+      "answer": true
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beef": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "carrots": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "red bell peppers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bell": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "peppers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomato sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "ketchup": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "worcestershire sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "large bowl": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "tomato": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cayenne": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pepper": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "tomato sauce mixture": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "taste": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "ranch coleslaw": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "ranch dressing": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "medium bowl": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "ranch": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "coleslaw": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dressing": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "slaw mix": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "slaw": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "mix": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        10,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "buns": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "pickles": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "bun": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "sloppy joe mix": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "joe": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 10,
+    "num_entities": 41,
+    "num_questions": 6
+  }
+}

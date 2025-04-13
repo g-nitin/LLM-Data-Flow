@@ -1,0 +1,824 @@
+{
+  "title": "Glazed Apple Cider Donuts",
+  "instructions": {
+    "1": "Bring 1 cup apple cider to a boil in a small saucepan; boil until reduced to 1/4 cup, 20 to 30 minutes. Cool.",
+    "2": "Beat butter in a bowl with an electric mixer until creamy, 1 to 2 minutes. Add 1 cup white sugar and beat until light and fluffy, 2 to 3 minutes.",
+    "3": "Beat eggs, 1 at a time, into butter mixture until completely incorporated. Mix buttermilk and reduced cider into butter mixture.",
+    "4": "Whisk 3 1/2 cups flour, baking powder, baking soda, 1/2 teaspoon cinnamon, salt, and nutmeg together in bowl. Add flour mixture to buttermilk mixture; stir until dough is just combined.",
+    "5": "Transfer dough to a lightly floured piece of parchment or wax paper. Sprinkle dough with flour. Turn dough over onto a baking sheet and sprinkle with flour.",
+    "6": "Roll dough to 1/2-inch thickness, sprinkling with more flour as necessary. Transfer dough on the baking sheet to the freezer until slightly hardened, about 20 minutes.",
+    "7": "Cut cold dough using a 3-inch doughnut cutter. Gather, roll, and cut any dough scraps. Transfer cut doughnuts and doughnut holes to a second, slightly floured, baking sheet. Refrigerate doughnuts for 20 to 30 minutes.",
+    "8": "Whisk 1 cup white sugar and 1/2 teaspoon cinnamon together in a bowl. Transfer cinnamon sugar to a paper bag. Whisk 1 cup confectioners' sugar and 2 tablespoons apple cider together in another bowl. Whisk 1 1/4 cups confectioners' sugar, maple syrup, and vanilla extract together in a third bowl.",
+    "9": "Heat oil in a deep-fryer or large saucepan to 350 degrees F (175 degrees C).",
+    "10": "Cook doughnuts and doughnut holes in batches in preheated oil, turning once, until golden brown and cooked through, about 1 minute per side. Set cooked doughnuts on paper towels to drain.",
+    "11": "Shake warm doughnuts in the paper bag with cinnamon sugar, or pour cider glaze or maple syrup glaze over warm doughnuts."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the cider from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is flour from Step 4 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is maple from Step 8 still available in Step 10?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is towels still needed after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the time interval applied at Step 10?",
+      "answer": "1 minute"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to roll the baking sheet in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "boil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "apple": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        8
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cider": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        3,
+        11,
+        8
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        9
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bowl": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "electric mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        11,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "buttermilk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "reduced cider": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "baking powder": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "baking soda": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "buttermilk mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "baking": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "soda": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        11,
+        4,
+        8
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lightly floured piece": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "parchment": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "wax paper": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "baking sheet": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "wax": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "paper": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        10,
+        11,
+        5,
+        8
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sheet": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5,
+        6,
+        7
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "freezer": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "thickness": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cold dough": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dough scraps": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cut doughnuts": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "doughnut holes": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "doughnuts": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        11,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "doughnut": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cutter": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "scraps": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "holes": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cinnamon sugar": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        11,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "paper bag": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        11,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "maple syrup": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "vanilla extract": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "bag": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        11,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "confectioners": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "maple": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        11,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "syrup": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        11,
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "extract": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "oil": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9,
+        10
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "deep - fryer large saucepan": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "fryer": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "preheated oil": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "cooked doughnuts": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "paper towels": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "towels": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "warm doughnuts": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "cider glaze": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "maple syrup glaze": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "glaze": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 11,
+    "num_entities": 66,
+    "num_questions": 7
+  }
+}
