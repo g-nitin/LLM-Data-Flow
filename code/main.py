@@ -62,7 +62,7 @@ class ProceduralText:
 
     def _extract_entities_from_step(self, step_idx, step_text):
         """
-        Extract entities from a step using NLP techniques with filtering for recipes
+        Extract entities from a step using NLP techniques with filtering for recipes.
         Note that the method is specific to RECIPES.
         """
         doc = nlp(step_text)
@@ -73,7 +73,16 @@ class ProceduralText:
         # Add noun chunks
         for chunk in doc.noun_chunks:
             if not chunk.root.is_stop and chunk.root.pos_ != "DET":
-                potential_entities.append(chunk.text.lower())
+                # Normalize: remove determiners and get the core noun
+                clean_text = " ".join(
+                    [
+                        token.text.lower()
+                        for token in chunk
+                        if token.pos_ != "DET" and not token.is_stop
+                    ]
+                )
+                if clean_text:
+                    potential_entities.append(clean_text)
 
         # Add individual nouns that might not be in chunks
         for token in doc:
@@ -116,10 +125,41 @@ class ProceduralText:
             "seconds",
             "degree",
             "degrees",
-            # "f",
-            # "c",
             "fahrenheit",
             "celsius",
+        }
+
+        # Additional terms to filter out
+        generic_terms = {
+            "step",
+            "time",
+            "texture",
+            "pan",
+            "mixture",
+            "batter",
+            "rest",
+            "heat",
+            "medium heat",
+            "high heat",
+            "low heat",
+            "temperature",
+            "side",
+            "top",
+            "bottom",
+            "middle",
+            "center",
+            "half",
+            "third",
+            "quarter",
+            "part",
+            "piece",
+            "amount",
+            "bit",
+            "way",
+            "method",
+            "technique",
+            "process",
+            "result",
         }
 
         # Patterns for measurements with numbers
@@ -127,42 +167,53 @@ class ProceduralText:
             r"\d+\s*-*\s*\d*\s*(minute|minutes|min|mins|hour|hours|second|seconds|sec|secs)",
             r"\d+\s*(cup|cups|tablespoon|tbsp|teaspoon|tsp|ounce|oz|pound|lb|gram|g|kg|ml|l)",
             r"\d+\s*-*\s*\d*\s*(degree|degrees|°)\s*[fc]",
+            r"(medium|high|low)\s+(heat|temperature)",
+            r"(the|a|an)\s+(rest|remainder|remaining)",
         ]
 
         # Process each potential entity
+        filtered_entities = []
         for entity_name in potential_entities:
             # Skip very common words, short entities, or measurement units
             if (
                 len(entity_name) < 3
                 or entity_name in measurement_units
+                or entity_name in generic_terms
                 or any(word in entity_name for word in measurement_units)
                 or any(
                     re.search(pattern, entity_name, re.IGNORECASE)
                     for pattern in measurement_patterns
                 )
-                or entity_name
-                in {"step", "time", "texture", "pan", "mixture", "batter"}
+                or re.match(r"^\d+(\.\d+)?$", entity_name)
+                or re.match(r"^\d+/\d+$", entity_name)
+                or "degree" in entity_name
+                or "°" in entity_name
             ):
                 loguru.logger.debug(f"Skipping entity due to filtering: {entity_name}")
                 continue
 
-            # Skip entities that are just numbers or measurements
-            if re.match(r"^\d+(\.\d+)?$", entity_name) or re.match(
-                r"^\d+/\d+$", entity_name
+            # Additional context-based filtering
+            if (
+                any(
+                    adj + " " + entity_name in step_text.lower()
+                    for adj in ["medium", "high", "low"]
+                )
+                and entity_name == "heat"
             ):
-                loguru.logger.debug(
-                    f"Skipping entity due to being a number: {entity_name}"
-                )
+                loguru.logger.debug(f"Skipping heat with modifier: {entity_name}")
                 continue
 
-            # Skip temperature references
-            if "degree" in entity_name or "°" in entity_name:
-                loguru.logger.debug(
-                    f"Skipping entity due to being a temperature: {entity_name}"
-                )
+            if entity_name in ["rest", "remainder"] and any(
+                det + " " + entity_name in step_text.lower()
+                for det in ["the", "a", "an"]
+            ):
+                loguru.logger.debug(f"Skipping generic reference: {entity_name}")
                 continue
 
-            # Create or update entity
+            filtered_entities.append(entity_name)
+
+        # Create or update entity
+        for entity_name in filtered_entities:
             if entity_name not in self.entities:
                 self.entities[entity_name] = Entity(entity_name, step_idx)
                 self.entities[entity_name].defined_in.add(step_idx)
@@ -929,10 +980,12 @@ def process_recipe_folder(
         if not instructions:
             loguru.logger.warning(f"No instructions found in {file_name}, skipping.")
             continue
-    
+
         # Check if instructions are too short
         if len(instructions) < 3:
-            loguru.logger.warning(f"Recipe {file_name} has fewer than 3 steps, skipping.")
+            loguru.logger.warning(
+                f"Recipe {file_name} has fewer than 3 steps, skipping."
+            )
             continue
 
         # Process the recipe
