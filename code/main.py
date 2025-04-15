@@ -63,53 +63,40 @@ class ProceduralText:
 
     def _extract_entities_from_step(self, step_idx, step_text):
         """
-        Extract entities from a step using NLP techniques with filtering for recipes.
-        Note that the method is specific to RECIPES.
+        Extract entities from a step using NLP techniques with refined filtering for recipes.
+        Focuses on ingredients and key intermediate products, filtering out containers,
+        tools, generic terms, locations, and certain actions/qualities.
         """
         doc = nlp(step_text)
 
-        # Extract all potential entities (nouns and noun phrases)
-        potential_entities = []
-
-        # Add noun chunks
-        for chunk in doc.noun_chunks:
-            if not chunk.root.is_stop and chunk.root.pos_ != "DET":
-                # Normalize: remove determiners and get the core noun
-                clean_text = " ".join(
-                    [
-                        token.text.lower()
-                        for token in chunk
-                        if token.pos_ != "DET" and not token.is_stop
-                    ]
-                )
-                if clean_text:
-                    potential_entities.append(clean_text)
-
-        # Add individual nouns that might not be in chunks
-        for token in doc:
-            if token.pos_ == "NOUN" and not token.is_stop:
-                potential_entities.append(token.text.lower())
-
-        # Define patterns to filter out
+        # Filter Lists
         measurement_units = {
             "cup",
             "cups",
             "tablespoon",
             "tablespoons",
+            "tbsp",
             "teaspoon",
             "teaspoons",
+            "tsp",
             "ounce",
             "ounces",
+            "oz",
             "pound",
             "pounds",
+            "lb",
             "gram",
             "grams",
+            "g",
             "kilogram",
             "kilograms",
+            "kg",
             "milliliter",
             "milliliters",
+            "ml",
             "liter",
             "liters",
+            "l",
             "pint",
             "pints",
             "quart",
@@ -120,40 +107,107 @@ class ProceduralText:
             "inches",
             "minute",
             "minutes",
+            "min",
             "hour",
             "hours",
             "second",
             "seconds",
+            "sec",
             "degree",
             "degrees",
             "fahrenheit",
             "celsius",
+            "f",
+            "c",
         }
 
-        # Additional terms to filter out
-        generic_terms = {
-            "step",
-            "time",
-            "texture",
+        # More structured generic terms
+        containers_tools = {
+            "bowl",
             "pan",
-            "mixture",
-            "batter",
-            "rest",
-            "heat",
-            "medium heat",
-            "high heat",
-            "low heat",
-            "temperature",
+            "skillet",
+            "pot",
+            "saucepan",
+            "dish",
+            "sheet",
+            "rack",
+            "plate",
+            "spoon",
+            "fork",
+            "knife",
+            "oven",
+            "whisk",
+            "spatula",
+            "grater",
+            "peeler",
+            "board",
+            "container",
+            "jar",
+            "bottle",
+            "processor",
+            "blender",
+            "mixer",
+            "cooker",
+            "grill",
+            "microwave",
+            "utensil",
+            "tongs",
+            "ladle",
+            "colander",
+            "sieve",
+            "mandoline",
+            "thermometer",
+            "timer",
+            "machine",
+            "bag",
+            "wrap",
+            "foil",
+            "paper",
+            "towel",
+            "lid",
+            "cover",
+        }
+
+        locations_qualities = {
             "side",
             "top",
             "bottom",
             "middle",
             "center",
+            "level",
+            "surface",
+            "edge",
+            "point",
+            "heat",
+            "temperature",
+            "medium",
+            "high",
+            "low",
+            "small",
+            "large",
+            "hot",
+            "cold",
+            "warm",
+            "cool",
+            "room",
+            "color",
+            "consistency",
+            "aroma",
+            "flavor",
+            "texture",
+            "appearance",
+        }
+
+        abstract_generic = {
+            "step",
+            "time",
+            "rest",
             "half",
             "third",
             "quarter",
             "part",
             "piece",
+            "pieces",
             "amount",
             "bit",
             "way",
@@ -161,111 +215,268 @@ class ProceduralText:
             "technique",
             "process",
             "result",
+            "use",
+            "need",
+            "addition",
+            "removal",
+            "remainder",
+            "balance",
+            "recipe",
+            "instructions",
+            "directions",
+            "return",
+            "place",
+            "set",
+            "transfer",
+            "attention",
+            "care",
+            "ingredients",
+            "mixture",
+            "batter",
+            "liquid",
+            "solids",
+            "everything",
+            "anything",
+            "something",
+            "nothing",
+            "water",  # Water is often implicit or tap water, less often a specific 'ingredient' unless qualified (e.g., 'coconut water')
         }
 
-        # Patterns for measurements with numbers
-        measurement_patterns = [
-            r"\d+\s*-*\s*\d*\s*(minute|minutes|min|mins|hour|hours|second|seconds|sec|secs)",
-            r"\d+\s*(cup|cups|tablespoon|tbsp|teaspoon|tsp|ounce|oz|pound|lb|gram|g|kg|ml|l)",
-            r"\d+\s*-*\s*\d*\s*(degree|degrees|°)\s*[fc]",
-            r"(medium|high|low)\s+(heat|temperature)",
-            r"(the|a|an)\s+(rest|remainder|remaining)",
+        # Combine all terms to exclude by direct match
+        stop_entity_lemmas = (
+            measurement_units.union(containers_tools)
+            .union(locations_qualities)
+            .union(abstract_generic)
+        )
+
+        # Patterns for filtering (e.g., numeric values, specific phrases)
+        filter_patterns = [
+            r"^\d+(\.\d+)?$",  # Pure numbers
+            r"^\d+/\d+$",  # Fractions
+            r"medium heat",
+            r"high heat",
+            r"low heat",  # Specific heat levels often not entities
+            r"room temperature",
+            r"baking soda",
+            r"baking powder",  # Keep these as exceptions if needed later, but filter simple 'baking'/'powder'
+        ]
+        # Pre-compile regex for efficiency
+        compiled_filter_patterns = [
+            re.compile(p, re.IGNORECASE) for p in filter_patterns
         ]
 
-        # Process each potential entity
-        filtered_entities = []
-        for entity_name in potential_entities:
-            # Skip very common words, short entities, or measurement units
-            if (
-                len(entity_name) < 3
-                or entity_name in measurement_units
-                or entity_name in generic_terms
-                or any(word in entity_name for word in measurement_units)
-                or any(
-                    re.search(pattern, entity_name, re.IGNORECASE)
-                    for pattern in measurement_patterns
+        potential_entities = {}  # Use dict to store lemma -> original text mapping, helps deduplicate
+
+        # --- Process Noun Chunks ---
+        for chunk in doc.noun_chunks:
+            # Clean the chunk text: lowercase, remove leading/trailing articles/possessives
+            clean_chunk_text = chunk.text.lower()
+            clean_chunk_text = re.sub(
+                r"^(the|a|an|some|your|my|his|her|its|our|their)\s+",
+                "",
+                clean_chunk_text,
+            ).strip()
+            clean_chunk_text = re.sub(
+                r"\s+'s$", "", clean_chunk_text
+            ).strip()  # Remove trailing 's
+
+            # Use the lemma of the root word for checking against stop lists
+            root_lemma = chunk.root.lemma_.lower()
+
+            # --- Apply Filters ---
+            # 1. Check exact cleaned text against patterns
+            if any(
+                pattern.match(clean_chunk_text) for pattern in compiled_filter_patterns
+            ):
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' due to pattern match on '{clean_chunk_text}'"
                 )
-                or re.match(r"^\d+(\.\d+)?$", entity_name)
-                or re.match(r"^\d+/\d+$", entity_name)
-                or "degree" in entity_name
-                or "°" in entity_name
-            ):
-                loguru.logger.debug(f"Skipping entity due to filtering: {entity_name}")
                 continue
 
-            # Additional context-based filtering
-            if (
-                any(
-                    adj + " " + entity_name in step_text.lower()
-                    for adj in ["medium", "high", "low"]
+            # 2. Check root lemma against stop lemmas
+            if root_lemma in stop_entity_lemmas:
+                # Allow exceptions? e.g., if root is 'pot' but text is 'instant pot'? For now, filter if root matches.
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because root lemma '{root_lemma}' is in stop list."
                 )
-                and entity_name == "heat"
-            ):
-                loguru.logger.debug(f"Skipping heat with modifier: {entity_name}")
                 continue
 
-            if entity_name in ["rest", "remainder"] and any(
-                det + " " + entity_name in step_text.lower()
-                for det in ["the", "a", "an"]
-            ):
-                loguru.logger.debug(f"Skipping generic reference: {entity_name}")
+            # 3. Check full cleaned text against stop lemmas (for multi-word generics)
+            if clean_chunk_text in stop_entity_lemmas:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because full text '{clean_chunk_text}' is in stop list."
+                )
                 continue
 
-            filtered_entities.append(entity_name)
+            # 4. Length check
+            if len(clean_chunk_text) < 3:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' due to short length after cleaning: '{clean_chunk_text}'"
+                )
+                continue
 
-        # Create or update entity
+            # 5. Check if root is a verb/adjective (sometimes chunks can be misidentified)
+            if chunk.root.pos_ not in {"NOUN", "PROPN"}:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because root POS is {chunk.root.pos_}"
+                )
+                continue
+
+            # --- If passes filters, add it ---
+            # Use lemma for deduplication key, store original cleaned text
+            entity_lemma = root_lemma  # Or potentially lemmatize the whole clean_chunk_text if more complex
+            if entity_lemma not in potential_entities:
+                potential_entities[entity_lemma] = clean_chunk_text
+                loguru.logger.debug(
+                    f"Keeping chunk: '{chunk.text}' -> Cleaned: '{clean_chunk_text}', Lemma: '{entity_lemma}'"
+                )
+
+        # --- Process Individual Nouns (Optional: Catch things missed by chunks) ---
+        # Be cautious here to avoid re-adding filtered items or parts of chunks
+        for token in doc:
+            if token.pos_ in {"NOUN", "PROPN"} and not token.is_stop:
+                token_lemma = token.lemma_.lower()
+
+                # Check if this token's lemma is already covered by a kept chunk
+                if token_lemma in potential_entities:
+                    continue
+
+                # Check if this token was part of ANY noun chunk (even filtered ones)
+                part_of_chunk = False
+                for chunk in doc.noun_chunks:
+                    if token.i >= chunk.start and token.i < chunk.end:
+                        part_of_chunk = True
+                        break
+                if part_of_chunk:
+                    continue
+
+                # Apply similar filters as for chunks
+                if token_lemma in stop_entity_lemmas:
+                    loguru.logger.debug(
+                        f"Skipping individual noun '{token.text}' because lemma '{token_lemma}' is in stop list."
+                    )
+                    continue
+                if len(token_lemma) < 3:
+                    loguru.logger.debug(
+                        f"Skipping individual noun '{token.text}' due to short length."
+                    )
+                    continue
+                if any(
+                    pattern.match(token.text.lower())
+                    for pattern in compiled_filter_patterns
+                ):
+                    loguru.logger.debug(
+                        f"Skipping individual noun '{token.text}' due to pattern match."
+                    )
+                    continue
+
+                # If it passes, add it
+                if token_lemma not in potential_entities:
+                    potential_entities[token_lemma] = token.text.lower()
+                    loguru.logger.debug(
+                        f"Keeping individual noun: '{token.text}', Lemma: '{token_lemma}'"
+                    )
+
+        # --- Final list of entity names (using the stored original text) ---
+        filtered_entities = list(potential_entities.values())
+        loguru.logger.info(
+            f"Step {step_idx + 1}: Extracted entities: {filtered_entities}"
+        )
+
+        # --- Create or update entity objects (using the extracted names) ---
+        # (This part remains largely the same as your original code, using the 'filtered_entities' list)
         for entity_name in filtered_entities:
+            # Ensure we use the *extracted name* for consistency in the ProceduralText object
             if entity_name not in self.entities:
                 self.entities[entity_name] = Entity(entity_name, step_idx)
+                # Initial definition assumed when first extracted, refine based on verbs
                 self.entities[entity_name].defined_in.add(step_idx)
 
-            # Determine entity's role in this step
+            # Determine entity's role in this step using verbs
             is_used = False
             is_defined = False
             is_consumed = False
 
-            # Check for verbs acting on this entity
+            # Define verb categories (can be refined)
+            use_verbs = {
+                "add",
+                "use",
+                "stir",
+                "mix",
+                "combine",
+                "pour",
+                "crack",
+                "sprinkle",
+                "top",
+                "garnish",
+                "serve",
+                "incorporate",
+                "fold",
+                "whisk",
+                "beat",
+                "season",
+            }
+            define_verbs = {
+                "create",
+                "make",
+                "prepare",
+                "preheat",
+                "measure",
+                "warm",
+                "peel",
+                "mash",
+                "chop",
+                "dice",
+                "slice",
+                "mince",
+                "cook",
+                "bake",
+                "boil",
+                "simmer",
+                "fry",
+                "roast",
+                "grate",
+                "zest",
+                "juice",
+                "reduce",
+            }
+            consume_verbs = {
+                "eat",
+                "consume",
+                "finish",
+                "remove",
+                "discard",
+                "drain",
+                "strain",
+                "reserve",
+            }  # Reserve might be definition? Context needed.
+
+            # Check verbs acting on this entity (check if entity name is in the object of the verb)
             for token in doc:
                 if token.pos_ == "VERB":
-                    # Check if this verb acts on our entity
+                    # Check direct objects (dobj) or objects of prepositions (pobj) linked to the verb
                     for child in token.children:
+                        # Check if the entity name is reasonably contained within the child's text
+                        # This check needs to be robust (e.g., "the large onions" should match "onions")
                         if entity_name in child.text.lower():
-                            # Classify based on verb semantics
-                            if token.lemma_ in {
-                                "add",
-                                "use",
-                                "stir",
-                                "mix",
-                                "combine",
-                                "pour",
-                                "crack",
-                            }:
+                            verb_lemma = token.lemma_
+                            if verb_lemma in use_verbs:
                                 is_used = True
-                            elif token.lemma_ in {
-                                "create",
-                                "make",
-                                "prepare",
-                                "preheat",
-                                "measure",
-                                "warm",
-                                "peel",
-                                "mash",
-                            }:
+                            elif verb_lemma in define_verbs:
                                 is_defined = True
-                            elif token.lemma_ in {"eat", "consume", "finish", "remove"}:
+                                # If defined here, remove from initial assumption
+                                self.entities[entity_name].defined_in.discard(step_idx)
+                                self.entities[entity_name].defined_in.add(
+                                    step_idx
+                                )  # Re-add to be sure
+                            elif verb_lemma in consume_verbs:
                                 is_consumed = True
 
-            # Update entity with its role in this step
+            # Update entity roles for this step
             if is_used:
                 self.entities[entity_name].used_in.add(step_idx)
-            if is_defined:
-                self.entities[entity_name].defined_in.add(step_idx)
             if is_consumed:
                 self.entities[entity_name].consumed_in.add(step_idx)
-
-            # If no specific role was identified, assume it's being used
-            if not (is_used or is_defined or is_consumed):
-                self.entities[entity_name].used_in.add(step_idx)
 
     def _parse_steps(self):
         """Parse steps to extract entities and their relationships"""
