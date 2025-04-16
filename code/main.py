@@ -16,8 +16,9 @@ import spacy
 from tqdm import tqdm
 
 # Load spaCy model for NLP processing
-# nlp = spacy.load("en_core_web_sm")  # Smaller model for faster processing
-nlp = spacy.load("en_core_web_trf")  # Larger model for better accuracy
+spacy.require_gpu()
+nlp = spacy.load("en_core_web_sm")  # Smaller model for faster processing
+# nlp = spacy.load("en_core_web_trf")  # Larger model for better accuracy
 
 
 @dataclass
