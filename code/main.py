@@ -65,10 +65,10 @@ class ProceduralText:
     def _extract_entities_from_step(self, step_idx, step_text):
         """
         Extract entities from a step using NLP techniques with refined filtering for recipes.
-        Focuses on ingredients and key intermediate products, filtering out containers,
-        tools, generic terms, locations, and certain actions/qualities.
+        Focuses on ingredients and key intermediate products, filtering out containers, tools, generic terms, locations, actions/verbs, quantities, times, and dimensions.
         """
         doc = nlp(step_text)
+        loguru.logger.debug(f"*** Processing Step {step_idx + 1}: '{step_text}' ***")
 
         # Filter Lists
         measurement_units = {
@@ -120,6 +120,26 @@ class ProceduralText:
             "celsius",
             "f",
             "c",
+            "pinch",
+            "dash",
+            "sprig",
+            "clove",
+            "slice",
+            "slices",
+            "piece",
+            "pieces",
+            "head",
+            "bunch",
+            "can",
+            "cans",
+            "jar",
+            "jars",
+            "package",
+            "packages",
+            "box",
+            "boxes",
+            "stick",
+            "sticks",
         }
 
         # More structured generic terms
@@ -167,6 +187,12 @@ class ProceduralText:
             "towel",
             "lid",
             "cover",
+            "surface",
+            "counter",
+            "stove",
+            "burner",
+            "hob",
+            "range",
         }
 
         locations_qualities = {
@@ -197,6 +223,16 @@ class ProceduralText:
             "flavor",
             "texture",
             "appearance",
+            "golden",
+            "brown",
+            "tender",
+            "crisp",
+            "soft",
+            "firm",
+            "thick",
+            "thin",
+            "smooth",
+            "lumpy",
         }
 
         abstract_generic = {
@@ -240,7 +276,120 @@ class ProceduralText:
             "anything",
             "something",
             "nothing",
-            "water",  # Water is often implicit or tap water, less often a specific 'ingredient' unless qualified (e.g., 'coconut water')
+            "water",  # Often implicit, filter unless qualified e.g. "coconut water"
+            "grease",  # Often refers to generic action byproduct unless specified e.g. "bacon grease"
+            "oil",  # Often generic unless specified e.g. "olive oil"
+            "juice",  # Often generic unless specified e.g. "lemon juice"
+            "stock",
+            "broth",  # Often generic unless specified e.g. "chicken stock"
+        }
+
+        # Explicit list of common cooking verbs (lemmas) to filter out
+        verb_stop_list = {
+            "preheat",
+            "heat",
+            "warm",
+            "cool",
+            "chill",
+            "freeze",
+            "bake",
+            "roast",
+            "grill",
+            "broil",
+            "toast",
+            "fry",
+            "saute",
+            "sear",
+            "boil",
+            "simmer",
+            "poach",
+            "steam",
+            "reduce",
+            "mix",
+            "stir",
+            "combine",
+            "blend",
+            "whisk",
+            "fold",
+            "beat",
+            "whip",
+            "add",
+            "incorporate",
+            "introduce",
+            "remove",
+            "discard",
+            "take",
+            "set",
+            "aside",
+            "reserve",
+            "drain",
+            "strain",
+            "sift",
+            "measure",
+            "weigh",
+            "chop",
+            "dice",
+            "slice",
+            "mince",
+            "grate",
+            "zest",
+            "peel",
+            "core",
+            "trim",
+            "mash",
+            "puree",
+            "crush",
+            "grease",
+            "oil",
+            "butter",  # Verbs, not the nouns (usually)
+            "season",
+            "salt",
+            "pepper",
+            "cover",
+            "wrap",
+            "seal",
+            "soak",
+            "marinate",
+            "serve",
+            "plate",
+            "garnish",
+            "cook",
+            "prepare",
+            "make",
+            "create",
+            "start",
+            "begin",
+            "continue",
+            "finish",
+            "let",
+            "allow",
+            "ensure",
+            "check",
+            "test",
+            "adjust",
+            "repeat",
+            "follow",
+            "place",
+            "put",
+            "transfer",
+            "pour",
+            "sprinkle",
+            "drizzle",
+            "spread",
+            "layer",
+            "turn",
+            "flip",
+            "rotate",
+            "bring",  # e.g., "bring to a boil"
+            "work",  # e.g., "work the dough"
+            "use",  # Too generic
+            "need",  # Too generic
+            "require",  # Too generic
+            "taste",  # Action
+            "look",  # Action
+            "feel",  # Action
+            "smell",  # Action
+            "watch",  # Action
         }
 
         # Combine all terms to exclude by direct match
@@ -253,14 +402,19 @@ class ProceduralText:
         # Patterns for filtering (e.g., numeric values, specific phrases)
         filter_patterns = [
             r"^\d+(\.\d+)?$",  # Pure numbers
-            r"^\d+/\d+$",  # Fractions
+            r"^\d+\s?/\s?\d+$",  # Fractions like 1/2 or 1 / 2
+            r"^\d+\s?-\s?\d+$",  # Ranges like 10-15
+            r"^\d+x\d+$",  # Dimensions like 9x13
+            r"^\d+(\s?(to|or|-)\s?\d+)?\s+(minute|minutes|min|hour|hours|hr|second|seconds|sec)$",  # Time durations e.g., "5 minutes", "10-15 minutes"
+            r"^\d+(\s?(to|or|-)\s?\d+)?\s+(degree|degrees|°)\s?[fc]?$",  # Temperatures e.g., "350 degrees F"
             r"medium heat",
             r"high heat",
             r"low heat",  # Specific heat levels often not entities
             r"room temperature",
-            r"baking soda",
-            r"baking powder",  # Keep these as exceptions if needed later, but filter simple 'baking'/'powder'
+            r"^(about|approx\.?|approximately|around|over|under|less than|more than|at least)\s+\d+",
+            r"^(a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+(cup|tablespoon|teaspoon|pinch|dash|clove|slice|piece|can|jar|package|box|stick)",  # Common small quantities
         ]
+
         # Pre-compile regex for efficiency
         compiled_filter_patterns = [
             re.compile(p, re.IGNORECASE) for p in filter_patterns
@@ -268,12 +422,12 @@ class ProceduralText:
 
         potential_entities = {}  # Use dict to store lemma -> original text mapping, helps deduplicate
 
-        # --- Process Noun Chunks ---
+        # Process Noun Chunks
         for chunk in doc.noun_chunks:
             # Clean the chunk text: lowercase, remove leading/trailing articles/possessives
             clean_chunk_text = chunk.text.lower()
             clean_chunk_text = re.sub(
-                r"^(the|a|an|some|your|my|his|her|its|our|their)\s+",
+                r"^(the|a|an|some|your|my|his|her|its|our|their|of|for|with|in|on|at|to|about|approx\.?|approximately|around|over|under|less than|more than|at least)\s+",
                 "",
                 clean_chunk_text,
             ).strip()
@@ -284,8 +438,27 @@ class ProceduralText:
             # Use the lemma of the root word for checking against stop lists
             root_lemma = chunk.root.lemma_.lower()
 
-            # --- Apply Filters ---
-            # 1. Check exact cleaned text against patterns
+            # Apply Filters
+            # 0. Check first token POS: Skip if it starts with a verb, adverb, number, etc.
+            first_token_pos = chunk[0].pos_
+            if first_token_pos in {
+                "VERB",
+                "AUX",
+                "ADV",
+                "ADP",
+                "NUM",
+                "PUNCT",
+                "PART",
+                "SCONJ",
+                "CCONJ",
+            }:
+                # Allow ADP only if it's part of a known multi-word entity? (e.g. "cream of tartar") - complex, skip for now.
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because first token POS is {first_token_pos}"
+                )
+                continue
+
+            # 1. Check exact cleaned text against compiled regex patterns
             if any(
                 pattern.match(clean_chunk_text) for pattern in compiled_filter_patterns
             ):
@@ -294,112 +467,105 @@ class ProceduralText:
                 )
                 continue
 
-            # 2. Check root lemma against stop lemmas
+            # 2. Check root lemma against general stop lemmas
             if root_lemma in stop_entity_lemmas:
-                # Allow exceptions? e.g., if root is 'pot' but text is 'instant pot'? For now, filter if root matches.
                 loguru.logger.debug(
                     f"Skipping chunk '{chunk.text}' because root lemma '{root_lemma}' is in stop list."
                 )
                 continue
 
-            # 3. Check full cleaned text against stop lemmas (for multi-word generics)
+            # 3. Check root lemma against VERB stop list
+            if root_lemma in verb_stop_list:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because root lemma '{root_lemma}' is in VERB stop list."
+                )
+                continue
+
+            # 4. Check full cleaned text against general stop lemmas (for multi-word generics)
             if clean_chunk_text in stop_entity_lemmas:
                 loguru.logger.debug(
                     f"Skipping chunk '{chunk.text}' because full text '{clean_chunk_text}' is in stop list."
                 )
                 continue
 
-            # 4. Length check
+            # 5. Check full cleaned text against VERB stop list
+            if clean_chunk_text in verb_stop_list:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because full text '{clean_chunk_text}' is in VERB stop list."
+                )
+                continue
+
+            # 6. Length check (on cleaned text)
             if len(clean_chunk_text) < 3:
                 loguru.logger.debug(
                     f"Skipping chunk '{chunk.text}' due to short length after cleaning: '{clean_chunk_text}'"
                 )
                 continue
 
-            # 5. Check if root is a verb/adjective (sometimes chunks can be misidentified)
+            # 7. Check if root is a verb/adjective (redundant with check 3, but keep as safety)
             if chunk.root.pos_ not in {"NOUN", "PROPN"}:
+                # Allow ADJ if it modifies a noun? e.g. "large onions" - chunk root might be 'large'
+                # Let's be strict for now: root must be NOUN or PROPN
                 loguru.logger.debug(
                     f"Skipping chunk '{chunk.text}' because root POS is {chunk.root.pos_}"
                 )
                 continue
 
-            # --- If passes filters, add it ---
-            # Use lemma for deduplication key, store original cleaned text
-            entity_lemma = root_lemma  # Or potentially lemmatize the whole clean_chunk_text if more complex
-            if entity_lemma not in potential_entities:
-                potential_entities[entity_lemma] = clean_chunk_text
+            # 8. Check if the chunk seems to be just a quantity + unit (missed by patterns)
+            if (
+                len(chunk) == 2
+                and chunk[0].like_num
+                and chunk[1].lemma_ in measurement_units
+            ):
                 loguru.logger.debug(
-                    f"Keeping chunk: '{chunk.text}' -> Cleaned: '{clean_chunk_text}', Lemma: '{entity_lemma}'"
+                    f"Skipping chunk '{chunk.text}' as it looks like quantity+unit."
+                )
+                continue
+
+            # If passes filters, add it
+            # Use lemma for deduplication key, store original cleaned text
+            entity_lemma = root_lemma  # Using root lemma as the key
+            # Alternative: use the full cleaned text as key if root lemma is too ambiguous
+            # entity_key = clean_chunk_text
+
+            # Prefer longer chunks if lemmas collide (e.g., "olive oil" vs "oil")
+            if entity_lemma not in potential_entities or len(clean_chunk_text) > len(
+                potential_entities[entity_lemma]
+            ):
+                potential_entities[entity_lemma] = clean_chunk_text
+                loguru.logger.info(
+                    f"Keeping potential entity: '{chunk.text}' -> Cleaned: '{clean_chunk_text}', Key Lemma: '{entity_lemma}'"
+                )
+            else:
+                loguru.logger.debug(
+                    f"Skipping chunk '{chunk.text}' because lemma '{entity_lemma}' already exists with '{potential_entities[entity_lemma]}'"
                 )
 
-        # --- Process Individual Nouns (Optional: Catch things missed by chunks) ---
-        # Be cautious here to avoid re-adding filtered items or parts of chunks
-        for token in doc:
-            if token.pos_ in {"NOUN", "PROPN"} and not token.is_stop:
-                token_lemma = token.lemma_.lower()
-
-                # Check if this token's lemma is already covered by a kept chunk
-                if token_lemma in potential_entities:
-                    continue
-
-                # Check if this token was part of ANY noun chunk (even filtered ones)
-                part_of_chunk = False
-                for chunk in doc.noun_chunks:
-                    if token.i >= chunk.start and token.i < chunk.end:
-                        part_of_chunk = True
-                        break
-                if part_of_chunk:
-                    continue
-
-                # Apply similar filters as for chunks
-                if token_lemma in stop_entity_lemmas:
-                    loguru.logger.debug(
-                        f"Skipping individual noun '{token.text}' because lemma '{token_lemma}' is in stop list."
-                    )
-                    continue
-                if len(token_lemma) < 3:
-                    loguru.logger.debug(
-                        f"Skipping individual noun '{token.text}' due to short length."
-                    )
-                    continue
-                if any(
-                    pattern.match(token.text.lower())
-                    for pattern in compiled_filter_patterns
-                ):
-                    loguru.logger.debug(
-                        f"Skipping individual noun '{token.text}' due to pattern match."
-                    )
-                    continue
-
-                # If it passes, add it
-                if token_lemma not in potential_entities:
-                    potential_entities[token_lemma] = token.text.lower()
-                    loguru.logger.debug(
-                        f"Keeping individual noun: '{token.text}', Lemma: '{token_lemma}'"
-                    )
-
-        # --- Final list of entity names (using the stored original text) ---
+        # Final list of entity names (using the stored original text)
         filtered_entities = list(potential_entities.values())
         loguru.logger.info(
-            f"Step {step_idx + 1}: Extracted entities: {filtered_entities}"
+            f"Step {step_idx + 1}: Final extracted entities for this step: {filtered_entities}"
         )
 
-        # --- Create or update entity objects (using the extracted names) ---
-        # (This part remains largely the same as your original code, using the 'filtered_entities' list)
+        # Create or update entity objects (using the extracted names)
+        # (This part remains largely the same, but acts on the better 'filtered_entities')
         for entity_name in filtered_entities:
             # Ensure we use the *extracted name* for consistency in the ProceduralText object
             if entity_name not in self.entities:
                 self.entities[entity_name] = Entity(entity_name, step_idx)
                 # Initial definition assumed when first extracted, refine based on verbs
                 self.entities[entity_name].defined_in.add(step_idx)
+                loguru.logger.debug(
+                    f"Adding new global entity: '{entity_name}' from step {step_idx + 1}"
+                )
 
-            # Determine entity's role in this step using verbs
+            # Determine entity's role in this step using verbs (existing logic)
             is_used = False
             is_defined = False
             is_consumed = False
 
             # Define verb categories (can be refined)
-            use_verbs = {
+            use_verbs = {  # Verbs indicating using an existing entity
                 "add",
                 "use",
                 "stir",
@@ -416,8 +582,14 @@ class ProceduralText:
                 "whisk",
                 "beat",
                 "season",
+                "coat",
+                "stuff",
+                "fill",
+                "layer",
+                "spread",
+                "drizzle",
             }
-            define_verbs = {
+            define_verbs = {  # Verbs indicating creating/transforming an entity
                 "create",
                 "make",
                 "prepare",
@@ -440,8 +612,14 @@ class ProceduralText:
                 "zest",
                 "juice",
                 "reduce",
+                "melt",
+                "toast",
+                "brown",
+                "render",
+                "whip",
+                "beat",
             }
-            consume_verbs = {
+            consume_verbs = {  # Verbs indicating the entity is used up or removed
                 "eat",
                 "consume",
                 "finish",
@@ -450,34 +628,115 @@ class ProceduralText:
                 "drain",
                 "strain",
                 "reserve",
-            }  # Reserve might be definition? Context needed.
+            }
 
-            # Check verbs acting on this entity (check if entity name is in the object of the verb)
+            # Check verbs acting ON this entity (check dependency relations)
+            entity_found_in_step = False
             for token in doc:
-                if token.pos_ == "VERB":
-                    # Check direct objects (dobj) or objects of prepositions (pobj) linked to the verb
-                    for child in token.children:
-                        # Check if the entity name is reasonably contained within the child's text
-                        # This check needs to be robust (e.g., "the large onions" should match "onions")
-                        if entity_name in child.text.lower():
-                            verb_lemma = token.lemma_
+                # Find occurrences of the entity name (or its root lemma) in the step
+                # This needs to be robust: check token text, lemma, and potentially substring matches
+                if (
+                    entity_name in token.text.lower()
+                    or entity_name == token.lemma_.lower()
+                ):
+                    entity_found_in_step = True
+                    # Check the token's syntactic head (the verb governing it)
+                    head = token.head
+                    if head.pos_ == "VERB":
+                        verb_lemma = head.lemma_.lower()
+                        loguru.logger.debug(
+                            f"Entity '{entity_name}' governed by verb '{verb_lemma}' ({head.text}) with relation '{token.dep_}'"
+                        )
+
+                        # Check if the entity is the object (dobj, pobj) or subject (nsubj, nsubjpass)
+                        if token.dep_ in {
+                            "dobj",
+                            "pobj",
+                            "attr",
+                            "nsubj",
+                            "nsubjpass",
+                            "conj",
+                        }:  # Added conj for lists
                             if verb_lemma in use_verbs:
                                 is_used = True
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as USED by verb '{verb_lemma}'"
+                                )
                             elif verb_lemma in define_verbs:
                                 is_defined = True
-                                # If defined here, remove from initial assumption
-                                self.entities[entity_name].defined_in.discard(step_idx)
-                                self.entities[entity_name].defined_in.add(
-                                    step_idx
-                                )  # Re-add to be sure
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as DEFINED by verb '{verb_lemma}'"
+                                )
                             elif verb_lemma in consume_verbs:
                                 is_consumed = True
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as CONSUMED by verb '{verb_lemma}'"
+                                )
 
-            # Update entity roles for this step
-            if is_used:
-                self.entities[entity_name].used_in.add(step_idx)
-            if is_consumed:
-                self.entities[entity_name].consumed_in.add(step_idx)
+            # If entity name appears but not clearly governed by a verb (e.g., just mentioned)
+            # Default to 'used' if not defined/consumed? Or require explicit verb action?
+            # Let's require explicit verb action for now to be stricter.
+            # However, if an entity is mentioned first time, it's likely defined.
+            if entity_name in self.entities:
+                current_entity = self.entities[entity_name]
+                if (
+                    step_idx == current_entity.step_introduced
+                    and not is_used
+                    and not is_defined
+                    and not is_consumed
+                    and entity_found_in_step
+                ):
+                    # If it's the first mention and no clear verb action, assume definition (e.g., "2 cups flour")
+                    is_defined = True
+                    loguru.logger.debug(
+                        f"Marking '{entity_name}' as DEFINED (first mention, no clear verb)"
+                    )
+
+                # Update entity roles for this step
+                if is_used:
+                    current_entity.used_in.add(step_idx)
+                if is_defined:
+                    # If defined here, ensure it's marked (overwrites initial assumption if needed)
+                    current_entity.defined_in.discard(
+                        step_idx
+                    )  # Remove if added initially
+                    current_entity.defined_in.add(
+                        step_idx
+                    )  # Add based on verb analysis
+                if is_consumed:
+                    current_entity.consumed_in.add(step_idx)
+
+                # If an entity is defined in this step, it usually implies it's also used (unless it's just measuring)
+                # Let's add a rule: if defined by a transformation verb, also mark as used (consuming the previous state)
+                transformation_verbs = {
+                    "mash",
+                    "chop",
+                    "dice",
+                    "slice",
+                    "mince",
+                    "grate",
+                    "zest",
+                    "juice",
+                    "cook",
+                    "bake",
+                    "boil",
+                    "simmer",
+                    "fry",
+                    "roast",
+                    "melt",
+                    "toast",
+                    "brown",
+                    "whip",
+                    "beat",
+                    "reduce",
+                }
+                if is_defined and verb_lemma in transformation_verbs:
+                    current_entity.used_in.add(step_idx)
+                    loguru.logger.debug(
+                        f"Also marking '{entity_name}' as USED due to transformation verb '{verb_lemma}'"
+                    )
+
+        loguru.logger.debug(f"*** Finished Step {step_idx + 1} ***")
 
     def _parse_steps(self):
         """Parse steps to extract entities and their relationships"""
