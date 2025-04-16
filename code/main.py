@@ -659,35 +659,57 @@ class QuestionGenerator:
         # Ground truth is True since we verified no redefinition
         return question, True
 
-    def generate_very_busy_expressions_question(self) -> Tuple[str, Optional[bool]]:
+    def generate_very_busy_expressions_question(
+        self,
+    ) -> List[Tuple[str, bool]]:
         """
-        Generate a question about very busy expressions in the procedural text.
+        Generate questions about very busy expressions in the procedural text.
 
-        This method identifies entities that, after being defined, are used in multiple future steps,
-        indicating that they are "very busy" throughout the process.
+        Identifies entities that, after being defined, are used in multiple future steps.
+        Generates a question for EACH such instance found in the recipe.
 
-        :return: A tuple containing the generated question and a boolean ground truth.
-                 If no busy expressions are found, returns an explanatory message and None.
+        :return: A list of tuples, each containing a generated question and the boolean ground truth (True).
+                 Returns an empty list if no busy expressions are found.
         """
-        busy_entities = []
+        busy_entity_questions = []  # Initialize list to store questions
+        busy_entities_found = []  # Store the found entities first
 
         for entity_name, entity in self.text.entities.items():
             for def_step in entity.defined_in:
+                # Find future uses (strictly after definition)
                 future_uses = [step for step in entity.used_in if step > def_step]
-                if len(future_uses) >= 2:  # Used in multiple future steps
-                    busy_entities.append((entity_name, def_step))
 
-        if not busy_entities:
-            return "No very busy expressions found.", None
+                # Check for redefinition between def_step and each future_use
+                # This makes the check stricter and aligns with the definition
+                valid_future_uses = []
+                for use_step in future_uses:
+                    is_redefined_before_use = False
+                    for intermediate_step in range(def_step + 1, use_step):
+                        if intermediate_step in entity.defined_in:
+                            is_redefined_before_use = True
+                            break
+                    if not is_redefined_before_use:
+                        valid_future_uses.append(use_step)
 
-        # Choose a random entity and step
-        entity_name, step = random.choice(busy_entities)
+                # Check if used in multiple future steps WITHOUT intermediate redefinition
+                if len(valid_future_uses) >= 2:
+                    busy_entities_found.append(
+                        (entity_name, def_step, valid_future_uses)
+                    )  # Store uses too for clarity
 
-        # Generate question
-        question = f"Is {entity_name} from Step {step + 1} used in multiple future steps without being redefined?"
+        if not busy_entities_found:
+            return []  # Return empty list if none found
 
-        # Ground truth is True since we verified multiple future uses
-        return question, True
+        # Generate a question for each found busy expression
+        for entity_name, step, use_steps in busy_entities_found:
+            # Construct the question text
+            # Mentioning the specific future steps might make the question too complex/long.
+            # Keep the original question format for simplicity.
+            question = f"Is {entity_name} from Step {step + 1} used in multiple future steps without being redefined?"
+            # Ground truth is True because we found at least two valid future uses
+            busy_entity_questions.append((question, True))
+
+        return busy_entity_questions
 
     def generate_available_expressions_question(self) -> Tuple[str, Optional[bool]]:
         """
@@ -996,37 +1018,41 @@ class QuestionGenerator:
         """
         questions = []
 
-        for _ in range(num_per_type):
-            questions.append(
-                ("Reaching Definitions", self.generate_reaching_definitions_question())
-            )
-            questions.append(
-                (
-                    "Very Busy Expressions",
-                    self.generate_very_busy_expressions_question(),
-                )
-            )
-            questions.append(
-                (
-                    "Available Expressions",
-                    self.generate_available_expressions_question(),
-                )
-            )
-            questions.append(
-                ("Live Variable Analysis", self.generate_live_variable_question())
-            )
-            questions.append(
-                ("Interval Analysis", self.generate_interval_analysis_question())
-            )
-            questions.append(
-                ("Type-State Analysis", self.generate_type_state_question())
-            )
-            questions.append(
-                ("Taint Analysis", self.generate_taint_analysis_question())
-            )
-            questions.append(
-                ("Concurrency Analysis", self.generate_concurrency_analysis_question())
-            )
+        generator_functions = {
+            "Reaching Definitions": self.generate_reaching_definitions_question,
+            "Very Busy Expressions": self.generate_very_busy_expressions_question,  # This one returns a list now
+            "Available Expressions": self.generate_available_expressions_question,
+            "Live Variable Analysis": self.generate_live_variable_question,
+            "Interval Analysis": self.generate_interval_analysis_question,
+            "Type-State Analysis": self.generate_type_state_question,
+            "Taint Analysis": self.generate_taint_analysis_question,
+            "Concurrency Analysis": self.generate_concurrency_analysis_question,
+        }
+
+        for _ in range(num_per_type):  # Loop num_per_type times
+            for q_type, generator_func in generator_functions.items():
+                result = generator_func()
+
+                if isinstance(
+                    result, list
+                ):  # Handle list results (like from Very Busy Expressions)
+                    # Check if the list is not empty and contains tuples (question, answer)
+                    if result and isinstance(result[0], tuple) and len(result[0]) == 2:
+                        for question_answer in result:
+                            if question_answer[1] is not None:  # Check for valid answer
+                                questions.append((q_type, question_answer))
+                    # Handle empty list case implicitly (adds nothing)
+                elif (
+                    isinstance(result, tuple) and len(result) == 2
+                ):  # Handle single tuple result
+                    question, answer = result
+                    if answer is not None:  # Check for valid answer
+                        questions.append((q_type, (question, answer)))
+                else:
+                    # Handle unexpected return types or None answers if necessary
+                    loguru.logger.warning(
+                        f"Generator for {q_type} returned unexpected result: {result}"
+                    )
 
         return questions
 
