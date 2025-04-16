@@ -692,7 +692,7 @@ class QuestionGenerator:
                         valid_future_uses.append(use_step)
 
                 # Check if used in multiple future steps WITHOUT intermediate redefinition
-                if len(valid_future_uses) >= 2:
+                if len(valid_future_uses) >= 1:
                     busy_entities_found.append(
                         (entity_name, def_step, valid_future_uses)
                     )  # Store uses too for clarity
