@@ -14,4 +14,4 @@ module load python3/anaconda/2021.07 gcc/12.2.0 cuda/12.1
 echo $CONDA_DEFAULT_ENV
 
 hostname
-uv run python3 code/main.py data/allrecipes-recipes outs/outs_5
+uv run python3 code/main.py data/allrecipes-recipes outs/outs_6
