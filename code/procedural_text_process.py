@@ -548,7 +548,8 @@ class ProceduralText:
         )
 
         # Create or update entity objects (using the extracted names)
-        # (This part remains largely the same, but acts on the better 'filtered_entities')
+        step_entity_roles = {}  # Track roles assigned in this step: entity_name -> set of roles {'used', 'defined', 'consumed'}
+
         for entity_name in filtered_entities:
             # Ensure we use the *extracted name* for consistency in the ProceduralText object
             if entity_name not in self.entities:
@@ -564,8 +565,8 @@ class ProceduralText:
             is_defined = False
             is_consumed = False
 
-            # Define verb categories (can be refined)
-            use_verbs = {  # Verbs indicating using an existing entity
+            # Define verb categories
+            use_verbs = {
                 "add",
                 "use",
                 "stir",
@@ -588,8 +589,15 @@ class ProceduralText:
                 "layer",
                 "spread",
                 "drizzle",
+                "simmer",
+                "boil",
+                "bake",
+                "roast",
+                "cook",
+                "fry",
+                "saute",
             }
-            define_verbs = {  # Verbs indicating creating/transforming an entity
+            define_verbs = {
                 "create",
                 "make",
                 "prepare",
@@ -619,7 +627,7 @@ class ProceduralText:
                 "whip",
                 "beat",
             }
-            consume_verbs = {  # Verbs indicating the entity is used up or removed
+            consume_verbs = {
                 "eat",
                 "consume",
                 "finish",
@@ -629,9 +637,34 @@ class ProceduralText:
                 "strain",
                 "reserve",
             }
+            # Verbs indicating transformation (Expanded)
+            transformation_verbs = {
+                "mash",
+                "chop",
+                "dice",
+                "slice",
+                "mince",
+                "grate",
+                "zest",
+                "juice",
+                "cook",
+                "bake",
+                "boil",
+                "simmer",
+                "fry",
+                "roast",
+                "melt",
+                "toast",
+                "brown",
+                "whip",
+                "beat",
+                "reduce",
+                "puree",  # Added puree
+            }
 
             # Check verbs acting ON this entity (check dependency relations)
             entity_found_in_step = False
+            verb_action_found = False  # Flag if a verb explicitly acted on the entity
             for token in doc:
                 # Find occurrences of the entity name (or its root lemma) in the step
                 # This needs to be robust: check token text, lemma, and potentially substring matches
@@ -648,7 +681,7 @@ class ProceduralText:
                             f"Entity '{entity_name}' governed by verb '{verb_lemma}' ({head.text}) with relation '{token.dep_}'"
                         )
 
-                        # Check if the entity is the object (dobj, pobj) or subject (nsubj, nsubjpass)
+                        # Check if the entity is the object/subject/conjunct etc.
                         if token.dep_ in {
                             "dobj",
                             "pobj",
@@ -656,12 +689,21 @@ class ProceduralText:
                             "nsubj",
                             "nsubjpass",
                             "conj",
-                        }:  # Added conj for lists
+                            "appos",
+                            "advcl",
+                        }:
+                            verb_action_found = (
+                                True  # Mark that we found a direct verb action
+                            )
+                            governing_verb_lemma = (
+                                verb_lemma  # Store for transformation check
+                            )
                             if verb_lemma in use_verbs:
                                 is_used = True
                                 loguru.logger.debug(
                                     f"Marking '{entity_name}' as USED by verb '{verb_lemma}'"
                                 )
+                            # Use 'elif' to avoid double-counting if a verb is in multiple sets (define takes precedence over use if both match)
                             elif verb_lemma in define_verbs:
                                 is_defined = True
                                 loguru.logger.debug(
@@ -679,11 +721,12 @@ class ProceduralText:
             # However, if an entity is mentioned first time, it's likely defined.
             if entity_name in self.entities:
                 current_entity = self.entities[entity_name]
+                roles_assigned = set()
+
+                # Handle initial definition assumption
                 if (
                     step_idx == current_entity.step_introduced
-                    and not is_used
-                    and not is_defined
-                    and not is_consumed
+                    and not verb_action_found
                     and entity_found_in_step
                 ):
                     # If it's the first mention and no clear verb action, assume definition (e.g., "2 cups flour")
@@ -695,46 +738,45 @@ class ProceduralText:
                 # Update entity roles for this step
                 if is_used:
                     current_entity.used_in.add(step_idx)
+                    roles_assigned.add("used")
                 if is_defined:
-                    # If defined here, ensure it's marked (overwrites initial assumption if needed)
+                    # Ensure definition is marked correctly
                     current_entity.defined_in.discard(
                         step_idx
-                    )  # Remove if added initially
-                    current_entity.defined_in.add(
-                        step_idx
-                    )  # Add based on verb analysis
+                    )  # Remove initial assumption if needed
+                    current_entity.defined_in.add(step_idx)
+                    roles_assigned.add("defined")
+                    # If defined by transformation, also mark as used (consuming previous state)
+                    if governing_verb_lemma in transformation_verbs:
+                        current_entity.used_in.add(step_idx)
+                        roles_assigned.add("used")  # Add 'used' role as well
+                        loguru.logger.debug(
+                            f"Also marking '{entity_name}' as USED due to transformation verb '{governing_verb_lemma}'"
+                        )
                 if is_consumed:
                     current_entity.consumed_in.add(step_idx)
+                    current_entity.consumed_in.add(step_idx)
 
-                # If an entity is defined in this step, it usually implies it's also used (unless it's just measuring)
-                # Let's add a rule: if defined by a transformation verb, also mark as used (consuming the previous state)
-                transformation_verbs = {
-                    "mash",
-                    "chop",
-                    "dice",
-                    "slice",
-                    "mince",
-                    "grate",
-                    "zest",
-                    "juice",
-                    "cook",
-                    "bake",
-                    "boil",
-                    "simmer",
-                    "fry",
-                    "roast",
-                    "melt",
-                    "toast",
-                    "brown",
-                    "whip",
-                    "beat",
-                    "reduce",
-                }
-                if is_defined and verb_lemma in transformation_verbs:
-                    current_entity.used_in.add(step_idx)
-                    loguru.logger.debug(
-                        f"Also marking '{entity_name}' as USED due to transformation verb '{verb_lemma}'"
+                # If the entity was found, wasn't its introduction step, and no role was assigned by verbs, assume 'used'.
+                if (
+                    entity_found_in_step
+                    and not roles_assigned
+                    and step_idx != current_entity.step_introduced
+                ):
+                    # Check if it was defined or used previously to justify assuming 'used' now
+                    was_previously_active = any(
+                        s < step_idx
+                        for s in current_entity.defined_in.union(current_entity.used_in)
                     )
+                    if was_previously_active:
+                        loguru.logger.warning(
+                            f"Entity '{entity_name}' found in step {step_idx + 1} but no clear verb role assigned. Applying fallback: marking as USED."
+                        )
+                        current_entity.used_in.add(step_idx)
+                        roles_assigned.add("used")
+
+                # Store assigned roles for this step (used for debugging/verification if needed)
+                step_entity_roles[entity_name] = roles_assigned
 
         loguru.logger.debug(f"*** Finished Step {step_idx + 1} ***")
 
@@ -1017,28 +1059,70 @@ class QuestionGenerator:
         live_entities = []
         non_live_entities = []
 
-        for entity_name, entity in self.text.entities.items():
-            for step in range(len(self.text.steps)):
-                # Check if entity is used after this step
+        # Consider entities that are actually defined or used at some point
+        relevant_entities = {
+            name: entity
+            for name, entity in self.text.entities.items()
+            if entity.defined_in or entity.used_in
+        }
+
+        if not relevant_entities:
+            return "No relevant entities found for live variable analysis.", None
+
+        for entity_name, entity in relevant_entities.items():
+            # Check liveness after each step where the entity *could* be relevant
+            # (i.e., from its introduction up to the second-to-last step)
+            last_possible_step = len(self.text.steps) - 1
+            start_step = entity.step_introduced  # Start checking after it's introduced
+
+            for step in range(start_step, last_possible_step):
+                # Check if entity is used in any step strictly after 'step'
                 is_live = any(use_step > step for use_step in entity.used_in)
 
-                if is_live:
-                    live_entities.append((entity_name, step))
-                else:
-                    non_live_entities.append((entity_name, step))
+                # Avoid asking about liveness if the entity was consumed at or before this step
+                consumed_before_or_at_step = any(
+                    cons_step <= step for cons_step in entity.consumed_in
+                )
 
-        # Choose between live and non-live entities
-        if live_entities and (not non_live_entities or random.random() > 0.5):
-            entity_name, step = random.choice(live_entities)
+                if not consumed_before_or_at_step:
+                    if is_live:
+                        live_entities.append((entity_name, step))
+                    else:
+                        # Only consider non-live if it wasn't consumed earlier
+                        non_live_entities.append((entity_name, step))
+
+        # Ensure we don't have duplicates (e.g., entity live after step 2 and step 3)
+        live_entities = list(set(live_entities))
+        non_live_entities = list(set(non_live_entities))
+
+        # Choose between live and non-live entities to generate a mix of True/False questions
+        chosen_entity = None
+        ground_truth = None
+
+        can_choose_live = bool(live_entities)
+        can_choose_non_live = bool(non_live_entities)
+
+        if can_choose_live and (not can_choose_non_live or random.random() > 0.5):
+            chosen_entity = random.choice(live_entities)
             ground_truth = True
-        elif non_live_entities:
-            entity_name, step = random.choice(non_live_entities)
+        elif can_choose_non_live:
+            chosen_entity = random.choice(non_live_entities)
             ground_truth = False
-        else:
-            return "No entities found for live variable analysis.", None
 
-        # Generate question
-        question = f"Is {entity_name} still needed after Step {step + 1}?"
+        if chosen_entity is None:
+            return (
+                "Could not find a suitable scenario for live variable analysis question.",
+                None,
+            )
+
+        entity_name, step = chosen_entity
+
+        # Old: question = f"Is {entity_name} still needed after Step {step + 1}?"
+        question = f"Is {entity_name} live after Step {step + 1}?"
+
+        loguru.logger.debug(
+            f"Generated Liveness Q: '{question}' -> {ground_truth}. Entity: {entity_name}, Step checked after: {step + 1}, Used in: {self.text.entities[entity_name].used_in}"
+        )
 
         return question, ground_truth
 
@@ -1182,9 +1266,23 @@ class QuestionGenerator:
         step_text = self.text.steps[step].lower()
 
         # Raw ingredients that aren't cooked later are a concern
+        cooking_verbs = {
+            "cook",
+            "bake",
+            "simmer",
+            "boil",
+            "broil",
+            "fry",
+            "roast",
+            "grill",
+            "steam",
+            "saute",
+        }
         is_raw = "raw" in step_text or "egg" in entity_name
         is_cooked_later = any(
-            "cook" in self.text.steps[s].lower() or "bake" in self.text.steps[s].lower()
+            any(
+                verb in self.text.steps[s].lower().split() for verb in cooking_verbs
+            )  # Check if any cooking verb is present
             for s in range(step + 1, len(self.text.steps))
         )
 
@@ -1279,7 +1377,7 @@ class QuestionGenerator:
 
         generator_functions = {
             "Reaching Definitions": self.generate_reaching_definitions_question,
-            "Very Busy Expressions": self.generate_very_busy_expressions_question,  # This one returns a list now
+            "Very Busy Expressions": self.generate_very_busy_expressions_question,
             "Available Expressions": self.generate_available_expressions_question,
             "Live Variable Analysis": self.generate_live_variable_question,
             "Interval Analysis": self.generate_interval_analysis_question,
