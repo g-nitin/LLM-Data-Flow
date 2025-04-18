@@ -11,7 +11,8 @@ dependencies = [
     "pandas>=2.2.3",
     "pip>=25.0.1",
     "setuptools>=78.1.0",
-    "spacy[apple]>=3.8.5",
+    "spacy[apple]>=3.8.5 ; platform_system == 'Darwin'",
+    "spacy[cuda12x]>=3.8.5 ; platform_system == 'Linux'",
     "tqdm>=4.67.1",
     "wheel>=0.45.1",
 ]
