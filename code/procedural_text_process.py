@@ -17,8 +17,8 @@ from tqdm import tqdm
 
 # Load spaCy model for NLP processing
 spacy.require_gpu()
-nlp = spacy.load("en_core_web_sm")  # Smaller model for faster processing
-# nlp = spacy.load("en_core_web_trf")  # Larger model for better accuracy
+# nlp = spacy.load("en_core_web_sm")  # Smaller model for faster processing
+nlp = spacy.load("en_core_web_trf")  # Larger model for better accuracy
 
 
 @dataclass
@@ -99,6 +99,7 @@ class ProceduralText:
         # Parse steps to extract entities and their relationships
         self._parse_steps()
         self.build_entity_flow_graph()
+        self._add_dataflow_dependencies()
 
         # Log all variables
         loguru.logger.info(
@@ -1004,6 +1005,7 @@ class ProceduralText:
         """
         # Ensure step1 < step2 for consistent checking, swap if needed
         s1, s2 = min(step1, step2), max(step1, step2)
+        loguru.logger.trace(f"Checking concurrency for Steps {s1 + 1} and {s2 + 1}")
 
         # 1. Check for Path Dependency in the potentially augmented step_dependencies graph
         # If there's a path from s1 to s2, s1 must precede s2.
@@ -1214,7 +1216,6 @@ class QuestionGenerator:
         This method evaluates whether a given entity is "live" after a specified step,
         meaning that the entity is still used in subsequent steps.
 
-        Some more notes...
         What does it mean for an entity to be "live"?
 
         In the context of the procedural text framework, drawing analogy from software analysis: An entity (like an ingredient, tool, or intermediate product) is considered **"live"** after a specific step (say, Step `k`) if that entity **will be used** in at least one subsequent step (Step `j`, where `j > k`).
