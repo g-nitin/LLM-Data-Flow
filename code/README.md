@@ -71,17 +71,16 @@ This script will take the outputs from the `procedural_text_processing.py`'s run
 1.  Ensure Inputs: Make sure you have the `all_entities.json` and `all_questions.json` files from your original run in a known input folder (here `path/to/output`).
 2.  Run - Step 1 (Propose Subset):
     ```bash
-    uv run python code/diminish.py /path/to/output subset_analysis --target-count 100
+    uv run python code/diminish.py outs/outs_1/ outs/outs_1_subset_analysis/ --target-count 100
     ```
-    - Replace `subset_analysis` with the path to your desired output folder.
-    - The script will run and create `subset_analysis/proposed_entity_subset.txt` and `subset_analysis/subset_finding.log`.
+    - The script will run and create `subset_analysis/proposed_entity_subset.txt` and `subset_analysis/subset_finding.log` within `outs_1_sub/`.
 3.  Manual Review:
     - Open `subset_analysis/proposed_entity_subset.txt`.
     - Delete any lines containing entities that seem like parsing errors (e.g., "medium heat", "minutes", single letters, verbs, etc.) or are too generic ("mixture", "batter" might be okay depending on your goal, but "ingredients" probably isn't).
     - Save the edited file. You can overwrite it or save it as, for example, `subset_analysis/manual_entity_subset.txt`.
 4.  Run - Step 2 (Verify Manual List):
     ```bash
-    uv run python code/diminish.py /path/to/output subset_analysis --verify-manual-list subset_analysis/manual_entity_subset.txt --target-count 100
+    python code/diminish.py outs/outs_1 outs/outs_1_subset_analysis --verify-manual-list outs/outs_1_subset_analysis/manual_entity_subset.txt --target-count 100
     ```
     - Make sure the path after `--verify-manual-list` points to the _edited_ file.
     - The script will now use _only_ the entities in your edited list to count the relevant questions.
@@ -129,10 +128,6 @@ After the previous two script, we have a curated list of trusted entities (e.g. 
     - Decide on an output folder for the CSVs (e.g., `final_csv_datasets`).
 2.  **Run the Script:**
     ```bash
-    uv run python code/generate_final_dataset.py \
-        outs/outs_6/ \
-        outs/outs_6_sub/final_entity_subset.txt \
-        outs/outs_6_final_csv_datasets \
-        --target-count 100
+    uv run python code/generate_final_dataset.py outs/outs_1/ outs/outs_1_subset_analysis/final_entity_subset.txt outs/outs_1_subsetted_final_datasets --target-count 100
     ```
 3.  **Check Output:** The script will create the `final_csv_datasets` folder (or whatever you named it) and populate it with CSV files, one for each analysis category (e.g., `Reaching_Definitions_questions.csv`, `Taint_Analysis_questions.csv`, etc.). Each CSV will contain exactly 100 rows (or fewer if not enough eligible questions were found for that category), with `prompt` and `answer` columns.

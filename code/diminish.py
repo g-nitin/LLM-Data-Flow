@@ -9,6 +9,10 @@ from shutil import rmtree
 import loguru
 from tqdm import tqdm
 
+# Explicit list of common cooking verbs (lemmas) to filter out
+# Path assumes running from home dir.
+VERB_STOP_LIST = set(line.strip() for line in open("data/verbs_stop_list.txt", "r"))
+
 
 def load_json(file_path: str):
     """Loads JSON data from a file."""
@@ -21,6 +25,35 @@ def load_json(file_path: str):
     except json.JSONDecodeError:
         loguru.logger.error(f"Error: Could not decode JSON from {file_path}")
         return None
+
+
+def is_likely_valid_entity(entity_name: str) -> bool:
+    """
+    Checks if an entity name is likely valid (e.g., doesn't start with a common verb).
+    Simple rule-based check.
+    """
+    if not entity_name or not isinstance(entity_name, str):
+        return False
+
+    # Basic length check
+    if len(entity_name.strip()) < 2:
+        return False
+
+    # Check if it's purely numeric
+    if entity_name.isdigit():
+        return False
+
+    # Check if the first word is a verb from the stop list
+    first_word = entity_name.split(" ", 1)[0].lower()
+    if first_word in VERB_STOP_LIST:
+        loguru.logger.debug(
+            f"Filtering out entity '{entity_name}' because it starts with verb '{first_word}'"
+        )
+        return False
+
+    # Add more rules here if needed (e.g., check for units, generic terms)
+
+    return True
 
 
 def check_question_relevance(question_text: str, entity_subset: set) -> bool:
@@ -99,7 +132,7 @@ def verify_subset(
 
 
 def find_entity_subset(
-    entity_counts: dict,
+    filtered_entity_counts: dict,
     all_questions: list,
     target_count: int,
     initial_percentage: float = 0.1,
@@ -109,8 +142,10 @@ def find_entity_subset(
     Finds a subset of entities likely sufficient to meet the target question count,
     ignoring types where the entity-mention heuristic is known to fail.
     """
-    if not entity_counts or not all_questions:
-        loguru.logger.error("Entity counts or questions data is missing.")
+    if not filtered_entity_counts or not all_questions:
+        loguru.logger.error(
+            "Filtered entity counts or questions data is missing or empty."
+        )
         return None, None
 
     # Types where the entity mention heuristic is unreliable/irrelevant
@@ -119,12 +154,16 @@ def find_entity_subset(
         f"Heuristic Check: Will ignore {heuristic_ignore_types} when determining sufficiency."
     )
 
-    # Sort entities by frequency
+    # Sort entities by frequency (using the filtered counts)
     sorted_entities = sorted(
-        entity_counts.items(), key=lambda item: item[1], reverse=True
+        filtered_entity_counts.items(), key=lambda item: item[1], reverse=True
     )
     all_entity_names = [name for name, count in sorted_entities]
     total_unique_entities = len(all_entity_names)
+
+    if total_unique_entities == 0:
+        loguru.logger.error("No valid entities remaining after filtering.")
+        return None, None
 
     current_subset_size = ceil(total_unique_entities * initial_percentage)
     if current_subset_size == 0 and total_unique_entities > 0:
@@ -135,7 +174,7 @@ def find_entity_subset(
         increment_count = 1  # Ensure we add at least one
 
     loguru.logger.info(
-        f"Total unique entities: {total_unique_entities}. Target questions/type: {target_count}"
+        f"Total unique *filtered* entities: {total_unique_entities}. Target questions/type: {target_count}"
     )
     loguru.logger.info(
         f"Starting with initial {initial_percentage * 100:.1f}% ({current_subset_size} entities)."
@@ -195,12 +234,12 @@ def find_entity_subset(
 
     pbar.close()
     loguru.logger.warning(
-        "Could not find a subset meeting the target for all *heuristic-relevant* types, even using all entities."
+        "Could not find a subset meeting the target for all *heuristic-relevant* types, even using all *filtered* entities."
     )
     loguru.logger.warning(
         "This might indicate issues with the heuristic or the data for other types."
     )
-    # Return all entities as the best effort, along with the last calculated counts
+    # Return all filtered entities as the best effort, along with the last calculated counts
     return all_entity_names, last_verified_counts
 
 
@@ -225,13 +264,13 @@ def main():
     parser.add_argument(
         "--initial-perc",
         type=float,
-        default=0.1,
+        default=0.01,
         help="Initial percentage of top entities to try (e.g., 0.1 for 10%).",
     )
     parser.add_argument(
         "--increment-perc",
         type=float,
-        default=0.05,
+        default=0.01,
         help="Percentage of entities to add in each iteration (e.g., 0.05 for 5%).",
     )
     parser.add_argument(
@@ -283,16 +322,34 @@ def main():
             loguru.logger.error("Failed to load necessary input files. Exiting.")
             return
 
-        entity_counts = entity_data.get("entity_counts", {})
-        if not entity_counts:
+        original_entity_counts = entity_data.get("entity_counts", {})
+        if not original_entity_counts:
             loguru.logger.error(
                 "No 'entity_counts' found in all_entities.json. Exiting."
             )
             return
 
-        # Find the subset
+        # Filter the loaded entities
+        loguru.logger.info(
+            f"Filtering {len(original_entity_counts)} entities based on rules (e.g., removing those starting with verbs)..."
+        )
+        filtered_entity_counts = {
+            name: count
+            for name, count in original_entity_counts.items()
+            if is_likely_valid_entity(name)
+        }
+        loguru.logger.info(
+            f"Retained {len(filtered_entity_counts)} entities after filtering."
+        )
+        if not filtered_entity_counts:
+            loguru.logger.error(
+                "No entities remained after filtering. Cannot proceed. Check filtering rules or input data."
+            )
+            return
+
+        # --- Modified: Pass filtered_entity_counts ---
         proposed_subset_names, final_heuristic_counts = find_entity_subset(
-            entity_counts,
+            filtered_entity_counts,
             all_questions,
             args.target_count,
             args.initial_perc,
@@ -338,7 +395,7 @@ def main():
 
             loguru.logger.info("\n*** Explanation & Action Required ***")
             loguru.logger.info(
-                "The script found a subset of entities where *most* question types meet the target count based on a simple text-mention heuristic."
+                "The script filtered the initial entity list (e.g., removing items starting with verbs) and then found a subset where *most* question types meet the target count based on a simple text-mention heuristic."
             )
             loguru.logger.info(
                 "Types like 'Interval Analysis' and 'Concurrency Analysis' were ignored during this check because the heuristic is unreliable for them (questions often don't mention specific entities)."
@@ -351,7 +408,7 @@ def main():
             )
             loguru.logger.info(f"1. Please review the file: {proposed_list_path}")
             loguru.logger.info(
-                "2. Edit the file: Remove any entities you consider incorrect, noisy, or irrelevant."
+                "2. Edit the file: Remove any *remaining* entities you consider incorrect, noisy, or irrelevant (e.g., units, generic terms like 'mixture' if unwanted)."
             )
             loguru.logger.info(
                 "3. Save the edited file (you can overwrite it or save with a new name)."
@@ -360,12 +417,12 @@ def main():
                 "4. Re-run this script using the --verify-manual-list flag, pointing to your edited file:"
             )
             loguru.logger.info(
-                f"   python {os.path.basename(__file__)} {args.input_folder} {args.output_folder} --verify-manual-list YOUR_EDITED_LIST.txt"
+                f"   uv run python code/diminish.py {args.input_folder} {args.output_folder} --verify-manual-list YOUR_EDITED_LIST.txt --target-count {args.target_count}"
             )
             loguru.logger.info("***")
         else:
             loguru.logger.error(
-                "Failed to find a suitable entity subset even with modified logic. Check logs for details."
+                "Failed to find a suitable entity subset even with filtered entities. Check logs for details."
             )
 
     # Mode 2: Verify Manual List
@@ -459,7 +516,7 @@ def main():
             )
         else:
             loguru.warning(
-                "One or more heuristic targets for *relevant* types were NOT met."
+                "One or more heuristic targets for *relevant* types were NOT MET."
             )
             loguru.warning(
                 "You may need to add back entities or accept lower potential counts for those types."

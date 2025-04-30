@@ -1,5 +1,6 @@
 import argparse
 import json
+import re
 from collections import defaultdict
 from pathlib import Path
 from shutil import rmtree
@@ -26,8 +27,8 @@ def load_text_list(file_path: Path) -> set:
     """Loads a list of strings from a text file (one item per line)."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
-            # Read lines, strip whitespace, filter out empty lines
-            return set(line.strip() for line in f if line.strip())
+            # Read lines, strip whitespace, filter out empty lines, convert to lowercase
+            return set(line.strip().lower() for line in f if line.strip())
     except FileNotFoundError:
         loguru.logger.error(f"Error: File not found at {file_path}")
         return set()
@@ -66,6 +67,104 @@ def sanitize_filename(name: str) -> str:
     return name
 
 
+def check_question_relevance(
+    question_text: str, q_type: str, curated_entities_lower: set
+) -> bool:
+    """
+    Checks if the primary entity discussed in the question matches a curated entity.
+    Uses regex patterns tailored to specific question types.
+
+    Args:
+        question_text: The text of the question.
+        q_type: The analysis type of the question.
+        curated_entities_lower: A set of curated entity names, already lowercased.
+
+    Returns:
+        True if the question is relevant (either type doesn't need check or primary entity matches), False otherwise.
+    """
+    # Types that don't require a specific entity match in the question text
+    types_to_skip_entity_check = {
+        "Interval Analysis",
+        "Concurrency Analysis",
+    }
+    if q_type in types_to_skip_entity_check:
+        loguru.logger.trace(
+            f"Skipping entity check for type '{q_type}': {question_text}"
+        )
+        return True
+
+    # Define regex patterns to extract the primary entity phrase for each relevant type
+    # The patterns capture the group assumed to be the (potentially malformed) entity name
+    patterns = {
+        "Reaching Definitions": r"In Step \d+, is the (.*?) from Step \d+ being used\?",
+        "Very Busy Expressions": r"Is (.*?) from Step \d+ used in multiple future steps.*?",
+        "Available Expressions": r"Is (.*?) from Step \d+ still available in Step \d+\?",
+        "Live Variable Analysis": r"Is (.*?) live after Step \d+\?",
+        "Type-State Analysis": r"If we skip Step \d+, is it still valid to .+ the (.*?) in Step \d+\?",
+        "Taint Analysis": r"Does using (.*?) in Step \d+ introduce.*?",
+    }
+
+    pattern = patterns.get(q_type)
+    if not pattern:
+        loguru.logger.warning(
+            f"No specific regex pattern defined for question type '{q_type}'. Cannot perform strict entity check for: {question_text}"
+        )
+        # Fallback: Check if *any* curated entity is mentioned (original less strict check)
+        question_lower = question_text.lower()
+        for entity in curated_entities_lower:
+            if len(entity) > 1:
+                entity_pattern = r"\b" + re.escape(entity) + r"\b"
+                try:
+                    if re.search(entity_pattern, question_lower):
+                        loguru.logger.trace(
+                            f"Fallback check passed for '{q_type}': Found '{entity}' in '{question_text}'"
+                        )
+                        return True
+                except re.error as e:
+                    loguru.logger.warning(
+                        f"Regex error during fallback check for entity '{entity}': {e}"
+                    )
+                    continue
+        loguru.logger.debug(
+            f"Fallback check failed for '{q_type}': No curated entity found in '{question_text}'"
+        )
+        return False  # Strict: if no pattern, fail unless fallback finds something
+
+    # Try to match the pattern and extract the entity phrase
+    match = re.match(
+        pattern, question_text, re.IGNORECASE
+    )  # Use re.match to anchor at the beginning
+    if match:
+        # Extract the captured group (the entity phrase)
+        extracted_entity_phrase = match.group(1).strip()
+        extracted_entity_lower = extracted_entity_phrase.lower()
+
+        # Check if this EXACT extracted phrase is in the curated list
+        if extracted_entity_lower in curated_entities_lower:
+            loguru.logger.trace(
+                f"Strict check passed for '{q_type}': Extracted '{extracted_entity_phrase}' is in curated list. Q: {question_text}"
+            )
+            return True
+        else:
+            loguru.logger.debug(
+                f"Strict check failed for '{q_type}': Extracted '{extracted_entity_phrase}' NOT in curated list. Q: {question_text}"
+            )
+            # Less strict check
+            # question_lower = question_text.lower()
+            # for entity in curated_entities_lower:
+            #     if len(entity) > 1 and re.search(r"\b" + re.escape(entity) + r"\b", question_lower):
+            #         loguru.logger.trace(f"Strict check failed, but fallback found '{entity}' in '{question_text}'")
+            #         return True # Allow if strict fails but fallback passes? Decide based on requirement. Currently: No.
+            return False
+    else:
+        # If the specific pattern for the question type didn't match the question text structure
+        loguru.logger.warning(
+            f"Regex pattern for '{q_type}' did not match question structure: {question_text}"
+        )
+        # Apply fallback check here as well? Or just fail? Let's fail for now to be strict.
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate final CSV datasets for each analysis category."
@@ -91,7 +190,7 @@ def main():
     parser.add_argument(
         "--log-level",
         default="INFO",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        choices=["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"],
         help="Set the logging level.",
     )
 
@@ -114,18 +213,21 @@ def main():
     # Configure logging
     loguru.logger.remove()
     log_file_path = output_csv_dir / "csv_generation.log"
-    loguru.logger.add(log_file_path, level=args.log_level)
+    loguru.logger.add(log_file_path, level=args.log_level.upper())
     loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level="INFO")
 
     # *** Load Inputs ***
     loguru.logger.info(f"Loading curated entity list from: {curated_entity_list_path}")
-    curated_entities = load_text_list(curated_entity_list_path)
-    if not curated_entities:
+    # Load curated entities and convert to lowercase immediately
+    curated_entities_lower = load_text_list(curated_entity_list_path)
+    if not curated_entities_lower:
         loguru.logger.error(
             "Curated entity list is empty or could not be loaded. Exiting."
         )
         return
-    loguru.logger.info(f"Loaded {len(curated_entities)} curated entities.")
+    loguru.logger.info(
+        f"Loaded {len(curated_entities_lower)} curated entities (lowercased)."
+    )
 
     # *** Filter Recipes and Collect Questions ***
     loguru.logger.info(f"Scanning processed recipes in: {processed_recipes_dir}")
@@ -143,6 +245,10 @@ def main():
             "all_questions.json",
             "question_counts.json",
             "processing_stats.json",
+            "final_entity_subset.txt",
+            "subset_finding.log",
+            "final_verification_report.json",
+            "final_entity_subset.txt",
         }
     ]
 
@@ -155,6 +261,9 @@ def main():
     loguru.logger.info(f"Found {len(recipe_files)} potential recipe files to process.")
 
     relevant_recipe_count = 0
+    processed_question_count = 0
+    skipped_entity_mismatch_count = 0
+
     for recipe_file in tqdm(recipe_files, desc="Filtering Recipes & Questions"):
         recipe_data = load_json(recipe_file)
         if not recipe_data:
@@ -162,7 +271,10 @@ def main():
             continue
 
         title = recipe_data.get("title")
-        recipe_entities = set(recipe_data.get("entities", {}).keys())
+        # Get recipe entities identified in the JSON and lowercase them for comparison
+        recipe_entities_in_json_lower = set(
+            e.lower() for e in recipe_data.get("entities", {}).keys()
+        )
         questions = recipe_data.get("questions", [])
         instructions = recipe_data.get("instructions", {})
 
@@ -172,17 +284,37 @@ def main():
             )
             continue
 
-        # Check for overlap with curated entities
-        if curated_entities.intersection(recipe_entities):
+        # Check if *this recipe* contains *any* curated entity (using lowercased sets)
+        recipe_has_curated_entity = bool(
+            curated_entities_lower.intersection(recipe_entities_in_json_lower)
+        )
+
+        if recipe_has_curated_entity:
             relevant_recipe_count += 1
-            # Store instructions for later prompt generation
+            # Store instructions for later prompt generation IF the recipe is relevant
             recipe_instructions_cache[title] = instructions
-            # Add questions from this relevant recipe
+
+            # Now, filter the questions *within* this relevant recipe
             for q_data in questions:
+                processed_question_count += 1
                 q_type = q_data.get("type")
                 question_text = q_data.get("question")
                 answer = q_data.get("answer")
-                if q_type and question_text and answer is not None:
+
+                # Basic validity check
+                is_valid_question = q_type and question_text and answer is not None
+                if not is_valid_question:
+                    loguru.logger.trace(
+                        f"Skipping invalid question data: {q_data} from {title}"
+                    )
+                    continue
+
+                # Perform the NEW strict relevance check
+                is_relevant = check_question_relevance(
+                    question_text, q_type, curated_entities_lower
+                )
+
+                if is_relevant:
                     all_eligible_questions.append(
                         {
                             "recipe_title": title,
@@ -191,14 +323,27 @@ def main():
                             "answer": answer,
                         }
                     )
-        # else:
-        # loguru.logger.debug(f"Recipe '{title}' skipped (no overlap with curated entities). Entities: {recipe_entities}")
+                else:
+                    # Log only if it failed the strict check (debug level already handles details)
+                    skipped_entity_mismatch_count += 1
+                    # No need for extra log here, check_question_relevance logs the failure reason
+
+        else:
+            loguru.logger.trace(
+                f"Recipe '{title}' skipped (no overlap with curated entities)."
+            )
 
     loguru.logger.info(
-        f"Found {relevant_recipe_count} relevant recipes containing curated entities."
+        f"Found {relevant_recipe_count} relevant recipes containing at least one curated entity."
     )
     loguru.logger.info(
-        f"Collected {len(all_eligible_questions)} eligible questions from these recipes."
+        f"Processed {processed_question_count} questions from relevant recipes."
+    )
+    loguru.logger.info(
+        f"Skipped {skipped_entity_mismatch_count} questions failing strict entity check."
+    )
+    loguru.logger.info(
+        f"Collected {len(all_eligible_questions)} eligible questions meeting all criteria."
     )
 
     if not all_eligible_questions:
@@ -207,8 +352,8 @@ def main():
         )
         return
 
-    # *** Score Recipes ***
-    loguru.logger.info("Scoring recipes based on question type diversity...")
+    # Score Recipes
+    loguru.logger.info("Scoring recipes based on eligible question type diversity...")
     questions_by_recipe = defaultdict(lambda: defaultdict(list))
     for q_data in all_eligible_questions:
         questions_by_recipe[q_data["recipe_title"]][q_data["type"]].append(q_data)
@@ -219,26 +364,34 @@ def main():
 
     loguru.logger.info("Finished scoring recipes.")
 
-    # *** Select Final Questions ***
+    # Select Final Questions
     loguru.logger.info(
-        f"Selecting top {target_count} questions per category, prioritizing diverse recipes..."
+        f"Selecting top {target_count} questions per category from eligible pool, prioritizing diverse recipes..."
     )
     final_questions_by_type = defaultdict(list)
     all_question_types = sorted(list(set(q["type"] for q in all_eligible_questions)))
 
     for q_type in tqdm(all_question_types, desc="Selecting Questions per Type"):
-        # Get all questions of this type
+        # Get all eligible questions of this type
         type_questions = [q for q in all_eligible_questions if q["type"] == q_type]
 
+        if not type_questions:
+            loguru.logger.warning(
+                f"No eligible questions found for type '{q_type}' after filtering."
+            )
+            continue
+
         # Sort them: 1. Recipe Score (desc), 2. Recipe Title (asc), 3. Question Text (asc)
+        # Note: Higher score is better, so reverse=True applies to the score tuple element
         sorted_type_questions = sorted(
             type_questions,
             key=lambda q: (
-                recipe_scores.get(q["recipe_title"], 0),  # Score (higher is better)
-                q["recipe_title"],  # Title (for tie-breaking)
-                q["question"],  # Question text (for final tie-breaking)
+                -recipe_scores.get(
+                    q["recipe_title"], 0
+                ),  # Score (negated for descending sort)
+                q["recipe_title"],  # Title (ascending)
+                q["question"],  # Question text (ascending)
             ),
-            reverse=True,  # Reverse only for score (higher first)
         )
 
         # Select top N
@@ -247,21 +400,24 @@ def main():
 
         if len(selected_questions) < target_count:
             loguru.logger.warning(
-                f"Found only {len(selected_questions)} questions for type '{q_type}', which is less than the target {target_count}."
+                f"Found only {len(selected_questions)} eligible questions for type '{q_type}', which is less than the target {target_count}."
             )
         else:
-            loguru.logger.debug(
+            loguru.logger.info(  # Changed to INFO for successful selection
                 f"Selected {len(selected_questions)} questions for type '{q_type}'."
             )
 
     # *** Format and Write CSVs ***
     loguru.logger.info("Formatting prompts and writing CSV files...")
     num_csv_written = 0
+    final_counts_summary = {}
     for q_type, questions in tqdm(final_questions_by_type.items(), desc="Writing CSVs"):
         if not questions:
+            # This case should be handled by the warning above, but double-check
             loguru.logger.warning(
                 f"No questions selected for type '{q_type}', skipping CSV generation."
             )
+            final_counts_summary[q_type] = 0
             continue
 
         output_data = []
@@ -273,8 +429,9 @@ def main():
             # Retrieve cached instructions
             instructions = recipe_instructions_cache.get(recipe_title)
             if not instructions:
+                # This indicates an issue if a question was selected but its recipe wasn't cached
                 loguru.logger.error(
-                    f"Could not find cached instructions for recipe '{recipe_title}'. Skipping question: {question_text}"
+                    f"CRITICAL: Could not find cached instructions for recipe '{recipe_title}' associated with an eligible question. Skipping question: {question_text}"
                 )
                 continue
 
@@ -285,6 +442,7 @@ def main():
 
         # Create DataFrame
         df = pd.DataFrame(output_data)
+        final_counts_summary[q_type] = len(df)  # Store final count for summary
 
         # Save to CSV
         csv_filename = sanitize_filename(q_type) + "_questions.csv"
@@ -296,7 +454,50 @@ def main():
         except Exception as e:
             loguru.logger.error(f"Failed to write CSV file {csv_path}: {e}")
 
-    loguru.logger.success(f"Finished writing {num_csv_written} CSV files to: {output_csv_dir}")
+    loguru.logger.success(
+        f"Finished writing {num_csv_written} CSV files to: {output_csv_dir}"
+    )
+    loguru.logger.info("Final question counts per category:")
+    for q_type, count in sorted(final_counts_summary.items()):
+        loguru.logger.info(f"- {q_type}: {count}")
+
+    all_targets_met = True
+    generated_types = set(final_counts_summary.keys())
+
+    # Check counts for generated types
+    for q_type, count in final_counts_summary.items():
+        if count < target_count:
+            all_targets_met = False
+            loguru.logger.warning(
+                f"Target count NOT MET for '{q_type}' (found {count})"
+            )
+
+    # Check for missing types
+    all_expected_types = {
+        "Reaching Definitions",
+        "Very Busy Expressions",
+        "Available Expressions",
+        "Live Variable Analysis",
+        "Interval Analysis",
+        "Type-State Analysis",
+        "Taint Analysis",
+        "Concurrency Analysis",
+    }
+    missing_types = all_expected_types - generated_types
+    if missing_types:
+        all_targets_met = False
+        loguru.logger.warning(
+            f"Missing CSVs for types: {', '.join(sorted(list(missing_types)))}"
+        )
+
+    if all_targets_met:
+        loguru.logger.success(
+            f"Target count of {target_count} met or exceeded for all expected categories."
+        )
+    else:
+        loguru.logger.warning(
+            f"Target count of {target_count} was NOT met for one or more categories OR some categories are missing."
+        )
 
 
 if __name__ == "__main__":

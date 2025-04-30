@@ -43,6 +43,51 @@ class ProceduralText:
         self.step_dependencies = nx.DiGraph()  # Directed graph for step dependencies
         self.entity_flow_graph = nx.DiGraph()  # Graph for entity flow
 
+        self.exclusive_resources = {
+            "oven",
+            "stove",
+            "burner",
+            "hob",
+            "range",  # Cooking surfaces/appliances
+            "mixer",
+            "stand mixer",
+            "blender",
+            "food processor",  # Appliances
+            "microwave",
+            "grill",
+            "smoker",
+            "deep fryer",
+        }
+        self.verb_to_resource_map = {
+            # Oven Verbs
+            "bake": "oven",
+            "roast": "oven",
+            "broil": "oven",
+            "preheat": "oven",
+            # Stove Verbs
+            "boil": "stove",
+            "simmer": "stove",
+            "fry": "stove",
+            "saute": "stove",
+            "sear": "stove",
+            "reduce": "stove",
+            "melt": "stove",
+            "toast (in pan)": "stove",
+            "steam (on stove)": "stove",
+            # Mixer/Blender Verbs
+            "mix (with mixer)": "mixer",
+            "beat (with mixer)": "mixer",
+            "whip (with mixer)": "mixer",
+            "blend": "blender",
+            "puree (with blender/processor)": "blender",
+            "process": "food processor",
+            # Other Appliances
+            "microwave": "microwave",
+            "grill": "grill",
+            "smoke": "smoker",
+            "deep-fry": "deep fryer",
+        }
+
         # Initialize step dependencies graph
         for i in range(len(steps)):
             self.step_dependencies.add_node(i)
@@ -57,9 +102,9 @@ class ProceduralText:
 
         # Log all variables
         loguru.logger.info(
-            f"\n{len(self.steps)} steps:\n{pformat(list(zip(range(1, len(self.steps)), self.steps)))}"
+            f"\n{len(self.steps)} steps:\n{pformat(list(zip(range(1, len(self.steps) + 1), self.steps)))}"
             f"\nParsed {len(self.entities)} entities:\n{pformat(self.entities)}"
-            f"\nStep dependencies:\n{pformat(list(self.step_dependencies.edges()))}"
+            f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(list(self.step_dependencies.edges()))}"
         )
 
     def _extract_entities_from_step(self, step_idx, step_text):
@@ -781,10 +826,10 @@ class ProceduralText:
         loguru.logger.debug(f"*** Finished Step {step_idx + 1} ***")
 
     def _parse_steps(self):
-        """Parse steps to extract entities and their relationships"""
+        """Parse steps to extract entities, relationships, and concurrency hints"""
         # Process each step
         for step_idx, step_text in enumerate(self.steps):
-            # Extract entities
+            # Extract entities and determine their roles (defined, used)
             self._extract_entities_from_step(step_idx, step_text)
 
             # Extract temporal dependencies
@@ -807,40 +852,66 @@ class ProceduralText:
             # The pattern represents exact time like "5 minutes" or "2 hours"
             exact_time_pattern = r"(\d+)\s+(minutes|minute|min|seconds|hours|hour)"
             exact_matches = re.findall(exact_time_pattern, step_text, re.IGNORECASE)
-            if exact_matches and not matches:  # Only if we didn't already find a range
+            if exact_matches and not matches:
                 for match in exact_matches:
                     time_val, unit = match
-                    # Store as a time interval with the same min and max
                     self.step_dependencies.nodes[step_idx]["time_interval"] = (
                         int(time_val),
                         int(time_val),
                         unit,
                     )
 
-            # Look for concurrent steps
+            # Look for concurrency keywords ("while", etc.) and mark the node
+            # We are not modifying the graph structure here based on "while".
+            # We just mark the node as potentially concurrent with *something*.
             if any(
                 word in step_text.lower()
                 for word in ["while", "during", "meanwhile", "at the same time"]
             ):
-                # This indicates potential concurrency
-                # For simplicity, we'll just note it in the node attributes
-                self.step_dependencies.nodes[step_idx]["concurrent"] = True
+                self.step_dependencies.nodes[step_idx]["concurrent_hint"] = True
+                loguru.logger.debug(
+                    f"Step {step_idx + 1} marked with concurrent_hint=True due to keywords."
+                )
+            else:
+                self.step_dependencies.nodes[step_idx]["concurrent_hint"] = False
 
-                # Try to identify which steps can run concurrently
-                if "while" in step_text.lower():
-                    # Look for references to other steps
-                    for i, other_step in enumerate(self.steps):
-                        if i != step_idx and any(
-                            entity in step_text.lower()
-                            for entity in self.get_entities_at_step(i)
-                        ):
-                            # Add a concurrency relationship
-                            self.step_dependencies.nodes[step_idx][
-                                "concurrent_with"
-                            ] = i
-                            # Remove the direct sequential dependency if it exists
-                            if self.step_dependencies.has_edge(i - 1, i):
-                                self.step_dependencies.remove_edge(i - 1, i)
+    def _add_dataflow_dependencies(self):
+        """
+        Adds edges to the step_dependencies graph based on data flow.
+        An edge A -> B is added if step B uses an entity last defined in step A.
+        This complements the default sequential edges.
+        """
+        loguru.logger.debug("Adding dataflow dependencies to the graph...")
+        edges_added = 0
+        for entity_name, entity in self.entities.items():
+            # Sort definition and usage steps
+            defined_steps = sorted(list(entity.defined_in))
+            used_steps = sorted(list(entity.used_in))
+
+            if not defined_steps or not used_steps:
+                continue  # Entity needs to be defined and used for dataflow
+
+            # For each usage step, find the latest definition step before it
+            for use_step in used_steps:
+                latest_def_step = -1
+                for def_step in defined_steps:
+                    if def_step < use_step:
+                        latest_def_step = max(latest_def_step, def_step)
+                    else:
+                        # Since lists are sorted, no need to check further def_steps for this use_step
+                        break
+
+                # If a preceding definition exists, add the dataflow edge
+                if latest_def_step != -1:
+                    if not self.step_dependencies.has_edge(latest_def_step, use_step):
+                        self.step_dependencies.add_edge(latest_def_step, use_step)
+                        loguru.logger.debug(
+                            f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
+                        )
+                        edges_added += 1
+                    # else: Edge already exists (could be default or another dataflow)
+
+        loguru.logger.info(f"Added {edges_added} dataflow dependency edges.")
 
     def build_entity_flow_graph(self):
         """Build a graph representing entity flow between steps"""
@@ -882,35 +953,125 @@ class ProceduralText:
         entity = self.entities[entity_name]
         return any(use_step > step_idx for use_step in entity.used_in)
 
+    def _get_resources_used(self, step_idx: int) -> Set[str]:
+        """
+        Identifies exclusive resources potentially used by a step based on verbs and entities.
+        """
+        resources = set()
+        step_text = self.steps[step_idx].lower()
+        doc = nlp(step_text)
+
+        # Check verbs
+        for token in doc:
+            if token.pos_ == "VERB":
+                verb_lemma = token.lemma_
+                if verb_lemma in self.verb_to_resource_map:
+                    resources.add(self.verb_to_resource_map[verb_lemma])
+                    loguru.logger.trace(
+                        f"Step {step_idx + 1}: Verb '{verb_lemma}' maps to resource '{self.verb_to_resource_map[verb_lemma]}'"
+                    )
+
+        # Check entities mentioned that are resources themselves
+        # (This requires entities like 'oven' to be extracted correctly)
+        step_entities = {
+            e.lower()
+            for e, ent in self.entities.items()
+            if step_idx in ent.used_in or step_idx in ent.defined_in
+        }
+        for entity in step_entities:
+            # Check direct match and also if the entity *is* a known resource
+            if entity in self.exclusive_resources:
+                resources.add(entity)
+                loguru.logger.trace(
+                    f"Step {step_idx + 1}: Entity '{entity}' is an exclusive resource."
+                )
+
+        # Simple check for keywords if entity extraction missed them
+        for resource in self.exclusive_resources:
+            if resource in step_text:
+                resources.add(resource)
+                loguru.logger.trace(
+                    f"Step {step_idx + 1}: Keyword '{resource}' found, adding as resource."
+                )
+
+        loguru.logger.debug(f"Step {step_idx + 1} identified resources: {resources}")
+        return resources
+
     def can_steps_run_concurrently(self, step1: int, step2: int) -> bool:
-        """Check if two steps can run concurrently"""
-        # Check if either step is marked as concurrent
-        step1_concurrent = self.step_dependencies.nodes.get(step1, {}).get(
-            "concurrent", False
+        """
+        Check if two steps can run concurrently based on dependencies, data conflicts,
+        and resource conflicts.
+        """
+        # Ensure step1 < step2 for consistent checking, swap if needed
+        s1, s2 = min(step1, step2), max(step1, step2)
+
+        # 1. Check for Path Dependency in the potentially augmented step_dependencies graph
+        # If there's a path from s1 to s2, s1 must precede s2.
+        if nx.has_path(self.step_dependencies, s1, s2):
+            loguru.logger.debug(
+                f"Concurrency check: Path exists from Step {s1 + 1} to {s2 + 1} in dependency graph. Cannot run concurrently."
+            )
+            # Log the path for debugging (Can be expensive)
+            # try:
+            #     path = nx.shortest_path(self.step_dependencies, s1, s2)
+            #     loguru.logger.trace(f"Path: {[p+1 for p in path]}")
+            # except nx.NetworkXNoPath:
+            #     pass # Should not happen if has_path is true
+            return False
+        # Check the reverse only if graph might have cycles or errors (less likely)
+        # if nx.has_path(self.step_dependencies, s2, s1):
+        #      loguru.logger.debug(f"Concurrency check: Path exists from Step {s2+1} to {s1+1} in dependency graph (unexpected?). Cannot run concurrently.")
+        #      return False
+
+        # 2. Check for Data Conflicts (Write-Write, Write-Read, Read-Write)
+        entities_written1 = {
+            e for e, ent in self.entities.items() if s1 in ent.defined_in
+        }
+        entities_read1 = {e for e, ent in self.entities.items() if s1 in ent.used_in}
+        entities_written2 = {
+            e for e, ent in self.entities.items() if s2 in ent.defined_in
+        }
+        entities_read2 = {e for e, ent in self.entities.items() if s2 in ent.used_in}
+
+        # Write-Write conflict
+        ww_conflict = entities_written1.intersection(entities_written2)
+        if ww_conflict:
+            loguru.logger.debug(
+                f"Concurrency check: Write-Write conflict between Step {s1 + 1} and {s2 + 1} on entities {ww_conflict}. Cannot run concurrently."
+            )
+            return False
+
+        # Write-Read conflict (s1 writes, s2 reads)
+        wr_conflict = entities_written1.intersection(entities_read2)
+        if wr_conflict:
+            loguru.logger.debug(
+                f"Concurrency check: Write-Read conflict (S{s1 + 1} writes, S{s2 + 1} reads) on entities {wr_conflict}. Cannot run concurrently."
+            )
+            return False
+
+        # Read-Write conflict (s1 reads, s2 writes)
+        rw_conflict = entities_read1.intersection(entities_written2)
+        if rw_conflict:
+            loguru.logger.debug(
+                f"Concurrency check: Read-Write conflict (S{s1 + 1} reads, S{s2 + 1} writes) on entities {rw_conflict}. Cannot run concurrently."
+            )
+            return False
+
+        # 3. Check for Resource Conflicts
+        resources1 = self._get_resources_used(s1)
+        resources2 = self._get_resources_used(s2)
+        resource_conflict = resources1.intersection(resources2)
+        if resource_conflict:
+            loguru.logger.debug(
+                f"Concurrency check: Resource conflict between Step {s1 + 1} and {s2 + 1} on resources {resource_conflict}. Cannot run concurrently."
+            )
+            return False
+
+        # 4. If no path dependency, no data conflict, and no resource conflict, they can run concurrently
+        loguru.logger.debug(
+            f"Concurrency check: No path dependency, data conflicts, or resource conflicts found between Step {s1 + 1} and {s2 + 1}. Can run concurrently."
         )
-        step2_concurrent = self.step_dependencies.nodes.get(step2, {}).get(
-            "concurrent", False
-        )
-
-        if not (step1_concurrent or step2_concurrent):
-            # If neither is marked concurrent, check for path dependencies
-            if nx.has_path(self.step_dependencies, step1, step2) or nx.has_path(
-                self.step_dependencies, step2, step1
-            ):
-                return False
-
-        # Check for shared mutable entities
-        entities1 = set()
-        entities2 = set()
-
-        for entity_name, entity in self.entities.items():
-            if step1 in entity.defined_in:
-                entities1.add(entity_name)
-            if step2 in entity.defined_in:
-                entities2.add(entity_name)
-
-        # If they modify the same entities, they can't run concurrently
-        return len(entities1.intersection(entities2)) == 0
+        return True
 
 
 class QuestionGenerator:
@@ -1053,6 +1214,15 @@ class QuestionGenerator:
         This method evaluates whether a given entity is "live" after a specified step,
         meaning that the entity is still used in subsequent steps.
 
+        Some more notes...
+        What does it mean for an entity to be "live"?
+
+        In the context of the procedural text framework, drawing analogy from software analysis: An entity (like an ingredient, tool, or intermediate product) is considered **"live"** after a specific step (say, Step `k`) if that entity **will be used** in at least one subsequent step (Step `j`, where `j > k`).
+
+        - Future Use: Liveness is about whether the entity is needed *later* in the procedure.
+        - Specific Point: Liveness is always relative to a point in the procedure (i.e., *after* a particular step).
+        - Implication: If an entity is *not* live after Step `k`, it means it's no longer required for any remaining steps. It might have been fully consumed, transformed into something else entirely, or simply won't be referenced again. This is analogous to how a variable that's not live in software can potentially be discarded or its register reused.
+
         :return: A tuple containing the generated question and a boolean ground truth.
                  If no suitable entity is found for live variable analysis, returns an explanatory message and None.
         """
@@ -1194,17 +1364,49 @@ class QuestionGenerator:
         # Extract action from the dependent step if possible
         step_text = self.text.steps[dependent_step]
         doc = nlp(step_text)
-
         action = None
+        entity_found_in_step = False
+
         for token in doc:
-            if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}:
-                action = token.lemma_
-                break
+            # Check if token relates to the entity (simple substring/lemma check for illustration)
+            if entity_name in token.text.lower() or entity_name == token.lemma_.lower():
+                entity_found_in_step = True
+                head = token.head
+                # Check if the head is a verb and the entity is its object/subject
+                if head.pos_ == "VERB" and token.dep_ in {
+                    "dobj",
+                    "pobj",
+                    "nsubjpass",
+                    "attr",
+                    "conj",
+                }:
+                    # Exclude auxiliary verbs like 'be', 'have' unless they are the main verb
+                    if head.lemma_ not in {"be", "have"}:
+                        action = head.lemma_
+                        loguru.logger.debug(
+                            f"Found action '{action}' governing entity '{entity_name}' via dep '{token.dep_}' in step {dependent_step + 1}"
+                        )
+                        break  # Found the most likely action for this entity
 
+        # Fallback if no specific action found governing the entity
         if not action:
-            action = "use"  # Default fallback
+            if entity_found_in_step:
+                loguru.logger.warning(
+                    f"Could not find specific verb governing '{entity_name}' in step {dependent_step + 1}. Falling back to 'use'."
+                )
+                action = "use"
+            else:
+                # If the entity wasn't even found in the step text (shouldn't happen if parsing was correct)
+                loguru.logger.error(
+                    f"Entity '{entity_name}' expected but not found in step {dependent_step + 1} text: '{step_text}'. Cannot generate question."
+                )
+                # Return None or raise error, as the premise is flawed
+                return (
+                    f"Could not find entity '{entity_name}' in dependent step text.",
+                    None,
+                )
 
-        # Generate question
+        # Generate question using the found or fallback action
         question = f"If we skip Step {prerequisite_step + 1}, is it still valid to {action} the {entity_name} in Step {dependent_step + 1}?"
 
         # Ground truth - if prerequisite step is skipped, the dependent step is invalid
@@ -1216,8 +1418,7 @@ class QuestionGenerator:
         """
         Generate a question focused on taint analysis of the procedural text.
 
-        The method identifies potential "tainted" entities—often raw ingredients or those flagged by specific keywords—
-        and asks whether their use in a particular step might introduce safety concerns.
+        The method identifies potential "tainted" entities, raw ingredients or those flagged by specific keywords, and asks whether their use in a particular step might introduce safety concerns.
 
         :return: A tuple with the generated question and a boolean ground truth.
                  If no potential taints are identified, returns an explanatory message and None.
