@@ -1005,25 +1005,26 @@ class ProceduralText:
         """
         # Ensure step1 < step2 for consistent checking, swap if needed
         s1, s2 = min(step1, step2), max(step1, step2)
-        loguru.logger.trace(f"Checking concurrency for Steps {s1 + 1} and {s2 + 1}")
+        loguru.logger.debug(f"Checking concurrency for Steps {s1 + 1} and {s2 + 1}")
 
         # 1. Check for Path Dependency in the potentially augmented step_dependencies graph
         # If there's a path from s1 to s2, s1 must precede s2.
         if nx.has_path(self.step_dependencies, s1, s2):
-            loguru.logger.debug(
-                f"Concurrency check: Path exists from Step {s1 + 1} to {s2 + 1} in dependency graph. Cannot run concurrently."
-            )
+            loguru.logger.debug(f"-> REJECTED: Path exists from {s1 + 1} to {s2 + 1}")
             # Log the path for debugging (Can be expensive)
-            # try:
-            #     path = nx.shortest_path(self.step_dependencies, s1, s2)
-            #     loguru.logger.trace(f"Path: {[p+1 for p in path]}")
-            # except nx.NetworkXNoPath:
-            #     pass # Should not happen if has_path is true
+            try:
+                path = nx.shortest_path(self.step_dependencies, s1, s2)
+                loguru.logger.trace(f"Path: {[p + 1 for p in path]}")
+            except nx.NetworkXNoPath:
+                pass  # Should not happen if has_path is true
             return False
+
         # Check the reverse only if graph might have cycles or errors (less likely)
-        # if nx.has_path(self.step_dependencies, s2, s1):
-        #      loguru.logger.debug(f"Concurrency check: Path exists from Step {s2+1} to {s1+1} in dependency graph (unexpected?). Cannot run concurrently.")
-        #      return False
+        if nx.has_path(self.step_dependencies, s2, s1):
+            loguru.logger.debug(
+                f"Concurrency check: Path exists from Step {s2 + 1} to {s1 + 1} in dependency graph (unexpected?). Cannot run concurrently."
+            )
+            return False
 
         # 2. Check for Data Conflicts (Write-Write, Write-Read, Read-Write)
         entities_written1 = {
@@ -1038,16 +1039,14 @@ class ProceduralText:
         # Write-Write conflict
         ww_conflict = entities_written1.intersection(entities_written2)
         if ww_conflict:
-            loguru.logger.debug(
-                f"Concurrency check: Write-Write conflict between Step {s1 + 1} and {s2 + 1} on entities {ww_conflict}. Cannot run concurrently."
-            )
+            loguru.logger.debug(f"-> REJECTED: WW conflict on {ww_conflict}")
             return False
 
         # Write-Read conflict (s1 writes, s2 reads)
         wr_conflict = entities_written1.intersection(entities_read2)
         if wr_conflict:
             loguru.logger.debug(
-                f"Concurrency check: Write-Read conflict (S{s1 + 1} writes, S{s2 + 1} reads) on entities {wr_conflict}. Cannot run concurrently."
+                f"-> REJECTED: WR conflict (S{s1 + 1} writes, S{s2 + 1} reads) on {wr_conflict}"
             )
             return False
 
@@ -1055,23 +1054,25 @@ class ProceduralText:
         rw_conflict = entities_read1.intersection(entities_written2)
         if rw_conflict:
             loguru.logger.debug(
-                f"Concurrency check: Read-Write conflict (S{s1 + 1} reads, S{s2 + 1} writes) on entities {rw_conflict}. Cannot run concurrently."
+                f"-> REJECTED: RW conflict (S{s1 + 1} reads, S{s2 + 1} writes) on {rw_conflict}"
             )
             return False
 
         # 3. Check for Resource Conflicts
         resources1 = self._get_resources_used(s1)
         resources2 = self._get_resources_used(s2)
+        loguru.logger.trace(f"  Resources S{s1 + 1}: {resources1}")
+        loguru.logger.trace(f"  Resources S{s2 + 1}: {resources2}")
         resource_conflict = resources1.intersection(resources2)
         if resource_conflict:
             loguru.logger.debug(
-                f"Concurrency check: Resource conflict between Step {s1 + 1} and {s2 + 1} on resources {resource_conflict}. Cannot run concurrently."
+                f"-> REJECTED: Resource conflict on {resource_conflict}"
             )
             return False
 
         # 4. If no path dependency, no data conflict, and no resource conflict, they can run concurrently
         loguru.logger.debug(
-            f"Concurrency check: No path dependency, data conflicts, or resource conflicts found between Step {s1 + 1} and {s2 + 1}. Can run concurrently."
+            f"-> ACCEPTED: Steps {s1 + 1} and {s2 + 1} can run concurrently."
         )
         return True
 
