@@ -48,15 +48,22 @@ class ProceduralText:
             "stove",
             "burner",
             "hob",
-            "range",  # Cooking surfaces/appliances
+            "range",
             "mixer",
             "stand mixer",
             "blender",
-            "food processor",  # Appliances
+            "food processor",
             "microwave",
             "grill",
             "smoker",
             "deep fryer",
+            "skillet",
+            "saucepan",
+            "wok",
+            "griddle",
+            "air fryer",
+            "pressure cooker",
+            "slow cooker",
         }
         self.verb_to_resource_map = {
             # Oven Verbs
@@ -74,19 +81,25 @@ class ProceduralText:
             "melt": "stove",
             "toast (in pan)": "stove",
             "steam (on stove)": "stove",
-            # Mixer/Blender Verbs
+            "cook": "stove",
+            "stir-fry": "wok",
             "mix (with mixer)": "mixer",
             "beat (with mixer)": "mixer",
             "whip (with mixer)": "mixer",
             "blend": "blender",
             "puree (with blender/processor)": "blender",
             "process": "food processor",
-            # Other Appliances
             "microwave": "microwave",
             "grill": "grill",
             "smoke": "smoker",
             "deep-fry": "deep fryer",
+            "air-fry": "air fryer",
         }
+
+        # Define essential tools based on resources
+        self.essential_tools = self.exclusive_resources.copy()  # Start with appliances
+        # Add common non-appliance exclusives, e.g., specific pans
+        self.essential_tools.update({"skillet", "saucepan", "wok", "griddle"})
 
         # Initialize step dependencies graph - ONLY ADD NODES
         for i in range(len(steps)):
@@ -95,7 +108,7 @@ class ProceduralText:
         # Parse steps to extract entities and their relationships
         self._parse_steps()  # Extract entities/roles
         self.build_entity_flow_graph()
-        self._add_dataflow_dependencies()
+        self._add_dataflow_dependencies()  # Add dataflow edges AFTER initial parsing
 
         # Log all variables
         loguru.logger.info(
@@ -201,6 +214,7 @@ class ProceduralText:
         containers_tools = {
             "bowl",
             "pan",
+            "pot",
             "skillet",
             "pot",
             "saucepan",
@@ -323,20 +337,18 @@ class ProceduralText:
             "attention",
             "care",
             "ingredients",
-            "mixture",
-            "batter",
             "liquid",
             "solids",
             "everything",
             "anything",
             "something",
             "nothing",
-            "water",  # Often implicit, filter unless qualified e.g. "coconut water"
-            "grease",  # Often refers to generic action byproduct unless specified e.g. "bacon grease"
-            "oil",  # Often generic unless specified e.g. "olive oil"
-            "juice",  # Often generic unless specified e.g. "lemon juice"
+            "water",
+            "grease",
+            "oil",
+            "juice",
             "stock",
-            "broth",  # Often generic unless specified e.g. "chicken stock"
+            "broth",
         }
 
         # Explicit list of common cooking verbs (lemmas) to filter out
@@ -396,7 +408,7 @@ class ProceduralText:
             "crush",
             "grease",
             "oil",
-            "butter",  # Verbs, not the nouns (usually)
+            "butter",
             "season",
             "salt",
             "pepper",
@@ -435,19 +447,19 @@ class ProceduralText:
             "turn",
             "flip",
             "rotate",
-            "bring",  # e.g., "bring to a boil"
-            "work",  # e.g., "work the dough"
-            "use",  # Too generic
-            "need",  # Too generic
-            "require",  # Too generic
-            "taste",  # Action
-            "look",  # Action
-            "feel",  # Action
-            "smell",  # Action
-            "watch",  # Action
+            "bring",
+            "work",
+            "use",
+            "need",
+            "require",
+            "taste",
+            "look",
+            "feel",
+            "smell",
+            "watch",
         }
 
-        # Combine all terms to exclude by direct match
+        # Combine stop lemmas
         stop_entity_lemmas = (
             measurement_units.union(containers_tools)
             .union(locations_qualities)
@@ -508,8 +520,8 @@ class ProceduralText:
                 "CCONJ",
             }:
                 # Allow ADP only if it's part of a known multi-word entity? (e.g. "cream of tartar") - complex, skip for now.
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because first token POS is {first_token_pos}"
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (first token POS: {first_token_pos})"
                 )
                 continue
 
@@ -517,43 +529,51 @@ class ProceduralText:
             if any(
                 pattern.match(clean_chunk_text) for pattern in compiled_filter_patterns
             ):
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' due to pattern match on '{clean_chunk_text}'"
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (pattern match: '{clean_chunk_text}')"
                 )
                 continue
 
             # 2. Check root lemma against general stop lemmas
-            if root_lemma in stop_entity_lemmas:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because root lemma '{root_lemma}' is in stop list."
+            is_essential = root_lemma in self.essential_tools
+            if is_essential:
+                loguru.logger.trace(
+                    f"Keeping chunk '{chunk.text}' because root lemma '{root_lemma}' is an essential tool."
                 )
-                continue
+                # Skip other stop list checks if it's essential
+            else:
+                # If not essential, apply normal stop list checks
+                if root_lemma in stop_entity_lemmas:
+                    loguru.logger.trace(
+                        f"Skipping chunk '{chunk.text}' (root lemma '{root_lemma}' in stop list)"
+                    )
+                    continue
 
             # 3. Check root lemma against VERB stop list
             if root_lemma in verb_stop_list:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because root lemma '{root_lemma}' is in VERB stop list."
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (root lemma '{root_lemma}' in VERB stop list)"
                 )
                 continue
 
             # 4. Check full cleaned text against general stop lemmas (for multi-word generics)
             if clean_chunk_text in stop_entity_lemmas:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because full text '{clean_chunk_text}' is in stop list."
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in stop list)"
                 )
                 continue
 
             # 5. Check full cleaned text against VERB stop list
             if clean_chunk_text in verb_stop_list:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because full text '{clean_chunk_text}' is in VERB stop list."
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in VERB stop list)"
                 )
                 continue
 
             # 6. Length check (on cleaned text)
-            if len(clean_chunk_text) < 3:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' due to short length after cleaning: '{clean_chunk_text}'"
+            if len(clean_chunk_text) < 2:
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (short length: '{clean_chunk_text}')"
                 )
                 continue
 
@@ -561,8 +581,8 @@ class ProceduralText:
             if chunk.root.pos_ not in {"NOUN", "PROPN"}:
                 # Allow ADJ if it modifies a noun? e.g. "large onions" - chunk root might be 'large'
                 # Let's be strict for now: root must be NOUN or PROPN
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because root POS is {chunk.root.pos_}"
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (root POS: {chunk.root.pos_})"
                 )
                 continue
 
@@ -572,9 +592,7 @@ class ProceduralText:
                 and chunk[0].like_num
                 and chunk[1].lemma_ in measurement_units
             ):
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' as it looks like quantity+unit."
-                )
+                loguru.logger.trace(f"Skipping chunk '{chunk.text}' (quantity+unit)")
                 continue
 
             # If passes filters, add it
@@ -592,8 +610,8 @@ class ProceduralText:
                     f"Keeping potential entity: '{chunk.text}' -> Cleaned: '{clean_chunk_text}', Key Lemma: '{entity_lemma}'"
                 )
             else:
-                loguru.logger.debug(
-                    f"Skipping chunk '{chunk.text}' because lemma '{entity_lemma}' already exists with '{potential_entities[entity_lemma]}'"
+                loguru.logger.trace(
+                    f"Skipping chunk '{chunk.text}' (lemma '{entity_lemma}' exists with '{potential_entities[entity_lemma]}')"
                 )
 
         # Final list of entity names (using the stored original text)
@@ -635,7 +653,6 @@ class ProceduralText:
             if len(chunk_text.split()) < 2:  # Need at least two words for these rules
                 continue
 
-            found_link = False
             for suffix, method in derived_entity_rules.items():
                 base_entity_name = None
                 if method == "suffix" and chunk_text.endswith(f" {suffix}"):
@@ -784,6 +801,7 @@ class ProceduralText:
                 "render",
                 "whip",
                 "beat",
+                "puree",
             }
             consume_verbs = {
                 "eat",
@@ -817,7 +835,7 @@ class ProceduralText:
                 "whip",
                 "beat",
                 "reduce",
-                "puree",  # Added puree
+                "puree",
             }
 
             # Check verbs acting ON this entity (check dependency relations)
@@ -893,6 +911,9 @@ class ProceduralText:
                                 governing_verb_lemma = (
                                     verb_lemma  # Store for transformation check
                                 )
+                                loguru.logger.trace(
+                                    f"Entity '{entity_name}' governed by verb '{verb_lemma}' ({head.text}) dep '{token.dep_}'"
+                                )
 
                                 # Assign roles based on verb lists (use elif for precedence)
                                 if verb_lemma in consume_verbs:
@@ -933,7 +954,7 @@ class ProceduralText:
                 ):
                     # If it's the first mention and no clear verb action, assume definition (e.g., "2 cups flour")
                     is_defined = True
-                    loguru.logger.debug(
+                    loguru.logger.trace(
                         f"Marking '{entity_name}' as DEFINED (first mention, no clear verb)"
                     )
 
@@ -946,17 +967,23 @@ class ProceduralText:
                     # Remove from defined/used if it was marked earlier in this step?
                     current_entity.defined_in.discard(step_idx)
                     current_entity.used_in.discard(step_idx)
-
+                    loguru.logger.debug(
+                        f"Marking '{entity_name}' as CONSUMED in step {step_idx + 1}"
+                    )
                 elif is_defined:  # Define before Use
                     # Ensure definition is marked correctly
                     current_entity.defined_in.add(step_idx)
                     roles_assigned.add("defined")
+                    loguru.logger.debug(
+                        f"Marking '{entity_name}' as DEFINED in step {step_idx + 1}"
+                    )
                     # If defined by transformation, also mark as used (consuming previous state)
                     if governing_verb_lemma in transformation_verbs:
-                        # Check if it wasn't already marked used by the rule-based linking
-                        if step_idx not in current_entity.used_in:
+                        if (
+                            step_idx not in current_entity.used_in
+                        ):  # Avoid redundant logging
                             loguru.logger.debug(
-                                f"Also marking '{entity_name}' as USED due to transformation verb '{governing_verb_lemma}'"
+                                f"Also marking '{entity_name}' as USED in step {step_idx + 1} due to transformation verb '{governing_verb_lemma}'"
                             )
                         current_entity.used_in.add(step_idx)  # Ensure it's added
                         roles_assigned.add("used")  # Add 'used' role as well
@@ -964,6 +991,9 @@ class ProceduralText:
                 elif is_used:  # Use is the fallback if not consumed/defined by a verb
                     current_entity.used_in.add(step_idx)
                     roles_assigned.add("used")
+                    loguru.logger.debug(
+                        f"Marking '{entity_name}' as USED in step {step_idx + 1}"
+                    )
 
                 # Fallback: If entity found, not introduction, no verb action, assume 'used' if previously active
                 if (
@@ -1035,8 +1065,8 @@ class ProceduralText:
                 for word in ["while", "during", "meanwhile", "at the same time"]
             ):
                 self.step_dependencies.nodes[step_idx]["concurrent_hint"] = True
-                loguru.logger.debug(
-                    f"Step {step_idx + 1} marked with concurrent_hint=True due to keywords."
+                loguru.logger.trace(
+                    f"Step {step_idx + 1} marked with concurrent_hint=True."
                 )
             else:
                 self.step_dependencies.nodes[step_idx]["concurrent_hint"] = False
@@ -1069,13 +1099,28 @@ class ProceduralText:
 
                 # If a preceding definition exists, add the dataflow edge
                 if latest_def_step != -1:
-                    if not self.step_dependencies.has_edge(latest_def_step, use_step):
-                        self.step_dependencies.add_edge(latest_def_step, use_step)
-                        loguru.logger.debug(
-                            f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
+                    # Check if the entity was redefined between the latest_def_step and use_step
+                    redefined_between = False
+                    for intermediate_def_step in defined_steps:
+                        if latest_def_step < intermediate_def_step < use_step:
+                            redefined_between = True
+                            break
+
+                    # Only add edge if NOT redefined in between
+                    if not redefined_between:
+                        if not self.step_dependencies.has_edge(
+                            latest_def_step, use_step
+                        ):
+                            self.step_dependencies.add_edge(latest_def_step, use_step)
+                            loguru.logger.debug(
+                                f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
+                            )
+                            edges_added += 1
+                        # else: Edge already exists (could be default or another dataflow)
+                    else:
+                        loguru.logger.trace(
+                            f"Skipped dataflow edge {latest_def_step + 1} -> {use_step + 1} for '{entity_name}' (redefined between)."
                         )
-                        edges_added += 1
-                    # else: Edge already exists (could be default or another dataflow)
 
         loguru.logger.info(f"Added {edges_added} dataflow dependency edges.")
 
@@ -1121,44 +1166,46 @@ class ProceduralText:
 
     def _get_resources_used(self, step_idx: int) -> Set[str]:
         """
-        Identifies exclusive resources potentially used by a step based on verbs and entities.
+        Identifies exclusive resources potentially used by a step based on verbs, entities, and keywords.
         """
         resources = set()
         step_text = self.steps[step_idx].lower()
         doc = nlp(step_text)
 
-        # Check verbs
+        # 1. Check verbs mapped to resources
         for token in doc:
             if token.pos_ == "VERB":
                 verb_lemma = token.lemma_
                 if verb_lemma in self.verb_to_resource_map:
-                    resources.add(self.verb_to_resource_map[verb_lemma])
-                    loguru.logger.trace(
-                        f"Step {step_idx + 1}: Verb '{verb_lemma}' maps to resource '{self.verb_to_resource_map[verb_lemma]}'"
-                    )
+                    resource = self.verb_to_resource_map[verb_lemma]
+                    if resource not in resources:
+                        loguru.logger.trace(
+                            f"Step {step_idx + 1}: Verb '{verb_lemma}' maps to resource '{resource}'"
+                        )
+                    resources.add(resource)
 
-        # Check entities mentioned that are resources themselves
-        # (This requires entities like 'oven' to be extracted correctly)
-        step_entities = {
+        # 2. Check entities mentioned that ARE resources themselves
+        step_entities_lower = {
             e.lower()
             for e, ent in self.entities.items()
             if step_idx in ent.used_in or step_idx in ent.defined_in
         }
-        for entity in step_entities:
-            # Check direct match and also if the entity *is* a known resource
-            if entity in self.exclusive_resources:
-                resources.add(entity)
-                loguru.logger.trace(
-                    f"Step {step_idx + 1}: Entity '{entity}' is an exclusive resource."
-                )
+        for entity_lower in step_entities_lower:
+            if entity_lower in self.exclusive_resources:
+                if entity_lower not in resources:  # Avoid duplicate logging
+                    loguru.logger.trace(
+                        f"Step {step_idx + 1}: Entity '{entity_lower}' used/defined is an exclusive resource."
+                    )
+                resources.add(entity_lower)
 
-        # Simple check for keywords if entity extraction missed them
+        # 3. Simple keyword check as fallback
         for resource in self.exclusive_resources:
             if resource in step_text:
+                if resource not in resources:
+                    loguru.logger.trace(
+                        f"Step {step_idx + 1}: Keyword '{resource}' found, adding as resource."
+                    )
                 resources.add(resource)
-                loguru.logger.trace(
-                    f"Step {step_idx + 1}: Keyword '{resource}' found, adding as resource."
-                )
 
         loguru.logger.debug(f"Step {step_idx + 1} identified resources: {resources}")
         return resources
@@ -1166,7 +1213,25 @@ class ProceduralText:
     def can_steps_run_concurrently(self, step1: int, step2: int) -> bool:
         """
         Check if two steps can run concurrently based on dependencies, data conflicts,
-        and resource conflicts.
+        and resource conflicts. Includes detailed logging for rejection reasons.
+
+        The function determines if two steps (`s1`, `s2`, where `s1 < s2`) can run in parallel by checking for three types of conflicts:
+
+        1.  **Path Dependency:** It checks if there's *any* directed path from `s1` to `s2` in the `step_dependencies` graph (`nx.has_path(self.step_dependencies, s1, s2)`).
+            *   This graph initially assumes a basic sequence (0->1, 1->2, etc.).
+            *   Crucially, the `_add_dataflow_dependencies` function adds *extra* edges. An edge `A -> B` is added if Step `B` uses an entity that was last defined/modified in Step `A`.
+            *   **If a path exists, `s1` *must* happen before `s2`, so they cannot be concurrent.** This is the most common reason steps *cannot* run in parallel.
+
+        2.  **Data Conflicts:** It checks if the steps interfere with each other by accessing the same data in conflicting ways:
+            *   **Write-Write (WW):** Both steps define/modify the same entity.
+            *   **Write-Read (WR):** `s1` defines/modifies an entity that `s2` uses.
+            *   **Read-Write (RW):** `s1` uses an entity that `s2` defines/modifies.
+            *   **If any data conflict exists, they cannot be concurrent.** (Note: A path dependency often implies a data conflict, so the path check might catch it first).
+
+        3.  **Resource Conflicts:** It checks if both steps require the *same exclusive resource* (like "oven", "stove", "mixer") simultaneously, using the `_get_resources_used` helper function.
+            *   **If they need the same exclusive resource, they cannot be concurrent.**
+
+        **Concurrency is only possible (`True`) if *NONE* of these conditions (Path Dependency, Data Conflict, Resource Conflict) are met.**
         """
         # Ensure step1 < step2 for consistent checking, swap if needed
         s1, s2 = min(step1, step2), max(step1, step2)
@@ -1175,23 +1240,25 @@ class ProceduralText:
         # 1. Check for Path Dependency in the potentially augmented step_dependencies graph
         # If there's a path from s1 to s2, s1 must precede s2.
         if nx.has_path(self.step_dependencies, s1, s2):
-            loguru.logger.debug(f"-> REJECTED: Path exists from {s1 + 1} to {s2 + 1}")
-            # Log the path for debugging (Can be expensive)
+            log_path_detail = ""
             try:
                 path = nx.shortest_path(self.step_dependencies, s1, s2)
-                loguru.logger.trace(f"Path: {[p + 1 for p in path]}")
+                log_path_detail = f" Path: {[p + 1 for p in path]}"
             except nx.NetworkXNoPath:
-                pass  # Should not happen if has_path is true
-            return False
-
-        # Check the reverse only if graph might have cycles or errors (less likely)
-        if nx.has_path(self.step_dependencies, s2, s1):
+                pass  # Should not happen
             loguru.logger.debug(
-                f"Concurrency check: Path exists from Step {s2 + 1} to {s1 + 1} in dependency graph (unexpected?). Cannot run concurrently."
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Path exists from {s1 + 1} to {s2 + 1}.{log_path_detail}"
             )
             return False
 
-        # 2. Check for Data Conflicts (Write-Write, Write-Read, Read-Write)
+        # Check reverse path (less likely but good sanity check)
+        if nx.has_path(self.step_dependencies, s2, s1):
+            loguru.logger.debug(
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Path exists from {s2 + 1} to {s1 + 1} (unexpected?)."
+            )
+            return False
+
+        # 2. Check for Data Conflicts
         entities_written1 = {
             e for e, ent in self.entities.items() if s1 in ent.defined_in
         }
@@ -1204,14 +1271,16 @@ class ProceduralText:
         # Write-Write conflict
         ww_conflict = entities_written1.intersection(entities_written2)
         if ww_conflict:
-            loguru.logger.debug(f"-> REJECTED: WW conflict on {ww_conflict}")
+            loguru.logger.debug(
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Write-Write conflict on {ww_conflict}"
+            )
             return False
 
         # Write-Read conflict (s1 writes, s2 reads)
         wr_conflict = entities_written1.intersection(entities_read2)
         if wr_conflict:
             loguru.logger.debug(
-                f"-> REJECTED: WR conflict (S{s1 + 1} writes, S{s2 + 1} reads) on {wr_conflict}"
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Write-Read conflict (S{s1 + 1} writes, S{s2 + 1} reads) on {wr_conflict}"
             )
             return False
 
@@ -1219,7 +1288,7 @@ class ProceduralText:
         rw_conflict = entities_read1.intersection(entities_written2)
         if rw_conflict:
             loguru.logger.debug(
-                f"-> REJECTED: RW conflict (S{s1 + 1} reads, S{s2 + 1} writes) on {rw_conflict}"
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Read-Write conflict (S{s1 + 1} reads, S{s2 + 1} writes) on {rw_conflict}"
             )
             return False
 
@@ -1231,11 +1300,11 @@ class ProceduralText:
         resource_conflict = resources1.intersection(resources2)
         if resource_conflict:
             loguru.logger.debug(
-                f"-> REJECTED: Resource conflict on {resource_conflict}"
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Resource conflict on {resource_conflict}"
             )
             return False
 
-        # 4. If no path dependency, no data conflict, and no resource conflict, they can run concurrently
+        # 4. If no conflicts, they can run concurrently
         loguru.logger.debug(
             f"-> ACCEPTED: Steps {s1 + 1} and {s2 + 1} can run concurrently."
         )
@@ -1454,9 +1523,7 @@ class QuestionGenerator:
 
         entity_name, step = chosen_entity
 
-        # Old: question = f"Is {entity_name} still needed after Step {step + 1}?"
-        question = f"Is {entity_name} live after Step {step + 1}?"
-
+        question = f"Are the {entity_name} from Step {step + 1} live at any later step?"
         loguru.logger.debug(
             f"Generated Liveness Q: '{question}' -> {ground_truth}. Entity: {entity_name}, Step checked after: {step + 1}, Used in: {self.text.entities[entity_name].used_in}"
         )
@@ -1866,13 +1933,9 @@ def process_single_recipe(title: str, instructions: List[str]) -> Dict[str, Any]
         formatted_entities[entity_name] = {
             "step_introduced": entity.step_introduced + 1,  # Convert to 1-indexed
             "states": entity.states,
-            "used_in": [step + 1 for step in entity.used_in],  # Convert to 1-indexed
-            "defined_in": [
-                step + 1 for step in entity.defined_in
-            ],  # Convert to 1-indexed
-            "consumed_in": [
-                step + 1 for step in entity.consumed_in
-            ],  # Convert to 1-indexed
+            "used_in": sorted([step + 1 for step in entity.used_in]),
+            "defined_in": sorted([step + 1 for step in entity.defined_in]),
+            "consumed_in": sorted([step + 1 for step in entity.consumed_in]),
         }
 
     # Format questions for output

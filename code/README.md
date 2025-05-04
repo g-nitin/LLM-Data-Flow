@@ -80,7 +80,7 @@ This script will take the outputs from the `procedural_text_processing.py`'s run
     - Save the edited file. You can overwrite it or save it as, for example, `subset_analysis/manual_entity_subset.txt`.
 4.  Run - Step 2 (Verify Manual List):
     ```bash
-    python code/diminish.py outs/outs_1 outs/outs_1_subset_analysis --verify-manual-list outs/outs_1_subset_analysis/manual_entity_subset.txt
+    uv run python code/diminish.py outs/outs_1 outs/outs_1_subset_analysis --verify-manual-list outs/outs_1_subset_analysis/manual_entity_subset.txt
     ```
     - Make sure the path after `--verify-manual-list` points to the _edited_ file.
     - The script will now use _only_ the entities in your edited list to count the relevant questions.
