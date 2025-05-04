@@ -525,7 +525,7 @@ class ProceduralText:
                 )
                 continue
 
-            # 1. Check exact cleaned text against compiled regex patterns
+            # Check exact cleaned text against compiled regex patterns
             if any(
                 pattern.match(clean_chunk_text) for pattern in compiled_filter_patterns
             ):
@@ -534,59 +534,62 @@ class ProceduralText:
                 )
                 continue
 
-            # 2. Check root lemma against general stop lemmas
+            # Check root lemma against general stop lemmas
             is_essential = root_lemma in self.essential_tools
             if is_essential:
                 loguru.logger.trace(
                     f"Keeping chunk '{chunk.text}' because root lemma '{root_lemma}' is an essential tool."
                 )
                 # Skip other stop list checks if it's essential
+                pass  # Let it proceed to the potential_entities addition
             else:
                 # If not essential, apply normal stop list checks
+                # Check root lemma against general stop lemmas
                 if root_lemma in stop_entity_lemmas:
                     loguru.logger.trace(
                         f"Skipping chunk '{chunk.text}' (root lemma '{root_lemma}' in stop list)"
                     )
-                    continue
+                    continue  # Skip to next chunk
+                # Check full cleaned text against general stop lemmas
+                if clean_chunk_text in stop_entity_lemmas:
+                    loguru.logger.trace(
+                        f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in stop list)"
+                    )
+                    continue  # Skip to next chunk
+                # Check full cleaned text against VERB stop list
+                if clean_chunk_text in verb_stop_list:
+                    loguru.logger.trace(
+                        f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in VERB stop list)"
+                    )
+                    continue  # Skip to next chunk
 
-            # 3. Check root lemma against VERB stop list
-            if root_lemma in verb_stop_list:
-                loguru.logger.trace(
-                    f"Skipping chunk '{chunk.text}' (root lemma '{root_lemma}' in VERB stop list)"
-                )
-                continue
+            # Check if root is a verb/adjective (only if NOT essential)
+            # Also add check for Noun/Propn before filtering based on verb list
+            if not is_essential:
+                if chunk.root.pos_ not in {"NOUN", "PROPN"}:
+                    # If the root isn't a noun, THEN check if its lemma is a verb to filter actions
+                    if root_lemma in verb_stop_list:
+                        loguru.logger.trace(
+                            f"Skipping chunk '{chunk.text}' (root POS {chunk.root.pos_}, lemma '{root_lemma}' in VERB stop list)"
+                        )
+                        continue
+                    else:
+                        # If root is not Noun/Propn and not a known verb, maybe still skip?
+                        loguru.logger.trace(
+                            f"Skipping chunk '{chunk.text}' (root POS is {chunk.root.pos_})"
+                        )
+                        continue
+                else:
+                    pass  # It's a noun/propn, let it proceed
 
-            # 4. Check full cleaned text against general stop lemmas (for multi-word generics)
-            if clean_chunk_text in stop_entity_lemmas:
-                loguru.logger.trace(
-                    f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in stop list)"
-                )
-                continue
-
-            # 5. Check full cleaned text against VERB stop list
-            if clean_chunk_text in verb_stop_list:
-                loguru.logger.trace(
-                    f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in VERB stop list)"
-                )
-                continue
-
-            # 6. Length check (on cleaned text)
+            # Length check (on cleaned text)
             if len(clean_chunk_text) < 2:
                 loguru.logger.trace(
                     f"Skipping chunk '{chunk.text}' (short length: '{clean_chunk_text}')"
                 )
                 continue
 
-            # 7. Check if root is a verb/adjective (redundant with check 3, but keep as safety)
-            if chunk.root.pos_ not in {"NOUN", "PROPN"}:
-                # Allow ADJ if it modifies a noun? e.g. "large onions" - chunk root might be 'large'
-                # Let's be strict for now: root must be NOUN or PROPN
-                loguru.logger.trace(
-                    f"Skipping chunk '{chunk.text}' (root POS: {chunk.root.pos_})"
-                )
-                continue
-
-            # 8. Check if the chunk seems to be just a quantity + unit (missed by patterns)
+            # Check if the chunk seems to be just a quantity + unit (missed by patterns)
             if (
                 len(chunk) == 2
                 and chunk[0].like_num
