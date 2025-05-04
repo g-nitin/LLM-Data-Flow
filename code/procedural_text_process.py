@@ -104,10 +104,23 @@ class ProceduralText:
             f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(list(self.step_dependencies.edges()))}"
         )
 
+    def _get_lemma(text: str, nlp_processor) -> str:
+        """Get the lemma of the last noun in a potentially multi-word string."""
+        doc = nlp_processor(text)
+        # Find the last token that is a noun or proper noun
+        last_noun = None
+        for token in reversed(doc):
+            if token.pos_ in {"NOUN", "PROPN"}:
+                last_noun = token
+                break
+        # Fallback to the last token's lemma if no noun found
+        return last_noun.lemma_.lower() if last_noun else doc[-1].lemma_.lower()
+
     def _extract_entities_from_step(self, step_idx, step_text):
         """
         Extract entities from a step using NLP techniques with refined filtering for recipes.
         Focuses on ingredients and key intermediate products, filtering out containers, tools, generic terms, locations, actions/verbs, quantities, times, and dimensions.
+        Includes rule-based linking for derived entities.
         """
         doc = nlp(step_text)
         loguru.logger.debug(f"*** Processing Step {step_idx + 1}: '{step_text}' ***")
@@ -586,26 +599,129 @@ class ProceduralText:
         # Final list of entity names (using the stored original text)
         filtered_entities = list(potential_entities.values())
         loguru.logger.info(
-            f"Step {step_idx + 1}: Final extracted entities for this step: {filtered_entities}"
+            f"Step {step_idx + 1}: Initial extracted entities for this step: {filtered_entities}"
         )
+
+        loguru.logger.debug(f"Step {step_idx + 1}: Applying rule-based linking...")
+        # Define patterns for derived entities: suffix -> potential base extraction method
+        # Method 'suffix': Extracts text before the last space and the suffix
+        # Method 'modifier': Extracts the last word (assumed head noun)
+        derived_entity_rules = {
+            "mixture": "suffix",
+            "dough": "suffix",
+            "batter": "suffix",
+            "filling": "suffix",
+            "sauce": "suffix",
+            "glaze": "suffix",
+            "marinade": "suffix",
+            "dressing": "suffix",
+            "paste": "suffix",
+            "crust": "modifier",  # e.g., "potato crust" -> "crust"
+            "stock": "modifier",  # e.g., "chicken stock" -> "stock" (might be too generic, adjust if needed)
+            "broth": "modifier",  # e.g., "beef broth" -> "broth"
+            "juice": "modifier",  # e.g., "lemon juice" -> "juice"
+            "oil": "modifier",  # e.g., "olive oil" -> "oil"
+            "milk": "modifier",  # e.g., "almond milk" -> "milk"
+            # Add more rules as needed
+        }
+
+        # Use noun chunks from the step text for checking derived forms
+        for chunk in doc.noun_chunks:
+            # Basic cleaning similar to entity extraction
+            chunk_text = chunk.text.lower().strip()
+            chunk_text = re.sub(
+                r"^(the|a|an|some|any|its|the)\s+", "", chunk_text
+            ).strip()
+            if len(chunk_text.split()) < 2:  # Need at least two words for these rules
+                continue
+
+            found_link = False
+            for suffix, method in derived_entity_rules.items():
+                base_entity_name = None
+                if method == "suffix" and chunk_text.endswith(f" {suffix}"):
+                    # Extract base part: text before the suffix
+                    base_entity_name = chunk_text[: -(len(suffix) + 1)].strip()
+                    loguru.logger.trace(
+                        f"Link Check (Suffix): Chunk '{chunk_text}', Suffix '{suffix}', Potential Base '{base_entity_name}'"
+                    )
+
+                elif method == "modifier" and chunk_text.endswith(f" {suffix}"):
+                    # Check if the last word matches the suffix rule key
+                    # Extract base part: the suffix itself (assumed head noun)
+                    base_entity_name = suffix
+                    loguru.logger.trace(
+                        f"Link Check (Modifier): Chunk '{chunk_text}', Suffix '{suffix}', Potential Base '{base_entity_name}'"
+                    )
+
+                # If we extracted a potential base entity name
+                if (
+                    base_entity_name and len(base_entity_name) > 1
+                ):  # Avoid empty or single-letter bases
+                    # Check if this potential base entity exists globally
+                    # Try exact match first, then lemma match as fallback
+                    target_entity = None
+                    if base_entity_name in self.entities:
+                        target_entity = self.entities[base_entity_name]
+                    else:
+                        # Fallback: Check if the lemma of the base matches an existing entity's lemma
+                        # This requires storing lemmas or re-calculating. Let's skip lemma fallback for now to keep it simple.
+                        # base_lemma = _get_lemma(base_entity_name, nlp)
+                        # for existing_name, entity_obj in self.entities.items():
+                        #     if _get_lemma(existing_name, nlp) == base_lemma:
+                        #         target_entity = entity_obj
+                        #         base_entity_name = existing_name # Use the actual key
+                        #         loguru.logger.trace(f"Link Check: Found base '{base_entity_name}' via lemma '{base_lemma}'")
+                        #         break
+                        pass  # No lemma fallback currently
+
+                    if target_entity:
+                        # Check if the base entity was active (defined or used) before this step
+                        was_active_before = any(
+                            s < step_idx
+                            for s in target_entity.defined_in.union(
+                                target_entity.used_in
+                            )
+                        )
+                        if was_active_before:
+                            # Mark the BASE entity as USED in the CURRENT step
+                            if step_idx not in target_entity.used_in:
+                                loguru.info(
+                                    f"Rule-based Link: Marking base entity '{base_entity_name}' as USED in step {step_idx + 1} due to derived form '{chunk_text}'"
+                                )
+                                target_entity.used_in.add(step_idx)
+                            break  # Stop checking other rules for this chunk
+                        else:
+                            loguru.logger.trace(
+                                f"Rule-based Link: Base '{base_entity_name}' found but not active before step {step_idx + 1}."
+                            )
+                    else:
+                        loguru.logger.trace(
+                            f"Rule-based Link: Potential base entity '{base_entity_name}' (from '{chunk_text}') not found in global entities."
+                        )
+
+            # if found_link: # Optimization: if we linked this chunk, maybe skip to next chunk?
+            #     continue
 
         # Create or update entity objects (using the extracted names)
         step_entity_roles = {}  # Track roles assigned in this step: entity_name -> set of roles {'used', 'defined', 'consumed'}
 
+        # Loop through initially filtered entities to assign roles based on verbs/dependencies
         for entity_name in filtered_entities:
             # Ensure we use the *extracted name* for consistency in the ProceduralText object
             if entity_name not in self.entities:
+                # This check might be redundant if potential_entities logic already added them, but safe to keep
                 self.entities[entity_name] = Entity(entity_name, step_idx)
                 # Initial definition assumed when first extracted, refine based on verbs
                 self.entities[entity_name].defined_in.add(step_idx)
                 loguru.logger.debug(
-                    f"Adding new global entity: '{entity_name}' from step {step_idx + 1}"
+                    f"Adding new global entity (during role assignment): '{entity_name}' from step {step_idx + 1}"
                 )
 
             # Determine entity's role in this step using verbs (existing logic)
             is_used = False
             is_defined = False
             is_consumed = False
+            governing_verb_lemma = None
 
             # Define verb categories
             use_verbs = {
@@ -707,55 +823,99 @@ class ProceduralText:
             # Check verbs acting ON this entity (check dependency relations)
             entity_found_in_step = False
             verb_action_found = False  # Flag if a verb explicitly acted on the entity
+            # Re-use the doc processed earlier
             for token in doc:
                 # Find occurrences of the entity name (or its root lemma) in the step
-                # This needs to be robust: check token text, lemma, and potentially substring matches
-                if (
-                    entity_name in token.text.lower()
-                    or entity_name == token.lemma_.lower()
-                ):
-                    entity_found_in_step = True
-                    # Check the token's syntactic head (the verb governing it)
-                    head = token.head
-                    if head.pos_ == "VERB":
-                        verb_lemma = head.lemma_.lower()
-                        loguru.logger.debug(
-                            f"Entity '{entity_name}' governed by verb '{verb_lemma}' ({head.text}) with relation '{token.dep_}'"
-                        )
+                # Be robust: check token text, lemma, and potentially substring matches
+                # Use lowercase comparison for robustness
+                token_text_lower = token.text.lower()
+                token_lemma_lower = token.lemma_.lower()
+                entity_name_lower = entity_name.lower()
 
-                        # Check if the entity is the object/subject/conjunct etc.
-                        if token.dep_ in {
-                            "dobj",
-                            "pobj",
-                            "attr",
-                            "nsubj",
-                            "nsubjpass",
-                            "conj",
-                            "appos",
-                            "advcl",
-                        }:
-                            verb_action_found = (
-                                True  # Mark that we found a direct verb action
+                # Check if token is part of the entity name (simple substring check for now)
+                # A better check would involve aligning tokens with noun chunks
+                if (
+                    entity_name_lower in token_text_lower
+                    or entity_name_lower == token_lemma_lower
+                ):
+                    # More specific check: is this token the root of a chunk matching the entity?
+                    is_entity_match = False
+                    if hasattr(
+                        token, "sent"
+                    ):  # Check if token belongs to a sentence (spaCy structure)
+                        for chunk in token.sent.noun_chunks:
+                            # Compare cleaned chunk text with entity name
+                            clean_chunk_text = chunk.text.lower().strip()
+                            clean_chunk_text = re.sub(
+                                r"^(the|a|an|some|your|my|his|her|its|our|their|of|for|with|in|on|at|to|about|approx\.?|approximately|around|over|under|less than|more than|at least)\s+",
+                                "",
+                                clean_chunk_text,
+                            ).strip()
+                            if clean_chunk_text == entity_name_lower and token in chunk:
+                                is_entity_match = True
+                                break
+                    # Fallback to simple check if chunk matching fails or is complex
+                    if not is_entity_match:
+                        if (
+                            entity_name_lower in token_text_lower
+                            or entity_name_lower == token_lemma_lower
+                        ):
+                            is_entity_match = True  # Less precise fallback
+
+                    if is_entity_match:
+                        entity_found_in_step = True
+                        # Check the token's syntactic head (the verb governing it)
+                        head = token.head
+                        if head.pos_ == "VERB":
+                            verb_lemma = head.lemma_.lower()
+                            loguru.logger.debug(
+                                f"Entity '{entity_name}' potentially governed by verb '{verb_lemma}' ({head.text}) with relation '{token.dep_}'"
                             )
-                            governing_verb_lemma = (
-                                verb_lemma  # Store for transformation check
-                            )
-                            if verb_lemma in use_verbs:
-                                is_used = True
-                                loguru.logger.debug(
-                                    f"Marking '{entity_name}' as USED by verb '{verb_lemma}'"
+
+                            # Check if the entity is the object/subject/conjunct etc. of the verb
+                            if (
+                                token.dep_
+                                in {
+                                    "dobj",
+                                    "pobj",
+                                    "obj",  # Direct/prepositional/general object
+                                    "attr",  # Attribute (e.g., "it is flour")
+                                    "nsubj",
+                                    "nsubjpass",  # Nominal subject (active/passive)
+                                    "conj",  # Conjunct (e.g., "mix flour and sugar")
+                                    "appos",  # Appositional modifier
+                                    "advcl",  # Adverbial clause modifier (less common for direct action)
+                                    "xcomp",  # Open clausal complement
+                                    "agent",  # Agent in passive construction
+                                }
+                            ):
+                                verb_action_found = True
+                                governing_verb_lemma = (
+                                    verb_lemma  # Store for transformation check
                                 )
-                            # Use 'elif' to avoid double-counting if a verb is in multiple sets (define takes precedence over use if both match)
-                            elif verb_lemma in define_verbs:
-                                is_defined = True
-                                loguru.logger.debug(
-                                    f"Marking '{entity_name}' as DEFINED by verb '{verb_lemma}'"
-                                )
-                            elif verb_lemma in consume_verbs:
-                                is_consumed = True
-                                loguru.logger.debug(
-                                    f"Marking '{entity_name}' as CONSUMED by verb '{verb_lemma}'"
-                                )
+
+                                # Assign roles based on verb lists (use elif for precedence)
+                                if verb_lemma in consume_verbs:
+                                    is_consumed = True
+                                    loguru.logger.debug(
+                                        f"Marking '{entity_name}' as CONSUMED by verb '{verb_lemma}'"
+                                    )
+                                elif verb_lemma in define_verbs:
+                                    is_defined = True
+                                    loguru.logger.debug(
+                                        f"Marking '{entity_name}' as DEFINED by verb '{verb_lemma}'"
+                                    )
+                                elif verb_lemma in use_verbs:
+                                    is_used = True
+                                    loguru.logger.debug(
+                                        f"Marking '{entity_name}' as USED by verb '{verb_lemma}'"
+                                    )
+                                else:
+                                    loguru.logger.trace(
+                                        f"Verb '{verb_lemma}' acting on '{entity_name}' not in standard role lists."
+                                    )
+                                    # Default assumption if verb found but not categorized? Maybe 'used'?
+                                    # Let's be 'conservative' and not assume role if verb unknown.
 
             # If entity name appears but not clearly governed by a verb (e.g., just mentioned)
             # Default to 'used' if not defined/consumed? Or require explicit verb action?
@@ -778,48 +938,57 @@ class ProceduralText:
                     )
 
                 # Update entity roles for this step
-                if is_used:
-                    current_entity.used_in.add(step_idx)
-                    roles_assigned.add("used")
-                if is_defined:
+                if is_consumed:  # Consume takes precedence
+                    current_entity.consumed_in.add(step_idx)
+                    roles_assigned.add("consumed")
+                    # If consumed, it might also be used in the process (e.g., draining uses the liquid before discarding)
+                    # Let's keep it simple: consume means it's gone after this.
+                    # Remove from defined/used if it was marked earlier in this step?
+                    current_entity.defined_in.discard(step_idx)
+                    current_entity.used_in.discard(step_idx)
+
+                elif is_defined:  # Define before Use
                     # Ensure definition is marked correctly
-                    current_entity.defined_in.discard(
-                        step_idx
-                    )  # Remove initial assumption if needed
                     current_entity.defined_in.add(step_idx)
                     roles_assigned.add("defined")
                     # If defined by transformation, also mark as used (consuming previous state)
                     if governing_verb_lemma in transformation_verbs:
-                        current_entity.used_in.add(step_idx)
+                        # Check if it wasn't already marked used by the rule-based linking
+                        if step_idx not in current_entity.used_in:
+                            loguru.logger.debug(
+                                f"Also marking '{entity_name}' as USED due to transformation verb '{governing_verb_lemma}'"
+                            )
+                        current_entity.used_in.add(step_idx)  # Ensure it's added
                         roles_assigned.add("used")  # Add 'used' role as well
-                        loguru.logger.debug(
-                            f"Also marking '{entity_name}' as USED due to transformation verb '{governing_verb_lemma}'"
-                        )
-                if is_consumed:
-                    current_entity.consumed_in.add(step_idx)
-                    current_entity.consumed_in.add(step_idx)
 
-                # If the entity was found, wasn't its introduction step, and no role was assigned by verbs, assume 'used'.
+                elif is_used:  # Use is the fallback if not consumed/defined by a verb
+                    current_entity.used_in.add(step_idx)
+                    roles_assigned.add("used")
+
+                # Fallback: If entity found, not introduction, no verb action, assume 'used' if previously active
                 if (
                     entity_found_in_step
                     and not roles_assigned
                     and step_idx != current_entity.step_introduced
                 ):
-                    # Check if it was defined or used previously to justify assuming 'used' now
                     was_previously_active = any(
                         s < step_idx
                         for s in current_entity.defined_in.union(current_entity.used_in)
                     )
                     if was_previously_active:
-                        loguru.logger.warning(
+                        loguru.warning(
                             f"Entity '{entity_name}' found in step {step_idx + 1} but no clear verb role assigned. Applying fallback: marking as USED."
                         )
                         current_entity.used_in.add(step_idx)
                         roles_assigned.add("used")
 
                 # Store assigned roles for this step (used for debugging/verification if needed)
-                step_entity_roles[entity_name] = roles_assigned
+                if roles_assigned:  # Only store if some role was determined
+                    step_entity_roles[entity_name] = roles_assigned
 
+        loguru.logger.debug(
+            f"Step {step_idx + 1}: Roles assigned in this step: {step_entity_roles}"
+        )
         loguru.logger.debug(f"*** Finished Step {step_idx + 1} ***")
 
     def _parse_steps(self):

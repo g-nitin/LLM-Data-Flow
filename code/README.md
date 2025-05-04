@@ -131,3 +131,17 @@ After the previous two script, we have a curated list of trusted entities (e.g. 
     uv run python code/generate_final_dataset.py outs/outs_1/ outs/outs_1_subset_analysis/final_entity_subset.txt outs/outs_1_subsetted_final_datasets
     ```
 3.  **Check Output:** The script will create the `final_csv_datasets` folder (or whatever you named it) and populate it with CSV files, one for each analysis category (e.g., `Reaching_Definitions_questions.csv`, `Taint_Analysis_questions.csv`, etc.). Each CSV will contain exactly 100 rows (or fewer if not enough eligible questions were found for that category), with `prompt` and `answer` columns.
+
+## (Final) Post-Processing
+
+Lastly, to adhere with the format and naming requirements, we need to rename the CSV files and columns. This is a simple script that takes the final dataset folder and renames the files and columns accordingly.
+
+### How to Use
+
+1.  **Ensure Inputs:**
+    - Have the folder containing the final CSV datasets (e.g., `outs/outs_1_subsetted_final_datasets/`).
+2.  **Run the Script:**
+    ```bash
+    uv run python code/post_processing.py outs/outs_1_subsetted_final_datasets/ outs/final_recipes/
+    ```
+3.  **Check Output:** The script will create the `outs/final_recipes/` folder and populate it with the renamed CSV files and columns.
