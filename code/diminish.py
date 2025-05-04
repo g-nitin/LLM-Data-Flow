@@ -391,7 +391,7 @@ def main():
                         f"- {q_type}: {count} {target_met_note} {ignored_note}"
                     )
             else:
-                loguru.warning("Could not retrieve final heuristic counts.")
+                loguru.logger.warning("Could not retrieve final heuristic counts.")
 
             loguru.logger.info("\n*** Explanation & Action Required ***")
             loguru.logger.info(
@@ -515,10 +515,10 @@ def main():
                 "Assume targets for ignored types can also be met based on original run."
             )
         else:
-            loguru.warning(
+            loguru.logger.warning(
                 "One or more heuristic targets for *relevant* types were NOT MET."
             )
-            loguru.warning(
+            loguru.logger.warning(
                 "You may need to add back entities or accept lower potential counts for those types."
             )
 

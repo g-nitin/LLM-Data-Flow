@@ -35,6 +35,24 @@ class Entity:
     consumed_in: Set = field(default_factory=set)
 
 
+# Vars used globally
+cooking_verbs = {
+    "cook",
+    "bake",
+    "simmer",
+    "boil",
+    "broil",
+    "fry",
+    "roast",
+    "grill",
+    "steam",
+    "saute",
+    "poach",
+    "toast",
+    "microwave",
+}
+
+
 class ProceduralText:
     def __init__(self, goal: str, steps: List[str]):
         self.goal = goal
@@ -941,6 +959,25 @@ class ProceduralText:
                                     # Default assumption if verb found but not categorized? Maybe 'used'?
                                     # Let's be 'conservative' and not assume role if verb unknown.
 
+                            if verb_lemma in cooking_verbs and token.dep_ in {
+                                "dobj",
+                                "nsubjpass",
+                                "attr",
+                            }:  # Check if entity is object/subject of cooking
+                                entity_obj = self.entities[entity_name]
+                                entity_obj.states[step_idx] = "cooked"
+                                loguru.logger.info(
+                                    f"State Change: Marked '{entity_name}' as 'cooked' in step {step_idx + 1} due to verb '{verb_lemma}'"
+                                )
+                                # Propagate 'cooked' state forward (simple version)
+                                for future_step in range(step_idx + 1, len(self.steps)):
+                                    # Only update if not already set to something else potentially
+                                    if future_step not in entity_obj.states:
+                                        entity_obj.states[future_step] = "cooked"
+                                    # # Or, more robustly, only if the previous state was cooked
+                                    # elif entity_obj.states.get(future_step -1) == 'cooked':
+                                    #    entity_obj.states[future_step] = 'cooked'
+
             # If entity name appears but not clearly governed by a verb (e.g., just mentioned)
             # Default to 'used' if not defined/consumed? Or require explicit verb action?
             # Let's require explicit verb action for now to be stricter.
@@ -1653,81 +1690,82 @@ class QuestionGenerator:
 
     def generate_taint_analysis_question(self) -> Tuple[str, Optional[bool]]:
         """
-        Generate a question focused on taint analysis of the procedural text.
+        Generate a question focused on taint analysis using entity state tracking.
 
-        The method identifies potential "tainted" entities, raw ingredients or those flagged by specific keywords, and asks whether their use in a particular step might introduce safety concerns.
+        Identifies potentially "tainted" entities (raw ingredients) and asks
+        if their use introduces a safety concern, considering if they are ever cooked.
 
         :return: A tuple with the generated question and a boolean ground truth.
-                 If no potential taints are identified, returns an explanatory message and None.
+                 Returns explanatory message and None if no suitable scenario found.
         """
-        potential_taints = []
+        potential_concerns = []
+        unsafe_entity_names = {"egg", "eggs", "raw chicken", "raw beef", "raw pork"}
 
-        # Look for entities that might introduce "taint"
-        taint_keywords = {
-            "raw",
-            "optional",
-            "allergen",
-            "substitute",
-            "contaminate",
-            "uncooked",
-        }
+        for entity_name, entity in self.text.entities.items():
+            # Check if entity is potentially unsafe based on name or initial step text
+            is_potentially_unsafe_initially = False
+            intro_step_text = self.text.steps[entity.step_introduced].lower()
+            if entity_name in unsafe_entity_names or "raw" in intro_step_text:
+                is_potentially_unsafe_initially = True
 
-        for step_idx, step_text in enumerate(self.text.steps):
-            step_text_lower = step_text.lower()
+            if not is_potentially_unsafe_initially:
+                continue  # Skip if not initially considered unsafe
 
-            # Check for taint keywords in the step
-            if any(keyword in step_text_lower for keyword in taint_keywords):
-                # Find entities in this step
-                for entity_name, entity in self.text.entities.items():
-                    if step_idx in entity.defined_in or step_idx in entity.used_in:
-                        if entity_name in step_text_lower:
-                            potential_taints.append((entity_name, step_idx))
+            # Check if this entity is ever marked as 'cooked'
+            is_ever_cooked = any(state == "cooked" for state in entity.states.values())
 
-        if not potential_taints:
-            # If no obvious taints, look for raw ingredients
-            for entity_name, entity in self.text.entities.items():
-                for step_idx in entity.defined_in:
-                    step_text = self.text.steps[step_idx].lower()
-                    if "raw" in step_text or "egg" in entity_name:
-                        potential_taints.append((entity_name, step_idx))
+            # Find steps where this unsafe entity is actively used *before* being cooked (if ever)
+            first_cooked_step = -1
+            if is_ever_cooked:
+                first_cooked_step = min(
+                    step for step, state in entity.states.items() if state == "cooked"
+                )
 
-        if not potential_taints:
-            return "No potential taints found.", None
+            for use_step in entity.used_in:
+                # Consider it a potential concern if used while still raw
+                is_raw_at_use_step = True  # Assume raw unless proven otherwise
+                # Check state *at* or *just before* the use_step
+                current_state = entity.states.get(use_step) or entity.states.get(
+                    use_step - 1
+                )
+                if current_state == "cooked":
+                    is_raw_at_use_step = False
 
-        # Choose a random potential taint
-        entity_name, step = random.choice(potential_taints)
+                # Alternative check: is the use_step before the first cooking step?
+                is_raw_at_use_step = (
+                    first_cooked_step == -1 or use_step < first_cooked_step
+                )
 
-        # Generate question
+                if is_raw_at_use_step:
+                    # Found a step where a potentially unsafe entity is used while likely still raw
+                    # The *overall* concern exists if it's *never* cooked
+                    overall_concern_exists = not is_ever_cooked
+                    potential_concerns.append(
+                        (entity_name, use_step, overall_concern_exists)
+                    )
+                    loguru.logger.debug(
+                        f"Taint Candidate: Entity '{entity_name}' used raw in step {use_step + 1}. Ever cooked: {is_ever_cooked}. Overall concern: {overall_concern_exists}"
+                    )
+
+        if not potential_concerns:
+            return (
+                "No potential safety concerns identified based on raw ingredients and cooking state.",
+                None,
+            )
+
+        # Choose a random potential concern scenario
+        # Prioritize cases where overall_concern_exists is True? Or mix? Let's mix for now.
+        entity_name, step, ground_truth = random.choice(potential_concerns)
+
+        # Generate question about the specific step where it was used raw
         question = f"Does using {entity_name} in Step {step + 1} introduce a potential safety concern to the recipe?"
 
-        # Determine ground truth based on keywords and context
-        step_text = self.text.steps[step].lower()
-
-        # Raw ingredients that aren't cooked later are a concern
-        cooking_verbs = {
-            "cook",
-            "bake",
-            "simmer",
-            "boil",
-            "broil",
-            "fry",
-            "roast",
-            "grill",
-            "steam",
-            "saute",
-        }
-        is_raw = "raw" in step_text or "egg" in entity_name
-        is_cooked_later = any(
-            any(
-                verb in self.text.steps[s].lower().split() for verb in cooking_verbs
-            )  # Check if any cooking verb is present
-            for s in range(step + 1, len(self.text.steps))
+        # The ground truth reflects whether this raw usage leads to an *uncooked final product*
+        # If it's used raw BUT cooked later, the *introduction* might be risky, but the final product isn't.
+        # Let's align the answer with the *overall* recipe safety.
+        loguru.logger.info(
+            f"Generated Taint Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Used raw in step: {step + 1}, Ever cooked: {not ground_truth})"
         )
-
-        # Optional ingredients are generally not a concern
-        is_optional = "optional" in step_text
-
-        ground_truth = is_raw and not is_cooked_later and not is_optional
 
         return question, ground_truth
 
