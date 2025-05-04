@@ -88,16 +88,12 @@ class ProceduralText:
             "deep-fry": "deep fryer",
         }
 
-        # Initialize step dependencies graph
+        # Initialize step dependencies graph - ONLY ADD NODES
         for i in range(len(steps)):
             self.step_dependencies.add_node(i)
-            if i > 0:
-                self.step_dependencies.add_edge(
-                    i - 1, i
-                )  # Default sequential dependency
 
         # Parse steps to extract entities and their relationships
-        self._parse_steps()
+        self._parse_steps()  # Extract entities/roles
         self.build_entity_flow_graph()
         self._add_dataflow_dependencies()
 
