@@ -2221,9 +2221,9 @@ def main():
 
     # Configure logging
     loguru.logger.remove()
-    log_file = os.path.join(args.output_folder, "processing.log")
     loguru.logger.add(
-        log_file, level=args.log_level.upper(), rotation="10 MB", compression="zip"
+        os.path.join(args.output_folder, "processing.log"),
+        level=args.log_level,
     )
     loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level=args.log_level)
 
