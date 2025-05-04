@@ -1526,7 +1526,7 @@ class QuestionGenerator:
 
         entity_name, step = chosen_entity
 
-        question = f"Are the {entity_name} from Step {step + 1} live at any later step?"
+        question = f"Is {entity_name} live after Step {step + 1}?"
         loguru.logger.debug(
             f"Generated Liveness Q: '{question}' -> {ground_truth}. Entity: {entity_name}, Step checked after: {step + 1}, Used in: {self.text.entities[entity_name].used_in}"
         )
