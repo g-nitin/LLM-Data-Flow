@@ -2208,12 +2208,12 @@ def main():
         "--limit",
         default=500,
         type=int,
-        help="The limit on the number of questions per type",
+        help="The limit on the number of questions per type to collect",
     )
     parser.add_argument(
         "--log-level",
         default="INFO",
-        choices=["DEBUG", "INFO", "WARNING", "ERROR"],
+        choices=["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"],
         help="Set the logging level",
     )
 
@@ -2221,15 +2221,18 @@ def main():
 
     # Configure logging
     loguru.logger.remove()
+    log_file = os.path.join(args.output_folder, "processing.log")
     loguru.logger.add(
-        os.path.join(args.output_folder, "processing.log"),
-        level=args.log_level,
+        log_file, level=args.log_level.upper(), rotation="10 MB", compression="zip"
     )
     loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level=args.log_level)
 
     random.seed(13)
 
-    # Process the recipes
+    loguru.logger.info(
+        f"Starting recipe processing. Input: '{args.input_folder}', Output: '{args.output_folder}', Limit/Type: {args.limit}, Log Level: {args.log_level}"
+    )
+
     process_recipe_folder(args.input_folder, args.output_folder, args.limit)
 
     loguru.logger.info("Recipe processing complete!")
