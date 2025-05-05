@@ -88,20 +88,35 @@ class ProceduralText:
         # Add common non-appliance exclusives, e.g., specific pans
         self.essential_tools.update({"skillet", "saucepan", "wok", "griddle"})
 
-        # Initialize step dependencies graph - ONLY ADD NODES
+        # Initialize step dependencies graph - ADD NODES AND DEFAULT SEQUENTIAL EDGES
+        loguru.logger.debug(
+            "Initializing step dependency graph with nodes and default sequential edges..."
+        )
+        nodes_added = 0
+        default_edges_added = 0
         for i in range(len(steps)):
             self.step_dependencies.add_node(i)
+            nodes_added += 1
+            # Add default edge from previous step to current step
+            if i > 0:
+                # Check if edge already exists (unlikely here, but safe)
+                if not self.step_dependencies.has_edge(i - 1, i):
+                    self.step_dependencies.add_edge(i - 1, i)
+                    default_edges_added += 1
+        loguru.logger.info(
+            f"Added {nodes_added} nodes and {default_edges_added} default sequential edges."
+        )
 
         # Parse steps to extract entities and their relationships
-        self._parse_steps()  # Extract entities/roles
-        self.build_entity_flow_graph()
-        self._add_dataflow_dependencies()  # Add dataflow edges AFTER initial parsing
+        self._parse_steps()  # Extract entities/roles, potentially mark concurrency hints
+        self.build_entity_flow_graph()  # Builds separate graph
+        self._add_dataflow_dependencies()  # Add *additional* dataflow edges based on entity usage
 
         # Log all variables
         loguru.logger.info(
             f"\n{len(self.steps)} steps:\n{pformat(list(zip(range(1, len(self.steps) + 1), self.steps)))}"
             f"\nParsed {len(self.entities)} entities:\n{pformat(self.entities)}"
-            f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(list(self.step_dependencies.edges()))}"
+            f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(sorted(list(self.step_dependencies.edges())))}"  # Sort edges for consistent logging
         )
 
     def _get_lemma(text: str, nlp_processor) -> str:
@@ -1131,20 +1146,23 @@ class ProceduralText:
                             redefined_between = True
                             break
 
-                    # Only add edge if NOT redefined in between
                     if not redefined_between:
-                        if not self.step_dependencies.has_edge(
+                        # Add edge ONLY IF IT DOESN'T EXIST. This prevents adding a duplicate
+                        # if the default i -> i+1 edge already covers this dataflow.
+                        # However, adding dataflow edges even if default exists can be useful
+                        # for visualizing specific dependencies.
+                        edge_exists = self.step_dependencies.has_edge(
                             latest_def_step, use_step
-                        ):
+                        )
+                        if not edge_exists:
                             self.step_dependencies.add_edge(latest_def_step, use_step)
                             loguru.logger.debug(
                                 f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
                             )
                             edges_added += 1
-                        # else: Edge already exists (could be default or another dataflow)
                     else:
                         loguru.logger.trace(
-                            f"Skipped dataflow edge {latest_def_step + 1} -> {use_step + 1} for '{entity_name}' (redefined between)."
+                            f"Dataflow dependency {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}') already covered by existing edge."
                         )
 
         loguru.logger.info(f"Added {edges_added} dataflow dependency edges.")
@@ -1240,23 +1258,7 @@ class ProceduralText:
         Check if two steps can run concurrently based on dependencies, data conflicts,
         and resource conflicts. Includes detailed logging for rejection reasons.
 
-        The function determines if two steps (`s1`, `s2`, where `s1 < s2`) can run in parallel by checking for three types of conflicts:
-
-        1.  **Path Dependency:** It checks if there's *any* directed path from `s1` to `s2` in the `step_dependencies` graph (`nx.has_path(self.step_dependencies, s1, s2)`).
-            *   This graph initially assumes a basic sequence (0->1, 1->2, etc.).
-            *   Crucially, the `_add_dataflow_dependencies` function adds *extra* edges. An edge `A -> B` is added if Step `B` uses an entity that was last defined/modified in Step `A`.
-            *   **If a path exists, `s1` *must* happen before `s2`, so they cannot be concurrent.** This is the most common reason steps *cannot* run in parallel.
-
-        2.  **Data Conflicts:** It checks if the steps interfere with each other by accessing the same data in conflicting ways:
-            *   **Write-Write (WW):** Both steps define/modify the same entity.
-            *   **Write-Read (WR):** `s1` defines/modifies an entity that `s2` uses.
-            *   **Read-Write (RW):** `s1` uses an entity that `s2` defines/modifies.
-            *   **If any data conflict exists, they cannot be concurrent.** (Note: A path dependency often implies a data conflict, so the path check might catch it first).
-
-        3.  **Resource Conflicts:** It checks if both steps require the *same exclusive resource* (like "oven", "stove", "mixer") simultaneously, using the `_get_resources_used` helper function.
-            *   **If they need the same exclusive resource, they cannot be concurrent.**
-
-        **Concurrency is only possible (`True`) if *NONE* of these conditions (Path Dependency, Data Conflict, Resource Conflict) are met.**
+        Relies on the step_dependencies graph which includes default i->i+1 edges plus specific dataflow edges.
         """
         # Ensure step1 < step2 for consistent checking, swap if needed
         s1, s2 = min(step1, step2), max(step1, step2)
