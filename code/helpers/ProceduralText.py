@@ -707,7 +707,7 @@ class ProceduralText:
                         if was_active_before:
                             # Mark the BASE entity as USED in the CURRENT step
                             if step_idx not in target_entity.used_in:
-                                loguru.info(
+                                loguru.logger.info(
                                     f"Rule-based Link: Marking base entity '{base_entity_name}' as USED in step {step_idx + 1} due to derived form '{chunk_text}'"
                                 )
                                 target_entity.used_in.add(step_idx)
@@ -1046,7 +1046,7 @@ class ProceduralText:
                         for s in current_entity.defined_in.union(current_entity.used_in)
                     )
                     if was_previously_active:
-                        loguru.warning(
+                        loguru.logger.warning(
                             f"Entity '{entity_name}' found in step {step_idx + 1} but no clear verb role assigned. Applying fallback: marking as USED."
                         )
                         current_entity.used_in.add(step_idx)

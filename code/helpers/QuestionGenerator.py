@@ -12,6 +12,7 @@ class QuestionGenerator:
         Initialize the QuestionGenerator with a ProceduralText instance.
 
         :param procedural_text: An instance of ProceduralText containing the recipe steps and parsed entities.
+        :param nlp: A spaCy NLP model instance.
         """
         self.text = procedural_text
         self.nlp = nlp
@@ -429,69 +430,78 @@ class QuestionGenerator:
         """
         Generate a question regarding concurrency analysis among steps.
 
-        This method examines steps marked as being concurrent or those that can run concurrently based on
-        dependency and shared entity modifications, then formulates a related question.
+        Randomly selects a pair of distinct steps and determines if they *can* run
+        concurrently based on path, data, and resource dependencies established
+        in the ProceduralText object (which includes default sequential paths).
+        Generates both True and False examples.
 
         :return: A tuple containing the concurrency question and a boolean ground truth.
-                 If no potential concurrent step pairs are found, returns an explanatory message and None.
+            Returns explanatory message and None if fewer than 2 steps exist.
         """
-        # Find pairs of steps that might be concurrent
-        potential_concurrent_pairs = []
+        num_steps = len(self.text.steps)
+        if num_steps < 2:
+            loguru.logger.warning("Skipping concurrency question: Fewer than 2 steps.")
+            return "Not enough steps for concurrency analysis.", None
 
-        # First check steps explicitly marked as concurrent
-        concurrent_steps = []
-        for step_idx, attrs in self.text.step_dependencies.nodes(data=True):
-            if attrs.get("concurrent", False):
-                concurrent_steps.append(step_idx)
+        # Randomly select two distinct step indices
+        try:
+            step1_idx, step2_idx = random.sample(range(num_steps), 2)
+        except ValueError:
+            # Should not happen if num_steps >= 2, but safeguard
+            loguru.logger.error("Error sampling steps for concurrency question.")
+            return "Error selecting steps for concurrency analysis.", None
 
-                # If we know what step it's concurrent with
-                concurrent_with = attrs.get("concurrent_with")
-                if concurrent_with is not None:
-                    potential_concurrent_pairs.append((step_idx, concurrent_with))
+        # Determine the ground truth using the ProceduralText method
+        # This method now correctly incorporates default sequential dependencies
+        ground_truth = self.text.can_steps_run_concurrently(step1_idx, step2_idx)
 
-        # If we don't have explicit concurrent pairs, look for potential ones
-        if not potential_concurrent_pairs:
-            for step1 in range(len(self.text.steps)):
-                for step2 in range(step1 + 1, len(self.text.steps)):
-                    # Check if steps have no direct dependency and don't modify the same entities
-                    if self.text.can_steps_run_concurrently(step1, step2):
-                        potential_concurrent_pairs.append((step1, step2))
+        # Generate question text (using the smaller index first for consistency in the question)
+        s1, s2 = min(step1_idx, step2_idx), max(step1_idx, step2_idx)
+        step1_text = self.text.steps[s1]
+        step2_text = self.text.steps[s2]
 
-        if not potential_concurrent_pairs:
-            return "No potential concurrent steps found.", None
+        # Extract key actions
+        action1 = "perform action"  # Default
+        try:
+            doc1 = self.nlp(step1_text)
+            action1 = next(
+                (
+                    token.lemma_
+                    for token in doc1
+                    if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
+                ),
+                "perform action",  # Use the default if no suitable verb found
+            )
+        except Exception as e:
+            loguru.logger.warning(
+                f"NLP processing failed for step {s1 + 1} text: '{step1_text}'. Error: {e}"
+            )
+            # Keep default action1
 
-        # Choose a random pair
-        step1, step2 = random.choice(potential_concurrent_pairs)
+        action2 = "perform action"  # Default
+        try:
+            doc2 = self.nlp(step2_text)
+            action2 = next(
+                (
+                    token.lemma_
+                    for token in doc2
+                    if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
+                ),
+                "perform action",  # Use the default if no suitable verb found
+            )
+        except Exception as e:
+            loguru.logger.warning(
+                f"NLP processing failed for step {s2 + 1} text: '{step2_text}'. Error: {e}"
+            )
+            # Keep default action2
 
-        # Generate question
-        step1_text = self.text.steps[step1]
-        step2_text = self.text.steps[step2]
+        question = f"Can we {action1} (Step {s1 + 1}) and {action2} (Step {s2 + 1}) at the same time?"
 
-        # Extract key actions from steps if possible
-        doc1 = self.nlp(step1_text)
-        action1 = next(
-            (
-                token.lemma_
-                for token in doc1
-                if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
-            ),
-            "doing",
+        loguru.logger.debug(
+            f"Generated Concurrency Q: '{question}' -> {ground_truth} (Steps checked: {step1_idx + 1}, {step2_idx + 1})"
         )
 
-        doc2 = self.nlp(step2_text)
-        action2 = next(
-            (
-                token.lemma_
-                for token in doc2
-                if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
-            ),
-            "doing",
-        )
-
-        question = f"Can we {action1} (Step {step1 + 1}) and {action2} (Step {step2 + 1}) at the same time?"
-
-        # Ground truth is True since we verified they can run concurrently
-        return question, True
+        return question, ground_truth
 
     def generate_all_questions(self, num_per_type=1):
         """

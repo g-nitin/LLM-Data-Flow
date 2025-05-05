@@ -375,7 +375,7 @@ def main():
     )
     parser.add_argument(
         "--limit",
-        default=500,
+        default=100,
         type=int,
         help="The limit on the number of questions per type to collect",
     )
