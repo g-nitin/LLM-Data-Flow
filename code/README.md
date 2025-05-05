@@ -1,28 +1,5 @@
 # Automated Question Generation for Procedural Text Analysis
 
-## TL;DR
-
-Starting from scratch, this codebase allows you to analyze procedural texts (like recipes) and generate questions based on program analysis concepts. It includes a framework for extracting entities, their relationships, and dependencies between steps, as well as generating questions that test understanding of the procedural flow.
-
-Commands and steps:
-
-```bash
-# Step 1: Process recipes
-uv run python code/procedural_text_process.py /path/to/recipes /path/to/output
-
-# Step 2: Diminish entity list
-uv run python code/diminish.py /path/to/output /path/to/output_subset_analysis
-
-# Step 3: After verifying manual list
-uv run python code/diminish.py /path/to/output /path/to/output_subset_analysis --verify-manual-list /path/to/output_subset_analysis/manual_entity_subset.txt
-
-# Step 4: Generate final dataset
-uv run python code/generate_final_dataset.py /path/to/output /path/to/output_subset_analysis/final_entity_subset.txt /path/to/output_subsetted_final_datasets
-
-# Step 5: Post-process final dataset
-uv run python code/post_processing.py /path/to/output_subsetted_final_datasets /path/to/final_recipes/
-```
-
 ## Procedural Text Processing
 
 This codebase provides a framework for analyzing procedural texts (like recipes or instructions) using concepts from program analysis. It extracts entities, their relationships, and dependencies between steps, then generates questions that test understanding of the procedural flow.
@@ -56,7 +33,8 @@ This codebase provides a framework for analyzing procedural texts (like recipes 
      - **Interval Analysis**: Examines time constraints in steps
      - **Type-State Analysis**: Verifies entities are used in valid states
      - **Taint Analysis**: Identifies potential contamination or safety concerns
-     - **Concurrency Analysis**: Determines which steps can run in parallel
+     - **Concurrency Analysis**: Determines which steps can run in parallel based on data and resource conflicts identified in the _full step text_.
+       - **Note:** A question might ask if simplified actions (e.g., "preheat" and "mix") can run concurrently. The answer reflects whether the _entire steps_ containing these actions can run concurrently. If Step 1 includes "preheat" and "prepare pan", and Step 2 includes "mix" and "pour into prepared pan", the answer will be "No" due to the pan dependency, even though the actions "preheat" and "mix" alone might seem concurrent. The question generation attempts to filter out the most obviously misleading cases of this type.
 
 ### How It Works
 
@@ -168,33 +146,3 @@ Lastly, to adhere with the format and naming requirements, we need to rename the
     uv run python code/post_processing.py outs/outs_1_subsetted_final_datasets/ outs/final_recipes/
     ```
 3.  **Check Output:** The script will create the `outs/final_recipes/` folder and populate it with the renamed CSV files and columns.
-
----
-
-## Explanations for Specific Analysis Types
-
-### Taint Analysis Question Generation
-
-The Taint Analysis questions aim to identify potential food safety concerns within the procedural text, drawing an analogy from software security where "tainted" (untrusted) input must be "sanitized" before reaching a sensitive operation.
-
-In recipes, this translates to identifying potentially hazardous raw ingredients (like eggs, raw meat) and checking if they undergo a necessary "sanitization" step, primarily cooking, before the final product is implicitly consumed.
-
-The generation process follows these steps:
-
-1.  Identify Potentially Unsafe Ingredients: The system first identifies ingredients that typically require cooking for safety. This is primarily done by:
-
-    - Looking for specific entity names (e.g., "egg", "eggs"). The list is just a heuristic and can be expanded.
-    - Checking if the step where the ingredient is introduced contains keywords like "raw".
-
-2.  Track Entity State: As the system parses each step, it tracks the state of entities. Specifically, when it detects a cooking verb (like `bake`, `boil`, `fry`, `cook`, `simmer`, etc.) acting directly on an entity or a mixture containing it, it attempts to mark that entity's state as 'cooked' for that step and subsequent steps.
-
-3.  Identify Usage While Raw: The system looks for steps where a potentially unsafe ingredient (identified in step 1) is actively used (e.g., added, mixed, combined). It checks the tracked state (from step 2) to determine if the ingredient is likely still in its 'raw' or unsafe state _at the point of use_.
-
-4.  Check for Sanitization (Cooking): For each potentially unsafe ingredient identified, the system checks if its tracked state is ever updated to 'cooked' at _any point_ during the entire procedure.
-
-5.  Generate Question: If an unsafe ingredient is found to be used while likely still raw (step 3), a question is formulated about that specific step:
-    `"Does using {entity_name} in Step {X+1} introduce a potential safety concern to the recipe?"`
-
-6.  Determine Ground Truth (Answer): The answer ("Yes" or "No") reflects the _overall safety of the final product_ concerning that specific ingredient:
-    - Yes (Potential Concern): The answer is "Yes" if the ingredient is identified as potentially unsafe initially AND the system's state tracking indicates it was **never** marked as 'cooked' throughout the entire recipe.
-    - No (Likely Safe): The answer is "No" if the ingredient, although potentially unsafe initially, _is_ marked as 'cooked' at some point during the procedure according to the state tracking.

@@ -5,6 +5,102 @@ import loguru
 
 from .ProceduralText import ProceduralText
 
+# Verbs for identifying potentially misleading scenarios
+# Verbs indicating background resource prep or simple state changes often done early
+BACKGROUND_PREP_VERBS = {
+    "preheat",
+    "heat",
+    "warm",
+    "cool",
+    "chill",
+    "freeze",
+    "grease",
+    "oil",
+    "butter",
+    "flour",
+    "line",
+    "prepare",
+    "boil",
+    "melt",
+    "toast",
+    "set",
+    "start",
+    "begin",
+    "measure",
+    "weigh",
+    "sift",
+    "drain",
+    "rinse",
+    "soak",
+    "reserve",
+    "get",
+    "gather",
+    "have",
+    "ensure",
+    "check",
+    "adjust",
+    "allow",
+    "let",
+    "place",
+    "put",
+    "remove",
+    "take",
+    "discard",
+    "cover",
+    "combine",
+}
+
+# Verbs indicating active mixing, chopping, or combining actions often done concurrently with background prep
+ACTIVE_PREP_VERBS = {
+    "mix",
+    "stir",
+    "combine",
+    "blend",
+    "whisk",
+    "fold",
+    "beat",
+    "whip",
+    "add",
+    "incorporate",
+    "chop",
+    "dice",
+    "slice",
+    "mince",
+    "grate",
+    "zest",
+    "peel",
+    "core",
+    "trim",
+    "mash",
+    "puree",
+    "crush",
+    "season",
+    "sprinkle",
+    "pour",
+    "layer",
+    "spread",
+    "make",
+    "create",
+    "cook",
+    "continue",
+    "work",
+    "use",
+    "follow",
+    "repeat",
+    "taste",
+    "look",
+    "feel",
+    "smell",
+    "watch",
+    "dissolve",
+    "cream",
+    "knead",
+    "roll",
+    "cut",
+    "shape",
+    "form",
+}
+
 
 class QuestionGenerator:
     def __init__(self, procedural_text: ProceduralText, nlp: object):
@@ -426,15 +522,18 @@ class QuestionGenerator:
 
         return question, ground_truth
 
-    def generate_concurrency_analysis_question(self) -> Tuple[str, Optional[bool]]:
+    def generate_concurrency_analysis_question(
+        self, max_retries=10
+    ) -> Tuple[str, Optional[bool]]:
         """
         Generate a question regarding concurrency analysis among steps.
 
-        Randomly selects a pair of distinct steps and determines if they *can* run
-        concurrently based on path, data, and resource dependencies established
-        in the ProceduralText object (which includes default sequential paths).
-        Generates both True and False examples.
+        Randomly selects a pair of distinct steps and determines if they
+        *can* run concurrently based on data and resource dependencies.
+        Attempts to filter questions where simplified verbs suggest concurrency
+        but the actual answer is False due to hidden dependencies within steps.
 
+        :param max_retries: Maximum attempts to find a non-misleading question pair.
         :return: A tuple containing the concurrency question and a boolean ground truth.
             Returns explanatory message and None if fewer than 2 steps exist.
         """
@@ -443,65 +542,100 @@ class QuestionGenerator:
             loguru.logger.warning("Skipping concurrency question: Fewer than 2 steps.")
             return "Not enough steps for concurrency analysis.", None
 
-        # Randomly select two distinct step indices
-        try:
-            step1_idx, step2_idx = random.sample(range(num_steps), 2)
-        except ValueError:
-            # Should not happen if num_steps >= 2, but safeguard
-            loguru.logger.error("Error sampling steps for concurrency question.")
-            return "Error selecting steps for concurrency analysis.", None
+        for attempt in range(max_retries):
+            # Randomly select two distinct step indices
+            try:
+                step1_idx, step2_idx = random.sample(range(num_steps), 2)
+            except ValueError:
+                loguru.logger.error("Error sampling steps for concurrency question.")
+                return "Error selecting steps for concurrency analysis.", None
 
-        # Determine the ground truth using the ProceduralText method
-        # This method now correctly incorporates default sequential dependencies
-        ground_truth = self.text.can_steps_run_concurrently(step1_idx, step2_idx)
+            # Determine the ground truth using the ProceduralText method
+            ground_truth = self.text.can_steps_run_concurrently(step1_idx, step2_idx)
 
-        # Generate question text (using the smaller index first for consistency in the question)
-        s1, s2 = min(step1_idx, step2_idx), max(step1_idx, step2_idx)
-        step1_text = self.text.steps[s1]
-        step2_text = self.text.steps[s2]
+            # Extract key actions for the question
+            s1, s2 = min(step1_idx, step2_idx), max(step1_idx, step2_idx)
+            step1_text = self.text.steps[s1]
+            step2_text = self.text.steps[s2]
 
-        # Extract key actions
-        action1 = "perform action"  # Default
-        try:
-            doc1 = self.nlp(step1_text)
-            action1 = next(
-                (
-                    token.lemma_
-                    for token in doc1
-                    if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
-                ),
-                "perform action",  # Use the default if no suitable verb found
-            )
-        except Exception as e:
-            loguru.logger.warning(
-                f"NLP processing failed for step {s1 + 1} text: '{step1_text}'. Error: {e}"
-            )
-            # Keep default action1
+            action1 = "perform action"
+            try:
+                doc1 = self.nlp(step1_text)
+                # Find first non-auxiliary verb lemma
+                action1 = next(
+                    (
+                        token.lemma_
+                        for token in doc1
+                        if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
+                    ),
+                    "perform action",
+                )
+            except Exception as e:
+                loguru.logger.warning(
+                    f"NLP processing failed for step {s1 + 1} text: '{step1_text}'. Error: {e}"
+                )
 
-        action2 = "perform action"  # Default
-        try:
-            doc2 = self.nlp(step2_text)
-            action2 = next(
-                (
-                    token.lemma_
-                    for token in doc2
-                    if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
-                ),
-                "perform action",  # Use the default if no suitable verb found
-            )
-        except Exception as e:
-            loguru.logger.warning(
-                f"NLP processing failed for step {s2 + 1} text: '{step2_text}'. Error: {e}"
-            )
-            # Keep default action2
+            action2 = "perform action"
+            try:
+                doc2 = self.nlp(step2_text)
+                # Find first non-auxiliary verb lemma
+                action2 = next(
+                    (
+                        token.lemma_
+                        for token in doc2
+                        if token.pos_ == "VERB" and token.lemma_ not in {"be", "have"}
+                    ),
+                    "perform action",
+                )
+            except Exception as e:
+                loguru.logger.warning(
+                    f"NLP processing failed for step {s2 + 1} text: '{step2_text}'. Error: {e}"
+                )
 
-        question = f"Can we {action1} (Step {s1 + 1}) and {action2} (Step {s2 + 1}) at the same time?"
+            # Filtering Logic for Potentially Misleading "No" Answers
+            is_potentially_misleading = False
+            if ground_truth is False:
+                # Check if it's a background prep + active prep verb combination
+                combo1 = (
+                    action1 in BACKGROUND_PREP_VERBS and action2 in ACTIVE_PREP_VERBS
+                )
+                combo2 = (
+                    action2 in BACKGROUND_PREP_VERBS and action1 in ACTIVE_PREP_VERBS
+                )
 
-        loguru.logger.debug(
-            f"Generated Concurrency Q: '{question}' -> {ground_truth} (Steps checked: {step1_idx + 1}, {step2_idx + 1})"
+                # Also check if both are background verbs (e.g., measure and sift) which might also be misleading if False
+                combo3 = (
+                    action1 in BACKGROUND_PREP_VERBS
+                    and action2 in BACKGROUND_PREP_VERBS
+                )
+
+                if combo1 or combo2 or combo3:
+                    # If the answer is False for these combinations, it's likely due to
+                    # hidden dependencies (like needing a prepared pan) rather than
+                    # a direct conflict between the *named actions*. Skip it.
+                    is_potentially_misleading = True
+                    loguru.logger.debug(
+                        f"Skipping potentially misleading concurrency question (Attempt {attempt + 1}/{max_retries}): "
+                        f"'Can we {action1} (S{s1 + 1}) and {action2} (S{s2 + 1})?' "
+                        f"(Actual Answer: False, Verbs: '{action1}', '{action2}')"
+                    )
+
+            if not is_potentially_misleading:
+                # Generate the question text
+                question = f"Can we {action1} (Step {s1 + 1}) and {action2} (Step {s2 + 1}) at the same time?"
+                loguru.logger.debug(
+                    f"Generated Concurrency Q: '{question}' -> {ground_truth} (Steps checked: {step1_idx + 1}, {step2_idx + 1})"
+                )
+                return question, ground_truth  # Found a suitable question
+
+        # If loop finishes without returning a question
+        loguru.logger.warning(
+            f"Could not generate a non-misleading concurrency question after {max_retries} attempts."
         )
-
-        return question, ground_truth
+        return (
+            "Could not find suitable steps for non-misleading concurrency analysis.",
+            None,
+        )
 
     def generate_all_questions(self, num_per_type=1):
         """
