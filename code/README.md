@@ -145,3 +145,32 @@ Lastly, to adhere with the format and naming requirements, we need to rename the
     uv run python code/post_processing.py outs/outs_1_subsetted_final_datasets/ outs/final_recipes/
     ```
 3.  **Check Output:** The script will create the `outs/final_recipes/` folder and populate it with the renamed CSV files and columns.
+
+---
+
+## Explanations for Specific Analysis Types
+
+### Taint Analysis Question Generation
+
+The Taint Analysis questions aim to identify potential food safety concerns within the procedural text, drawing an analogy from software security where "tainted" (untrusted) input must be "sanitized" before reaching a sensitive operation.
+
+In recipes, this translates to identifying potentially hazardous raw ingredients (like eggs, raw meat) and checking if they undergo a necessary "sanitization" step, primarily cooking, before the final product is implicitly consumed.
+
+The generation process follows these steps:
+
+1.  Identify Potentially Unsafe Ingredients: The system first identifies ingredients that typically require cooking for safety. This is primarily done by:
+    -   Looking for specific entity names (e.g., "egg", "eggs"). The list is just a heuristic and can be expanded.
+    -   Checking if the step where the ingredient is introduced contains keywords like "raw".
+
+2.  Track Entity State: As the system parses each step, it tracks the state of entities. Specifically, when it detects a cooking verb (like `bake`, `boil`, `fry`, `cook`, `simmer`, etc.) acting directly on an entity or a mixture containing it, it attempts to mark that entity's state as 'cooked' for that step and subsequent steps.
+
+3.  Identify Usage While Raw: The system looks for steps where a potentially unsafe ingredient (identified in step 1) is actively used (e.g., added, mixed, combined). It checks the tracked state (from step 2) to determine if the ingredient is likely still in its 'raw' or unsafe state *at the point of use*.
+
+4.  Check for Sanitization (Cooking): For each potentially unsafe ingredient identified, the system checks if its tracked state is ever updated to 'cooked' at *any point* during the entire procedure.
+
+5.  Generate Question: If an unsafe ingredient is found to be used while likely still raw (step 3), a question is formulated about that specific step:
+    `"Does using {entity_name} in Step {X+1} introduce a potential safety concern to the recipe?"`
+
+6.  Determine Ground Truth (Answer): The answer ("Yes" or "No") reflects the *overall safety of the final product* concerning that specific ingredient:
+    *   Yes (Potential Concern): The answer is "Yes" if the ingredient is identified as potentially unsafe initially AND the system's state tracking indicates it was **never** marked as 'cooked' throughout the entire recipe.
+    *   No (Likely Safe): The answer is "No" if the ingredient, although potentially unsafe initially, *is* marked as 'cooked' at some point during the procedure according to the state tracking.
