@@ -199,16 +199,9 @@ class QuestionGenerator:
             # Mentioning the specific future steps might make the question too complex/long.
             # Keep the original question format for simplicity.
             question = f"Is {entity_name} from Step {step + 1} used in multiple future steps without being redefined?"
-            # Ground truth is True because we found at least two valid future uses
+            # Ground truth is True if more than one valid future use
             busy_entity_questions.append(
-                (
-                    question,
-                    True
-                    if len(use_steps) > 1
-                    else False
-                    if len(use_steps) == 1
-                    else False,
-                )
+                (question, True if len(use_steps) > 1 else False)
             )
 
         return busy_entity_questions
@@ -253,14 +246,6 @@ class QuestionGenerator:
 
         This method evaluates whether a given entity is "live" after a specified step,
         meaning that the entity is still used in subsequent steps.
-
-        What does it mean for an entity to be "live"?
-
-        In the context of the procedural text framework, drawing analogy from software analysis: An entity (like an ingredient, tool, or intermediate product) is considered **"live"** after a specific step (say, Step `k`) if that entity **will be used** in at least one subsequent step (Step `j`, where `j > k`).
-
-        - Future Use: Liveness is about whether the entity is needed *later* in the procedure.
-        - Specific Point: Liveness is always relative to a point in the procedure (i.e., *after* a particular step).
-        - Implication: If an entity is *not* live after Step `k`, it means it's no longer required for any remaining steps. It might have been fully consumed, transformed into something else entirely, or simply won't be referenced again. This is analogous to how a variable that's not live in software can potentially be discarded or its register reused.
 
         :return: A tuple containing the generated question and a boolean ground truth.
                  If no suitable entity is found for live variable analysis, returns an explanatory message and None.
@@ -311,13 +296,10 @@ class QuestionGenerator:
         chosen_entity_info = None
         ground_truth = None
 
-        can_choose_live = bool(live_entities)
-        can_choose_non_live = bool(non_live_entities)
-
-        if can_choose_live and (not can_choose_non_live or random.random() > 0.5):
+        if live_entities and (not non_live_entities or random.random() > 0.5):
             chosen_entity_info = random.choice(live_entities)
             ground_truth = True
-        elif can_choose_non_live:
+        elif non_live_entities:
             chosen_entity_info = random.choice(non_live_entities)
             ground_truth = False
 
@@ -376,14 +358,11 @@ class QuestionGenerator:
     def generate_type_state_question(self) -> Tuple[str, Optional[bool]]:
         """
         Generate a question focusing on type-state analysis.
-
-        This method searches for pairs of steps where an entity is defined and later used.
-        It then constructs a question about the validity of using the entity if its prerequisite definition step were omitted.
-
-        :return: A tuple containing the generated question and a boolean ground truth.
-                 If no prerequisite relationships are found, returns an explanatory message and None.
+        The ground truth is True if skipping the prerequisite step is still valid
+        (e.g., because the dependent step defines the entity itself or adds a new instance).
+        Otherwise, it's False.
         """
-        prerequisite_pairs = []
+        potential_questions_data = []
 
         # Look for pairs of steps where one step prepares an entity for another
         for entity_name, entity in self.text.entities.items():
@@ -393,68 +372,97 @@ class QuestionGenerator:
             for def_step in defined_steps:
                 for use_step in used_steps:
                     if def_step < use_step:
-                        # This is a potential prerequisite relationship
-                        prerequisite_pairs.append((entity_name, def_step, use_step))
+                        # Check if def_step's definition reaches use_step (no intermediate redefinition)
+                        is_redefined_between = False
+                        for intermediate_step in range(def_step + 1, use_step):
+                            if intermediate_step in entity.defined_in:
+                                is_redefined_between = True
+                                break
+                        if is_redefined_between:
+                            continue
 
-        if not prerequisite_pairs:
-            return "No prerequisite relationships found.", None
+                        # Extract action in dependent_step for this entity
+                        action_in_dependent_step = "use"  # Default action
+                        dependent_step_text_doc = self.nlp(self.text.steps[use_step])
+                        entity_found_in_dep_step_text = False
 
-        # Choose a random prerequisite pair
-        entity_name, prerequisite_step, dependent_step = random.choice(
-            prerequisite_pairs
-        )
+                        # Find the primary verb acting on the entity in the dependent step
+                        # This logic is simplified; more robust parsing might be needed for complex sentences.
+                        verb_for_action = None
+                        for token in dependent_step_text_doc:
+                            # Check if token relates to the entity
+                            if (
+                                entity_name in token.text.lower()
+                                or entity_name == token.lemma_.lower()
+                            ):
+                                entity_found_in_dep_step_text = True
+                                head = token.head
+                                if head.pos_ == "VERB" and token.dep_ in {
+                                    "dobj",
+                                    "pobj",
+                                    "nsubjpass",
+                                    "attr",
+                                    "conj",
+                                }:
+                                    if head.lemma_ not in {
+                                        "be",
+                                        "have",
+                                    }:  # Exclude auxiliary verbs
+                                        verb_for_action = head.lemma_
+                                        break
+                        if verb_for_action:
+                            action_in_dependent_step = verb_for_action
+                        elif not entity_found_in_dep_step_text:
+                            # If entity not even mentioned in dependent step text (should not happen if use_step is from entity.used_in)
+                            loguru.logger.warning(
+                                f"Type-State: Entity '{entity_name}' not found in text of dependent step {use_step + 1}. Skipping."
+                            )
+                            continue
 
-        # Extract action from the dependent step if possible
-        step_text = self.text.steps[dependent_step]
-        doc = self.nlp(step_text)
-        action = None
-        entity_found_in_step = False
+                        # Determine ground truth
+                        # True if skipping prerequisite is OK because dependent step is self-sufficient.
+                        is_dependent_step_self_sufficient = False
+                        if (
+                            use_step in entity.defined_in
+                        ):  # Formal definition in dependent_step
+                            is_dependent_step_self_sufficient = True
+                        elif (
+                            action_in_dependent_step == "add"
+                            and entity_name not in self.text.essential_tools
+                        ):
+                            # Heuristic: "add" for an ingredient implies a new instance/quantity.
+                            is_dependent_step_self_sufficient = True
+                            loguru.logger.trace(
+                                f"Type-State Heuristic: Entity '{entity_name}' action 'add' in Step {use_step + 1} implies self-sufficiency."
+                            )
 
-        for token in doc:
-            # Check if token relates to the entity (simple substring/lemma check for illustration)
-            if entity_name in token.text.lower() or entity_name == token.lemma_.lower():
-                entity_found_in_step = True
-                head = token.head
-                # Check if the head is a verb and the entity is its object/subject
-                if head.pos_ == "VERB" and token.dep_ in {
-                    "dobj",
-                    "pobj",
-                    "nsubjpass",
-                    "attr",
-                    "conj",
-                }:
-                    # Exclude auxiliary verbs like 'be', 'have' unless they are the main verb
-                    if head.lemma_ not in {"be", "have"}:
-                        action = head.lemma_
-                        loguru.logger.debug(
-                            f"Found action '{action}' governing entity '{entity_name}' via dep '{token.dep_}' in step {dependent_step + 1}"
+                        current_ground_truth = is_dependent_step_self_sufficient
+
+                        potential_questions_data.append(
+                            {
+                                "entity_name": entity_name,
+                                "prerequisite_step": def_step,
+                                "dependent_step": use_step,
+                                "action_for_question": action_in_dependent_step,
+                                "ground_truth": current_ground_truth,
+                            }
                         )
-                        break  # Found the most likely action for this entity
 
-        # Fallback if no specific action found governing the entity
-        if not action:
-            if entity_found_in_step:
-                loguru.logger.warning(
-                    f"Could not find specific verb governing '{entity_name}' in step {dependent_step + 1}. Falling back to 'use'."
-                )
-                action = "use"
-            else:
-                # If the entity wasn't even found in the step text (shouldn't happen if parsing was correct)
-                loguru.logger.error(
-                    f"Entity '{entity_name}' expected but not found in step {dependent_step + 1} text: '{step_text}'. Cannot generate question."
-                )
-                # Return None or raise error, as the premise is flawed
-                return (
-                    f"Could not find entity '{entity_name}' in dependent step text.",
-                    None,
-                )
+        if not potential_questions_data:
+            return "No suitable scenarios for type-state questions found.", None
 
-        # Generate question using the found or fallback action
+        chosen_scenario = random.choice(potential_questions_data)
+        entity_name = chosen_scenario["entity_name"]
+        prerequisite_step = chosen_scenario["prerequisite_step"]
+        dependent_step = chosen_scenario["dependent_step"]
+        action = chosen_scenario["action_for_question"]
+        ground_truth = chosen_scenario["ground_truth"]
+
         question = f"If we skip Step {prerequisite_step + 1}, is it still valid to {action} the {entity_name} in Step {dependent_step + 1}?"
 
-        # Ground truth - if prerequisite step is skipped, the dependent step is invalid
-        ground_truth = False
-
+        loguru.logger.debug(
+            f"Generated Type-State Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Prereq: {prerequisite_step + 1}, Dep: {dependent_step + 1}, Action: {action})"
+        )
         return question, ground_truth
 
     def generate_taint_analysis_question(self) -> Tuple[str, Optional[bool]]:
@@ -554,15 +562,7 @@ class QuestionGenerator:
     ) -> Tuple[str, Optional[bool]]:
         """
         Generate a question regarding concurrency analysis among steps.
-
-        Randomly selects a pair of distinct steps and determines if they
-        *can* run concurrently based on data and resource dependencies.
-        Attempts to filter questions where simplified verbs suggest concurrency
-        but the actual answer is False due to hidden dependencies within steps.
-
-        :param max_retries: Maximum attempts to find a non-misleading question pair.
-        :return: A tuple containing the concurrency question and a boolean ground truth.
-            Returns explanatory message and None if fewer than 2 steps exist.
+        Relies on ProceduralText.can_steps_run_concurrently which considers hard dependencies.
         """
         num_steps = len(self.text.steps)
         if num_steps < 2:
@@ -619,43 +619,37 @@ class QuestionGenerator:
                     f"NLP processing failed for step {s2 + 1} text: '{step2_text}'. Error: {e}"
                 )
 
-            # Filtering Logic for Potentially Misleading "No" Answers
-            is_potentially_misleading = False
-            if ground_truth is False:
-                # Check if it's a background prep + active prep verb combination
+            # The filtering for "misleading No" answers might still be useful,
+            # even if can_steps_run_concurrently is more accurate.
+            # This is because the *question phrasing* uses simplified actions.
+            is_potentially_misleading_phrasing = False
+            if ground_truth is False:  # If the accurate check says "No"
                 combo1 = (
                     action1 in BACKGROUND_PREP_VERBS and action2 in ACTIVE_PREP_VERBS
                 )
                 combo2 = (
                     action2 in BACKGROUND_PREP_VERBS and action1 in ACTIVE_PREP_VERBS
                 )
-
-                # Also check if both are background verbs (e.g., measure and sift) which might also be misleading if False
                 combo3 = (
                     action1 in BACKGROUND_PREP_VERBS
                     and action2 in BACKGROUND_PREP_VERBS
                 )
-
                 if combo1 or combo2 or combo3:
-                    # If the answer is False for these combinations, it's likely due to
-                    # hidden dependencies (like needing a prepared pan) rather than
-                    # a direct conflict between the *named actions*. Skip it.
-                    is_potentially_misleading = True
+                    # If the answer is False for these verb combinations, the simplified question might sound like it should be Yes.
+                    is_potentially_misleading_phrasing = True
                     loguru.logger.debug(
-                        f"Skipping potentially misleading concurrency question (Attempt {attempt + 1}/{max_retries}): "
+                        f"Skipping potentially misleading concurrency question phrasing (Attempt {attempt + 1}/{max_retries}): "
                         f"'Can we {action1} (S{s1 + 1}) and {action2} (S{s2 + 1})?' "
                         f"(Actual Answer: False, Verbs: '{action1}', '{action2}')"
                     )
 
-            if not is_potentially_misleading:
-                # Generate the question text
+            if not is_potentially_misleading_phrasing:
                 question = f"Can we {action1} (Step {s1 + 1}) and {action2} (Step {s2 + 1}) at the same time?"
                 loguru.logger.debug(
-                    f"Generated Concurrency Q: '{question}' -> {ground_truth} (Steps checked: {step1_idx + 1}, {step2_idx + 1})"
+                    f"Generated Concurrency Q: '{question}' -> {ground_truth} (Steps checked: {s1 + 1}, {s2 + 1})"
                 )
                 return question, ground_truth  # Found a suitable question
 
-        # If loop finishes without returning a question
         loguru.logger.warning(
             f"Could not generate a non-misleading concurrency question after {max_retries} attempts."
         )
@@ -667,14 +661,6 @@ class QuestionGenerator:
     def generate_all_questions(self, num_per_type=1):
         """
         Generate a collection of questions for each analysis type provided.
-
-        This method aggregates questions from various analysis functions such as reaching definitions,
-        very busy expressions, available expressions, live variable analysis, interval analysis,
-        type-state analysis, taint analysis, and concurrency analysis.
-
-        :param num_per_type: The number of questions to generate per analysis type. Defaults to 1.
-        :return: A list of tuples. Each tuple consists of an analysis type string and another tuple
-                 containing the question and corresponding ground truth.
         """
         questions = []
 
