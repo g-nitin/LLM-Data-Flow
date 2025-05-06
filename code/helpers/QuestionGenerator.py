@@ -1,4 +1,5 @@
 import random
+import re
 from typing import List, Optional, Tuple
 
 import loguru
@@ -455,72 +456,81 @@ class QuestionGenerator:
                  Returns explanatory message and None if no suitable scenario found.
         """
         potential_concerns = []
+        # This list contains lowercase entity names that are inherently unsafe if not cooked.
         unsafe_entity_names = {"egg", "eggs", "raw chicken", "raw beef", "raw pork"}
 
         for entity_name, entity in self.text.entities.items():
-            # Check if entity is potentially unsafe based on name or initial step text
+            # entity.name is expected to be lowercase from ProceduralText parsing.
+
+            # Determine if the entity is potentially unsafe initially.
             is_potentially_unsafe_initially = False
-            intro_step_text = self.text.steps[entity.step_introduced].lower()
-            if entity_name in unsafe_entity_names or "raw" in intro_step_text:
+            if entity_name in unsafe_entity_names:
                 is_potentially_unsafe_initially = True
+            elif entity_name.startswith("raw "):  # e.g., entity name is "raw fish"
+                is_potentially_unsafe_initially = True
+            else:
+                # Check if the introduction step text explicitly mentions "raw {entity_name}"
+                intro_step_text_lower = self.text.steps[entity.step_introduced].lower()
+                try:
+                    # Pattern to find "raw" immediately preceding the entity_name, as whole words.
+                    # re.escape handles entity names that might contain regex special characters.
+                    pattern_raw_entity = rf"\braw\s+{re.escape(entity_name)}\b"
+                    if re.search(pattern_raw_entity, intro_step_text_lower):
+                        is_potentially_unsafe_initially = True
+                except re.error as e:
+                    loguru.logger.warning(
+                        f"Regex error during taint analysis for entity '{entity_name}' in recipe '{self.text.goal}': {e}. Step text: '{intro_step_text_lower}'"
+                    )
 
             if not is_potentially_unsafe_initially:
-                continue  # Skip if not initially considered unsafe
+                continue  # Skip if not considered unsafe by the refined criteria
 
             # Check if this entity is ever marked as 'cooked'
+            # This relies on the entity itself being the direct object of a cooking verb.
             is_ever_cooked = any(state == "cooked" for state in entity.states.values())
 
-            # Find steps where this unsafe entity is actively used *before* being cooked (if ever)
+            # Find the first step index where this entity was marked as cooked, if any.
             first_cooked_step = -1
             if is_ever_cooked:
-                first_cooked_step = min(
+                # Ensure states dictionary is not empty and contains 'cooked'
+                cooked_steps = [
                     step for step, state in entity.states.items() if state == "cooked"
-                )
+                ]
+                if cooked_steps:
+                    first_cooked_step = min(cooked_steps)
 
             for use_step in entity.used_in:
-                # Consider it a potential concern if used while still raw
-                is_raw_at_use_step = True  # Assume raw unless proven otherwise
-                # Check state *at* or *just before* the use_step
-                current_state = entity.states.get(use_step) or entity.states.get(
-                    use_step - 1
-                )
-                if current_state == "cooked":
-                    is_raw_at_use_step = False
-
-                # Alternative check: is the use_step before the first cooking step?
-                is_raw_at_use_step = (
+                # Determine if the entity is used before it's cooked (or if it's never cooked)
+                is_used_while_potentially_raw = (
                     first_cooked_step == -1 or use_step < first_cooked_step
                 )
 
-                if is_raw_at_use_step:
-                    # Found a step where a potentially unsafe entity is used while likely still raw
-                    # The *overall* concern exists if it's *never* cooked
+                if is_used_while_potentially_raw:
+                    # The overall concern for the recipe exists if the unsafe entity is *never* cooked.
                     overall_concern_exists = not is_ever_cooked
                     potential_concerns.append(
                         (entity_name, use_step, overall_concern_exists)
                     )
                     loguru.logger.debug(
-                        f"Taint Candidate: Entity '{entity_name}' used raw in step {use_step + 1}. Ever cooked: {is_ever_cooked}. Overall concern: {overall_concern_exists}"
+                        f"Taint Candidate: Entity '{entity_name}' (unsafe) used in step {use_step + 1} "
+                        f"while potentially raw. Ever cooked (direct): {is_ever_cooked}. Overall recipe concern: {overall_concern_exists}"
                     )
 
         if not potential_concerns:
             return (
-                "No potential safety concerns identified based on raw ingredients and cooking state.",
+                "No potential safety concerns identified based on refined unsafe criteria and cooking state.",
                 None,
             )
 
         # Choose a random potential concern scenario
-        # Prioritize cases where overall_concern_exists is True? Or mix? Let's mix for now.
         entity_name, step, ground_truth = random.choice(potential_concerns)
 
-        # Generate question about the specific step where it was used raw
         question = f"Does using {entity_name} in Step {step + 1} introduce a potential safety concern to the recipe?"
 
-        # The ground truth reflects whether this raw usage leads to an *uncooked final product*
-        # If it's used raw BUT cooked later, the *introduction* might be risky, but the final product isn't.
-        # Let's align the answer with the *overall* recipe safety.
+        # The ground_truth reflects whether this raw usage leads to an *uncooked final product*
+        # with respect to this specific entity being directly cooked.
         loguru.logger.info(
-            f"Generated Taint Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Used raw in step: {step + 1}, Ever cooked: {not ground_truth})"
+            f"Generated Taint Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Used raw in step: {step + 1}, Entity ever directly cooked: {not ground_truth})"
         )
 
         return question, ground_truth
