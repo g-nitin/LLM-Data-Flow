@@ -14,5 +14,5 @@ module load python3/anaconda/2021.07 gcc/12.2.0 cuda/12.1
 echo $CONDA_DEFAULT_ENV
 
 hostname
-uv run python3 code/procedural_text_process.py data/allrecipes-recipes outs/outs_22 --limit 200 --log-level TRACE
-zip -r outs/outs_22.zip outs/outs_22 &> zip.out
+uv run python3 code/procedural_text_process.py data/allrecipes-recipes outs/outs_23 --limit 200 --log-level TRACE
+zip -r outs/outs_23.zip outs/outs_23 &> zip.out
