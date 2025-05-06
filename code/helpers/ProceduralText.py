@@ -30,14 +30,27 @@ class ProceduralText:
         rf"(?:{_UNIT_HR_PATTERN_STR}|{_UNIT_MIN_PATTERN_STR}|{_UNIT_SEC_PATTERN_STR})"
     )
 
-    _PAT_HR_MIN_RE_STR = (
+    # Optional suffix to capture descriptive text after a time expression (e.g., "or overnight", "or until set")
+    # This suffix is non-capturing for value parsing but will be part of match.group(0)
+    _OPTIONAL_TEXT_SUFFIX_RE_STR = r"(?:\s+(?:or|until|to|for|about|around|approximately|roughly|at\s+least|less\s+than|more\s+than|up\s+to)\s+(?:[\w\-]+(?:[\s\-]+[\w\-]+){0,4}))?"
+
+    _PAT_HR_MIN_RE_STR_BASE = (
         rf"(\d+)\s*{_UNIT_HR_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_MIN_PATTERN_STR}"
     )
-    _PAT_MIN_SEC_RE_STR = (
+    _PAT_MIN_SEC_RE_STR_BASE = (
         rf"(\d+)\s*{_UNIT_MIN_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_SEC_PATTERN_STR}"
     )
-    _PAT_RANGE_RE_STR = rf"(\d+)\s*(?:to|-)\s*(\d+)\s*{_GENERAL_UNIT_PATTERN_STR}"
-    _PAT_EXACT_RE_STR = rf"(\d+)\s*{_GENERAL_UNIT_PATTERN_STR}"
+    # Ensure _GENERAL_UNIT_PATTERN_STR is captured for parsing unit_str from group(3)
+    _PAT_RANGE_RE_STR_BASE = (
+        rf"(\d+)\s*(?:to|-)\s*(\d+)\s*({_GENERAL_UNIT_PATTERN_STR})"
+    )
+    # Ensure _GENERAL_UNIT_PATTERN_STR is captured for parsing unit_str from group(2)
+    _PAT_EXACT_RE_STR_BASE = rf"(\d+)\s*({_GENERAL_UNIT_PATTERN_STR})"
+
+    _PAT_HR_MIN_RE_STR = _PAT_HR_MIN_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
+    _PAT_MIN_SEC_RE_STR = _PAT_MIN_SEC_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
+    _PAT_RANGE_RE_STR = _PAT_RANGE_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
+    _PAT_EXACT_RE_STR = _PAT_EXACT_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
 
     _COMPILED_TIME_PATTERNS_WITH_PRIORITY = [
         (re.compile(_PAT_HR_MIN_RE_STR, re.IGNORECASE), "hr_min", 1),
@@ -138,16 +151,16 @@ class ProceduralText:
 
     def _canonical_unit(self, unit_str: str) -> str:
         """Converts various unit strings to a canonical plural form."""
-        unit_str_lower = unit_str.lower()
+        unit_str_lower = unit_str.lower().strip()
         if re.match(rf"^{self._UNIT_HR_PATTERN_STR}$", unit_str_lower):
             return "hours"
         if re.match(rf"^{self._UNIT_MIN_PATTERN_STR}$", unit_str_lower):
             return "minutes"
         if re.match(rf"^{self._UNIT_SEC_PATTERN_STR}$", unit_str_lower):
             return "seconds"
-        # Fallback if somehow a unit string doesn't match known patterns (should not happen with current regexes)
+        # Fallback if somehow a unit string doesn't match known patterns
         loguru.logger.warning(
-            f"Unknown unit string encountered in _canonical_unit: {unit_str}"
+            f"Unknown unit string encountered in _canonical_unit: '{unit_str}'"
         )
         return unit_str_lower
 
@@ -169,20 +182,20 @@ class ProceduralText:
             elif pattern_type == "range":
                 val1 = int(match.group(1))
                 val2 = int(match.group(2))
-                # The third group of _PAT_RANGE_RE_STR is the full unit string matched by _GENERAL_UNIT_PATTERN_STR
+                # The third group of _PAT_RANGE_RE_STR_BASE is the unit string
                 unit_str = match.group(3)
                 return val1, val2, self._canonical_unit(unit_str)
             elif pattern_type == "exact":
                 val1 = int(match.group(1))
-                # The second group of _PAT_EXACT_RE_STR is the full unit string
+                # The second group of _PAT_EXACT_RE_STR_BASE is the unit string
                 unit_str = match.group(2)
                 return val1, val1, self._canonical_unit(unit_str)
         except (ValueError, IndexError) as e:
             loguru.logger.error(
-                f"Error parsing time from match (type: {pattern_type}, match: {match.groups()}): {e}"
+                f"Error parsing time from match (type: {pattern_type}, match groups: {match.groups()}): {e}"
             )
             return None
-        return None
+        return None  # Should not be reached if all paths return
 
     def _get_lemma(text: str, nlp_processor) -> str:
         """Get the lemma of the last noun in a potentially multi-word string."""
@@ -283,7 +296,6 @@ class ProceduralText:
             "pan",
             "pot",
             "skillet",
-            "pot",
             "saucepan",
             "dish",
             "sheet",
@@ -539,14 +551,14 @@ class ProceduralText:
             r"^\d+\s?/\s?\d+$",  # Fractions like 1/2 or 1 / 2
             r"^\d+\s?-\s?\d+$",  # Ranges like 10-15
             r"^\d+x\d+$",  # Dimensions like 9x13
-            r"^\d+(\s?(to|or|-)\s?\d+)?\s+(minute|minutes|min|hour|hours|hr|second|seconds|sec)$",  # Time durations e.g., "5 minutes", "10-15 minutes"
-            r"^\d+(\s?(to|or|-)\s?\d+)?\s+(degree|degrees|°)\s?[fc]?$",  # Temperatures e.g., "350 degrees F"
+            r"^\d+(?:\s*(?:to|-)\s*\d+)?\s+(?:minute|minutes|min\.?|hour|hours|hr\.?|second|seconds|sec\.?)$",
+            r"^\d+(?:\s*(?:to|-)\s*\d+)?\s+(?:degree|degrees|°)\s?[FC]?$",  # Temperatures e.g., "350 degrees F"
             r"medium heat",
             r"high heat",
             r"low heat",  # Specific heat levels often not entities
             r"room temperature",
             r"^(about|approx\.?|approximately|around|over|under|less than|more than|at least)\s+\d+",
-            r"^(a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+(cup|tablespoon|teaspoon|pinch|dash|clove|slice|piece|can|jar|package|box|stick)",  # Common small quantities
+            r"^(a|an|one|two|three|four|five|six|seven|eight|nine|ten)\s+(?:cup|cups|tablespoon|tablespoons|tbsp\.?|teaspoon|teaspoons|tsp\.?|pinch|dash|clove|slice|slices|piece|pieces|can|cans|jar|jars|package|packages|box|boxes|stick|sticks)$",
         ]
 
         # Pre-compile regex for efficiency
@@ -579,14 +591,12 @@ class ProceduralText:
                 "VERB",
                 "AUX",
                 "ADV",
-                "ADP",
                 "NUM",
                 "PUNCT",
                 "PART",
                 "SCONJ",
                 "CCONJ",
             }:
-                # Allow ADP only if it's part of a known multi-word entity? (e.g. "cream of tartar") - complex, skip for now.
                 loguru.logger.trace(
                     f"Skipping chunk '{chunk.text}' (first token POS: {first_token_pos})"
                 )
@@ -594,7 +604,8 @@ class ProceduralText:
 
             # Check exact cleaned text against compiled regex patterns
             if any(
-                pattern.match(clean_chunk_text) for pattern in compiled_filter_patterns
+                pattern.fullmatch(clean_chunk_text)
+                for pattern in compiled_filter_patterns
             ):
                 loguru.logger.trace(
                     f"Skipping chunk '{chunk.text}' (pattern match: '{clean_chunk_text}')"
@@ -609,7 +620,6 @@ class ProceduralText:
                 )
             else:
                 # If not essential, apply normal stop list checks
-                # Check root lemma against general stop lemmas
                 if root_lemma in stop_entity_lemmas:
                     loguru.logger.trace(
                         f"Skipping chunk '{chunk.text}' (root lemma '{root_lemma}' in stop list)"
@@ -620,9 +630,10 @@ class ProceduralText:
                     loguru.logger.trace(
                         f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in stop list)"
                     )
-                    continue  # Skip to next chunk
-                # Check full cleaned text against VERB stop list
-                if clean_chunk_text in verb_stop_list:
+                    continue
+                if (
+                    clean_chunk_text in verb_stop_list
+                ):  # Check against verbs if it's not an essential tool
                     loguru.logger.trace(
                         f"Skipping chunk '{chunk.text}' (full text '{clean_chunk_text}' in VERB stop list)"
                     )
@@ -753,9 +764,7 @@ class ProceduralText:
                 ):  # Avoid empty or single-letter bases
                     # Check if this potential base entity exists globally
                     # Try exact match first, then lemma match as fallback
-                    target_entity = None
-                    if base_entity_name in self.entities:
-                        target_entity = self.entities[base_entity_name]
+                    target_entity = self.entities.get(base_entity_name)
                     if target_entity:
                         # Check if the base entity was active (defined or used) before this step
                         was_active_before = any(
@@ -764,13 +773,11 @@ class ProceduralText:
                                 target_entity.used_in
                             )
                         )
-                        if was_active_before:
-                            # Mark the BASE entity as USED in the CURRENT step
-                            if step_idx not in target_entity.used_in:
-                                loguru.logger.info(
-                                    f"Rule-based Link: Marking base entity '{base_entity_name}' as USED in step {step_idx + 1} due to derived form '{chunk_text}'"
-                                )
-                                target_entity.used_in.add(step_idx)
+                        if was_active_before and step_idx not in target_entity.used_in:
+                            loguru.logger.info(
+                                f"Rule-based Link: Marking base entity '{base_entity_name}' as USED in step {step_idx + 1} due to derived form '{chunk_text}'"
+                            )
+                            target_entity.used_in.add(step_idx)
                             break  # Stop checking other rules for this chunk
                         else:
                             loguru.logger.trace(
@@ -800,9 +807,7 @@ class ProceduralText:
                 )
 
             # Determine entity's role in this step using verbs (existing logic)
-            is_used = False
-            is_defined = False
-            is_consumed = False
+            is_used, is_defined, is_consumed = False, False, False
             governing_verb_lemma = None
 
             # Define verb categories
@@ -943,24 +948,23 @@ class ProceduralText:
                     if hasattr(
                         token, "sent"
                     ):  # Check if token belongs to a sentence (spaCy structure)
-                        for chunk in token.sent.noun_chunks:
+                        for nc_chunk in token.sent.noun_chunks:
                             # Compare cleaned chunk text with entity name
-                            clean_chunk_text = chunk.text.lower().strip()
-                            clean_chunk_text = re.sub(
+                            clean_nc_text = nc_chunk.text.lower().strip()
+                            clean_nc_text = re.sub(
                                 r"^(the|a|an|some|your|my|his|her|its|our|their|of|for|with|in|on|at|to|about|approx\.?|approximately|around|over|under|less than|more than|at least)\s+",
                                 "",
-                                clean_chunk_text,
+                                clean_nc_text,
                             ).strip()
-                            if clean_chunk_text == entity_name_lower and token in chunk:
+                            if clean_nc_text == entity_name_lower and token in nc_chunk:
                                 is_entity_match = True
                                 break
                     # Fallback to simple check if chunk matching fails or is complex
-                    if not is_entity_match:
-                        if (
-                            entity_name_lower in token_text_lower
-                            or entity_name_lower == token_lemma_lower
-                        ):
-                            is_entity_match = True  # Less precise fallback
+                    if not is_entity_match and (
+                        entity_name_lower in token_text_lower
+                        or entity_name_lower == token_lemma_lower
+                    ):
+                        is_entity_match = True  # Less precise fallback
 
                     if is_entity_match:
                         entity_found_in_step = True
@@ -1024,21 +1028,18 @@ class ProceduralText:
                             #  Cooking state logic (applies to ingredients, not typically tools like oven)
                             # Check if the entity is a direct argument of the cooking verb
 
-                            if governing_verb_lemma in cooking_verbs:
-                                if (
-                                    actual_verb_for_entity == token.head
-                                    and token.dep_ in {"dobj", "nsubjpass", "attr"}
-                                ):
-                                    entity_obj = self.entities[entity_name]
-                                    entity_obj.states[step_idx] = "cooked"
-                                    loguru.logger.info(
-                                        f"State Change: Marked '{entity_name}' as 'cooked' in step {step_idx + 1} due to verb '{governing_verb_lemma}'"
-                                    )
-                                    for future_step in range(
-                                        step_idx + 1, len(self.steps)
-                                    ):
-                                        if future_step not in entity_obj.states:
-                                            entity_obj.states[future_step] = "cooked"
+                            if governing_verb_lemma in cooking_verbs and (
+                                actual_verb_for_entity == token.head
+                                and token.dep_ in {"dobj", "nsubjpass", "attr"}
+                            ):
+                                entity_obj = self.entities[entity_name]
+                                entity_obj.states[step_idx] = "cooked"
+                                loguru.logger.info(
+                                    f"State Change: Marked '{entity_name}' as 'cooked' in step {step_idx + 1} due to verb '{governing_verb_lemma}'"
+                                )
+                                for future_step in range(step_idx + 1, len(self.steps)):
+                                    if future_step not in entity_obj.states:
+                                        entity_obj.states[future_step] = "cooked"
             # If entity name appears but not clearly governed by a verb (e.g., just mentioned)
             # Default to 'used' if not defined/consumed? Or require explicit verb action?
             # Let's require explicit verb action for now to be stricter.
@@ -1132,6 +1133,7 @@ class ProceduralText:
             self._extract_entities_from_step(step_idx, step_text)
 
             # Time Interval Extraction Logic
+            found_intervals_in_step = []
             current_best_interval_details = None
 
             for (
@@ -1144,54 +1146,58 @@ class ProceduralText:
                     parsed_time = self._parse_time_value_from_match(match, type_str)
                     if parsed_time:
                         min_v, max_v, unit_c = parsed_time
-                        # MODIFICATION: Capture original matched text (will have original casing)
+                        # Capture original matched text (will have original casing)
                         original_match_text = match.group(0)
 
-                        new_interval_details = {
+                        interval_detail = {
                             "min_val": min_v,
                             "max_val": max_v,
                             "unit": unit_c,
                             "original_text": original_match_text,
                             "end_pos": match.end(),
                             "priority": priority_val,
+                            "start_pos": match.start(),
                         }
+                        found_intervals_in_step.append(interval_detail)
+                        loguru.logger.trace(
+                            f"Step {step_idx + 1}: Found potential time interval: {interval_detail}"
+                        )
+            if found_intervals_in_step:
+                # Select the best interval:
+                # 1. Maximize end_pos (latest occurrence)
+                # 2. Minimize priority (higher priority pattern)
+                # (Optional: Maximize start_pos for same end_pos and priority - makes match longer, less likely needed)
 
-                        if current_best_interval_details is None:
-                            current_best_interval_details = new_interval_details
-                            loguru.logger.trace(
-                                f"Step {step_idx + 1}: Initial time interval found: {new_interval_details}"
-                            )
-                        elif (
-                            new_interval_details["end_pos"]
-                            > current_best_interval_details["end_pos"]
-                        ):
-                            current_best_interval_details = new_interval_details
-                            loguru.logger.trace(
-                                f"Step {step_idx + 1}: New 'last' time interval (later end_pos): {new_interval_details}"
-                            )
-                        elif (
-                            new_interval_details["end_pos"]
-                            == current_best_interval_details["end_pos"]
-                        ):
-                            if (
-                                new_interval_details["priority"]
-                                < current_best_interval_details["priority"]
-                            ):
-                                current_best_interval_details = new_interval_details
-                                loguru.logger.trace(
-                                    f"Step {step_idx + 1}: New 'last' time interval (same end_pos, higher priority): {new_interval_details}"
-                                )
+                # Find max end_pos
+                max_end_pos = -1
+                for detail in found_intervals_in_step:
+                    if detail["end_pos"] > max_end_pos:
+                        max_end_pos = detail["end_pos"]
 
-            if current_best_interval_details:
+                # Filter for those with max_end_pos
+                candidates_at_max_end_pos = [
+                    d for d in found_intervals_in_step if d["end_pos"] == max_end_pos
+                ]
+
+                # Sort these candidates by priority (ascending, so lowest number is best)
+                # and then by start_pos (descending, so longer/earlier starting match is preferred if all else equal)
+                # This secondary sort on start_pos is mostly for determinism if multiple identical patterns match at same end_pos.
+                candidates_at_max_end_pos.sort(
+                    key=lambda x: (x["priority"], -x["start_pos"])
+                )
+
+                current_best_interval_details = candidates_at_max_end_pos[0]
+
+                loguru.logger.debug(
+                    f"Step {step_idx + 1}: Selected final time interval: {current_best_interval_details}"
+                )
                 self.step_dependencies.nodes[step_idx]["time_interval"] = (
                     current_best_interval_details["min_val"],
                     current_best_interval_details["max_val"],
                     current_best_interval_details["unit"],
                     current_best_interval_details["original_text"],
                 )
-                loguru.logger.debug(
-                    f"Step {step_idx + 1}: Final time interval set to: {self.step_dependencies.nodes[step_idx]['time_interval']}"
-                )
+            # else: current_best_interval_details remains None, no time_interval attribute set
 
             # Look for concurrency keywords ("while", etc.) and mark the node
             # We are not modifying the graph structure here based on "while".
