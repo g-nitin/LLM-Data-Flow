@@ -30,27 +30,25 @@ class ProceduralText:
         rf"(?:{_UNIT_HR_PATTERN_STR}|{_UNIT_MIN_PATTERN_STR}|{_UNIT_SEC_PATTERN_STR})"
     )
 
-    # Optional suffix to capture descriptive text after a time expression (e.g., "or overnight", "or until set")
-    # This suffix is non-capturing for value parsing but will be part of match.group(0)
-    _OPTIONAL_TEXT_SUFFIX_RE_STR = r"(?:\s+(?:or|until|to|for|about|around|approximately|roughly|at\s+least|less\s+than|more\s+than|up\s+to)\s+(?:[\w\-]+(?:[\s\-]+[\w\-]+){0,4}))?"
+    # Regex for parsing numbers: fractions, decimals, integers
+    # Order: fraction, then decimal (with optional integer part), then integer
+    _NUMBER_PATTERN_STR = r"(?:\d+\s*/\s*\d+|\d*\.\d+|\d+)"
 
-    _PAT_HR_MIN_RE_STR_BASE = (
+    _PAT_HR_MIN_RE_STR = (
+        # Hours and minutes are typically integers in "X hours Y minutes" format
         rf"(\d+)\s*{_UNIT_HR_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_MIN_PATTERN_STR}"
     )
-    _PAT_MIN_SEC_RE_STR_BASE = (
+    _PAT_MIN_SEC_RE_STR = (
+        # Minutes and seconds are typically integers in "X minutes Y seconds" format
         rf"(\d+)\s*{_UNIT_MIN_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_SEC_PATTERN_STR}"
     )
     # Ensure _GENERAL_UNIT_PATTERN_STR is captured for parsing unit_str from group(3)
-    _PAT_RANGE_RE_STR_BASE = (
-        rf"(\d+)\s*(?:to|-)\s*(\d+)\s*({_GENERAL_UNIT_PATTERN_STR})"
+    _PAT_RANGE_RE_STR = (
+        # Use _NUMBER_PATTERN_STR for values in a range
+        rf"({_NUMBER_PATTERN_STR})\s*(?:to|-)\s*({_NUMBER_PATTERN_STR})\s*({_GENERAL_UNIT_PATTERN_STR})"
     )
     # Ensure _GENERAL_UNIT_PATTERN_STR is captured for parsing unit_str from group(2)
-    _PAT_EXACT_RE_STR_BASE = rf"(\d+)\s*({_GENERAL_UNIT_PATTERN_STR})"
-
-    _PAT_HR_MIN_RE_STR = _PAT_HR_MIN_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
-    _PAT_MIN_SEC_RE_STR = _PAT_MIN_SEC_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
-    _PAT_RANGE_RE_STR = _PAT_RANGE_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
-    _PAT_EXACT_RE_STR = _PAT_EXACT_RE_STR_BASE + _OPTIONAL_TEXT_SUFFIX_RE_STR
+    _PAT_EXACT_RE_STR = rf"({_NUMBER_PATTERN_STR})\s*({_GENERAL_UNIT_PATTERN_STR})"  # Use _NUMBER_PATTERN_STR for exact values
 
     _COMPILED_TIME_PATTERNS_WITH_PRIORITY = [
         (re.compile(_PAT_HR_MIN_RE_STR, re.IGNORECASE), "hr_min", 1),
@@ -164,33 +162,73 @@ class ProceduralText:
         )
         return unit_str_lower
 
+    def _parse_numeric_string(self, value_str: str) -> float:
+        """Parses a string (integer, decimal, or fraction) into a float."""
+        value_str = value_str.strip()
+        if "/" in value_str:
+            parts = value_str.split("/")
+            if len(parts) == 2:
+                try:
+                    numerator = float(parts[0].strip())
+                    denominator = float(parts[1].strip())
+                    if denominator == 0:
+                        loguru.logger.error(
+                            f"Denominator cannot be zero in fraction: {value_str}"
+                        )
+                        raise ValueError("Denominator cannot be zero in fraction.")
+                    return numerator / denominator
+                except ValueError as e:
+                    loguru.logger.error(
+                        f"Could not parse fraction parts: {value_str} ({e})"
+                    )
+                    raise ValueError(f"Could not parse fraction: {value_str}") from e
+            else:
+                loguru.logger.error(
+                    f"Invalid fraction format (not two parts): {value_str}"
+                )
+                raise ValueError(f"Invalid fraction format: {value_str}")
+        else:
+            try:
+                return float(value_str)
+            except ValueError as e:
+                loguru.logger.error(
+                    f"Could not parse numeric string as float: {value_str} ({e})"
+                )
+                raise ValueError(
+                    f"Could not parse numeric string as float: {value_str}"
+                ) from e
+
     def _parse_time_value_from_match(
         self, match: re.Match, pattern_type: str
-    ) -> Optional[Tuple[int, int, str]]:
+    ) -> Optional[Tuple[float, float, str]]:
         """Parses time values from a regex match object based on pattern type."""
         try:
             if pattern_type == "hr_min":
-                hr = int(match.group(1))
-                minute = int(match.group(2))
-                total_minutes = hr * 60 + minute
+                hr = int(match.group(1))  # Hours are typically integers
+                minute = int(match.group(2))  # Minutes are typically integers
+                total_minutes = float(hr * 60 + minute)  # Result as float
                 return total_minutes, total_minutes, "minutes"
             elif pattern_type == "min_sec":
-                minute = int(match.group(1))
-                sec = int(match.group(2))
-                total_seconds = minute * 60 + sec
+                minute = int(match.group(1))  # Minutes are typically integers
+                sec = int(match.group(2))  # Seconds are typically integers
+                total_seconds = float(minute * 60 + sec)  # Result as float
                 return total_seconds, total_seconds, "seconds"
             elif pattern_type == "range":
-                val1 = int(match.group(1))
-                val2 = int(match.group(2))
-                # The third group of _PAT_RANGE_RE_STR_BASE is the unit string
+                val1_str = match.group(1)
+                val2_str = match.group(2)
+                val1 = self._parse_numeric_string(val1_str)
+                val2 = self._parse_numeric_string(val2_str)
                 unit_str = match.group(3)
                 return val1, val2, self._canonical_unit(unit_str)
             elif pattern_type == "exact":
-                val1 = int(match.group(1))
-                # The second group of _PAT_EXACT_RE_STR_BASE is the unit string
+                val_str = match.group(1)
+                val1 = self._parse_numeric_string(val_str)
                 unit_str = match.group(2)
                 return val1, val1, self._canonical_unit(unit_str)
-        except (ValueError, IndexError) as e:
+        except (
+            ValueError,
+            IndexError,
+        ) as e:  # ValueError can be raised by _parse_numeric_string
             loguru.logger.error(
                 f"Error parsing time from match (type: {pattern_type}, match groups: {match.groups()}): {e}"
             )
@@ -1150,8 +1188,8 @@ class ProceduralText:
                         original_match_text = match.group(0)
 
                         interval_detail = {
-                            "min_val": min_v,
-                            "max_val": max_v,
+                            "min_val": min_v,  # float
+                            "max_val": max_v,  # float
                             "unit": unit_c,
                             "original_text": original_match_text,
                             "end_pos": match.end(),
