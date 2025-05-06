@@ -347,7 +347,7 @@ class QuestionGenerator:
         interval = self.text.step_dependencies.nodes[step]["time_interval"]
 
         # Generate question
-        question = f"What is the time interval applied at Step {step + 1}?"
+        question = f"What is the last time interval specified in Step {step + 1}?"
 
         # Ground truth is the actual interval
         if interval[0] == interval[1]:
@@ -355,6 +355,9 @@ class QuestionGenerator:
         else:
             ground_truth = f"{interval[0]}-{interval[1]} {interval[2]}"
 
+        loguru.logger.debug(
+            f"Generated Interval Q: '{question}' -> '{ground_truth}' from data {interval} for step {step_idx + 1}"
+        )
         return question, ground_truth
 
     def generate_type_state_question(self) -> Tuple[str, Optional[bool]]:

@@ -1,7 +1,7 @@
 import re
 from dataclasses import dataclass, field
 from pprint import pformat
-from typing import Dict, List, Set
+from typing import Dict, List, Optional, Set, Tuple
 
 import loguru
 import networkx as nx
@@ -22,6 +22,30 @@ class Entity:
 
 
 class ProceduralText:
+    # Define regex patterns as class attributes for clarity and single definition
+    _UNIT_HR_PATTERN_STR = r"(?:hours?|hrs?\.?)"
+    _UNIT_MIN_PATTERN_STR = r"(?:minutes?|mins?\.?)"
+    _UNIT_SEC_PATTERN_STR = r"(?:seconds?|secs?\.?)"
+    _GENERAL_UNIT_PATTERN_STR = (
+        rf"(?:{_UNIT_HR_PATTERN_STR}|{_UNIT_MIN_PATTERN_STR}|{_UNIT_SEC_PATTERN_STR})"
+    )
+
+    _PAT_HR_MIN_RE_STR = (
+        rf"(\d+)\s*{_UNIT_HR_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_MIN_PATTERN_STR}"
+    )
+    _PAT_MIN_SEC_RE_STR = (
+        rf"(\d+)\s*{_UNIT_MIN_PATTERN_STR}\s*(?:and\s*)?(\d+)\s*{_UNIT_SEC_PATTERN_STR}"
+    )
+    _PAT_RANGE_RE_STR = rf"(\d+)\s*(?:to|-)\s*(\d+)\s*{_GENERAL_UNIT_PATTERN_STR}"
+    _PAT_EXACT_RE_STR = rf"(\d+)\s*{_GENERAL_UNIT_PATTERN_STR}"
+
+    _COMPILED_TIME_PATTERNS_WITH_PRIORITY = [
+        (re.compile(_PAT_HR_MIN_RE_STR, re.IGNORECASE), "hr_min", 1),
+        (re.compile(_PAT_MIN_SEC_RE_STR, re.IGNORECASE), "min_sec", 2),
+        (re.compile(_PAT_RANGE_RE_STR, re.IGNORECASE), "range", 3),
+        (re.compile(_PAT_EXACT_RE_STR, re.IGNORECASE), "exact", 4),
+    ]
+
     def __init__(self, goal: str, steps: List[str], nlp: object):
         self.goal = goal
         self.steps = steps
@@ -53,12 +77,10 @@ class ProceduralText:
             "slow cooker",
         }
         self.verb_to_resource_map = {
-            # Oven Verbs
             "bake": "oven",
             "roast": "oven",
             "broil": "oven",
             "preheat": "oven",
-            # Stove Verbs
             "boil": "stove",
             "simmer": "stove",
             "fry": "stove",
@@ -88,21 +110,16 @@ class ProceduralText:
         # Add common non-appliance exclusives, e.g., specific pans
         self.essential_tools.update({"skillet", "saucepan", "wok", "griddle"})
 
-        # Initialize step dependencies graph - ADD NODES AND DEFAULT SEQUENTIAL EDGES
-        loguru.logger.debug(
-            "Initializing step dependency graph with nodes and default sequential edges..."
-        )
+        loguru.logger.debug("Initializing step dependency graph...")
         nodes_added = 0
         default_edges_added = 0
         for i in range(len(steps)):
             self.step_dependencies.add_node(i)
             nodes_added += 1
             # Add default edge from previous step to current step
-            if i > 0:
-                # Check if edge already exists (unlikely here, but safe)
-                if not self.step_dependencies.has_edge(i - 1, i):
-                    self.step_dependencies.add_edge(i - 1, i)
-                    default_edges_added += 1
+            if i > 0 and not self.step_dependencies.has_edge(i - 1, i):
+                self.step_dependencies.add_edge(i - 1, i)
+                default_edges_added += 1
         loguru.logger.info(
             f"Added {nodes_added} nodes and {default_edges_added} default sequential edges."
         )
@@ -118,6 +135,54 @@ class ProceduralText:
             f"\nParsed {len(self.entities)} entities:\n{pformat(self.entities)}"
             f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(sorted(list(self.step_dependencies.edges())))}"  # Sort edges for consistent logging
         )
+
+    def _canonical_unit(self, unit_str: str) -> str:
+        """Converts various unit strings to a canonical plural form."""
+        unit_str_lower = unit_str.lower()
+        if re.match(rf"^{self._UNIT_HR_PATTERN_STR}$", unit_str_lower):
+            return "hours"
+        if re.match(rf"^{self._UNIT_MIN_PATTERN_STR}$", unit_str_lower):
+            return "minutes"
+        if re.match(rf"^{self._UNIT_SEC_PATTERN_STR}$", unit_str_lower):
+            return "seconds"
+        # Fallback if somehow a unit string doesn't match known patterns (should not happen with current regexes)
+        loguru.logger.warning(
+            f"Unknown unit string encountered in _canonical_unit: {unit_str}"
+        )
+        return unit_str_lower
+
+    def _parse_time_value_from_match(
+        self, match: re.Match, pattern_type: str
+    ) -> Optional[Tuple[int, int, str]]:
+        """Parses time values from a regex match object based on pattern type."""
+        try:
+            if pattern_type == "hr_min":
+                hr = int(match.group(1))
+                minute = int(match.group(2))
+                total_minutes = hr * 60 + minute
+                return total_minutes, total_minutes, "minutes"
+            elif pattern_type == "min_sec":
+                minute = int(match.group(1))
+                sec = int(match.group(2))
+                total_seconds = minute * 60 + sec
+                return total_seconds, total_seconds, "seconds"
+            elif pattern_type == "range":
+                val1 = int(match.group(1))
+                val2 = int(match.group(2))
+                # The third group of _PAT_RANGE_RE_STR is the full unit string matched by _GENERAL_UNIT_PATTERN_STR
+                unit_str = match.group(3)
+                return val1, val2, self._canonical_unit(unit_str)
+            elif pattern_type == "exact":
+                val1 = int(match.group(1))
+                # The second group of _PAT_EXACT_RE_STR is the full unit string
+                unit_str = match.group(2)
+                return val1, val1, self._canonical_unit(unit_str)
+        except (ValueError, IndexError) as e:
+            loguru.logger.error(
+                f"Error parsing time from match (type: {pattern_type}, match: {match.groups()}): {e}"
+            )
+            return None
+        return None
 
     def _get_lemma(text: str, nlp_processor) -> str:
         """Get the lemma of the last noun in a potentially multi-word string."""
@@ -542,8 +607,6 @@ class ProceduralText:
                 loguru.logger.trace(
                     f"Keeping chunk '{chunk.text}' because root lemma '{root_lemma}' is an essential tool."
                 )
-                # Skip other stop list checks if it's essential
-                pass  # Let it proceed to the potential_entities addition
             else:
                 # If not essential, apply normal stop list checks
                 # Check root lemma against general stop lemmas
@@ -581,8 +644,6 @@ class ProceduralText:
                             f"Skipping chunk '{chunk.text}' (root POS is {chunk.root.pos_})"
                         )
                         continue
-                else:
-                    pass  # It's a noun/propn, let it proceed
 
             # Length check (on cleaned text)
             if len(clean_chunk_text) < 2:
@@ -645,7 +706,6 @@ class ProceduralText:
             "juice": "modifier",  # e.g., "lemon juice" -> "juice"
             "oil": "modifier",  # e.g., "olive oil" -> "oil"
             "milk": "modifier",  # e.g., "almond milk" -> "milk"
-            # Add more rules as needed
         }
 
         # Use noun chunks from the step text for checking derived forms
@@ -684,18 +744,6 @@ class ProceduralText:
                     target_entity = None
                     if base_entity_name in self.entities:
                         target_entity = self.entities[base_entity_name]
-                    else:
-                        # Fallback: Check if the lemma of the base matches an existing entity's lemma
-                        # This requires storing lemmas or re-calculating. Let's skip lemma fallback for now to keep it simple.
-                        # base_lemma = _get_lemma(base_entity_name, nlp)
-                        # for existing_name, entity_obj in self.entities.items():
-                        #     if _get_lemma(existing_name, nlp) == base_lemma:
-                        #         target_entity = entity_obj
-                        #         base_entity_name = existing_name # Use the actual key
-                        #         loguru.logger.trace(f"Link Check: Found base '{base_entity_name}' via lemma '{base_lemma}'")
-                        #         break
-                        pass  # No lemma fallback currently
-
                     if target_entity:
                         # Check if the base entity was active (defined or used) before this step
                         was_active_before = any(
@@ -1068,34 +1116,63 @@ class ProceduralText:
             # Extract entities and determine their roles (defined, used)
             self._extract_entities_from_step(step_idx, step_text)
 
-            # Extract temporal dependencies
-            # The pattern represents time intervals like "5 to 10 minutes" or "2 hours"
-            time_pattern = (
-                r"(\d+)[-\s]?to[-\s]?(\d+)\s+(minutes|minute|min|seconds|hours|hour)"
-            )
-            matches = re.findall(time_pattern, step_text, re.IGNORECASE)
-            if matches:
-                for match in matches:
-                    min_time, max_time, unit = match
-                    # Store time interval information with the step
-                    self.step_dependencies.nodes[step_idx]["time_interval"] = (
-                        int(min_time),
-                        int(max_time),
-                        unit,
-                    )
+            # Time Interval Extraction Logic
+            current_best_interval_details = None
+            step_text_lower = step_text.lower()
 
-            # Look for exact time specifications
-            # The pattern represents exact time like "5 minutes" or "2 hours"
-            exact_time_pattern = r"(\d+)\s+(minutes|minute|min|seconds|hours|hour)"
-            exact_matches = re.findall(exact_time_pattern, step_text, re.IGNORECASE)
-            if exact_matches and not matches:
-                for match in exact_matches:
-                    time_val, unit = match
-                    self.step_dependencies.nodes[step_idx]["time_interval"] = (
-                        int(time_val),
-                        int(time_val),
-                        unit,
-                    )
+            for (
+                regexp,
+                type_str,
+                priority_val,
+            ) in self._COMPILED_TIME_PATTERNS_WITH_PRIORITY:
+                for match in regexp.finditer(step_text_lower):
+                    parsed_time = self._parse_time_value_from_match(match, type_str)
+                    if parsed_time:
+                        min_v, max_v, unit_c = parsed_time
+
+                        new_interval_details = {
+                            "min_val": min_v,
+                            "max_val": max_v,
+                            "unit": unit_c,
+                            "end_pos": match.end(),
+                            "priority": priority_val,
+                        }
+
+                        if current_best_interval_details is None:
+                            current_best_interval_details = new_interval_details
+                            loguru.logger.trace(
+                                f"Step {step_idx + 1}: Initial time interval found: {new_interval_details}"
+                            )
+                        elif (
+                            new_interval_details["end_pos"]
+                            > current_best_interval_details["end_pos"]
+                        ):
+                            current_best_interval_details = new_interval_details
+                            loguru.logger.trace(
+                                f"Step {step_idx + 1}: New 'last' time interval (later end_pos): {new_interval_details}"
+                            )
+                        elif (
+                            new_interval_details["end_pos"]
+                            == current_best_interval_details["end_pos"]
+                        ):
+                            if (
+                                new_interval_details["priority"]
+                                < current_best_interval_details["priority"]
+                            ):
+                                current_best_interval_details = new_interval_details
+                                loguru.logger.trace(
+                                    f"Step {step_idx + 1}: New 'last' time interval (same end_pos, higher priority): {new_interval_details}"
+                                )
+
+            if current_best_interval_details:
+                self.step_dependencies.nodes[step_idx]["time_interval"] = (
+                    current_best_interval_details["min_val"],
+                    current_best_interval_details["max_val"],
+                    current_best_interval_details["unit"],
+                )
+                loguru.logger.debug(
+                    f"Step {step_idx + 1}: Final time interval set to: {self.step_dependencies.nodes[step_idx]['time_interval']}"
+                )
 
             # Look for concurrency keywords ("while", etc.) and mark the node
             # We are not modifying the graph structure here based on "while".
@@ -1160,10 +1237,6 @@ class ProceduralText:
                                 f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
                             )
                             edges_added += 1
-                    else:
-                        loguru.logger.trace(
-                            f"Dataflow dependency {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}') already covered by existing edge."
-                        )
 
         loguru.logger.info(f"Added {edges_added} dataflow dependency edges.")
 
