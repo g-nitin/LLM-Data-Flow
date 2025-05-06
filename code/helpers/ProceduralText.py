@@ -662,22 +662,34 @@ class ProceduralText:
                 continue
 
             # If passes filters, add it
-            # Use lemma for deduplication key, store original cleaned text
             entity_lemma = root_lemma  # Using root lemma as the key
-            # Alternative: use the full cleaned text as key if root lemma is too ambiguous
-            # entity_key = clean_chunk_text
 
-            # Prefer longer chunks if lemmas collide (e.g., "olive oil" vs "oil")
-            if entity_lemma not in potential_entities or len(clean_chunk_text) > len(
-                potential_entities[entity_lemma]
-            ):
+            # Canonical naming for essential tools
+            if entity_lemma in self.essential_tools:
+                # For essential tools, always use the canonical lemma as the entity name
+                current_stored_name = potential_entities.get(entity_lemma)
+                # We want the value to be entity_lemma (canonical name)
+                # Only update if it's not already set to the canonical name, or if it's not present
+                if (
+                    current_stored_name != entity_lemma
+                ):  # This covers not present (None != lemma) and different
+                    potential_entities[entity_lemma] = (
+                        entity_lemma  # Store/overwrite with canonical name
+                    )
+                    loguru.logger.info(
+                        f"Storing/Updating ESSENTIAL TOOL: Chunk '{chunk.text}' (lemma '{root_lemma}') -> Canonical Name: '{entity_lemma}'. Was: '{current_stored_name if current_stored_name is not None else 'Not present'}'"
+                    )
+            elif (
+                entity_lemma not in potential_entities
+                or len(clean_chunk_text) > len(potential_entities[entity_lemma])
+            ):  # Logic for non-essential tools (prefer longer chunk text for same lemma)
                 potential_entities[entity_lemma] = clean_chunk_text
                 loguru.logger.info(
                     f"Keeping potential entity: '{chunk.text}' -> Cleaned: '{clean_chunk_text}', Key Lemma: '{entity_lemma}'"
                 )
-            else:
+            else:  # Existing entity_lemma for non-essential tool, and current clean_chunk_text is not longer
                 loguru.logger.trace(
-                    f"Skipping chunk '{chunk.text}' (lemma '{entity_lemma}' exists with '{potential_entities[entity_lemma]}')"
+                    f"Skipping chunk '{chunk.text}' (lemma '{entity_lemma}' exists with '{potential_entities[entity_lemma]}' and new one is not longer, or it's an essential tool already correctly named)"
                 )
 
         # Final list of entity names (using the stored original text)
@@ -889,6 +901,7 @@ class ProceduralText:
                 "beat",
                 "reduce",
                 "puree",
+                "preheat",
             }
             # Cooking verbs
             cooking_verbs = {
@@ -951,81 +964,81 @@ class ProceduralText:
 
                     if is_entity_match:
                         entity_found_in_step = True
-                        # Check the token's syntactic head (the verb governing it)
-                        head = token.head
-                        if head.pos_ == "VERB":
-                            verb_lemma = head.lemma_.lower()
-                            loguru.logger.debug(
-                                f"Entity '{entity_name}' potentially governed by verb '{verb_lemma}' ({head.text}) with relation '{token.dep_}'"
+
+                        # Improved governing verb identification
+                        actual_verb_for_entity = None
+                        # Scenario 1: Entity is a direct dependent of a verb (e.g., dobj, nsubj)
+                        # Valid direct dependencies for an entity to be acted upon by a verb:
+                        valid_direct_deps = {
+                            "dobj",
+                            "obj",
+                            "attr",
+                            "nsubj",
+                            "nsubjpass",
+                            "conj",
+                            "appos",
+                            "xcomp",
+                            "agent",
+                        }
+                        if (
+                            token.head.pos_ == "VERB"
+                            and token.dep_ in valid_direct_deps
+                        ):
+                            actual_verb_for_entity = token.head
+                        # Scenario 2: Entity is the object of a preposition, and the preposition is attached to a verb
+                        elif (
+                            token.dep_ == "pobj" and token.head.pos_ == "ADP"
+                        ):  # token.head is the preposition
+                            if token.head.head.pos_ == "VERB":
+                                actual_verb_for_entity = token.head.head
+
+                        if actual_verb_for_entity:
+                            verb_action_found = True
+                            governing_verb_lemma = actual_verb_for_entity.lemma_.lower()
+                            loguru.logger.trace(
+                                f"Entity '{entity_name}' governed by verb '{governing_verb_lemma}' ({actual_verb_for_entity.text}) (original entity dep: '{token.dep_}' to '{token.head.text}')"
                             )
 
-                            # Check if the entity is the object/subject/conjunct etc. of the verb
-                            if (
-                                token.dep_
-                                in {
-                                    "dobj",
-                                    "pobj",
-                                    "obj",  # Direct/prepositional/general object
-                                    "attr",  # Attribute (e.g., "it is flour")
-                                    "nsubj",
-                                    "nsubjpass",  # Nominal subject (active/passive)
-                                    "conj",  # Conjunct (e.g., "mix flour and sugar")
-                                    "appos",  # Appositional modifier
-                                    "advcl",  # Adverbial clause modifier (less common for direct action)
-                                    "xcomp",  # Open clausal complement
-                                    "agent",  # Agent in passive construction
-                                }
-                            ):
-                                verb_action_found = True
-                                governing_verb_lemma = (
-                                    verb_lemma  # Store for transformation check
+                            # Assign roles based on verb lists
+                            if governing_verb_lemma in consume_verbs:
+                                is_consumed = True
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as CONSUMED by verb '{governing_verb_lemma}'"
                                 )
+                            elif governing_verb_lemma in define_verbs:
+                                is_defined = True
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as DEFINED by verb '{governing_verb_lemma}'"
+                                )
+                            elif (
+                                governing_verb_lemma in use_verbs
+                            ):  # This elif ensures define_verbs takes precedence if a verb is in both
+                                is_used = True
+                                loguru.logger.debug(
+                                    f"Marking '{entity_name}' as USED by verb '{governing_verb_lemma}'"
+                                )
+                            else:
                                 loguru.logger.trace(
-                                    f"Entity '{entity_name}' governed by verb '{verb_lemma}' ({head.text}) dep '{token.dep_}'"
+                                    f"Verb '{governing_verb_lemma}' acting on '{entity_name}' not in standard role lists."
                                 )
+                            #  Cooking state logic (applies to ingredients, not typically tools like oven)
+                            # Check if the entity is a direct argument of the cooking verb
 
-                                # Assign roles based on verb lists (use elif for precedence)
-                                if verb_lemma in consume_verbs:
-                                    is_consumed = True
-                                    loguru.logger.debug(
-                                        f"Marking '{entity_name}' as CONSUMED by verb '{verb_lemma}'"
+                            if governing_verb_lemma in cooking_verbs:
+                                if (
+                                    actual_verb_for_entity == token.head
+                                    and token.dep_ in {"dobj", "nsubjpass", "attr"}
+                                ):
+                                    entity_obj = self.entities[entity_name]
+                                    entity_obj.states[step_idx] = "cooked"
+                                    loguru.logger.info(
+                                        f"State Change: Marked '{entity_name}' as 'cooked' in step {step_idx + 1} due to verb '{governing_verb_lemma}'"
                                     )
-                                elif verb_lemma in define_verbs:
-                                    is_defined = True
-                                    loguru.logger.debug(
-                                        f"Marking '{entity_name}' as DEFINED by verb '{verb_lemma}'"
-                                    )
-                                elif verb_lemma in use_verbs:
-                                    is_used = True
-                                    loguru.logger.debug(
-                                        f"Marking '{entity_name}' as USED by verb '{verb_lemma}'"
-                                    )
-                                else:
-                                    loguru.logger.trace(
-                                        f"Verb '{verb_lemma}' acting on '{entity_name}' not in standard role lists."
-                                    )
-                                    # Default assumption if verb found but not categorized? Maybe 'used'?
-                                    # Let's be 'conservative' and not assume role if verb unknown.
-
-                            if verb_lemma in cooking_verbs and token.dep_ in {
-                                "dobj",
-                                "nsubjpass",
-                                "attr",
-                            }:  # Check if entity is object/subject of cooking
-                                entity_obj = self.entities[entity_name]
-                                entity_obj.states[step_idx] = "cooked"
-                                loguru.logger.info(
-                                    f"State Change: Marked '{entity_name}' as 'cooked' in step {step_idx + 1} due to verb '{verb_lemma}'"
-                                )
-                                # Propagate 'cooked' state forward (simple version)
-                                for future_step in range(step_idx + 1, len(self.steps)):
-                                    # Only update if not already set to something else potentially
-                                    if future_step not in entity_obj.states:
-                                        entity_obj.states[future_step] = "cooked"
-                                    # # Or, more robustly, only if the previous state was cooked
-                                    # elif entity_obj.states.get(future_step -1) == 'cooked':
-                                    #    entity_obj.states[future_step] = 'cooked'
-
+                                    for future_step in range(
+                                        step_idx + 1, len(self.steps)
+                                    ):
+                                        if future_step not in entity_obj.states:
+                                            entity_obj.states[future_step] = "cooked"
             # If entity name appears but not clearly governed by a verb (e.g., just mentioned)
             # Default to 'used' if not defined/consumed? Or require explicit verb action?
             # Let's require explicit verb action for now to be stricter.
@@ -1275,10 +1288,17 @@ class ProceduralText:
         An entity is live if it's used in any step after the current one
         """
         if entity_name not in self.entities:
+            loguru.logger.warning(
+                f"Entity '{entity_name}' not found for liveness check after step {step_idx + 1}."
+            )
             return False
 
         entity = self.entities[entity_name]
-        return any(use_step > step_idx for use_step in entity.used_in)
+        is_live = any(use_step > step_idx for use_step in entity.used_in)
+        loguru.logger.trace(
+            f"Liveness check for '{entity_name}' after step {step_idx + 1}: Used in {entity.used_in}. Live: {is_live}"
+        )
+        return is_live
 
     def _get_resources_used(self, step_idx: int) -> Set[str]:
         """
