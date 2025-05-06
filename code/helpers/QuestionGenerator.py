@@ -200,7 +200,16 @@ class QuestionGenerator:
             # Keep the original question format for simplicity.
             question = f"Is {entity_name} from Step {step + 1} used in multiple future steps without being redefined?"
             # Ground truth is True because we found at least two valid future uses
-            busy_entity_questions.append((question, True))
+            busy_entity_questions.append(
+                (
+                    question,
+                    True
+                    if len(use_steps) > 1
+                    else False
+                    if len(use_steps) == 1
+                    else False,
+                )
+            )
 
         return busy_entity_questions
 
@@ -275,51 +284,54 @@ class QuestionGenerator:
             last_possible_step = len(self.text.steps) - 1
             start_step = entity.step_introduced  # Start checking after it's introduced
 
-            for step in range(start_step, last_possible_step):
-                # Check if entity is used in any step strictly after 'step'
-                is_live = any(use_step > step for use_step in entity.used_in)
+            for step_idx_checked_after in range(start_step, last_possible_step):
+                # Check if entity is used in any step strictly after 'step_idx_checked_after'
+                is_live = any(
+                    use_step > step_idx_checked_after for use_step in entity.used_in
+                )
 
                 # Avoid asking about liveness if the entity was consumed at or before this step
                 consumed_before_or_at_step = any(
-                    cons_step <= step for cons_step in entity.consumed_in
+                    cons_step <= step_idx_checked_after
+                    for cons_step in entity.consumed_in
                 )
 
                 if not consumed_before_or_at_step:
                     if is_live:
-                        live_entities.append((entity_name, step))
+                        live_entities.append((entity_name, step_idx_checked_after))
                     else:
                         # Only consider non-live if it wasn't consumed earlier
-                        non_live_entities.append((entity_name, step))
+                        non_live_entities.append((entity_name, step_idx_checked_after))
 
         # Ensure we don't have duplicates (e.g., entity live after step 2 and step 3)
         live_entities = list(set(live_entities))
         non_live_entities = list(set(non_live_entities))
 
         # Choose between live and non-live entities to generate a mix of True/False questions
-        chosen_entity = None
+        chosen_entity_info = None
         ground_truth = None
 
         can_choose_live = bool(live_entities)
         can_choose_non_live = bool(non_live_entities)
 
         if can_choose_live and (not can_choose_non_live or random.random() > 0.5):
-            chosen_entity = random.choice(live_entities)
+            chosen_entity_info = random.choice(live_entities)
             ground_truth = True
         elif can_choose_non_live:
-            chosen_entity = random.choice(non_live_entities)
+            chosen_entity_info = random.choice(non_live_entities)
             ground_truth = False
 
-        if chosen_entity is None:
+        if chosen_entity_info is None:
             return (
                 "Could not find a suitable scenario for live variable analysis question.",
                 None,
             )
 
-        entity_name, step = chosen_entity
+        entity_name, step_num_checked_after = chosen_entity_info
 
-        question = f"Is {entity_name} live after Step {step + 1}?"
+        question = f"Is {entity_name} live after Step {step_num_checked_after + 1}?"
         loguru.logger.debug(
-            f"Generated Liveness Q: '{question}' -> {ground_truth}. Entity: {entity_name}, Step checked after: {step + 1}, Used in: {self.text.entities[entity_name].used_in}"
+            f"Generated Liveness Q: '{question}' -> {ground_truth}. Entity: {entity_name}, Step checked after: {step_num_checked_after + 1}, Used in: {self.text.entities[entity_name].used_in}"
         )
 
         return question, ground_truth
@@ -330,34 +342,34 @@ class QuestionGenerator:
 
         It selects a step that specifies a time interval (either as an exact value or a range)
         and forms a question asking for that specific time interval detail.
+        The ground truth will be the exact text matched from the step.
 
-        :return: A tuple with the question and the ground truth interval (as a string).
+        :return: A tuple with the question and the ground truth interval (as a string from the step).
                  If no time interval is associated with any step, returns an explanatory message and None.
         """
         steps_with_intervals = []
 
-        for step_idx in self.text.step_dependencies.nodes():
-            if "time_interval" in self.text.step_dependencies.nodes[step_idx]:
-                steps_with_intervals.append(step_idx)
+        for step_idx_loop in self.text.step_dependencies.nodes():
+            if "time_interval" in self.text.step_dependencies.nodes[step_idx_loop]:
+                steps_with_intervals.append(step_idx_loop)
 
         if not steps_with_intervals:
             return "No time intervals found in the steps.", None
 
         # Choose a random step with a time interval
-        step = random.choice(steps_with_intervals)
-        interval = self.text.step_dependencies.nodes[step]["time_interval"]
+        chosen_step_idx = random.choice(steps_with_intervals)
+        interval_data = self.text.step_dependencies.nodes[chosen_step_idx][
+            "time_interval"
+        ]
+        ground_truth = interval_data[3]
 
         # Generate question
-        question = f"What is the last time interval specified in Step {step + 1}?"
-
-        # Ground truth is the actual interval
-        if interval[0] == interval[1]:
-            ground_truth = f"{interval[0]} {interval[2]}"
-        else:
-            ground_truth = f"{interval[0]}-{interval[1]} {interval[2]}"
+        question = (
+            f"What is the last time interval specified in Step {chosen_step_idx + 1}?"
+        )
 
         loguru.logger.debug(
-            f"Generated Interval Q: '{question}' -> '{ground_truth}' from data {interval} for step {step_idx + 1}"
+            f"Generated Interval Q: '{question}' -> '{ground_truth}' from data {interval_data} for step {chosen_step_idx + 1}"
         )
         return question, ground_truth
 
@@ -494,7 +506,9 @@ class QuestionGenerator:
             if is_ever_cooked:
                 # Ensure states dictionary is not empty and contains 'cooked'
                 cooked_steps = [
-                    step for step, state in entity.states.items() if state == "cooked"
+                    step_idx_loop
+                    for step_idx_loop, state in entity.states.items()
+                    if state == "cooked"  # Renamed 'step'
                 ]
                 if cooked_steps:
                     first_cooked_step = min(cooked_steps)
@@ -523,14 +537,14 @@ class QuestionGenerator:
             )
 
         # Choose a random potential concern scenario
-        entity_name, step, ground_truth = random.choice(potential_concerns)
+        entity_name, step_of_use, ground_truth = random.choice(potential_concerns)
 
-        question = f"Does using {entity_name} in Step {step + 1} introduce a potential safety concern to the recipe?"
+        question = f"Does using {entity_name} in Step {step_of_use + 1} introduce a potential safety concern to the recipe?"
 
         # The ground_truth reflects whether this raw usage leads to an *uncooked final product*
         # with respect to this specific entity being directly cooked.
         loguru.logger.info(
-            f"Generated Taint Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Used raw in step: {step + 1}, Entity ever directly cooked: {not ground_truth})"
+            f"Generated Taint Q: '{question}' -> {ground_truth} (Entity: {entity_name}, Used raw in step: {step_of_use + 1}, Entity ever directly cooked: {not ground_truth})"
         )
 
         return question, ground_truth

@@ -1125,28 +1125,33 @@ class ProceduralText:
     def _parse_steps(self):
         """Parse steps to extract entities, relationships, and concurrency hints"""
         # Process each step
-        for step_idx, step_text in enumerate(self.steps):
+        for step_idx, step_text in enumerate(
+            self.steps
+        ):  # step_text has original casing
             # Extract entities and determine their roles (defined, used)
             self._extract_entities_from_step(step_idx, step_text)
 
             # Time Interval Extraction Logic
             current_best_interval_details = None
-            step_text_lower = step_text.lower()
 
             for (
                 regexp,
                 type_str,
                 priority_val,
             ) in self._COMPILED_TIME_PATTERNS_WITH_PRIORITY:
-                for match in regexp.finditer(step_text_lower):
+                # Search on original step_text, rely on re.IGNORECASE in compiled regexp
+                for match in regexp.finditer(step_text):
                     parsed_time = self._parse_time_value_from_match(match, type_str)
                     if parsed_time:
                         min_v, max_v, unit_c = parsed_time
+                        # MODIFICATION: Capture original matched text (will have original casing)
+                        original_match_text = match.group(0)
 
                         new_interval_details = {
                             "min_val": min_v,
                             "max_val": max_v,
                             "unit": unit_c,
+                            "original_text": original_match_text,
                             "end_pos": match.end(),
                             "priority": priority_val,
                         }
@@ -1182,6 +1187,7 @@ class ProceduralText:
                     current_best_interval_details["min_val"],
                     current_best_interval_details["max_val"],
                     current_best_interval_details["unit"],
+                    current_best_interval_details["original_text"],
                 )
                 loguru.logger.debug(
                     f"Step {step_idx + 1}: Final time interval set to: {self.step_dependencies.nodes[step_idx]['time_interval']}"
