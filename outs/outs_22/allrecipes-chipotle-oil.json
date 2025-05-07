@@ -1,0 +1,82 @@
+{
+  "title": "Chipotle Oil",
+  "instructions": {
+    "1": "Place oil in a saucepan over medium heat. Heat oil to 250 degrees F (120 degrees C) using a candy thermometer to gauge temperature.",
+    "2": "Break chipotle chiles into small pieces and place into a a spice grinder; pulse to grind into 1/8-inch pieces. Stir ground chipotle chiles and red pepper flakes into the hot oil. Cook until chile oil begins to foam, 3 to 5 minutes.",
+    "3": "Remove chile oil from heat; cover and let sit for 4 hours to overnight. Pour chile oil through a fine mesh strainer into a sealable container."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is chipotle chiles from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "4 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we break (Step 2) and remove (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chipotle chiles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "a spice grinder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "red pepper flakes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fine mesh strainer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

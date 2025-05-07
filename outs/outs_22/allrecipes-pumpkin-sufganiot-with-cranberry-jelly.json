@@ -1,0 +1,406 @@
+{
+  "title": "Pumpkin Sufganiot with Cranberry Jelly",
+  "instructions": {
+    "1": "Place butter in the mixing bowl of a stand mixer. Pour hot milk over butter; stir occasionally until butter melts. Whisk pumpkin puree, 3/4 cup white sugar, eggs, and egg yolk into milk mixture.",
+    "2": "In separate bowl, combine flour, yeast, salt, ginger, cinnamon, and allspice. Using the paddle attachment, mix in about 4 cups of flour mixture on low speed. Scrape down sides of bowl and underneath paddle. Add remaining flour and mix, scraping down sides, on low speed until fully combined. Dough will be very wet, almost cookie-dough consistency; don't worry, it will absorb moisture as it sits.",
+    "3": "Transfer dough to a greased bowl. Cover bowl with plastic wrap lightly coated with cooking spray. Refrigerate for at least 5 hours or overnight.",
+    "4": "Combine canned cranberry sauce with 1/3 cup water in a small saucepan. Break the sauce up slightly with a spoon. Heat, covered, over medium-low heat, stirring occasionally, until cranberry sauce melts, about 25 minutes. Pour into a bowl and refrigerate.",
+    "5": "Place chilled dough on well-floured work surface. Shape it into a ball, divide the dough in half, and return half the dough to the greased bowl. Cover with greased plastic wrap and refrigerate. Roll out remaining dough half, flouring surface as needed, to 1/4-inch thickness. Cut out dough rounds with a 3-inch cutter.",
+    "6": "Heat oil in a deep-fryer or large saucepan to 375 degrees F (190 degrees C). Line a baking sheet with parchment paper or a silicone liner. This will prevent the dough from sticking and tearing.",
+    "7": "Transfer dough rounds to prepared baking sheet in pairs (one will be the top half, the other the bottom half of the doughnut). Gather up remaining dough scraps and add them to the dough stored in the refrigerator.",
+    "8": "Whisk egg white with 1 teaspoon water. Brush the rounds that will be the bottom halves of the doughnuts with the beaten egg white.",
+    "9": "Spoon 1 teaspoon cranberry jelly into center of each bottom round; arrange second round on top and press edges to seal. Let doughnuts rest 20 minutes.",
+    "10": "Working in batches, fry doughnuts until well browned, about 1 1/2 minutes per side. Drain doughnuts on paper towels. Pour 1/2 cup white sugar into a bag or large bowl; toss doughnuts in sugar to coat. Dust doughnuts with confectioners' sugar before serving. Repeat with remaining dough."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the dough from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is dough from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is saucepan from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is doughnuts from Step 8 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is eggs from Step 1 still available in Step 9?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is dough rounds live after Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "5 hours"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to use the dough in Step 7?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using egg in Step 8 introduce a potential safety concern to the recipe?",
+      "answer": true
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we transfer (Step 3) and transfer (Step 7) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "mixer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "hot milk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pumpkin puree": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "egg yolk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "milk mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "yeast": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "allspice": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "paddle attachment": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "low speed": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "paddle": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        3,
+        6,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "moisture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking spray": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "canned cranberry sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "half the dough": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "ball": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dough rounds": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "3-inch cutter": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "silicone liner": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pairs": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "doughnut": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "rounds": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "doughnuts": {
+      "step_introduced": 8,
+      "states": {
+        "9": "cooked"
+      },
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": [
+        10
+      ]
+    },
+    "beaten egg white": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "each bottom round": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "confectioners' sugar": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 10,
+    "num_entities": 35,
+    "num_questions": 10
+  }
+}

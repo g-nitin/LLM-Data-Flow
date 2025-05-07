@@ -1,0 +1,118 @@
+{
+  "title": "Luau Tacos",
+  "instructions": {
+    "1": "In 1 1/2-quart saucepan, cook barbecue sauce with shredded pork and 2/3 cup of the pineapple tidbits over medium-high heat for 6 to 8 minutes, stirring occasionally, until thoroughly heated.",
+    "2": "In 10-inch skillet, cook each tortilla over medium-high heat for 20 to 30 seconds, turning once, until thoroughly heated.",
+    "3": "Onto each warm tortilla, spoon about 3 tablespoons pork mixture, 1/4 cup cheese, 1 teaspoon cilantro, 1/4 cup lettuce, heaping tablespoon tomato and scant tablespoon remaining pineapple tidbits. Top each with sour cream."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is each tortilla from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is pineapple tidbits live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "6 to 8 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 1) and cook (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "barbecue sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shredded pork": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pineapple tidbits": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "each tortilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "each warm tortilla": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "3 tablespoons pork mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "heaping tablespoon tomato": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "scant tablespoon remaining pineapple tidbits": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

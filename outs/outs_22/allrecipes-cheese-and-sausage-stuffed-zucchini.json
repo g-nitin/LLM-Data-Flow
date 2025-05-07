@@ -1,0 +1,196 @@
+{
+  "title": "Cheese and Sausage Stuffed Zucchini",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F (175 degrees C). Butter a baking dish (size is dependent on the size of your zucchini).",
+    "2": "Place crumbled sausage in a large, deep skillet. Cook over medium high heat until evenly brown. Drain and set aside.",
+    "3": "Partially cook zucchini in the microwave on high for 5 minutes. Remove from the microwave and let cool for about 10 minutes. Meanwhile, in a medium bowl combine eggs, Colby cheese, cottage cheese, Italian blend cheese, onion, Italian seasoning, salt and pepper.",
+    "4": "Slice the zucchini in half lengthwise, remove the seeds and rinse. Place both halves in prepared baking dish and sprinkle with garlic salt. Layer the sausage, tomatoes and cheese mixture in each half.",
+    "5": "Bake in preheated oven for 40 minutes. Then broil for 5 minutes to brown the cheese."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the zucchini from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is zucchini from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is zucchini from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is size from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skillet live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to cook the zucchini in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": true
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and bake (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "size": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "zucchini": {
+      "step_introduced": 1,
+      "states": {
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked"
+      },
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        1,
+        3,
+        4
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "eggs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "italian blend cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "italian seasoning": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "seeds": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        4
+      ]
+    },
+    "garlic salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sausage, tomatoes and cheese mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 13,
+    "num_questions": 9
+  }
+}

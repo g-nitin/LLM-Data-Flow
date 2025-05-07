@@ -1,0 +1,211 @@
+{
+  "title": "Coconut Lamb Cake",
+  "instructions": {
+    "1": "Preheat oven to 450 degrees F (230 degrees C).grease and flour a lamb mold. Prepare cake mix as directed on the package.",
+    "2": "Pour batter into the face half of well-greased lamb mold. cover with back of mold and wire or tie mold together. Place mold face down on baking sheet.",
+    "3": "Bake for 15 minutes at 450 degrees F (230 degrees C). Reduce heat to 350 degrees F (175 degrees C) and bake 35 minutes longer.",
+    "4": "Remove mold from oven and remove the back of the mold. Allow lamb to cool in face half of mold for about 5 minutes. Loosen cake from sides of mold and remove carefully. Stand lamb cake upright on cake rack until cool. When cool, frost with snow frosting and cover with coconut.",
+    "5": "To make Snow Frosting: In the top of a small double boiler, Combine egg white, sugar, dash of salt, water and light corn syrup. Beat with rotary egg beater about 1 minute or until thoroughly mixed. Cook over rapidly boiling water, beating constantly with rotary egg beater 4 minutes, or until frosting will stand in stiff peaks. Remove from boiling water, add 1/2 teaspoon vanilla and beat 1 minute, or until thick enough to spread."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is wire from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is wire live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "1 minute"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bake (Step 3) and make (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "lamb mold": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cake mix": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "batter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "back": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "mold": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "wire": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lamb": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "face": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lamb cake": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "snow frosting": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "coconut": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "small double boiler": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "egg white": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "light corn syrup": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "rotary egg beater": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "stiff peaks": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 18,
+    "num_questions": 4
+  }
+}

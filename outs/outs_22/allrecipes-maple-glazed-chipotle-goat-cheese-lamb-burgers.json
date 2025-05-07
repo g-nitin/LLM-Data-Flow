@@ -1,0 +1,169 @@
+{
+  "title": "Maple Glazed Chipotle Goat Cheese Lamb Burgers",
+  "instructions": {
+    "1": "Preheat oven to 300 degrees F (150 degrees C). Cut the top off of the head of garlic, and place onto a small, oven safe dish.",
+    "2": "Bake the garlic in the preheated oven until the cloves are soft and golden brown, about 1 hour. Remove from the oven, and cool. Once cool enough to handle, squeeze the roasted garlic into a mixing bowl. Add the lamb, goat cheese, chipotle peppers, rosemary, 2 tablespoons maple syrup, salt, and pepper; mix well. Form the mixture into 4 patties.",
+    "3": "Heat the olive oil in a large skillet over medium-high heat. Sear the lamb patties for 1 minute on each side, then reduce the heat to medium-low, and continue cooking to your desired degree of doneness, about 2 minutes per side for medium-well. About 1 minute before the patties are ready, pour in the remaining 2 tablespoons of maple syrup, and allow it to thicken and glaze the burgers. Serve on toasted ciabatta buns."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is goat cheese from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is garlic live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "1 hour"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bake (Step 2) and heat (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "roasted garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lamb": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "goat cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chipotle peppers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "rosemary": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lamb patties": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "doneness": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "medium-well": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "maple syrup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "burgers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 14,
+    "num_questions": 4
+  }
+}

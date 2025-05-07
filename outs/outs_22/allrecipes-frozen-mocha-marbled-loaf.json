@@ -1,0 +1,140 @@
+{
+  "title": "Frozen Mocha Marbled Loaf",
+  "instructions": {
+    "1": "Line a 9-in. x 5-in. x 3-in. loaf pan with foil. In a bowl, combine the cookie crumbs and butter. Press firmly onto the bottom and 1-1/2 in. up the sides of prepared pan.",
+    "2": "In a mixing bowl, beat cream cheese until light. Add milk and vanilla; mix well. Fold in whipped cream. Spoon half of the mixture into another bowl and set aside. Dissolve coffee in hot water; fold into remaining cream cheese mixture. Fold in chocolate syrup.",
+    "3": "Spoon half of chocolate mixture over crust. Top with half of the reserved cream cheese mixture. Repeat layers. Cut through layers with a knife to swirl the chocolate (pan will be full). Cover and freeze for 6 hours or overnight. To serve, lift out of the pan; remove foil. Cut into slices."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is vanilla from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cookie crumbs live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "6 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we line (Step 1) and spoon (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cookie crumbs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coffee": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chocolate syrup": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "reserved cream cheese mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "crust": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "layers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chocolate": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}

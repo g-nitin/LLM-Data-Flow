@@ -1,0 +1,86 @@
+{
+  "title": "Cucumber Salad with Rice Vinegar",
+  "instructions": {
+    "1": "Combine cucumbers and red onion in a salad bowl.",
+    "2": "Stir together water, vinegar, sugar, and seasoned salt in a small bowl. Pour over vegetables. Chill for 1 hour.",
+    "3": "Serve chilled or at room temperature."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is vinegar from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sugar live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "1 hour"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 1) and serve (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cucumbers": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "red onion": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

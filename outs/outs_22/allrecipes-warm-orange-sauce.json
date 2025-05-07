@@ -1,0 +1,86 @@
+{
+  "title": "Warm Orange Sauce",
+  "instructions": {
+    "1": "Bring orange juice, sugar, butter, and salt to a simmer in a saucepan over medium heat.",
+    "2": "Whisk cold water and cornstarch in a small bowl; whisk cornstarch mixture into simmering sauce until thickened and no longer cloudy.",
+    "3": "Remove sauce from heat; stir in orange peel and triple sec. Serve warm."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is saucepan from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cornstarch mixture live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 1) and remove (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cornstarch mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "orange peel": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 3
+  }
+}

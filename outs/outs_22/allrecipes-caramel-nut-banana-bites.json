@@ -1,0 +1,82 @@
+{
+  "title": "Caramel Nut Banana Bites",
+  "instructions": {
+    "1": "Cut each banana crosswise into 6 pieces. Place 1 toothpick in each banana piece. Transfer to wax paper lined plate. Freeze 20 minutes or until solid.",
+    "2": "Heat caramel sauce in microwave 10 to 20 seconds on High or until slightly melted.",
+    "3": "Dip banana slices in caramel and roll into chopped nuts. Return to freezer until ready to serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is caramel sauce from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is microwave live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "10 to 20 seconds"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we heat (Step 2) and dip (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "each banana": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "caramel sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "caramel": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "freezer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

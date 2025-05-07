@@ -1,0 +1,128 @@
+{
+  "title": "Super Cheesy Potatoes",
+  "instructions": {
+    "1": "Place potato slices in a bowl of water while preparing remaining ingredients.",
+    "2": "Preheat oven to 350 degrees F (175 degrees C). Spray a 9x13-inch baking dish with cooking spray.",
+    "3": "Melt butter in a saucepan over medium heat; cook and stir flour in melted butter for 2 to 3 minutes. Stir in milk until thickened, 4 to 5 minutes more. Add American cheese, mixing until melted. Pour in jarred cheese sauce and cook and stir until smooth.",
+    "4": "Spread about 1/2 cup sauce in the bottom of the prepared baking dish. Layer potatoes slices in baking dish, alternating with cheese sauce.",
+    "5": "Bake in preheated oven until potatoes are tender, about 90 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is milk from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is milk live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "4 to 5 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we spread (Step 4) and bake (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooking spray": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "american cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "jarred cheese sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cheese sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "potatoes": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

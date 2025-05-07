@@ -1,0 +1,88 @@
+{
+  "title": "Hot Bacon Cheese Spread",
+  "instructions": {
+    "1": "Preheat oven to 400 degrees F. Cut lengthwise slice from top of bread loaf. Remove center, leaving 1-inch-thick shell. Cut removed bread into bite-sized pieces; set aside.",
+    "2": "Mix remaining ingredients until well blended. Spoon into bread shell; cover with top of bread. Wrap in foil. Place on baking sheet.",
+    "3": "Bake 15 to 20 or until filling is heated through. Serve with the reserved bread pieces and assorted NABISCO Crackers."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is bread loaf from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is bread loaf live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread loaf": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread shell": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "assorted nabisco crackers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 3
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "title": "Best Savory Dutch Baby",
+  "instructions": {
+    "1": "Preheat oven to 450 degrees F (230 degrees C).",
+    "2": "Place a cast iron skillet in the preheated oven for 15 minutes.",
+    "3": "Whisk 3 eggs together in a bowl until well blended and frothy. Add milk and 2 tablespoons melted butter; mix well. Stir in flour, 1/2 teaspoon salt, and 1/2 teaspoon pepper and blend until batter is smooth.",
+    "4": "Place 1 tablespoon butter in the hot skillet and swirl until bottom is evenly coated and butter is melted. Pour batter into the skillet and place immediately in the oven.",
+    "5": "Bake in the preheated oven until edges are brown and pancake is inflated, 15 to 20 minutes.",
+    "6": "Heat vegetable oil in a large skillet over medium heat; crack 4 eggs into skillet. Cook until desired doneness is reached, 2 to 3 minutes per side.",
+    "7": "Mix ricotta cheese, salt, and pepper, together in a bowl.",
+    "8": "Cut pancake into 4 pieces and top each with a fried egg, ham, ricotta cheese, and Parmesan shavings."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the skillet from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is skillet from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is batter from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is pancake from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is batter from Step 3 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skillet live after Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "15 to 20 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to cut the pancake in Step 8?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we whisk (Step 3) and bake (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "defined_in": [
+        1,
+        5
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        4,
+        6
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "batter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pancake": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "ricotta cheese": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "fried egg": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "ham": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "parmesan shavings": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 10,
+    "num_questions": 10
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "title": "RITZ Cream Cheese & Veggie Swimmers",
+  "instructions": {
+    "1": "Spread crackers with cream cheese spread.",
+    "2": "Top with overlapping rows of carrot slices as shown in photo.",
+    "3": "Cut small piece off each pimento piece. Add smaller pimento pieces to topped crackers for the fishes' eyes, then add remaining pimento pieces for the mouths."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is photo from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is crackers live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we overlap (Step 2) and cut (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "crackers": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream cheese spread": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "photo": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fishes' eyes": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mouths": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 3
+  }
+}

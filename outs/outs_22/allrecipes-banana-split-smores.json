@@ -1,0 +1,64 @@
+{
+  "title": "Banana Split S'mores",
+  "instructions": {
+    "1": "Place 2 chocolate graham cracker squares on microwavable plate.",
+    "2": "Top each with half of chocolate, 2 banana slices, a sliced strawberry and a marshmallow. Microwave on High 15 to 20 seconds or until marshmallows puff.",
+    "3": "Top with remaining graham squares."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is marshmallows from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sliced strawberry live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "15 to 20 seconds"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we place (Step 1) and top (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "chocolate": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sliced strawberry": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "marshmallows": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 3,
+    "num_questions": 4
+  }
+}

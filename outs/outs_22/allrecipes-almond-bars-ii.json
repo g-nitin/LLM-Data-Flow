@@ -1,0 +1,114 @@
+{
+  "title": "Almond Bars II",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F (175 degrees C). Grease a 10x15 inch jelly roll pan.",
+    "2": "Break graham crackers into 4 pieces and arrange them touching on the prepared jelly roll pan. Sprinkle the sliced almonds over the crackers. In a small saucepan, melt butter. When butter is melted, stir in the brown sugar and vanilla until smooth and remove from heat. Pour the butter mixture evenly over the graham crackers in the pan.",
+    "3": "Bake for 8 to 10 minutes in the preheated oven. Watch carefully so that the edges do not burn. Cut bars while still warm and remove from pan. If the bars are stuck, put the pan into the warm oven for a minute to loosen."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is graham crackers from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is butter mixture live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "8 to 10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and break (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1,
+        3
+      ],
+      "consumed_in": []
+    },
+    "graham crackers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sliced almonds": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bars": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "title": "Seasoned Orzo and Black Beans",
+  "instructions": {
+    "1": "In a 4 quart saucepan, combine water and pasta. Cook over medium high heat until mixture comes to a full boil, 4 to 6 minutes. Continue cooking, stirring occasionally, until pasta is tender, 8 to 10 minutes.",
+    "2": "Stir in frozen vegetables, cover, and reduce heat to medium low. Cook until vegetables are tender crisp, 2 to 4 minutes. Do not overcook. Drain.",
+    "3": "Stir in beans, butter or margarine, tarragon, and thyme. Continue cooking until heated through. Season to taste with salt and pepper."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is frozen vegetables from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is pasta live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "2 to 4 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we stir (Step 2) and stir (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pasta": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "full boil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "frozen vegetables": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "margarine": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tarragon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

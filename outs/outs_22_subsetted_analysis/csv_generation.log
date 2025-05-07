@@ -1,0 +1,31 @@
+2025-05-07 07:42:47.047 | INFO     | __main__:main:220 - Loading curated entity list from: outs/outs_22_subset_analysis/final_entity_subset.txt
+2025-05-07 07:42:47.060 | INFO     | __main__:main:228 - Loaded 36 curated entities (lowercased).
+2025-05-07 07:42:47.060 | INFO     | __main__:main:233 - Scanning processed recipes in: outs/outs_22
+2025-05-07 07:42:47.070 | INFO     | __main__:main:261 - Found 1382 potential recipe files to process.
+2025-05-07 07:42:47.335 | INFO     | __main__:main:336 - Found 1340 relevant recipes containing at least one curated entity.
+2025-05-07 07:42:47.335 | INFO     | __main__:main:339 - Processed 8922 questions from relevant recipes.
+2025-05-07 07:42:47.335 | INFO     | __main__:main:342 - Skipped 3064 questions failing strict entity check.
+2025-05-07 07:42:47.335 | INFO     | __main__:main:345 - Collected 5858 eligible questions meeting all criteria.
+2025-05-07 07:42:47.335 | INFO     | __main__:main:356 - Scoring recipes based on eligible question type diversity...
+2025-05-07 07:42:47.337 | INFO     | __main__:main:365 - Finished scoring recipes.
+2025-05-07 07:42:47.337 | INFO     | __main__:main:368 - Selecting top 100 questions per category from eligible pool, prioritizing diverse recipes...
+2025-05-07 07:42:47.339 | INFO     | __main__:main:406 - Selected 100 questions for type 'Available Expressions'.
+2025-05-07 07:42:47.340 | INFO     | __main__:main:406 - Selected 100 questions for type 'Concurrency Analysis'.
+2025-05-07 07:42:47.342 | INFO     | __main__:main:406 - Selected 100 questions for type 'Interval Analysis'.
+2025-05-07 07:42:47.342 | INFO     | __main__:main:406 - Selected 100 questions for type 'Live Variable Analysis'.
+2025-05-07 07:42:47.343 | INFO     | __main__:main:406 - Selected 100 questions for type 'Reaching Definitions'.
+2025-05-07 07:42:47.343 | INFO     | __main__:main:406 - Selected 100 questions for type 'Taint Analysis'.
+2025-05-07 07:42:47.344 | INFO     | __main__:main:406 - Selected 100 questions for type 'Type-State Analysis'.
+2025-05-07 07:42:47.345 | INFO     | __main__:main:406 - Selected 100 questions for type 'Very Busy Expressions'.
+2025-05-07 07:42:47.345 | INFO     | __main__:main:411 - Formatting prompts and writing CSV files...
+2025-05-07 07:42:47.373 | SUCCESS  | __main__:main:457 - Finished writing 8 CSV files to: outs/outs_22_subsetted_analysis
+2025-05-07 07:42:47.373 | INFO     | __main__:main:460 - Final question counts per category:
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Available Expressions: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Concurrency Analysis: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Interval Analysis: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Live Variable Analysis: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Reaching Definitions: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Taint Analysis: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Type-State Analysis: 100
+2025-05-07 07:42:47.373 | INFO     | __main__:main:462 - - Very Busy Expressions: 100
+2025-05-07 07:42:47.373 | SUCCESS  | __main__:main:494 - Target count of 100 met or exceeded for all expected categories.

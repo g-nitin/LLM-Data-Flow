@@ -1,0 +1,149 @@
+{
+  "title": "Fireball\u00ae Horchata Pops",
+  "instructions": {
+    "1": "Grind rice finely using a coffee or spice grinder. Transfer to a large bowl; add cinnamon sticks. Pour in warm water. Cover with plastic wrap and let sit, 8 hours to overnight.",
+    "2": "Strain rice mixture through a sieve set over a bowl. Press against the rice with a wooden spoon to squeeze out as much liquid as possible; discard rice. Stir rice milk and sugar into strained liquid to make horchata.",
+    "3": "Measure 2 1/2 cups horchata into another bowl. Add cinnamon whiskey, cayenne pepper, and 1/4 teaspoon ground cinnamon. Pour into ice pop molds.",
+    "4": "Freeze until solid, at least 12 hours.",
+    "5": "Run molds under warm water to release ice pops. Sprinkle with an additional dash of cinnamon before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is rice milk from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is rice milk live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "8 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we measure (Step 3) and run (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "rice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "coffee or spice grinder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rice mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "rice milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "horchata": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cinnamon whiskey": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ice pop molds": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "molds": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "ice pops": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 12,
+    "num_questions": 4
+  }
+}

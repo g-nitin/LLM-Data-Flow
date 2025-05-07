@@ -1,0 +1,82 @@
+{
+  "title": "Hot and Honey Pretzel'd Chicken Tenders",
+  "instructions": {
+    "1": "Dip chicken cubes into Honey Mustard sauce, then coat with crushed pretzels. Refrigerate 30 minutes to set.",
+    "2": "Discard any unused sauce. Place chicken cubes on large ungreased cookie sheet. Bake at 375 degrees F, 10 to 12 minutes or until chicken is done. Sprinkle with Morton\u00ae Salt Substitute. Serve warm.",
+    "3": "Honey Mustard Sauce: Combine ingredients until smooth."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is chicken cubes from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is chicken cubes live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "10 to 12 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we dip (Step 1) and combine (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "chicken cubes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "honey mustard sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "any unused sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "morton\u00ae salt substitute": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

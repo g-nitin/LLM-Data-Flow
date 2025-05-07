@@ -1,0 +1,79 @@
+{
+  "title": "Home on the Range Ranch Potatoes",
+  "instructions": {
+    "1": "Place potatoes in large pan with water over high heat and boil until tender but still firm, about 15 - 20 minutes.",
+    "2": "Heat butter, half and half and peppers in sauce pan over low heat until combined.",
+    "3": "Drain potatoes and place in mixer with butter sauce. Add dressing mix and process until smooth. Season with salt and pepper."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is potatoes from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is peppers live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "15 - 20 minutes"
+    }
+  ],
+  "entities": {
+    "potatoes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "peppers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dressing mix": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 3
+  }
+}

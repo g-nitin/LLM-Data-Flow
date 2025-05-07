@@ -1,0 +1,131 @@
+{
+  "title": "Sweet Vanilla Cinnamon Pumpkin Seeds",
+  "instructions": {
+    "1": "Preheat oven to 275 degrees F (135 degrees C).",
+    "2": "Place seeds in a mixing bowl. Pour melted butter over seeds; stir to coat. Combine 1 teaspoon vanilla sugar (see Cook's Note), 1 teaspoon cinnamon, and 1/2 teaspoon white sugar in a small bowl; mix well. Stir in vanilla extract. Spread sugar mixture over seeds, stirring to coat evenly.",
+    "3": "Spread seeds over a baking sheet in a single layer. Combine 1 teaspoon vanilla sugar and 1 teaspoon cinnamon in a small bowl; sprinkle over seeds.",
+    "4": "Bake seeds in the preheated oven for 30 minutes. Remove baking sheet from oven, stir seeds, and spread evenly on baking sheet again. Combine 1 teaspoon vanilla sugar and 1 teaspoon cinnamon in small bowl and sprinkle over seeds. Return seeds to oven for 30 more minutes.",
+    "5": "Remove seeds from oven. Sprinkle remaining 1/2 teaspoon vanilla sugar over seeds, and return to oven for 5 minutes. Remove from oven, pour into a serving bowl, and serve warm."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the seeds from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is seeds from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is seeds live after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to spread the seeds in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we place (Step 2) and bake (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        4,
+        5
+      ]
+    },
+    "seeds": {
+      "step_introduced": 2,
+      "states": {
+        "3": "cooked",
+        "4": "cooked"
+      },
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2,
+        4
+      ],
+      "consumed_in": [
+        5
+      ]
+    },
+    "vanilla sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cook's note": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla extract": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "single layer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 7,
+    "num_questions": 7
+  }
+}

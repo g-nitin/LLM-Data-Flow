@@ -1,0 +1,248 @@
+{
+  "title": "Greek Stuffed Bison Steak",
+  "instructions": {
+    "1": "Score bison flank steak on both sides by making shallow cuts at 1-inch intervals diagonally across the steak in a diamond pattern. Place bison flank steak between two pieces of plastic wrap. Using the flat side of a meat mallet, pound bison flank steak lightly into a 8x10-inch rectangle about 1/2 inch thick. Discard plastic wrap. Place bison flank steak in a resealable plastic bag set in a shallow bowl. For marinade, combine the 3 tablespoons oil, the lemon juice, the 2 cloves minced garlic, and the oregano in a medium bowl. Pour marinade over bison flank steak. Seal bag; turn to coat bison flank steak. Marinate in the refrigerator for 2 to 4 hours, turning bag occasionally",
+    "2": "For filling, heat the 2 teaspoons oil over medium heat in a large skillet. Cook the 2 cloves garlic in hot oil for 1 minute. Add spinach; cook and stir for 1 to 2 minutes or until spinach begins to wilt. Drain spinach in a colander, pressing out any excess liquid with the back of a spoon. Coarsely chop spinach. Stir in feta cheese and kalamata olives; set aside.",
+    "3": "Drain bison flank steak; discard marinade. Spread filling mixture evenly over bison flank steak to within 1 inch of edges. Starting from long edge, roll up bison flank steak into a spiral, making sure the ends stay tucked in. Using heavy 100-percent-cotton kitchen string, tie bison roll at 1-inch intervals. Place bison roll on a rack in a shallow roasting pan. Insert an oven-going meat thermometer into the center of the bison roll.",
+    "4": "Roast, uncovered, for 35 to 40 minutes or until internal temperature registers 135 degrees F. Cover with foil; let stand for 10 minutes before slicing. Slice bison roll into 3/4-inch-thick slices."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the filling from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is filling from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is 2 cloves garlic from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is filling live after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "1 to 2 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to use the filling in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we heat (Step 2) and roast (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "bison flank steak": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallow cuts": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "diamond pattern": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "meat mallet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "8x10-inch rectangle": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "marinade": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "oregano": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "2 cloves garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spinach": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "back": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "feta cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "kalamata olives": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "filling mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "spiral": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ends": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "heavy 100-percent-cotton kitchen string": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bison roll": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "slice bison roll": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 21,
+    "num_questions": 7
+  }
+}

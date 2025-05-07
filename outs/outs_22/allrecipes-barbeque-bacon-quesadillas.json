@@ -1,0 +1,110 @@
+{
+  "title": "Barbeque Bacon Quesadillas",
+  "instructions": {
+    "1": "Heat 1 tablespoon olive oil over medium heat in a large skillet. Add onion; cook and stir onions until softened about 5 minutes. Stir in bacon pieces and brown sugar, and cook until bacon pieces are crisp. Remove from skillet.",
+    "2": "Spread 1/4 cup barbecue sauce on one tortilla. Sprinkle with 1/4 of the bacon and onion mixture, 1 tablespoon cilantro, and 1/2 cup Cheddar cheese. Top with a tortilla.",
+    "3": "Heat 1 teaspoon olive oil over medium heat in a large skillet. Place the uncooked quesadilla in the skillet. Cook on one side until browned and crisp, about 3 minutes. Flip, and cook on the other side until the cheese is completely melted, about 2 minutes more. Remove to a paper towel lined plate to cool. Repeat with remaining six tortillas. Slice into quarters using a sharp knife or kitchen scissors when cool enough to handle."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is onions from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onions live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "5 minutes"
+    }
+  ],
+  "entities": {
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "onions": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bacon and onion mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tortilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "uncooked quesadilla": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "kitchen scissors": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 3
+  }
+}

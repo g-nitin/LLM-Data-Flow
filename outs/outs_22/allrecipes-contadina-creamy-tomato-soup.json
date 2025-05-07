@@ -1,0 +1,111 @@
+{
+  "title": "Contadina\u00ae \"Creamy\" Tomato Soup",
+  "instructions": {
+    "1": "Heat olive oil in a large saucepan over medium heat. Cook shallots and red pepper flakes until softened, 2 to 3 minutes, stirring frequently.",
+    "2": "Stir in remaining ingredients, except basil. Puree in saucepan with a hand-held immersion blender or puree in batches in a blender or food processor. Return to saucepan and heat through.",
+    "3": "Top with fresh basil before serving, if desired."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is batches from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "2 to 3 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we heat (Step 1) and top (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1,
+        2
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "red pepper flakes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fresh basil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "title": "Mock Mimosa",
+  "instructions": {
+    "1": "Empty contents of drink mix tub into large plastic or glass pitcher. Add club soda; stir until drink mix is completely dissolved.",
+    "2": "Stir in orange juice.",
+    "3": "Serve over ice cubes in 10 tall glasses. Add orange slice to each glass."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is drink mix tub from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is drink mix tub live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we empty (Step 1) and stir (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "contents": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "drink mix tub": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large plastic or glass pitcher": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "club soda": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "drink mix": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ice cubes": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "each glass": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 3
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "title": "Eggplant Parmesan Rigatoni",
+  "instructions": {
+    "1": "In a large skillet, heat 1/4 cup vegetable oil over medium-high heat until hot but not smoking. Dredge the eggplant slices in the flour, shaking off any excess. Add enough eggplant slices to the skillet to fill it without crowding and fry until golden brown, about 2 minutes on each side. Transfer to a paper-towel-lined plate and sprinkle with salt. Repeat with the remaining eggplant slices and more oil. Let cool, then cut into 1/2-inch strips. Set aside.",
+    "2": "In a large pot of boiling salted water, cook the pasta until al dente; drain and return to the pot.",
+    "3": "Meanwhile, heat the olive oil in a large saucepan over medium heat. Add the garlic and cook, stirring, until golden, about 2 minutes. Stir in the tomatoes and bring to a boil, then cover and simmer until thickened, about 10 minutes",
+    "4": "Add the tomato sauce to the cooked pasta and toss to coat, then stir in the mozzarella. Divide the pasta among shallow bowls and top with the reserved eggplant strips, basil and Parmesan."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is flour from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skillet live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 minutes"
+    }
+  ],
+  "entities": {
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "any excess": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pasta": {
+      "step_introduced": 2,
+      "states": {
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomato sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cooked pasta": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "mozzarella": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "reserved eggplant strips": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "parmesan": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 13,
+    "num_questions": 3
+  }
+}

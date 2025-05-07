@@ -1,0 +1,23 @@
+{
+  "manual_list_path": "outs/outs_22_subset_analysis/manual_entity_subset.txt",
+  "final_entity_subset_size": 36,
+  "target_questions_per_type": 100,
+  "heuristic_verification_counts": {
+    "Available Expressions": 115,
+    "Concurrency Analysis": 0,
+    "Interval Analysis": 0,
+    "Live Variable Analysis": 116,
+    "Reaching Definitions": 127,
+    "Taint Analysis": 200,
+    "Type-State Analysis": 128,
+    "Very Busy Expressions": 123
+  },
+  "all_relevant_heuristic_targets_met": true,
+  "heuristic_details": "Counts based on case-insensitive, whole-word substring match of entities in question text.",
+  "heuristic_ignored_types": [
+    "Concurrency Analysis",
+    "Interval Analysis"
+  ],
+  "relevant_question_count_heuristic": 809,
+  "confidence_note": "Confidence that targets for ignored types (e.g., Interval Analysis) can be met relies on the success of the original full data run, not this heuristic count."
+}

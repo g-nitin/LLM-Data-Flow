@@ -1,0 +1,109 @@
+{
+  "title": "Broccoli and Cheese Stuffed Shells",
+  "instructions": {
+    "1": "Stir the ricotta cheese, broccoli, 1/2 cup of the mozzarella cheese, Parmesan cheese and black pepper in a medium bowl. Spoon about 2 tablespoons of the cheese mixture into each shell.",
+    "2": "Spread 1 cup of the pasta sauce in a 13x9x2-inch shallow baking dish. Place the filled shells on the sauce. Pour the remaining pasta sauce over the shells. Sprinkle with the remaining mozzarella cheese.",
+    "3": "Bake at 400 degrees F for 25 minutes or until hot."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is broccoli from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is mozzarella cheese live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "25 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we spread (Step 2) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "mozzarella cheese": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "broccoli": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cheese mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "each shell": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "remaining pasta sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "filled shells": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "remaining mozzarella cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Pasta Side Salad Made Over",
+  "instructions": {
+    "1": "Mix dressings in large bowl.",
+    "2": "Add remaining ingredients; mix lightly.",
+    "3": "Refrigerate 30 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is dressings from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is dressings live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we add (Step 2) and perform action (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "dressings": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerate": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 2,
+    "num_questions": 4
+  }
+}

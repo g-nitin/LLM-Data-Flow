@@ -1,0 +1,84 @@
+{
+  "title": "Cheese Dip II",
+  "instructions": {
+    "1": "Melt processed cheese in a slow cooker set for high heat. Stir occasionally to avoid burning.",
+    "2": "Place ground beef in a large skillet. Cook over medium high heat until evenly brown. Drain beef, and mix in water and taco seasoning mix. Cook and stir 2 to 4 minutes.",
+    "3": "Stir seasoned beef into the melted processed cheese. Mix in salsa. Cook and stir until well blended. Serve warm."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is skillet from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skillet live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "2 to 4 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we Melt (Step 1) and place (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ground beef": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "taco seasoning mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "melted processed cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "salsa": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "title": "Lemon Chicken with Broccoli",
+  "instructions": {
+    "1": "Grate 1 tablespoon zest and squeeze 1/4 cup juice from the lemon.",
+    "2": "Heat 1 tablespoon oil in a 12-inch skillet over medium-high heat. Add the chicken and cook until well browned on all sides. Remove the chicken from the skillet. Pour off any fat.",
+    "3": "Reduce the heat to medium. Heat the remaining oil in the skillet. Add the onion and garlic and cook and stir for 2 minutes. Stir in the concentrated broth and lemon juice. Return the chicken to the skillet. Reduce the heat to low. Cover and cook for 20 minutes or until the chicken is cooked through.",
+    "4": "Stir the broccoli and lemon zest in the skillet. Cover and cook until the broccoli is tender-crisp."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is onion from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onion live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "20 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we grate (Step 1) and stir (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "lemon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "any fat": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "broccoli": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lemon zest": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 8,
+    "num_questions": 4
+  }
+}

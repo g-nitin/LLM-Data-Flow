@@ -1,0 +1,152 @@
+{
+  "title": "Apple Pie Streusel Cake",
+  "instructions": {
+    "1": "Heat oven to 350 degrees F.",
+    "2": ". In a large bowl of a food processor fitted with blade attachment combine flour, brown sugar and 2 tsp. cinnamon. Pulse until well combined. Add butter slowly, pulsing between additions, until pea-sized pieces form. Press 1/2 of the mixture in an ungreased 9-inch springform pan; set remaining mixture aside.",
+    "3": "Place apples, Stevia In The Raw\u00ae, cornstarch and remaining 1 teaspoon cinnamon in a large bowl; stir to combine. Place apples in prepared springform pan. Evenly sprinkle the remaining mixture over apples.",
+    "4": "Place springform pan on baking sheet with sides. Bake 60 to 70 minutes until top is golden. Remove from oven. Run knife around the edge of pan; let cake cool completely. Remove springform ring just before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is remaining mixture from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is brown sugar live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "60 to 70 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we heat (Step 1) and fit (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "blade attachment": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "apples": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "stevia": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "raw": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "remaining mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cake": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "springform ring": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 12,
+    "num_questions": 4
+  }
+}

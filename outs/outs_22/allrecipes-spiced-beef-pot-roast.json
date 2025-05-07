@@ -1,0 +1,128 @@
+{
+  "title": "Spiced Beef Pot Roast",
+  "instructions": {
+    "1": "Combine the salt, pepper, allspice and mace; rub over the roast. In a bowl, combine the tomato juice, onion, 6 tablespoons oil, lemon juice and vinegar; mix well. Pour half of the marinade into a large resealable plastic bag; add roast. Seal bag and turn to coat; refrigerate for 8 hours or overnight. Cover and refrigerate remaining marinade.",
+    "2": "Drain and discard marinade from meat. In a Dutch oven, brown roast on both sides in remaining oil over medium-high heat; drain. Pour reserved marinade over roast; add bay leaves. Bring to a boil. Reduce heat; cover and simmer for 2-3/4 hours or until meat is tender.",
+    "3": "Remove roast and keep warm. Discard bay leaves. Skim fat from pan juices. In a small bowl, combine cornstarch and water until smooth; gradually stir into pan juices. Bring to a boil; cook and stir for 2 minutes or until thickened. Strain; serve with meat."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is onion from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is allspice live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "2-3/4 hours"
+    }
+  ],
+  "entities": {
+    "allspice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mace": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "marinade": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "meat": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "bay leaves": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fat": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 3
+  }
+}

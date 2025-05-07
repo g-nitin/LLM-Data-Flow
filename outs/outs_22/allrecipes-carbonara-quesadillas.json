@@ -1,0 +1,239 @@
+{
+  "title": "Carbonara Quesadillas",
+  "instructions": {
+    "1": "Season chicken with salt and black pepper.",
+    "2": "Heat olive oil in a large skillet over medium heat. Cook and stir chicken in the hot oil until chicken is fully cooked and no longer pink in the center, 8 to 10 minutes. Remove chicken from skillet and set aside. Pour out any excess grease from the pan.",
+    "3": "Cook and stir bacon and mushrooms in the same skillet over medium heat until mushrooms are lightly browned, about 5 minutes. Reduce heat to low.",
+    "4": "Slice chicken into bite-size strips.",
+    "5": "Stir Alfredo sauce and chicken strips into mushroom mixture; simmer for a few minutes.",
+    "6": "Melt butter in a separate large skillet. Place a tortilla in the melted butter.",
+    "7": "Scoop about 1/5 chicken alfredo mixture onto 1 half of warm tortilla.",
+    "8": "Sprinkle about 1/5 mozzarella cheese over chicken alfredo mixture layer; fold tortilla in half. Cook until bottom of tortilla is lightly browned and mozzarella is melted, 3 to 5 minutes.",
+    "9": "Carefully flip quesadilla with a spatula and lightly brown the other side of tortilla, 3 to 5 minutes. Repeat with remaining tortillas and filling.",
+    "10": "Slice quesadillas into thirds to serve."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the chicken from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chicken from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is tortilla from Step 6 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is chicken strips from Step 5 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is tortilla live after Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 8?",
+      "answer": "3 to 5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 6, is it still valid to use the tortilla in Step 9?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we season (Step 1) and slice (Step 10) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "chicken": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1,
+        4
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "black pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        3,
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "bacon": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bite-size strips": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "alfredo sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chicken strips": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "mushroom mixture": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tortilla": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        9,
+        8
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "melted butter": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "warm tortilla": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "chicken alfredo mixture layer": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "mozzarella": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "quesadilla": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "quesadillas": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 10,
+    "num_entities": 17,
+    "num_questions": 8
+  }
+}

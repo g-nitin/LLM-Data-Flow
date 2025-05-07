@@ -1,0 +1,119 @@
+{
+  "title": "Caramelized Corned Beef",
+  "instructions": {
+    "1": "Place corned beef in a slow cooker. Pour beef stock over corned beef and add enough water to raise liquid to within 2 inches of top.",
+    "2": "Cook on Low for 5 hours 15 minutes to 7 hours 15 minutes. Add potatoes to slow cooker and cook for 45 minutes.",
+    "3": "Preheat oven to 350 degrees F (175 degrees C) and set rack to center. Grease a roasting pan.",
+    "4": "Remove corned beef from slow cooker and blot dry with a paper towel. Strain potatoes from slow cooker using a slotted spoon, reserving liquid in slow cooker. Place corned beef, fat-side up, and potatoes, cut-side up, in the roasting pan; generously brush with olive oil.",
+    "5": "Cook in the preheated oven until outside of corned beef is caramelized and browned, 45 to 60 minutes.",
+    "6": "When the beef is almost finished in the oven, place cabbage in the slow cooker; cook on Low until tender, 15 to 20 minutes.",
+    "7": "Slice corned beef and serve in roasting pan with potatoes. Strain cabbage and serve on the side."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the potatoes from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is potatoes from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 5 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is outside live after Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "45 to 60 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to use the oven in Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 5) and finish (Step 6) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "potatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        7
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        5
+      ],
+      "defined_in": [
+        3,
+        5
+      ],
+      "consumed_in": [
+        6
+      ]
+    },
+    "outside": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "beef": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        6
+      ]
+    },
+    "cabbage": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": [
+        7
+      ]
+    }
+  },
+  "metadata": {
+    "num_steps": 7,
+    "num_entities": 5,
+    "num_questions": 8
+  }
+}

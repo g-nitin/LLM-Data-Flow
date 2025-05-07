@@ -1,0 +1,78 @@
+{
+  "title": "Stompin' Steakhouse Chili with Blue Cheese Toast",
+  "instructions": {
+    "1": "Using half of 1 Safeway SELECT Artisan Sour Dough Baguette (8 oz.), cut diagonally to make 18 slices, about 1/4 inch thick and 3 inches long.",
+    "2": "In a bowl, mash together 3/4 cup Safeway SELECT Primo Taglio Imported Danish Blue Cheese, 3 tablespoons Lucerne Sweet Cream Butter, 1 tablespoon minced parsley, and 3/4 teaspoon black pepper until blended and easy to spread.",
+    "3": "Spread mixture equally on one side of each bread slice; lay buttered side up and slightly apart on an 11- by 17-inch baking sheet. Bake in a 350 degrees F oven until bread is crisp, about 15 minutes.",
+    "4": "Top slices with additional blue cheese spread, if desired."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is bread live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we use (Step 1) and top (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "additional blue cheese spread": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 4,
+    "num_questions": 4
+  }
+}

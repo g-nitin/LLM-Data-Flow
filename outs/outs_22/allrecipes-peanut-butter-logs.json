@@ -1,0 +1,70 @@
+{
+  "title": "Peanut Butter Logs",
+  "instructions": {
+    "1": "Blend JIF\u00ae and butter or margarine; stir in powdered sugar. Add cereal; mix well, crushing cereal slightly.",
+    "2": "Shape into three 7 x 1 1/4-inch logs. Cover with peanuts. Wrap in waxed paper or clear plastic wrap; chill till firm.",
+    "3": "To serve, carefully cut into 1/2-inch-thick slices."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is jif from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cereal live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we blend (Step 1) and shape (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "jif": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "margarine": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cereal": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "peanuts": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 4,
+    "num_questions": 3
+  }
+}

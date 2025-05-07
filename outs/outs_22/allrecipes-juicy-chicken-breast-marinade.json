@@ -1,0 +1,140 @@
+{
+  "title": "Juicy Chicken Breast Marinade",
+  "instructions": {
+    "1": "Pound chicken breasts on a work surface to at least 1/2-inch thickness.",
+    "2": "Whisk safflower oil, lemon juice, garlic, and Italian seasoning together in a bowl and pour into a resealable plastic bag. Add chicken, coat with the marinade, squeeze out excess air, and seal the bag. Marinate in the refrigerator for 6 to 24 hours.",
+    "3": "Preheat an outdoor grill for medium-high heat and lightly oil the grate.",
+    "4": "Remove chicken from the marinade and shake off excess. Discard the remaining marinade.",
+    "5": "Cook chicken on preheated grill until longer pink in the center, about 3 minutes per side. Transfer chicken to a plate and let sit for 10 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is chicken from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is garlic live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pound (Step 1) and remove (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "chicken breasts": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "italian seasoning": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {
+        "4": "cooked"
+      },
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2,
+        5
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "marinade": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "excess air": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "remaining marinade": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "excess": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

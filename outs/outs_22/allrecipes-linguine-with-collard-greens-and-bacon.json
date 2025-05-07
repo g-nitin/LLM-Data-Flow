@@ -1,0 +1,184 @@
+{
+  "title": "Linguine with Collard Greens and Bacon",
+  "instructions": {
+    "1": "Cook bacon in a 5-quart heavy pot over moderate heat, stirring occasionally, until crisp, about 5 minutes, then transfer with a slotted spoon to paper towels to drain. Pour off all but 3 tablespoons bacon fat from pot. Add pine nuts to pot and cook over moderate heat, stirring, until golden, about 2 minutes. Transfer nuts with slotted spoon to paper towels to drain and season with salt.",
+    "2": "Add shallots to pot and cook over moderate heat, stirring, until softened, about 4 minutes. Add garlic and red pepper flakes and cook, stirring, 1 minute. Add oil and half of collard greens and cook, stirring, until slightly wilted, about 1 minute. Add remaining greens and salt and continue to cook, stirring, until greens are crisp-tender, about 2 minutes more. Add water and cover pot, then simmer greens, stirring occasionally, until just tender, about 15 minutes.",
+    "3": "While collard greens are simmering, cook linguine in a 6- to 8-quart pot of boiling salted water until al dente.",
+    "4": "Drain linguine in a colander. Add drained linguine and tomatoes to pot with greens and cook over moderately high heat, stirring constantly, 1 minute. Season pasta with salt and pepper and serve topped with bacon, pine nuts, and cheese shavings."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the bacon from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is bacon from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is pine nuts from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is collard greens live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "1 minute"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the bacon in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 1) and add (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "bacon": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "all but 3 tablespoons bacon fat": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pine nuts": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "red pepper flakes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "collard greens": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "linguine": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "tomatoes": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "greens": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pasta": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese shavings": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 12,
+    "num_questions": 7
+  }
+}

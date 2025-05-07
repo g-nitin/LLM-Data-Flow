@@ -1,0 +1,93 @@
+{
+  "title": "Grands!\u00ae Cheesy BBQ Cups",
+  "instructions": {
+    "1": "In 10-inch nonstick skillet, mix cooked beef and barbecue sauce. Heat over medium-high heat, stirring constantly, until hot.",
+    "2": "Pull each biscuit apart into 2 layers; press each into 4-inch round. Place 1 round in each of 8 greased regular-size muffin cups. Firmly press in bottom and up side, forming 1/4-inch rim. Fill with beef mixture; sprinkle with cheese.",
+    "3": "Bake at 375 degrees F 13 to 15 minutes or until edges of biscuits are golden brown. Cool 1 minute; remove from pan."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is each biscuit from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is barbecue sauce live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "1 minute"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we mix (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cooked beef": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "barbecue sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "each biscuit": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beef mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "biscuits": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 4
+  }
+}

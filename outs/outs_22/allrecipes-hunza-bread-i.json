@@ -1,0 +1,100 @@
+{
+  "title": "Hunza Bread I",
+  "instructions": {
+    "1": "Place ingredients in the pan of the bread machine in the order suggested by the manufacturer. Select the Dough/Manual setting and Start.",
+    "2": "After the first rise, remove the bread from the bread machine. Shape into two loaves, and place into lightly greased 7x3 inch loaf pans. Allow the dough to rise until doubled in volume, but not more than an inch above the top of the pan.",
+    "3": "Bake at 350 degrees F (175 degrees C) for 35 to 40 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is manufacturer from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is volume live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "35 to 40 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we place (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "order": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "manufacturer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dough/manual setting": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "first rise": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "dough": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "volume": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

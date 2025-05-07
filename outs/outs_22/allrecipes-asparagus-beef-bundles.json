@@ -1,0 +1,118 @@
+{
+  "title": "Asparagus Beef Bundles",
+  "instructions": {
+    "1": "Bring a pot of water to a boil. Drop asparagus into boiling water and cook for 2 minutes; drain. Immediately plunge asparagus into a bowl of iced water.",
+    "2": "Mix cream cheese, horseradish, parsley, and chopped chives in a bowl. Lay thinly sliced beef onto a large sheet of waxed paper. Spread cream cheese mixture over each roast beef slice. Place one asparagus spear onto each slice so the tip overlaps an edge. Roll beef slice around the the asparagus. Secure by tying a chive around the wrapped asparagus.",
+    "3": "Arrange rolls on a plate and cover with plastic wrap; refrigerate at least 30 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is parsley from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cream cheese live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 1) and mix (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "asparagus": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "horseradish": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "parsley": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cream cheese mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tip": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "wrapped asparagus": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chive": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "rolls": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

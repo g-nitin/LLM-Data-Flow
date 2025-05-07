@@ -1,0 +1,244 @@
+{
+  "title": "Grandma's Old Italian Spaghetti Sauce with Meatballs",
+  "instructions": {
+    "1": "Heat 2 tablespoons olive oil over medium heat in a large saucepan. Add 3 whole garlic cloves; cook until brown and fragrant, 5 to 8 minutes. Remove garlic cloves; set aside. Add pig's feet and pork neck bones to the saucepan; cook, turning occasionally, until meat and bones have browned, about 15 minutes.",
+    "2": "Return garlic cloves to saucepan; stir in 1 1/2 cups water and tomato paste. Bring to a boil; add tomato pur\u00e9e. Reduce heat to low; simmer until pig's feet are tender and mixture begins to thicken, about 3 hours, stirring often from the bottom to prevent burning. Stir in sugar, black pepper, and baking soda; simmer while preparing meatballs.",
+    "3": "Soak torn bread in a bowl with remaining 1 cup water; squeeze excess water from bread. Place bread in a large bowl. Add ground pork, ground veal, ground beef, and 6 beaten eggs; mix thoroughly and form into 24 meatballs about 2 1/2-inches in diameter.",
+    "4": "Heat remaining 1 tablespoon olive oil in a large skillet over medium heat, stir in basil and minced garlic; cook about 1 minute. Add meatballs, working in batches, if necessary; season with salt and black pepper. Cook on all sides until brown, about 15 minutes.",
+    "5": "Add meatballs, oil, basil, and minced garlic to sauce, gently stirring to avoid breaking meatballs. Add 6 whole hard-boiled eggs; simmer until meatballs are cooked, sauce is thick, and flavors have blended, about 1 1/2 hours."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the meatballs from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is saucepan from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is meatballs from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is basil from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is mixture from Step 2 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan live after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "1/2 hours"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to add the meatballs in Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we return (Step 2) and add (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pig's feet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pork neck bones": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tomato paste": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tomato pur\u00e9e": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "baking soda": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "meatballs": {
+      "step_introduced": 2,
+      "states": {
+        "4": "cooked"
+      },
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        2,
+        5
+      ],
+      "consumed_in": []
+    },
+    "torn bread": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ground pork": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "diameter": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 18,
+    "num_questions": 9
+  }
+}

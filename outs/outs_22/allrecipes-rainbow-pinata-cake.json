@@ -1,0 +1,457 @@
+{
+  "title": "Rainbow Pi\u00f1ata Cake",
+  "instructions": {
+    "1": "Preheat the oven to 350 degrees F (175 degrees C). Grease and lightly flour 4 (9-inch) cake pans.",
+    "2": "Whisk flour, salt, baking powder, and baking soda together in a medium bowl and set aside.",
+    "3": "Beat butter in a stand mixer fitted with the paddle attachment until creamy, about 1 minute. Beat in sugar on high speed, scraping the bowl with a spatula as needed, until fully incorporated, about 5 minutes. Reduce speed to medium-high; beat in eggs one at a time, mixing well after each addition. Mix in vanilla.",
+    "4": "Mix flour mixture into creamed mixture in 3 additions, alternating with buttermilk, until batter is smooth and slightly thick.",
+    "5": "Divide batter evenly among 4 bowls. Tint each portion of batter with green, blue, purple, or pink food coloring; stir until smooth. Pour batter into the prepared cake pans.",
+    "6": "Bake in the preheated oven until a toothpick inserted into the center of cakes comes out clean, about 25 minutes. Place the pans onto wire racks to cool completely, about 25 minutes.",
+    "7": "Make frosting: Beat butter and cream cheese in a stand mixer fitted with a clean paddle attachment until creamy, about 2 minutes. Add confectioners' sugar, heavy cream, and vanilla; beat on low speed for 30 to 60 seconds. Increase speed to high and beat frosting until fluffy, about 3 minutes. Scrape down the sides of the bowl as needed. Mix in salt.",
+    "8": "Cut a 4-inch circle out of the center of 2 cake layers using a round cookie cutter.",
+    "9": "Place one of the intact cake layers on a cake stand or serving plate. Use an offset spatula or butter knife to spread frosting over cake layer. Position one of the cake rings on top. Spread frosting over the top and inside the circle. Repeat with second cake ring. Fill the hole with candies and sprinkles. Place remaining intact cake layer on top. Frost the top and sides of entire cake.",
+    "10": "Tint any remaining frosting with pink food coloring and pipe decoratively over cake.",
+    "11": "Cut cake into slices; spoon any candies that spill out over the slices."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 7, is the mixer from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is flour from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is mixer from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is vanilla from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is batter from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is frosting from Step 7 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is cake from Step 10 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is cake stand from Step 9 still available in Step 11?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is green, blue, purple, or pink food coloring live after Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 7?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to use the vanilla in Step 7?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 3 introduce a potential safety concern to the recipe?",
+      "answer": true
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we make (Step 7) and cut (Step 11) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        6
+      ],
+      "defined_in": [
+        1,
+        6
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "baking powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "baking soda": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        7
+      ],
+      "defined_in": [
+        3,
+        7
+      ],
+      "consumed_in": []
+    },
+    "paddle attachment": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "high speed": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3,
+        7
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "buttermilk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "batter": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "each portion": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "green, blue, purple, or pink food coloring": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "toothpick": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cakes": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "frosting": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        9,
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "clean paddle attachment": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "confectioners' sugar": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "heavy cream": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "low speed": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "4-inch circle": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "round cookie cutter": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "intact cake layers": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "cake stand": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "second cake ring": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "circle": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "hole": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "candies": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "sprinkles": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "entire cake": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "any remaining frosting": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "pink food coloring": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "cake": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "any candies": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 11,
+    "num_entities": 37,
+    "num_questions": 14
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "title": "Frightening Fizz",
+  "instructions": {
+    "1": "Scoop ice cream into a large glass.",
+    "2": "Pour in Izze Sparkling Clementine.",
+    "3": "Shake cinnamon powder on top (to your taste preference).",
+    "4": "Grab a spoon and enjoy!"
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is ice cream from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is izze sparkling clementine live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pour (Step 2) and grab (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ice cream": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large glass": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "izze sparkling clementine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cinnamon powder": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "taste preference": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 5,
+    "num_questions": 3
+  }
+}

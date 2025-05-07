@@ -1,0 +1,100 @@
+{
+  "title": "Ham Roulette",
+  "instructions": {
+    "1": "In a small bowl, mix together the cream cheese, pickles, mustard, and chives.",
+    "2": "Spoon 1/5 of the mixture onto each ham slice, then roll ham slices up carefully. Wrap each roll in aluminum foil, and refrigerate for 2 hours minimum.",
+    "3": "When you are ready to serve, unwrap the ham 'roulettes', and slice. Serve chilled."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is mixture from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cream cheese live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "2 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we mix (Step 1) and spoon (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cream cheese": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pickles": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chives": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "each roll": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ham 'roulettes": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

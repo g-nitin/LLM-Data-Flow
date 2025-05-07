@@ -1,0 +1,399 @@
+{
+  "title": "Savory Blue Cheese Cheesecake with Cherry Pear Compote and Cherry Balsamic Glaze",
+  "instructions": {
+    "1": "Beat 1/2 cup butter, 4 ounces Parmesan cheese, thyme, 1/2 teaspoon salt, and 1/2 teaspoon black pepper with an electric mixer in a large bowl until light and fluffy. Add the flour, and mix on low until mixture resembles large crumbles. Turn dough out and shape into a log. Wrap dough with plastic wrap, and refrigerate until chilled, about 1 hour.",
+    "2": "Preheat an oven to 350 degrees F (175 degrees C). Slice the prepared dough into 1/4-inch thick pieces and place on a baking sheet.",
+    "3": "Bake in the preheated oven until golden brown, about 22 minutes. Cool crackers on the sheets for 10 minutes before removing to cool completely on a wire rack. Reduce oven heat to 300 degrees F (150 degrees C). Line the bottom of a 10-inch springform pan with parchment paper, then butter the paper and the sides of the pan.",
+    "4": "Place the toasted pecans, baked crackers, and 1 tablespoon melted butter in a food processor. Pulse until crumbled. Press the crumbs into the bottom of the prepared pan. Chill in the refrigerator while preparing the filling.",
+    "5": "Beat three 8-ounce packages of cream cheese, 8 ounces of blue cheese, and 6 ounces of Parmesan cheese with an electric mixer in a large bowl until smooth and creamy. Add the eggs one at a time, allowing each egg to blend into the mixture before adding the next. Beat in the heavy cream and 1 teaspoon pepper with the last egg. Pour the mixture into prepared pan.",
+    "6": "Bake in the preheated oven for about 1 1/2 hours. The cheesecake is ready when the edges have nicely puffed and the surface of the cheesecake is firm except for a small spot in the center that will jiggle when the pan is gently shaken. Run the tip of a paring knife around the edges of the pan, set the pan on a wire rack, and allow the cheesecake to cool at room temperature for 1 hour before placing into the refrigerator, and cooling 4 hours to overnight.",
+    "7": "Heat the olive oil in a skillet over medium heat. Stir in the onion; cook and stir until the onion has softened and turned translucent, about 5 minutes. Reduce heat to medium-low, and continue cooking and stirring until the onion is very tender and dark brown, 15 to 20 minutes more. Add in the chopped pears, dried cherries, balsamic vinegar, brown sugar, and 1/4 teaspoon salt. Cook and stir until pears are tender. Remove the onion and fruit from the skillet using a slotted spoon. Drain the juice back into the skillet, then mash the fruit in a bowl with a fork. Simmer the juice in the skillet over medium heat until thickened, about 5 minutes. Transfer glaze to a separate bowl.",
+    "8": "Beat the remaining 8-ounce package of cream cheese, 4 ounces of blue cheese, 2 ounces of Parmesan cheese, and 1/2 teaspoon of black pepper with an electric mixer in a bowl until smooth. Spread the cheese mixture over the cooled cheesecake. Sprinkle with candied pecans. Serve with cherry pear compote, sliced pear, and vinegar glaze on the side."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the oven from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is mixer from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is mixer from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is mixture from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is refrigerator from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is filling from Step 4 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is mixer live after Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the mixer in Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bake (Step 3) and beat (Step 8) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "thyme": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        5,
+        8
+      ],
+      "defined_in": [
+        1,
+        5,
+        8
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "large crumbles": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shape": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "log": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3,
+        6
+      ],
+      "defined_in": [
+        2,
+        3,
+        6
+      ],
+      "consumed_in": []
+    },
+    "prepared dough": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "crackers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "toasted pecans": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "crumbs": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "parmesan cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "each egg": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "heavy cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cheesecake": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "small spot": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "tip": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        7
+      ]
+    },
+    "onion": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        7
+      ]
+    },
+    "chopped pears": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "balsamic vinegar": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "fruit": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        7
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "glaze": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "cheese mixture": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "cooled cheesecake": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "cherry pear compote": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "vinegar glaze": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 8,
+    "num_entities": 33,
+    "num_questions": 12
+  }
+}

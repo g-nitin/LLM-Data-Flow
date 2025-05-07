@@ -1,0 +1,110 @@
+{
+  "title": "Swedish Meatballs (From a Swede!)",
+  "instructions": {
+    "1": "Melt 1 tablespoon butter in a frying pan over low heat; cook and stir onion in melted butter until lightly browned, 5 to 8 minutes.",
+    "2": "Mix bread crumbs, water, and half-and-half in a large bowl; let stand for about 2 minutes. Stir cooked onion, ground beef, ground pork, salt, white pepper, and sugar into bread crumb mixture until thoroughly mixed. Shape mixture into about 48 very small meatballs.",
+    "3": "Melt 3 tablespoons butter in a skillet; add meatballs. Brown slowly, allowing about 25 minutes, until meatballs are fully cooked in the middle and no longer pink. Shake pan occasionally to cook evenly."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is bread crumbs from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onion live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "25 minutes"
+    }
+  ],
+  "entities": {
+    "onion": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread crumbs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooked onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "white pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread crumb mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "meatballs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 3
+  }
+}

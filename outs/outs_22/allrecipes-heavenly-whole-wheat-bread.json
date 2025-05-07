@@ -1,0 +1,88 @@
+{
+  "title": "Heavenly Whole Wheat Bread",
+  "instructions": {
+    "1": "Combine water and butter in a bread machine pan. Add, respectively, the whole wheat flour, bread flour, salt, sugar, and potato flakes; top with yeast, assuring yeast and salt do not mix.",
+    "2": "Select Whole Wheat cycle; press Start.",
+    "3": "Remove loaf from pan to a wire rack to cool."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is yeast from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is potato flakes live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we select (Step 2) and remove (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "whole wheat flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "potato flakes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "yeast": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "whole wheat cycle": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "loaf": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 3
+  }
+}

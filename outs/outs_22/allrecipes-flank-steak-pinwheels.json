@@ -1,0 +1,216 @@
+{
+  "title": "Flank Steak Pinwheels",
+  "instructions": {
+    "1": "Preheat grill to high.",
+    "2": "Place sun-dried tomatoes in a bowl; pour boiling water over them and let steep until softened, about 10 minutes. Drain and chop.",
+    "3": "Meanwhile, place steak between 2 large pieces of plastic wrap. Pound each side of the steak thoroughly with the pointed side of a meat mallet until the steak is an even 1/4-inch thickness.",
+    "4": "Rub garlic all over one side of the steak. Spread cheese lengthwise in a 3-inch-wide strip down the middle of the steak. Top with the sun-dried tomatoes and spinach. Starting at one edge of a long side, roll the steak up tightly, tucking in the filling as you go.",
+    "5": "Carefully rub salt and pepper all over the outside of the steak roll. Turn the roll so the overlapping edge is on top. Push 8 skewers, evenly spaced, through the roll, close to the overlapping edge to hold the roll together. Slice the roll into 8 equal portions, roughly 1 to 1 1/2 inches thick, with a skewer in each. Lay the slices on their sides and push the skewer through so it sticks out about 1 inch.",
+    "6": "Oil the grill rack (see Tip). Grill the pinwheels 3 to 4 minutes per side for medium-rare. Use a spatula when turning them to prevent too much filling from falling out. (Don't worry if the ends of the skewers burn. They will still hold the pinwheels together.) Remove the skewers; let the pinwheels rest for 5 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the steak from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is steak from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is outside from Step 5 still available in Step 6?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is steak live after Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 6?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to roll the steak in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we rub (Step 4) and oil (Step 6) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "grill": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sun-dried tomatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "steak": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "meat mallet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "even 1/4-inch thickness": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "3-inch-wide strip": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "spinach": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "outside": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "steak roll": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "skewer": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tip": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pinwheels": {
+      "step_introduced": 6,
+      "states": {
+        "5": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "ends": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "skewers": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        6
+      ]
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 17,
+    "num_questions": 7
+  }
+}

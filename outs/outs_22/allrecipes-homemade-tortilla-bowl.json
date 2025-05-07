@@ -1,0 +1,94 @@
+{
+  "title": "Homemade Tortilla Bowl",
+  "instructions": {
+    "1": "Heat oil in a large, heavy saucepan for about 7 minutes. Ensure oil is hot enough by sticking the end of a wooden spoon into the oil; bubbles should form around the wood start to float up.",
+    "2": "Place 1 tortilla on a slotted spoon and bottom of 1 jar on top of tortilla; lower into the hot oil. Carefully remove spoon, making sure not to tear the tortilla. Mold tortilla around the bottom of the jar using the spoon; cook for about 1 minute.",
+    "3": "Remove the jar and tortilla bowl from oil using tongs, tilting the tortilla bowl so excess oil goes back into the saucepan. Lay bowl on a paper towel-lined plate to drain and cool. Repeat with remaining tortillas and jars."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the saucepan from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is saucepan from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is wood from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan live after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "7 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the saucepan in Step 3?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "end": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bubbles": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "wood": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tortilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 6
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "title": "Old Fashioned Butter Valentine Cookies Dipped in Chocolate",
+  "instructions": {
+    "1": "Sift the flour, baking powder, and salt together in a bowl; set aside.",
+    "2": "Beat the 1 cup butter with the sugar, egg, milk, and vanilla extract in another bowl until well mixed.",
+    "3": "Gradually mix the flour mixture into the butter mixture.",
+    "4": "Shape the dough into a disk; wrap with plastic wrap and refrigerate for at least 2 hours.",
+    "5": "Working with half the dough at a time, roll out dough to about 1/8-inch thick.",
+    "6": "Cut into cookies with a large heart shaped cookie cutter. Repeat with the remaining half of the dough.",
+    "7": "Cut the center of half of the cookies with a smaller heart shaped cookie cutter.",
+    "8": "Place an open centered cookie on top of a whole cookie to form a sandwich. Arrange cookies on an ungreased baking sheet; set aside.",
+    "9": "Preheat an oven to 400 degrees F (200 degrees C).",
+    "10": "Place the raspberry jam in a microwave save bowl and heat on high until jam is runny, about 35 seconds.",
+    "11": "Fill the center of the cookies with the jam. Refrigerate cookies for 10 minutes.",
+    "12": "Bake in the preheated oven until the cookies are firm to the touch, 5 to 8 minutes. Cookies will be pale in color.",
+    "13": "Transfer cookies to a wire rack to cool completely.",
+    "14": "Melt the chocolate and 2 tablespoons butter in a microwave-safe glass or ceramic bowl in 30-second intervals, stirring after each melting until smooth, for 1 to 3 minutes, depending on your microwave.",
+    "15": "Spoon chocolate decoratively over half of each cookie.",
+    "16": "Place cookie on a waxed paper lined baking sheet and refrigerate until the chocolate has set, about 15 minutes."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 12, is the oven from Step 9 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is flour from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is dough from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is cookies from Step 6 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 9 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chocolate from Step 14 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is butter mixture from Step 3 still available in Step 14?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is oven live after Step 10?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 10?",
+      "answer": "35 seconds"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 4, is it still valid to use the dough in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we place (Step 8) and transfer (Step 13) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "1 cup butter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla extract": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "disk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "half the dough": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cookies": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        11,
+        12,
+        13,
+        7
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "large heart shaped cookie cutter": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "smaller heart shaped cookie cutter": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "open centered cookie": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "sandwich": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        9,
+        12
+      ],
+      "defined_in": [
+        9,
+        12
+      ],
+      "consumed_in": []
+    },
+    "raspberry jam": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "jam": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "touch": {
+      "step_introduced": 12,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        12
+      ],
+      "consumed_in": []
+    },
+    "chocolate": {
+      "step_introduced": 14,
+      "states": {},
+      "used_in": [
+        14,
+        15,
+        16
+      ],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "microwave-safe glass": {
+      "step_introduced": 14,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "each melting": {
+      "step_introduced": 14,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 14,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "each cookie": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "cookie": {
+      "step_introduced": 16,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        16
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 16,
+    "num_entities": 26,
+    "num_questions": 11
+  }
+}

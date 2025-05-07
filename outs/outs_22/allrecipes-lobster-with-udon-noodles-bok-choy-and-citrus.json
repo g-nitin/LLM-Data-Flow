@@ -1,0 +1,311 @@
+{
+  "title": "Lobster with Udon Noodles, Bok Choy and Citrus",
+  "instructions": {
+    "1": "Bring a large pot of water to a rolling boil over high heat. Add the lobsters head first and cook for 5 minutes. Using tongs, transfer the lobsters to a rimmed baking sheet. Bring the water back to a boil. Add the bok choy and cook for 30 seconds. Transfer the bok choy to a work surface and quarter each head lengthwise.",
+    "2": "Add the udon noodles to the boiling water and cook, stirring often, until al dente, about 6 minutes. Drain the udon. Return the noodles to the pot and cover with cold water. Drain and rinse the udon 2 more times, then drain thoroughly, lifting the noodles a few times to help them dry.",
+    "3": "In a small skillet, heat 1/4 cup of the oil. Add the shallots and cook over moderate heat, stirring a few times, until browned and crisp, about 3 minutes. Using a slotted spoon, transfer the shallots to paper towels to drain, then salt lightly.",
+    "4": "Crack the lobster claws and remove the meat in one piece. Twist off the lobster tails. Using kitchen shears, slit one side of each tail shell and remove the meat in one piece. Cut the tail meat in half lengthwise and discard the intestinal veins.",
+    "5": "Using a sharp knife, peel the orange, taking care to remove all of the bitter white pith. Cut in between the membranes to release the sections.",
+    "6": "In a large skillet, heat the remaining 3 tablespoons of oil. Add the onion and mushrooms and cook over high heat, stirring occasionally, until browned, about 5 minutes. Add the brown sugar, bok choy, vegetable stock and sake and bring to a simmer. Add the udon, season with salt and pepper and stir well.",
+    "7": "In a medium skillet, melt the butter. Add the lobster meat and cook over moderately low heat, turning a few times, until warmed through, about 2 minutes. Crush the fried shallots over the lobster and stir to coat. Season with salt and pepper. Transfer the noodles and vegetables to a serving bowl or deep plates, set the lobster and orange sections on top and serve right away."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the skillet from Step 3 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is skillet from Step 3 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is skillet from Step 3 still available in Step 7?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is bok choy live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "30 seconds"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 3, is it still valid to use the skillet in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 1) and add (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "rolling boil": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lobsters": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bok choy": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "udon noodles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "udon": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        3,
+        7
+      ],
+      "consumed_in": []
+    },
+    "shallots": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lobster claws": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "tail meat": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lobster tails": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "kitchen shears": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "each tail shell": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "intestinal veins": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "orange": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bitter white pith": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "membranes": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sections": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "sake": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "lobster meat": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "fried shallots": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lobster": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "noodles": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "lobster and orange sections": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 7,
+    "num_entities": 27,
+    "num_questions": 7
+  }
+}

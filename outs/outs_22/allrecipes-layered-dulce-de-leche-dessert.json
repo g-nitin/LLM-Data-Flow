@@ -1,0 +1,138 @@
+{
+  "title": "Layered Dulce de Leche Dessert",
+  "instructions": {
+    "1": "Chop 4 of the wafers; set aside. Line 9x5-inch loaf pan with foil, with ends of foil extending over sides of pan. Arrange 12 of the remaining wafers in single layer on bottom of prepared pan; set aside.",
+    "2": "Pour milk into large bowl. Add dry pudding mixes. Beat with wire whisk 2 min. or until well blended. (Mixture will be thick.) Gently stir in the whipped topping. Spoon one third of the pudding mixture over wafers in pan; top with 12 of the remaining wafers and 2 Tbsp. of the caramel topping. Repeat layers of pudding mixture, wafers and caramel topping. Cover with the remaining pudding mixture. Sprinkle with chopped wafers; press wafers gently into pudding mixture.",
+    "3": "Freeze 4 hours or until firm. Lift dessert from pan, using foil handles; remove foil. Place dessert on serving plate. Let stand 15 min. to soften slightly before cutting into 12 slices to serve. Store leftover dessert in freezer."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is whipped topping from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is milk live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "2 min."
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we chop (Step 1) and pour (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "remaining wafers": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ends": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "single layer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "dry pudding mixes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "remaining pudding mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "whipped topping": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "layers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "leftover dessert": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "foil handles": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "freezer": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}
