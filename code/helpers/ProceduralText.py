@@ -129,7 +129,7 @@ class ProceduralText:
             nodes_added += 1
             # Add default edge from previous step to current step
             if i > 0 and not self.step_dependencies.has_edge(i - 1, i):
-                self.step_dependencies.add_edge(i - 1, i, type="sequential_default")
+                self.step_dependencies.add_edge(i - 1, i)
                 default_edges_added += 1
         loguru.logger.info(
             f"Added {nodes_added} nodes and {default_edges_added} default sequential edges."
@@ -144,7 +144,7 @@ class ProceduralText:
         loguru.logger.info(
             f"\n{len(self.steps)} steps:\n{pformat(list(zip(range(1, len(self.steps) + 1), self.steps)))}"
             f"\nParsed {len(self.entities)} entities:\n{pformat(self.entities)}"
-            f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(sorted(list(self.step_dependencies.edges(data=True))))}"  # Sort edges for consistent logging and show data
+            f"\nStep dependencies (Nodes: {self.step_dependencies.number_of_nodes()}, Edges: {self.step_dependencies.number_of_edges()}):\n{pformat(sorted(list(self.step_dependencies.edges())))}"  # Sort edges for consistent logging
         )
 
     def _canonical_unit(self, unit_str: str) -> str:
@@ -1255,11 +1255,10 @@ class ProceduralText:
         """
         Adds edges to the step_dependencies graph based on data flow.
         An edge A -> B is added if step B uses an entity last defined in step A.
-        This complements the default sequential edges. Edges are marked with type='dataflow'.
-        If a 'sequential_default' edge already exists, its type is upgraded to 'dataflow'.
+        This complements the default sequential edges.
         """
         loguru.logger.debug("Adding dataflow dependencies to the graph...")
-        edges_added_or_upgraded = 0
+        edges_added = 0
         for entity_name, entity in self.entities.items():
             # Sort definition and usage steps
             defined_steps = sorted(list(entity.defined_in))
@@ -1296,33 +1295,13 @@ class ProceduralText:
                             latest_def_step, use_step
                         )
                         if not edge_exists:
-                            self.step_dependencies.add_edge(
-                                latest_def_step, use_step, type="dataflow"
-                            )
+                            self.step_dependencies.add_edge(latest_def_step, use_step)
                             loguru.logger.debug(
                                 f"Added dataflow edge: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
                             )
-                            edges_added_or_upgraded += 1
-                        elif (
-                            self.step_dependencies.edges[latest_def_step, use_step].get(
-                                "type"
-                            )
-                            == "sequential_default"
-                        ):
-                            self.step_dependencies.edges[latest_def_step, use_step][
-                                "type"
-                            ] = "dataflow"
-                            loguru.logger.debug(
-                                f"Upgraded edge to dataflow: {latest_def_step + 1} -> {use_step + 1} (for entity '{entity_name}')"
-                            )
-                            edges_added_or_upgraded += (
-                                1  # Count upgrades as well for info
-                            )
-                        # If edge exists and is already 'dataflow', do nothing.
+                            edges_added += 1
 
-        loguru.logger.info(
-            f"Added or upgraded {edges_added_or_upgraded} dataflow dependency edges."
-        )
+        loguru.logger.info(f"Added {edges_added} dataflow dependency edges.")
 
     def build_entity_flow_graph(self):
         """Build a graph representing entity flow between steps"""
@@ -1419,98 +1398,37 @@ class ProceduralText:
 
     def can_steps_run_concurrently(self, step1: int, step2: int) -> bool:
         """
-        Check if two steps can run concurrently.
-        Concurrency is blocked by:
-        1. A "hard" path (involving at least one 'dataflow' edge) in step_dependencies.
-        2. Data conflicts (Write-Write, Write-Read, Read-Write).
-        3. Resource conflicts.
-        Purely sequential paths (only 'sequential_default' edges) do not block concurrency
-        if other checks pass.
+        Check if two steps can run concurrently based on dependencies, data conflicts,
+        and resource conflicts. Includes detailed logging for rejection reasons.
+
+        Relies on the step_dependencies graph which includes default i->i+1 edges plus specific dataflow edges.
         """
+        # Ensure step1 < step2 for consistent checking, swap if needed
         s1, s2 = min(step1, step2), max(step1, step2)
         loguru.logger.debug(f"Checking concurrency for Steps {s1 + 1} and {s2 + 1}")
 
-        # 1. Check for Hard Path Dependency
-        # A "hard" path is one that involves at least one 'dataflow' typed edge.
-        # If such a path exists from s1 to s2, s1 must precede s2.
+        # 1. Check for Path Dependency in the potentially augmented step_dependencies graph
+        # If there's a path from s1 to s2, s1 must precede s2.
         if nx.has_path(self.step_dependencies, s1, s2):
-            has_hard_path_s1_s2 = False
-            for path_nodes in nx.all_simple_paths(
-                self.step_dependencies, source=s1, target=s2
-            ):
-                is_current_path_hard = False
-                for i in range(len(path_nodes) - 1):
-                    u, v_node = (
-                        path_nodes[i],
-                        path_nodes[i + 1],
-                    )  # Renamed v to v_node to avoid conflict
-                    if (
-                        self.step_dependencies.edges[u, v_node].get("type")
-                        == "dataflow"
-                    ):
-                        is_current_path_hard = True
-                        break
-                if is_current_path_hard:
-                    has_hard_path_s1_s2 = True
-                    break
+            log_path_detail = ""
+            try:
+                path = nx.shortest_path(self.step_dependencies, s1, s2)
+                log_path_detail = f" Path: {[p + 1 for p in path]}"
+            except nx.NetworkXNoPath:
+                pass  # Should not happen
+            loguru.logger.debug(
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Path exists from {s1 + 1} to {s2 + 1}.{log_path_detail}"
+            )
+            return False
 
-            if has_hard_path_s1_s2:
-                # Attempt to log one such hard path for clarity
-                log_path_detail = ""
-                try:
-                    # Find a shortest path that is hard (if multiple, this is just one)
-                    for path_nodes_log in nx.all_simple_paths(
-                        self.step_dependencies, source=s1, target=s2
-                    ):
-                        path_is_hard_log = False
-                        for i_log in range(len(path_nodes_log) - 1):
-                            u_log, v_log = (
-                                path_nodes_log[i_log],
-                                path_nodes_log[i_log + 1],
-                            )
-                            if (
-                                self.step_dependencies.edges[u_log, v_log].get("type")
-                                == "dataflow"
-                            ):
-                                path_is_hard_log = True
-                                break
-                        if path_is_hard_log:
-                            log_path_detail = (
-                                f" Example Hard Path: {[p + 1 for p in path_nodes_log]}"
-                            )
-                            break
-                except Exception:  # Catch any error during logging this detail
-                    pass
-                loguru.logger.debug(
-                    f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Hard dataflow path exists from {s1 + 1} to {s2 + 1}.{log_path_detail}"
-                )
-                return False
-
-        # Check for hard path from s2 to s1 (should not happen if s1 < s2 and graph is DAG, but for safety)
+        # Check reverse path (less likely but good sanity check)
         if nx.has_path(self.step_dependencies, s2, s1):
-            has_hard_path_s2_s1 = False
-            for path_nodes in nx.all_simple_paths(
-                self.step_dependencies, source=s2, target=s1
-            ):
-                is_current_path_hard = False
-                for i in range(len(path_nodes) - 1):
-                    u, v_node = path_nodes[i], path_nodes[i + 1]
-                    if (
-                        self.step_dependencies.edges[u, v_node].get("type")
-                        == "dataflow"
-                    ):
-                        is_current_path_hard = True
-                        break
-                if is_current_path_hard:
-                    has_hard_path_s2_s1 = True
-                    break
-            if has_hard_path_s2_s1:
-                loguru.logger.debug(
-                    f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Hard dataflow path exists from {s2 + 1} to {s1 + 1}."
-                )
-                return False
+            loguru.logger.debug(
+                f"-> REJECTED (Steps {s1 + 1}, {s2 + 1}): Path exists from {s2 + 1} to {s1 + 1} (unexpected?)."
+            )
+            return False
 
-        # 2. Check for Data Conflicts (WW, WR, RW)
+        # 2. Check for Data Conflicts
         entities_written1 = {
             e for e, ent in self.entities.items() if s1 in ent.defined_in
         }
@@ -1556,7 +1474,7 @@ class ProceduralText:
             )
             return False
 
-        # 4. If no hard path dependencies and no data/resource conflicts, they can run concurrently
+        # 4. If no conflicts, they can run concurrently
         loguru.logger.debug(
             f"-> ACCEPTED: Steps {s1 + 1} and {s2 + 1} can run concurrently."
         )
