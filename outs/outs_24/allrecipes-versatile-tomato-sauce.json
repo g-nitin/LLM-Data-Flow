@@ -1,0 +1,212 @@
+{
+  "title": "Versatile Tomato Sauce",
+  "instructions": {
+    "1": "In a medium skillet over medium heat, warm oil and saute onions and garlic until caramelized; set aside.",
+    "2": "In a large skillet over medium heat, cook ground beef until almost browned. Add onions and garlic and cook for 3 minutes.",
+    "3": "In a large pot over medium heat, combine tomato sauce and stewed tomatoes; bring to a boil and then reduce heat. Simmer sauce for 15 minutes.",
+    "4": "Stir pepperoni, ground beef mixture and green peppers into sauce; cover and simmer for 30 minutes.",
+    "5": "Stir in mushrooms, garlic salt, salt, ground black pepper, onion powder, oregano and Italian seasoning. Simmer for 10 minutes and serve."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the onions from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is skillet from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is onions from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is garlic from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is ground beef from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is ground beef from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is onions live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 2) and stir (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        1,
+        2
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked"
+      },
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ground beef": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tomato sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pepperoni": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "ground beef mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "green peppers": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "garlic salt": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "onion powder": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "oregano": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "italian seasoning": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 14,
+    "num_questions": 9
+  }
+}

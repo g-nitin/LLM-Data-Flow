@@ -1,0 +1,247 @@
+{
+  "title": "Nona's Tableside Homemade Soft Tofu",
+  "instructions": {
+    "1": "Soak the dry beans in water for at least 12 hours. Drain the beans. You want to end up with 14 ounces of soaked beans.",
+    "2": "Place a colander inside a larger bowl. Line the colander with a few layers of cheesecloth or a cotton towel. Use a blender to blend the beans with 14 fluid ounces of water. Pour into a nonstick saucepan and bring to a boil. Stir frequently. As soon as it comes to a boil, reduce the heat to low; simmer and stir for about 3 minutes.",
+    "3": "Pour the soybean mixture into the lined colander. Gather the edges and twist the solids in a ball to wring out all of the liquid. I use a can to help press out all of the soy milk. You will need 3 cups of the soy milk, (24 fluid ounces). If you don't have enough, pour some more hot water over the soybean solids (okara) until you have enough.",
+    "4": "Pour the soymilk into a saucepan. Heat to 170 to 175 degrees F (75 to 80 degrees C).",
+    "5": "At the table, have a container ready that is about 4 inches deep and 4 to 6 inches across to make the tofu in. You can use any container that is big enough to hold the milk, but if it is too big, it will be more difficult to form the tofu.",
+    "6": "Measure the nigari into the container at the table first. Pour the hot soy milk into the container. No stirring is necessary as the act of pouring the liquid in stirs it enough to form the tofu. Wait for 3 to 5 minutes for the tofu to form. You can serve immediately, or refrigerate for later use."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the saucepan from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is saucepan from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is table from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is tofu from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is milk from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is dry beans from Step 1 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is milk live after Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "12 hours"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to form the tofu in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pour (Step 4) and make (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "dry beans": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "few layers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheesecloth": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "soybean mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ball": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "soy milk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "soybean solids": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "okara": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "soymilk": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "table": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "tofu": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "hot soy milk": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "no stirring": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "act": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 18,
+    "num_questions": 10
+  }
+}

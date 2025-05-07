@@ -1,0 +1,139 @@
+{
+  "title": "Lasagna Corn Carne",
+  "instructions": {
+    "1": "In a large skillet, cook beef over medium heat until no longer pink; drain. Add salsa, beans, vegetables and seasonings. Reduce heat; cover and simmer for 15 minutes.",
+    "2": "Spread a fourth of the meat sauce in a greased 13-in. x 9-in. x 2-in. baking dish; top with four noodles. Repeat once. Top with half of the remaining sauce and half of the cheeses. Layer with the remaining noodles, sauce and cheeses.",
+    "3": "Cover and bake at 350 degrees F for 30 minutes. Uncover; bake 15-20 minutes longer or until heated through. Let stand for 15 minutes before cutting."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is cheeses from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is remaining noodles live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 1) and spread (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "beef": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "salsa": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "seasonings": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "fourth": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "remaining sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheeses": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "remaining noodles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

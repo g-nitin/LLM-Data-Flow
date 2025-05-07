@@ -1,0 +1,128 @@
+{
+  "title": "Pizza Lasagna",
+  "instructions": {
+    "1": "ARRANGE pepperoni evenly over hot lasagna. Separate dough into breadsticks. Evenly place breadsticks lengthwise and crosswise over pepperoni, weaving to form a lattice top. Trim any excess dough that might be hanging from edge of pan. Sprinkle top of lattice with cheese. Place lasagna on a baking sheet.",
+    "2": "BAKE in preheated 325 degrees F. oven for 25 to 35 minutes, or until breadsticks are golden brown and fully cooked.",
+    "3": "Note: To make mini breadsticks, place left over dough on baking sheet with lasagna. Brush with melted butter, or olive oil. Bake for 20 to 25 minutes or until golden brown."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 2, is the breadsticks from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is breadsticks from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is cheese from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is lattice live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "20 to 25 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the breadsticks in Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we arrange (Step 1) and bake (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "pepperoni": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "hot lasagna": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "any excess dough": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "breadsticks": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lattice": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mini breadsticks": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lasagna": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 7
+  }
+}

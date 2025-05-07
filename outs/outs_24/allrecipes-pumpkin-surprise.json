@@ -1,0 +1,177 @@
+{
+  "title": "Pumpkin Surprise",
+  "instructions": {
+    "1": "Cut a 4 inch circle off the top of the pumpkin, including the stem; set aside to be used later as a lid. Remove seeds and stringy insides of pumpkin. Place pumpkin in a 9x13 inch baking dish. Preheat oven to 350 degrees F (175 degrees C).",
+    "2": "Bring a large pot of salted water to a boil. Add potatoes and cook until tender, about 15 minutes. Drain, and mash. Season with salt, pepper and garlic powder; set aside.",
+    "3": "In a skillet over medium heat, brown the ground beef until no pink shows; drain. Spoon the ground beef into the pumpkin. Pour in the creamed corn and whole kernel corn. Top with mashed potatoes. Cover with pumpkin lid. Pour 2 cups of water in the baking dish.",
+    "4": "Bake in preheated oven for 50 to 60 minutes, or until pumpkin is tender and can be pierced with a fork."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the pumpkin from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is pumpkin from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is stringy insides from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is stem live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "50 to 60 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the pumpkin in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cut (Step 1) and bake (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "4 inch circle": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pumpkin": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "stem": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "seeds": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "stringy insides": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1,
+        4
+      ],
+      "consumed_in": []
+    },
+    "potatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ground beef": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "no pink": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "whole kernel corn": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 12,
+    "num_questions": 8
+  }
+}

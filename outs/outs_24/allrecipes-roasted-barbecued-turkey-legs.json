@@ -1,0 +1,129 @@
+{
+  "title": "Roasted Barbecued Turkey Legs",
+  "instructions": {
+    "1": "Place the turkey legs into a 4 quart pressure cooker over medium-high heat. Pour in just enough water to cover them. Sprinkle chicken bouillon granules over the water, and stir to dissolve a little. Place the lid on the cooker, and bring up to full pressure. Cook for about 5 minutes.",
+    "2": "While the turkey is cooking, preheat your oven's broiler. After the time is up on the turkey, remove from the heat. Run cold water over the top of the cooker to help release the pressure, and open the lid. Place the turkey legs on a broiling pan or roasting pan.",
+    "3": "Broil the turkey legs for 10 to 15 minutes, until the skin is brown and crispy. Brush the legs with barbeque sauce towards the end of cooking. Serve with remaining sauce on the side."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is turkey legs from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is turkey legs live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 to 15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 2) and broil (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "turkey legs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken bouillon granules": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "full pressure": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "turkey": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oven's broiler": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pressure": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skin": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "barbeque sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "end": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cooking": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,275 @@
+{
+  "title": "Prickly Pear Jelly",
+  "instructions": {
+    "1": "Simmer 3 pint-size jars in a large pot of water until jelly is ready. Wash the lids and rings in warm, soapy water.",
+    "2": "Slice ends off each prickly pear. Make 1 long vertical slit down each one. Use slit to hold skin and peel off. Discard peel.",
+    "3": "Place peeled pears in a blender; pur\u00e9e in batches until liquefied. Press pur\u00e9ed mixture through a fine-mesh sieve set over a bowl. Discard pulp and seeds.",
+    "4": "Measure out 3 cups prickly pear juice and pour into a large pot. Add lemon juice and pectin; bring to a boil, stirring constantly. Add sugar and return to a boil, stirring constantly. Let cook at a boil until thickened, about 3 minutes. Remove from heat.",
+    "5": "Pour prickly pear jelly into the hot, sterilized jars, filling to within 1/4 inch of the top. Run a clean knife or thin spatula around the insides of the jars to remove any air bubbles. Wipe the rims of the jars with a moist paper towel to remove any food residue. Top with the lids and screw on the rings.",
+    "6": "Place a rack in the bottom of a stockpot and fill halfway with water; bring to a boil. Lower jars 2 inches apart into boiling water using a holder. Pour in more boiling water to cover jars by at least 1 inch. Bring to a rolling boil, cover the stockpot, and process for 15 minutes.",
+    "7": "Remove the jars from the stockpot and place onto a cloth-covered or wood surface several inches apart. Let cool for at least 24 hours. Press the center of each lid with a finger to ensure the lid does not move up or down. Remove the rings for storage and store in a cool, dark area."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the rings from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is rings from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is skin from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skin live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to screw the rings in Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we simmer (Step 1) and place (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "jelly": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rings": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        7
+      ]
+    },
+    "ends": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "each prickly pear": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "slit": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skin": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pulp": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "seeds": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pectin": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "prickly pear jelly": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "insides": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "any air bubbles": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "rims": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "any food residue": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "stockpot": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": [
+        7
+      ]
+    },
+    "holder": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "rolling boil": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "finger": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "storage": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        7
+      ]
+    },
+    "cool, dark area": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 7,
+    "num_entities": 23,
+    "num_questions": 7
+  }
+}

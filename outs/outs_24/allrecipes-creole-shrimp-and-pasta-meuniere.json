@@ -1,0 +1,147 @@
+{
+  "title": "Creole Shrimp and Pasta Meuniere",
+  "instructions": {
+    "1": "Cook pasta in a large pot of boiling water until done. Drain.",
+    "2": "Meanwhile, melt butter in a small saucepan over very low heat. Add Worcestershire sauce, and hot sauces to taste; mix well. Stir in lemon juice, herb mix, bay leaf, and thyme. Keep warm, but do not simmer.",
+    "3": "Heat oil in large skillet. Saute shrimp in oil for 3 to 4 minutes, or just until shrimp turn pink. Pour off all but 1 tablespoon liquid from skillet. Remove and discard bay leaf. Add butter sauce, and stir well. Stir in parsley. Serve over angel hair pasta."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is pasta from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is saucepan live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "3 to 4 minutes"
+    }
+  ],
+  "entities": {
+    "pasta": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "worcestershire sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "herb mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bay leaf": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "shrimp": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked"
+      },
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "parsley": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "angel hair pasta": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 11,
+    "num_questions": 3
+  }
+}

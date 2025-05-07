@@ -1,0 +1,235 @@
+{
+  "title": "Green Apple, Jicama, and Prawn Salad with Mint, Lemongrass, and Dijon Dressing",
+  "instructions": {
+    "1": "Bring a small pot of water to boil. Cook shrimp in boiling water until they are bright pink on the outside and the meat is no longer transparent in the center, 3 to 5 minutes; drain.",
+    "2": "Rinse shrimp with cold water to cool completely. Peel, devein, and slice shrimp in half lengthwise; set aside in a bowl.",
+    "3": "Toss apple, jicama, and carrots together in a large bowl.",
+    "4": "Place mint leaves, olive oil, sugar, vinegar, Dijon mustard, garlic, and lemongrass in a food processor. Pulse until blended but slightly chunky, about two 10-second intervals.",
+    "5": "Pour dressing over apple mixture; toss until well mixed. Cover salad and shrimp separately with plastic wrap; refrigerate until ready to serve.",
+    "6": "Mix shrimp into salad before serving; garnish with cilantro."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the salad from Step 5 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is shrimp from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is shrimp from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is apple from Step 3 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is salad from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is sugar from Step 4 still available in Step 6?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is mint leaves live after Step 5?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "3 to 5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 5, is it still valid to use the salad in Step 6?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 1) and toss (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "shrimp": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked",
+        "5": "cooked"
+      },
+      "used_in": [
+        1,
+        2,
+        5,
+        6
+      ],
+      "defined_in": [
+        1,
+        2
+      ],
+      "consumed_in": []
+    },
+    "outside": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "apple": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "jicama": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "carrots": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mint leaves": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "dijon mustard": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lemongrass": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "dressing": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "apple mixture": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "salad": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 16,
+    "num_questions": 10
+  }
+}

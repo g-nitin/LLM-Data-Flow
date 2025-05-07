@@ -1,0 +1,95 @@
+{
+  "title": "Super Easy Chicken and Dumplings",
+  "instructions": {
+    "1": "Gather all ingredients.",
+    "2": "Stir condensed soup, chicken broth, and shredded chicken together in a large saucepan over medium-high heat until it begins to simmer.",
+    "3": "Cut each biscuit into quarters, and gently stir into the simmering soup.",
+    "4": "Reduce heat to medium-low, cover, and simmer until biscuits are no longer doughy in the center, 10 to 15 minutes.",
+    "5": "Serve and enjoy!"
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is condensed soup from Step 2 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is all ingredients live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "10 to 15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we reduce (Step 4) and serve (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "all ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "condensed soup": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "each biscuit": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "simmering soup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "biscuits": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 6,
+    "num_questions": 4
+  }
+}

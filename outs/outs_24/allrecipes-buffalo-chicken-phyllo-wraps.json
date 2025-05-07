@@ -1,0 +1,200 @@
+{
+  "title": "Buffalo Chicken Phyllo Wraps",
+  "instructions": {
+    "1": "Combine chicken and 1/4 cup hot sauce in a shallow dish; marinate in the refrigerator for 1 hour. Grease a 9x13- inch baking dish.",
+    "2": "Preheat oven to 350 degrees F (175 degrees C). Place phyllo sheets on work surface; cover with damp towel to keep from drying out.",
+    "3": "Heat 1 tablespoon olive oil in a small skillet over medium heat. Remove chicken from hot sauce; season with salt and pepper. Cook the chicken in the oil until the juices run clear, 3 to 5 minutes per side. Remove from heat; shred. Combine the shredded chicken, remaining 1/2 cup hot sauce, vinegar, and cream cheese in a large bowl. Stir until creamy. Allow mixture to cool, about 5 minutes.",
+    "4": "Remove 1 phyllo sheet from stack; fold in half lengthwise. Brush lightly with oil. Place 2 heaping tablespoons of the chicken mixture at the bottom of the folded phyllo, about 1 inch from the bottom. Fold bottom of phyllo over filling, fold in each side, roll wrap to the end of the phyllo sheet. Repeat with remaining phyllo sheets and chicken mixture.",
+    "5": "Place phyllo rolls in prepared baking dish. Bake in preheated oven until phyllo is brown and flaky, 20 to 25 minutes."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the chicken from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is chicken from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is chicken from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is oven live after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "20 to 25 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the chicken in Step 4?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "chicken": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "shredded chicken": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "hot sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "stack": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        4
+      ]
+    },
+    "chicken mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "folded phyllo": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "end": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "phyllo rolls": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "phyllo": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 16,
+    "num_questions": 6
+  }
+}

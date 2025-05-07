@@ -1,0 +1,354 @@
+{
+  "title": "Adrian Leon's Grilled Shrimp with Pineapple and Calabaza Stew",
+  "instructions": {
+    "1": "Marinade: Saute 2 sliced garlic cloves, 1/3 cup onions and pineapple in olive oil to light golden brown.",
+    "2": "Add pineapple juice, SPLENDA\u00ae Granulated Sweetener and oregano and cook for another 3 minutes. Remove from heat and let the mixture cool. When cooled add roasted skinless jalapeno, vinegar and cilantro. Mix everything together with a blender. Toss the shrimp with the marinade and refrigerate in a covered medium bowl for at least one hour.",
+    "3": "For the squash: Remove corn kernels from the cob and save the cobs (you should have about 2 cups of kernels).",
+    "4": "Place corn cobs and 1 quart of water in a 4 quart stockpot. Bring stockpot to a boil and reduce the heat to medium, simmer for 15 more minutes. Strain the corn stock and set aside.",
+    "5": "Grill the poblanos over an open flame until they are charred. Put them in a plastic bag to sweat, about 4 minutes. When cool enough to handle, peel off the skins and discard (do not wash the chiles with water, this will reduce the flavor). Cut the chilies into 1/4 inch strips (Rajas).",
+    "6": "Cook 1 2/3 cups onions and margarine until translucent (about 2 minutes) in a 4 quart heavy stockpot (cazuela or deep cast-iron frying pan) over medium heat.",
+    "7": "Stirring occasionally, add corn kernels, diced squash and 6 cloves of garlic.",
+    "8": "Continue cooking for another 10 minutes then add epazote (or cilantro) and cook for 5 more minutes. Remove pan from heat and mix in sour cream and season with salt and pepper.",
+    "9": "Grill shrimp for a minute each side or pan fry similarly. Season with salt and pepper and serve over squash.",
+    "10": "Serve squash stew on a platter with grilled shrimp on top."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 8, is the cilantro from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is marinade from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is cilantro from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is shrimp from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is blender from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is blender live after Step 9?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 8?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to grill the shrimp in Step 9?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we remove (Step 3) and serve (Step 10) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "marinade": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pineapple": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "splenda\u00ae granulated sweetener": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oregano": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "roasted skinless jalapeno": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "shrimp": {
+      "step_introduced": 2,
+      "states": {
+        "8": "cooked",
+        "9": "cooked"
+      },
+      "used_in": [
+        9
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "squash": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        9
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "corn kernels": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cobs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "corn cobs": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "4 quart stockpot": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "poblanos": {
+      "step_introduced": 5,
+      "states": {
+        "4": "cooked",
+        "5": "cooked",
+        "6": "cooked",
+        "7": "cooked",
+        "8": "cooked",
+        "9": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "open flame": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "skins": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chiles": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chilies": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "rajas": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "margarine": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "4 quart heavy stockpot": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "cazuela": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "epazote": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [
+        8
+      ],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "squash stew": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "platter": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 10,
+    "num_entities": 29,
+    "num_questions": 9
+  }
+}

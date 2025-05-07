@@ -1,0 +1,95 @@
+{
+  "title": "Rocky Road Cups",
+  "instructions": {
+    "1": "Pour milk into large bowl. Add pudding mixes. Beat with wire whisk 1 to 2 minutes or until well blended. Gently stir in whipped topping.",
+    "2": "Stir peanuts, chocolate chips and marshmallows into pudding mixture.",
+    "3": "Spoon into 8 dessert dishes or cups. Serve immediately or refrigerate until ready to serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is pudding mixture from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is peanuts live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "1 to 2 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pour (Step 1) and spoon (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "milk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pudding mixes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "peanuts": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chocolate chips": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "marshmallows": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pudding mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "title": "Sand Cups",
+  "instructions": {
+    "1": "In a large bowl, combine milk and pudding mix. Beat with a whisk until well blended. Let stand 5 minutes.",
+    "2": "Add whipped topping and half of the crushed cookies and fold in.",
+    "3": "Place 1 Tablespoon crushed cookies into each cup. Fill cups 3/4 full with pudding mixture. Top with remaining crushed cookies. Refrigerate 1 hour. Decorate before serving.",
+    "4": "Suggested Decorations: small paper umbrellas, gummy worms, gummy sharks, candy stars, chopped peanuts."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is milk from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is pudding mixture live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we place (Step 3) and suggest (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "milk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pudding mix": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "whipped topping": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "crushed cookies": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pudding mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "small paper umbrellas": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "gummy worms": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "gummy sharks": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "candy stars": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

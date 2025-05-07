@@ -1,0 +1,195 @@
+{
+  "title": "Pasta with Fennel and Onions",
+  "instructions": {
+    "1": "Cut fennel bulbs in half, lengthwise; remove tough cores. Thinly slice fennel bulb halves lengthwise. Slice onions in half lengthwise; thinly slice onions lengthwise.",
+    "2": "Heat olive oil in a large skillet over medium heat. Add fennel and onions; cook and stir until onions are translucent, about 8 minutes. Add wine; increase heat to medium-high. Cook, stirring often, until wine has nearly evaporated and fennel and onions begin to brown, 8 to 10 minutes.",
+    "3": "Bring a large pot of lightly salted water to a boil. Cook linguine at a boil until tender yet firm to the bite, about 11 minutes. Reserve 1/4 cup pasta water. Drain linguine; keep warm.",
+    "4": "Stir tomatoes into fennel mixture; cook until tomatoes soften, about 3 minutes. Stir lemon juice and pine nuts into fennel mixture.",
+    "5": "Stir linguine into fennel mixture; stir in reserved pasta water. Cook over high heat, stirring until hot and thoroughly combined, about 2 minutes. Top servings with Parmesan cheese."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 4, is the fennel from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is onions from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is fennel from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is tough cores from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is fennel live after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "2 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to use the fennel in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 3) and stir (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "fennel bulbs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tough cores": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fennel": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        4,
+        5
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "wine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "linguine": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked"
+      },
+      "used_in": [
+        5
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "bite": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "fennel mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pine nuts": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "servings": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "parmesan cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 13,
+    "num_questions": 8
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "title": "Calzone With Artichokes",
+  "instructions": {
+    "1": "Divide the pizza dough into 4 equal pieces.",
+    "2": "Preheat the oven with a pizza stone to 500 degrees F for 30 minutes.",
+    "3": "Place a large saute pan over high heat.",
+    "4": "Add the olive oil and when it is hot, saute the artichoke hearts and mushrooms.",
+    "5": "Season to taste with salt and pepper.",
+    "6": "Pour off any excess oil and let the vegetables cool.",
+    "7": "Roll or stretch the dough, 1/4 at a time, into 9-inch circles.",
+    "8": "Place the dough circles, one at a time, on a lightly floured wooden peel.",
+    "9": "Brush the circles to within 1-inch of the edge with chili oil.",
+    "10": "For each calzone, put 1/4 of both cheeses on half of the dough, still leaving the 1-inch border.",
+    "11": "Top with 1/4 of the artichokes and mushrooms, the garlic and the thyme.",
+    "12": "Assemble the remaining calzones in the same way.",
+    "13": "Moisten the edges of the circles with water.",
+    "14": "Fold the un-topped half of the dough, trapping as much air inside as possible, over the filling and press the edges together firmly to seal.",
+    "15": "With the backside of a fork, press the edges of the dough to crimp them.",
+    "16": "Slide the calzones onto the pizza stone and bake about 12 minutes, or until the crust is golden brown.",
+    "17": "Brush the calzones with melted butter and sprinkle them with Parmesan."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 15, is the dough from Step 7 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is mushrooms from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is dough from Step 7 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is circles from Step 9 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is calzones from Step 16 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is lightly floured wooden peel from Step 8 still available in Step 15?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is dough live after Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 16, is it still valid to brush the calzones in Step 17?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 2) and slide (Step 16) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "pizza dough": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pizza stone": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "artichoke hearts": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        11
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [
+        10,
+        14,
+        15
+      ],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "dough circles": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "lightly floured wooden peel": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "circles": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [
+        13
+      ],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    },
+    "each calzone": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "both cheeses": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "1-inch border": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "artichokes": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "remaining calzones": {
+      "step_introduced": 12,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        12
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 14,
+      "states": {},
+      "used_in": [
+        14
+      ],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "backside": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "calzones": {
+      "step_introduced": 16,
+      "states": {},
+      "used_in": [
+        17
+      ],
+      "defined_in": [
+        16
+      ],
+      "consumed_in": []
+    },
+    "crust": {
+      "step_introduced": 16,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        16
+      ],
+      "consumed_in": []
+    },
+    "parmesan": {
+      "step_introduced": 17,
+      "states": {},
+      "used_in": [
+        17
+      ],
+      "defined_in": [
+        17
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 17,
+    "num_entities": 22,
+    "num_questions": 10
+  }
+}

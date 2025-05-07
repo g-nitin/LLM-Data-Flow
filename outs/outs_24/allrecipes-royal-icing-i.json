@@ -1,0 +1,100 @@
+{
+  "title": "Royal Icing",
+  "instructions": {
+    "1": "Gather all ingredients.",
+    "2": "Beat egg whites in a large glass, metal, or ceramic bowl with an electric mixer at high speed until foamy.",
+    "3": "Gradually add sugar and lemon extract; continue to beat on high speed until thickened.",
+    "4": "Use to pipe or decorate cookies."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is high speed from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is egg whites live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we beat (Step 2) and add (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "all ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "egg whites": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "high speed": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lemon extract": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cookies": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 7,
+    "num_questions": 3
+  }
+}

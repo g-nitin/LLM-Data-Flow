@@ -1,0 +1,123 @@
+{
+  "title": "Beer Lime Grilled Chicken",
+  "instructions": {
+    "1": "In a bowl, mix the lime juice, beer, honey, garlic, cilantro, and salt and pepper until the honey dissolves. Pour the mixture over the chicken, cover and marinate for 30 minutes.",
+    "2": "Preheat an outdoor grill for medium heat and lightly oil grate.",
+    "3": "Remove chicken from marinade and shake off excess; discard remaining marinade. Grill chicken until tender and juices run clear, about 7 minutes per side."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is cilantro from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is mixture live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "30 minutes"
+    }
+  ],
+  "entities": {
+    "beer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "honey": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cilantro": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 1,
+      "states": {
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "grill": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "marinade": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "excess": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 9,
+    "num_questions": 3
+  }
+}

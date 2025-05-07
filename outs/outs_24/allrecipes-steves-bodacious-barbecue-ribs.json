@@ -1,0 +1,149 @@
+{
+  "title": "Steve's Bodacious Barbecue Ribs",
+  "instructions": {
+    "1": "In a medium bowl, stir together paprika, cayenne pepper, garlic powder, onion powder, salt, ground black pepper, cumin, brown sugar, cinnamon, cloves, and nutmeg. Apply liberally to the ribs. Place ribs in a large roasting pan, cover, and refrigerate overnight. Remove ribs from the refrigerator 1 hour before smoking.",
+    "2": "Prepare an outdoor smoker, bringing the temperature to 200 to 225 degrees F (95 to 110 degrees C).",
+    "3": "Smoke ribs for 6 to 8 hours, adding wood chips to maintain a steady smoke (approximately one handful every 30 to 45 minutes). Ribs are done when crispy outside and tender inside. Remove from smoker, and set aside for 15 to 20 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is paprika from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is smoker live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "15 to 20 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we prepare (Step 2) and smoke (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "paprika": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cumin": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ribs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "smoker": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "wood chips": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "steady smoke": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 12,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "title": "Kosher Salt Encrusted Prime Rib Roast",
+  "instructions": {
+    "1": "Preheat oven to 210 degrees F (100 degrees C).",
+    "2": "Cover the bottom of a roasting pan with a layer of kosher salt. Place the roast, bone side down, on the salt. Season the meat with the ground black pepper and seasoning salt, then cover completely with kosher salt.",
+    "3": "Roast in preheated oven for 4 to 5 hours, or until the internal temperature of the meat reaches 145 degrees F (63 degrees C).",
+    "4": "Remove from oven and let rest for 30 minutes. This sets the juices and makes the roast easier to carve. (Note: Be sure to remove all the salt from the roast before serving.)"
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the meat from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is meat from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is seasoning salt from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is seasoning salt live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 2, is it still valid to use the meat in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and roast (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "seasoning salt": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2,
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ground black pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "all the salt": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 5,
+    "num_questions": 7
+  }
+}

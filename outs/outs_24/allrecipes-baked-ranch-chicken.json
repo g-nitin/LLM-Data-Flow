@@ -1,0 +1,94 @@
+{
+  "title": "Baked Ranch Chicken",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F (175 degrees C). Grease baking sheet with vegetable oil.",
+    "2": "Put bread crumbs and ranch dressing into separate bowls.",
+    "3": "Dip chicken into ranch dressing and press into bread crumbs to coat. Gently toss between your hands so any bread crumbs that haven't stuck can fall away. Arrange onto prepared baking sheet.",
+    "4": "Bake in preheated oven until no longer pink in the center and the juices run clear, about 30 minutes. An instant-read thermometer inserted into the center should read at least 165 degrees F (74 degrees C)."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is oven live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and dip (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "bread crumbs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ranch dressing": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "any bread crumbs": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "hands": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 6,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "title": "St. Patrick's Rueben Stack",
+  "instructions": {
+    "1": "Bake, cool and remove the \"tops\" of the pastry shells according to the package directions.",
+    "2": "Place 2 slices corned beef into each pastry shell. Top each with 1 teaspoon mustard, 1 tablespoon sauerkraut and 1 piece cheese folded in half.",
+    "3": "Bake at 400 degrees F for 5 minutes or until the cheese is melted. Serve with the dressing, if desired."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is pastry shells from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is pastry shells live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bake (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "pastry shells": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "package directions": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "each pastry shell": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "dressing": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

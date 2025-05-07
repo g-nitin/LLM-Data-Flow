@@ -1,0 +1,126 @@
+{
+  "title": "Scrumptious Sausage and Raisin Appetizer Balls",
+  "instructions": {
+    "1": "Preheat oven to 375 degrees F (190 degrees C).",
+    "2": "Mix sausage, raisins, and basil together in a bowl; roll into walnut-size balls. Arrange balls on a baking sheet or jelly roll pan with sides; sprinkle with paprika.",
+    "3": "Bake in the preheated oven for 15 minutes. Remove sheet from oven, drain fat, re-roll balls if needed, and sprinkle with more paprika. Continue baking until cooked through, 10 to 15 minutes. An instant-read thermometer inserted into the center should read at least 160 degrees F (70 degrees C). Drain."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is sausage from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is paprika live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 to 15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we preheat (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "sausage": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "raisins": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "basil": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "walnut-size balls": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "paprika": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fat": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "balls": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "more paprika": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 9,
+    "num_questions": 4
+  }
+}

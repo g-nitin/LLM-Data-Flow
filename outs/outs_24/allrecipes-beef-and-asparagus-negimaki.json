@@ -1,0 +1,194 @@
+{
+  "title": "Beef and Asparagus Negimaki",
+  "instructions": {
+    "1": "Preheat a grill or grill pan until hot, or prepare oven broiler. Bring a medium saucepan of salted water to a boil. Cut off asparagus ends to within 3 1/2 inches from tips; reserve bottoms for another use. Place tips in boiling water; cook until bright green but still crunchy, about 1 minute. Prepare an ice-water bath. Drain asparagus; transfer to an ice-water bath to stop cooking. Drain asparagus again in a colander, and set aside.",
+    "2": "Whisk together soy sauce and sugar until dissolved; set aside. Cut scallions into 3 1/2-inch lengths, julienned lengthwise; set aside.",
+    "3": "Slice tenderloin into 1/4-inch-thick pieces. Place one slice between two pieces of plastic; pound lightly to an even thickness. Remove plastic; trim into 2-by-5-inch rectangle. Repeat with remaining beef.",
+    "4": "Dip a piece of beef in soy-sauce mixture, and place on a clean surface. Season with pepper. Place 1 piece of scallion and 2 asparagus tips across 1 end of beef, so vegetables extend over edges; roll. Set aside. Repeat with remaining beef and vegetables.",
+    "5": "Grill or broil negimaki, brushing with sauce and turning, until slightly charred and medium rare, about 2 minutes. Serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is vegetables from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is asparagus ends live after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "2 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we whisk (Step 2) and slice (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven broiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "asparagus ends": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tips": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ice-water bath": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "asparagus": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "soy sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "scallions": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tenderloin": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "plastic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "even thickness": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "beef": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "soy-sauce mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "scallion": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 17,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "title": "Bean & Pasta Soup",
+  "instructions": {
+    "1": "Heat oil in a large stockpot over medium-high heat. Crumble ground beef into pot and cook, stirring frequently, until well browned. Remove meat, leaving excess oil in pot.",
+    "2": "Cook onion and garlic in oil over medium-high heat until translucent. Stir in tomatoes, kidney beans, vegetable soup mix, and water. Reduce heat, and simmer 40 minutes.",
+    "3": "Add pasta stars, cover, and simmer 20 minutes more, or until pasta is tender. You may add more water at any time to adjust consistency."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is large stockpot from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is tomatoes live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "20 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 2) and add (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "large stockpot": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ground beef": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "kidney beans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vegetable soup mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pasta stars": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pasta": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

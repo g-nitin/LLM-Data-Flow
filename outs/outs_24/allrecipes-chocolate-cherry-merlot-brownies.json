@@ -1,0 +1,174 @@
+{
+  "title": "Chocolate Cherry Merlot Brownies",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F. Grease 9-inch-square baking pan.",
+    "2": "Microwave dried cherries and wine in small, uncovered, microwave-safe bowl on HIGH (100%) power for 1 minute. Set aside for 15 minutes, stirring occasionally. Drain cherries; discard wine.",
+    "3": "Microwave small chocolate pieces in small, uncovered, microwave-safe bowl on HIGH (100%) power for 45 seconds; STIR. If pieces retain some of their original shape, microwave at additional 10- to 15-second intervals, stirring just until melted; cool to room temperature.",
+    "4": "Combine flour and salt in small bowl. Beat sugar and butter in medium mixer bowl until well mixed. Add eggs and beat until light and fluffy. Beat in melted chocolate and vanilla extract. Stir in flour mixture until blended. Stir in drained cherries. Spread into prepared pan.",
+    "5": "Bake for 33 to 37 minutes or until wooden pick inserted in center comes out slightly sticky. Cool completely in pan on wire rack. Cut into bars."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is flour mixture from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is high (100%) power live after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "45 seconds"
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 4 introduce a potential safety concern to the recipe?",
+      "answer": true
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we microwave (Step 2) and microwave (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "wine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "cherries": {
+      "step_introduced": 2,
+      "states": {
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "high (100%) power": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "original shape": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "additional 10- to 15-second intervals": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "vanilla extract": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "flour mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "wooden pick": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bars": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 13,
+    "num_questions": 5
+  }
+}

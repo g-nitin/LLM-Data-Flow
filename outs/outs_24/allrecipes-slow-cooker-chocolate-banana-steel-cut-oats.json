@@ -1,0 +1,82 @@
+{
+  "title": "Slow Cooker Chocolate Banana Steel Cut Oats",
+  "instructions": {
+    "1": "Lightly spray a 5-quart or larger slow cooker crock with cooking spray.",
+    "2": "Mix water, oats, mashed bananas, cocoa powder, and sweetener in prepared slow cooker.",
+    "3": "Cook on Low for 6 hours."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is cooking spray from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is 5-quart or larger slow cooker crock live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "6 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we spray (Step 1) and mix (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "5-quart or larger slow cooker crock": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cooking spray": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oats": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cocoa powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sweetener": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "title": "Dorm Room Chili Mac",
+  "instructions": {
+    "1": "Bring a large pot of lightly salted water to a boil. Cook macaroni in the boiling water, stirring occasionally, until tender yet firm to the bite, 7 to 8 minutes.",
+    "2": "Drain macaroni and return to the pan. Add margarine, milk, and cheese sauce packet; mix well. Stir in canned chili and cook over medium heat until hot.",
+    "3": "Sprinkle with Cheddar cheese to serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is cheese sauce packet from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is macaroni live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "7 to 8 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 1) and sprinkle (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "macaroni": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "bite": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "margarine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese sauce packet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "canned chili": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheddar cheese": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

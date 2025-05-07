@@ -1,0 +1,155 @@
+{
+  "title": "Creamy Seafood Noodles",
+  "instructions": {
+    "1": "Saute the onions and garlic in a lightly oiled or buttered skillet over medium heat, for 5 minutes or until tender. Add the mushrooms and scallops and saute for 2 more minutes. Remove from heat and set aside. (Note: Be sure to not to overcook the scallops.)",
+    "2": "In a large saucepan over high heat, bring the water to a boil. Add the ramen noodles and boil for 3 minutes, reducing heat as necessary. Stir in the soup flavor packets, sour cream and the reserved scallop mixture. Season with salt and pepper to taste, reduce heat to low and let simmer for 5 minutes.",
+    "3": "Add the cooked shrimp and the crab, allow to heat through and serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is soup flavor packets from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is scallops live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 2) and add (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "onions": {
+      "step_introduced": 1,
+      "states": {
+        "0": "cooked",
+        "1": "cooked",
+        "2": "cooked"
+      },
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mushrooms": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "scallops": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ramen noodles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "soup flavor packets": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "reserved scallop mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cooked shrimp": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "crab": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 12,
+    "num_questions": 4
+  }
+}

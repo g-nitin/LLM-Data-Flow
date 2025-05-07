@@ -1,0 +1,88 @@
+{
+  "title": "Tropical Baked Bananas",
+  "instructions": {
+    "1": "Preheat oven to 375 degrees F (190 degrees C). Grease a 7x11 inch baking dish.",
+    "2": "In a small bowl, cream together butter and sugar. Stir in cloves and orange juice until smooth. Place the bananas in the prepared dish and spread the butter mixture evenly over the bananas. Sprinkle with coconut.",
+    "3": "Bake in preheated oven until bubbly and heated through, 10 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is sugar from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sugar live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cream (Step 2) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bananas": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "butter mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coconut": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "title": "Raspberry Jam",
+  "instructions": {
+    "1": "Wash jars and lids in hot soapy water; rinse with warm water. Fill boiling-water canner half full with water; add jars and water to cover. Bring water to a boil, reduce heat and simmer. Place lids in water to cover in a small saucepan; bring water to a simmer. Simmer until ready to use. Remove and drain jars and lids, one at a time, as needed for filling.",
+    "2": "Crush raspberries using potato masher or food processor. Place exactly 4 cups of crushed berries in a large Dutch oven; stir in water. Gradually add pectin, stirring until blended. Let stand for 10 minutes.",
+    "3": "Bring mixture to a full rolling boil (a boil that doesn't stop bubbling when stirred) over medium-high heat. Boil for 1 minute, stirring constantly. Remove from heat; add SPLENDA\u00ae Granulated Sweetener, stirring until SPLENDA\u00ae Granulated Sweetener dissolves. Skim off any foam with metal spoon.",
+    "4": "Ladle hot preserves immediately into prepared jars, filling to within 1/4 inch of tops. Wipe jar rims and threads. Cover with 2-piece lids. Screw bands tightly. Place jars on rack in canner. (Water must cover jars by 1 to 2 inches. Add boiling water, if necessary.) Cover; bring water to a gentle boil.",
+    "5": "Process 10 minutes. Remove jars and place upright on towel to cool completely. After jars cool, check seals by pressing center of lid with finger. (If lid springs back, lid is not sealed and refrigeration is necessary.) Store in a cool, dark place for up to 1 year. Once opened, store refrigerated and use within 2 weeks."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is any foam from Step 3 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is any foam live after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we bring (Step 3) and process (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "raspberries": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "potato masher": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pectin": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "full rolling boil": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "splenda\u00ae granulated sweetener": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "any foam": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "hot preserves": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "jar rims": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "threads": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "bands": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "canner": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "gentle boil": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "seals": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "finger": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "refrigeration": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "up to 1 year": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 20,
+    "num_questions": 4
+  }
+}

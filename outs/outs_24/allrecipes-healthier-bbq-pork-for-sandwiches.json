@@ -1,0 +1,102 @@
+{
+  "title": "Healthier BBQ Pork for Sandwiches",
+  "instructions": {
+    "1": "Pour beef broth into slow cooker and add pork ribs. Cook on High until meat shreds easily, about 4 hours. Remove meat and shred with two forks.",
+    "2": "Preheat oven to 350 degrees F (175 degrees C). Transfer shredded pork to a Dutch oven or skillet and stir in carrots, barbecue sauce, and mesquite sauce.",
+    "3": "Bake in preheated oven until heated through, about 30 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is barbecue sauce from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is skillet live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pour (Step 1) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "pork ribs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "oven": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "shredded pork": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "carrots": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "barbecue sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

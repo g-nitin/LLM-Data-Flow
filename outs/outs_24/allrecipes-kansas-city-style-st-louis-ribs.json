@@ -1,0 +1,162 @@
+{
+  "title": "Kansas City Style St. Louis Ribs",
+  "instructions": {
+    "1": "About one hour before smoking, coat both sides of ribs with a little vegetable oil and sprinkle with barbecue seasoning rub. Set aside at room temperature for 1 hour.",
+    "2": "Heat charcoal or gas grill for indirect cooking at 230 to 250 degrees F. Add drained wood chips, if using.",
+    "3": "Place the ribs, meaty side down, over a drip pan and cook for 2 hours. Add about 12 coals to a charcoal grill every 45 minutes or so to maintain the heat.",
+    "4": "Remove ribs from grill. Double-wrap each rack in heavy-duty aluminum foil. Return wrapped ribs to the grill and cook for 1 1/2 to 3 hours more over indirect heat, until very tender. Add more coals as needed to maintain temperature for a charcoal grill.",
+    "5": "Meanwhile, make the sauce. Combine all ingredients in small saucepan. Bring to a boil over medium-high heat; reduce heat and simmer 15 minutes, stirring frequently.",
+    "6": "Remove ribs from grill and unwrap. Place ribs over direct heat on grill and brush with Kansas City-style barbecue sauce. Cook for about 5 minutes until the sauce is set. Turn ribs and repeat with more sauce."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the ribs from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is ribs from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is grill from Step 2 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is more coals from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is grill live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 6?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to place the ribs in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we smoke (Step 1) and heat (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ribs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        4,
+        6
+      ]
+    },
+    "barbecue seasoning rub": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "charcoal": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        4,
+        6
+      ]
+    },
+    "indirect cooking": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "more coals": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "all ingredients": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "kansas city-style barbecue sauce": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 10,
+    "num_questions": 8
+  }
+}

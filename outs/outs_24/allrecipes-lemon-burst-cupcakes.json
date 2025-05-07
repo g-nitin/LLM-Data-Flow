@@ -1,0 +1,138 @@
+{
+  "title": "Lemon Burst Cupcakes",
+  "instructions": {
+    "1": "Heat oven to 350 degrees F for shiny metal pans (or 325 degrees F for dark or nonstick pans). Place paper baking cup in each of 24 regular-size muffin cups.",
+    "2": "In large bowl, make cake mix as directed on box, using water, oil and egg whites. Divide batter evenly among muffin cups.",
+    "3": "Bake as directed on box or until toothpick inserted in center comes out clean. Cool 10 minutes; remove from pan to cooling rack. Cool completely, about 30 minutes.",
+    "4": "Spoon lemon curd into corner of resealable heavy-duty food-storage plastic bag. Cut about 1/4 inch off corner of bag. Gently push cut corner of bag into center of cupcake. Squeeze about 2 teaspoons lemon curd into center of each cupcake for filling, being careful not to split cupcake.",
+    "5": "Frost cupcakes with frosting. To decorate, roll edge of each cupcake in candy sprinkles. Store loosely covered at room temperature."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is lemon curd from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is batter live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "30 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we make (Step 2) and frost (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cake mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "egg whites": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "batter": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "toothpick": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lemon curd": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "corner": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "each cupcake": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "filling": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "frosting": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "candy sprinkles": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}

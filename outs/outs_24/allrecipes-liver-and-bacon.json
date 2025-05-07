@@ -1,0 +1,126 @@
+{
+  "title": "Liver and Bacon",
+  "instructions": {
+    "1": "Place bacon in a large, deep skillet. Cook over medium high heat until evenly brown. Transfer bacon to a plate, reserving a small amount of grease in the pan and the rest aside.",
+    "2": "Pour seasoning coating mix into a large resealable plastic bag. Place calves' liver in bag one slice at a time; seal, and toss to coat.",
+    "3": "Cook liver in bacon grease over medium high heat, turning occasionally to brown both sides. Depending on the size of your skillet you may need to work in batches and add more bacon grease. Liver is done when juices run clear. Return bacon to the skillet during the last 2 minutes of cooking to warm through. Serve hot with your favorite side dish."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 3, is the skillet from Step 1 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is bacon from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is skillet from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is seasoning coating mix from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is calves' liver live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "2 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to return the bacon in Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we pour (Step 2) and cook (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "bacon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "seasoning coating mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "calves' liver": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "liver": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "size": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "batches": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 8
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "title": "Butterscotch Monkey Bread",
+  "instructions": {
+    "1": "Arrange dinner rolls in a tube pan. Scatter margarine pieces evenly over rolls.",
+    "2": "Mix pudding mix, brown sugar, and cinnamon in a bowl; pour over rolls. Place a towel over tube pan and all dough to rise overnight.",
+    "3": "Preheat oven to 350 degrees F (175 degrees C). Pour milk over risen dough, allowing milk to seep through any gaps.",
+    "4": "Bake in preheated oven until golden brown, 20 to 23 minutes. Allow bread to rest for 5 minutes. Invert pan onto a baking sheet or large plate to serve."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is dinner rolls from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is any gaps live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "5 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we arrange (Step 1) and preheat (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "dinner rolls": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pudding mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "rolls": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "all dough": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "any gaps": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

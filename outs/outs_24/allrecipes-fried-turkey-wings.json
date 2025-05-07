@@ -1,0 +1,109 @@
+{
+  "title": "Fried Turkey Wings",
+  "instructions": {
+    "1": "Season turkey wing pieces on all sides with seasoned salt, seafood seasoning, cayenne pepper, and garlic powder. Transfer into a resealable plastic bag; seal bag and marinate in the refrigerator for 4 hours to overnight.",
+    "2": "Heat oil in a deep-fryer or large saucepan to 350 degrees F (175 degrees C).",
+    "3": "Cook turkey wings in hot oil for 15 minutes; turn wings over and continue cooking until the meat is no longer pink at the bone, 10 to 15 minutes. An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C)."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is seafood seasoning from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is refrigerator live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "4 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we season (Step 1) and cook (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "seafood seasoning": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "turkey wings": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bone": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 8,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "title": "Cappuccino Mix in a Jar",
+  "instructions": {
+    "1": "Have ready 2 (12 ounce) canning jars. Put the instant coffee into a food processor, and process to a fine powder. If you don't have a food processor, put it into a large plastic bag, and crush with a rolling pin.",
+    "2": "In a large bowl, combine creamer, chocolate mix, instant coffee, SPLENDA\u00ae Granulated Sweetener, cinnamon, and nutmeg. Stir together until well mixed. Spoon into 2 - 12 ounce jars.",
+    "3": "Attach a note to each jar that reads: Cappuccino: Mix 3 tablespoons of powder with 6 fluid ounces hot water."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is creamer from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is fine powder live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 2) and attach (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "instant coffee": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "fine powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rolling pin": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "creamer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chocolate mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "splenda\u00ae granulated sweetener": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cinnamon": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "note": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "powder": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 3
+  }
+}

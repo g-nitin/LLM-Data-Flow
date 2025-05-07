@@ -1,0 +1,158 @@
+{
+  "title": "Raspberry Sauce - Savory",
+  "instructions": {
+    "1": "In a sauce pan over medium heat, add the water, berries, vinegar, garlic, rosemary, oregano, salt and pepper. Cook for about 10 minutes until the berries have broken up and formed a sauce. If you intend to strain the sauce to remove the seeds, garlic bits and herb leaves this is when to do it. Simply pour through a strainer and push the pulp through using the back of a spoon.",
+    "2": "Taste and adjust seasoning. Careful, it will be hot.",
+    "3": "To thicken the sauce, add a pinch of guar gum (up to 1/4 tsp) and stir vigorously. It takes a bit of time for the guar gum to thicken fully (about 3 minutes). It does not have to be on the heat to thicken. If you accidentally get it too thick then just add more water."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is seasoning from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is oregano live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we add (Step 1) and taste (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "berries": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rosemary": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oregano": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "seeds": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "herb leaves": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "strainer": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pulp": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "back": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "seasoning": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "guar gum": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 13,
+    "num_questions": 4
+  }
+}

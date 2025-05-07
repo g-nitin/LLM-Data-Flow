@@ -1,0 +1,184 @@
+{
+  "title": "Teriyaki Tuna Burgers",
+  "instructions": {
+    "1": "Coat a grill rack or broiler-pan rack with cooking spray. Preheat the grill or broiler.",
+    "2": "Finely chop the tuna to the consistency of ground meat. Place in a bowl. Add the teriyaki sauce, scallion, ginger, and garlic. Stir just until blended. Shape into 4 burgers. Coat lightly with cooking spray.",
+    "3": "Grill or broil the burgers 6 inches from the heat for 6 minutes, turning once, or until no longer pink. Remove to a plate and keep warm.",
+    "4": "Place 1/2 slice cheese on the bottom half of each bun. Place, cheese side up, on the rack and grill or broil for 1 minute, or until the cheese melts. Top each with lettuce, a burger, and a slice of pineapple."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is ground meat from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is scallion live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "6 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we chop (Step 2) and grill (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cooking spray": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "broiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tuna": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ground meat": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "teriyaki sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "scallion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "burgers": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "each bun": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "lettuce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "burger": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pineapple": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 15,
+    "num_questions": 4
+  }
+}

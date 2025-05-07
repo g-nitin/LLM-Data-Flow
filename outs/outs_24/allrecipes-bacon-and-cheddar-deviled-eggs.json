@@ -1,0 +1,111 @@
+{
+  "title": "Bacon and Cheddar Deviled Eggs",
+  "instructions": {
+    "1": "Cut eggs lengthwise in half. Remove yolks to medium bowl. Reserve 24 white halves. Finely chop remaining 4 white halves.",
+    "2": "Mash yolks with fork. Add mayonnaise, sour cream, mustard, lemon juice and pepper; mix well. Add chopped egg whites, bacon, cheese and chives; mix well.",
+    "3": "Spoon 1 heaping Tbsp. yolk mixture into each reserved egg white half.",
+    "4": "Refrigerate, covered, to blend flavors."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is eggs from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is chives live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we spoon (Step 3) and refrigerate (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "eggs": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "yolks": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        1
+      ]
+    },
+    "mayonnaise": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bacon": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chives": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 8,
+    "num_questions": 3
+  }
+}

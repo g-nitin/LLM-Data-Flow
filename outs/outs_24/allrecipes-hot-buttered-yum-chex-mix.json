@@ -1,0 +1,104 @@
+{
+  "title": "Hot Buttered Yum Chex\u00ae Mix",
+  "instructions": {
+    "1": "In large microwaveable bowl, place cereals. In 2-cup microwaveable measuring cup, microwave butter, brown sugar and honey uncovered on High 2 minutes, stirring after 1 minute, until mixture is bubbly. Stir in spices and rum flavoring. Pour over cereal mixture, stirring until coated.",
+    "2": "Microwave uncovered on High 3 minutes, stirring and scraping bowl after every minute.",
+    "3": "Cool slightly; about 5 minutes. Stir in marshmallows. Spread on waxed paper. Store in airtight container."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is rum flavoring from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is brown sugar live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we microwave (Step 2) and cool (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "cereals": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "brown sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "honey": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cereal mixture": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "spices": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rum flavoring": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "marshmallows": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

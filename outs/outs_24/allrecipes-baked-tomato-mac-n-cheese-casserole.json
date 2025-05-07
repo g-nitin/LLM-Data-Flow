@@ -1,0 +1,152 @@
+{
+  "title": "Baked Tomato Mac n Cheese Casserole",
+  "instructions": {
+    "1": "Preheat oven to 350 degrees F (175 degrees C). Butter a baking dish.",
+    "2": "Bring a large pot of lightly salted water to a boil. Cook elbow macaroni in the boiling water, stirring occasionally until cooked through but firm to the bite, 8 minutes; drain, return macaroni to pot, and stir tomatoes into the macaroni. Cook over medium heat until the macaroni absorbs some of the liquid from the tomatoes, about 4 minutes. Remove from heat.",
+    "3": "Melt butter in a large saucepan over medium-high heat. Stir flour into melted butter and cook until bubbly, 1 to 2 minutes. Slowly stream half-and-half and chicken broth into the butter mixture while stirring. Bring the mixture to a boil and continue to cook while stirring continually until thickened and bubbly, 2 to 3 minutes.",
+    "4": "Remove saucepan from heat. Melt mild Cheddar cheese and sharp Cheddar cheese into the butter mixture one handful at a time, stirring to incorporate each addition before adding the next. Season the cheese mixture with pepper and pour over the macaroni; stir to coat pasta evenly. Transfer the mixture to the prepared baking dish and top with crushed crackers.",
+    "5": "Bake in preheated oven until crust is golden brown and the liquid is bubbling, 15 to 20 minutes. Cool 10 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is tomatoes from Step 2 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is pasta live after Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 5?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we melt (Step 3) and bake (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "elbow macaroni": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bite": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": [
+        4
+      ]
+    },
+    "flour": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "butter mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sharp cheddar cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "macaroni": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "pasta": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "crust": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}

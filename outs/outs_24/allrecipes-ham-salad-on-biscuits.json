@@ -1,0 +1,129 @@
+{
+  "title": "Ham Salad on Biscuits",
+  "instructions": {
+    "1": "Combine Hellmann's\u00ae or Best Foods\u00ae Real Mayonnaise, relish, mustard, Worcestershire sauce, hot sauce and onion with wire whisk in medium bowl. Season, if desired, with salt and pepper.",
+    "2": "Pulse ham in food processor a few times until coarsely ground. Fold ham into mayonnaise mixture. Cover and refrigerate at least 1 hour.",
+    "3": "Arrange lettuce on bottom halves of biscuits, then top with ham salad and biscuit tops."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is worcestershire sauce from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is hellmann's\u00ae or best foods\u00ae real mayonnaise live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "1 hour"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 1) and arrange (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "hellmann's\u00ae or best foods\u00ae real mayonnaise": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "relish": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "worcestershire sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ham": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mayonnaise mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lettuce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "biscuits": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "ham salad": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

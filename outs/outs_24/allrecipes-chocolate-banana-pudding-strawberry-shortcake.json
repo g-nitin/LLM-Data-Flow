@@ -1,0 +1,258 @@
+{
+  "title": "Chocolate Banana Pudding Strawberry Shortcake",
+  "instructions": {
+    "1": "Prepare shortcake. Preheat oven to 400 degrees F. Grease a 9 inch round cake pan with butter. Mix together flour, baking powder, sugar and salt. Cut in the shortening until it resembles small pebbles. Add LACTAID\u00ae Low Fat Milk and the beaten egg. Stir just until a dough forms. Place dough in prepared cake pan and shape to fit.",
+    "2": "Bake shortcake in preheated oven 20-25 minutes or until lightly browned. Set aside on wire rack until ready to assemble.",
+    "3": "Prepare Pudding. Stir together the sugar, cornstarch and salt in small bowl. Pour LACTAID\u00ae Chocolate Milk into a medium-size sauce pan and whisk in sugar mixture. Mix well. Heat over low heat, stirring frequently until mixture begins to thicken, about 3-4 minutes. Add bananas. Simmer over low heat 1-2 minutes and add vanilla and butter. Stir well. Pour into a heat proof dish and chill 45-50 minutes.",
+    "4": "Mix together sliced strawberries and sugar. Set aside.",
+    "5": "Assemble shortcake. Cut shortcake in half (horizontally). Remove top half. Place shortcake bottom on a serving dish. Spread half of the chocolate banana pudding on the bottom half of the shortcake. Top with about half of the strawberries. Place shortcake top on the berries.",
+    "6": "Pour remaining pudding over the shortcake. Top with remaining strawberries. Serve immediately."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 6, is the shortcake from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is shortcake from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is shortcake from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is sugar from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is baking powder from Step 1 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sugar live after Step 1?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "45-50 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 1, is it still valid to use the sugar in Step 4?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we mix (Step 4) and assemble (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "shortcake": {
+      "step_introduced": 1,
+      "states": {
+        "1": "cooked",
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked",
+        "5": "cooked"
+      },
+      "used_in": [
+        2,
+        5,
+        6
+      ],
+      "defined_in": [
+        1,
+        2
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "baking powder": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3,
+        4
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "shortening": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "small pebbles": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "lactaid\u00ae low fat milk": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "beaten egg": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "pudding": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "lactaid\u00ae chocolate milk": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sugar mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "bananas": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chocolate banana pudding": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "strawberries": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "berries": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 6,
+    "num_entities": 19,
+    "num_questions": 9
+  }
+}

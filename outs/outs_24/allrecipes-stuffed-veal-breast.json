@@ -1,0 +1,351 @@
+{
+  "title": "Stuffed Veal Breast",
+  "instructions": {
+    "1": "Put oven rack in middle position and preheat oven to 350 degrees F.",
+    "2": "Make stuffing: Toast bread cubes on baking sheet until dry and beginning to brown on edges, about 15 minutes. (Leave oven on.)",
+    "3": "Cook celery, onion, garlic, 1/4 teaspoon salt, and 1/8 teaspoon pepper in 2 tablespoons butter in a 12-inch heavy skillet over moderate heat, stirring occasionally, until vegetables are softened, about 3 minutes. Transfer to a small bowl.",
+    "4": "Heat remaining 2 tablespoons butter in cleaned skillet over high heat until foam subsides, then saute livers with 1/4 teaspoon salt and 1/8 teaspoon pepper until edges are browned but livers are still pink inside, about 3 minutes. Transfer to a cutting board and cool completely, then cut livers into 1/4-inch dice.",
+    "5": "Whisk together eggs and milk in a large bowl, then stir in bread, vegetable mixture, livers, dill, 1/4 teaspoon salt, and 1/8 teaspoon pepper. Let stand at room temperature until bread has absorbed liquid, about 10 minutes.",
+    "6": "Prepare veal: Trim as much excess fat as possible from veal, then lay meat on a work surface. Beginning at center of thickest edge of veal breast, insert a large knife horizontally into center of veal and cut a pocket as evenly as possible, leaving a 1-inch border on 3 sides. Open pocket and sprinkle inside with 1/4 teaspoon salt and 1/8 teaspoon pepper. Fill pocket with stuffing and cover opening with bacon slices. Rub outside of veal with oil and sprinkle with remaining 1/2 teaspoon salt and remaining 1/4 teaspoon pepper.",
+    "7": "Transfer veal to a small roasting pan. Add stock to pan, then cover pan tightly with foil and roast veal 1 1/2 hours.",
+    "8": "Remove foil and baste veal with stock, then roast, uncovered, until well browned and thermometer inserted diagonally 2 inches into stuffing registers 190 degrees F, about 1 hour more.",
+    "9": "Transfer veal to a platter and let stand, loosely covered with foil, 20 minutes before slicing. Serve warm or at room temperature."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 8, is the stuffing from Step 2 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is oven from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is stuffing from Step 2 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is livers from Step 4 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is veal from Step 6 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is veal from Step 7 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is celery from Step 3 still available in Step 8?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is stuffing live after Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 6, is it still valid to transfer the veal in Step 7?",
+      "answer": false
+    },
+    {
+      "type": "Taint Analysis",
+      "question": "Does using eggs in Step 5 introduce a potential safety concern to the recipe?",
+      "answer": true
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we make (Step 2) and transfer (Step 7) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "middle position": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        2
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "stuffing": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        6,
+        8
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread cubes": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "celery": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked",
+        "3": "cooked",
+        "4": "cooked",
+        "5": "cooked",
+        "6": "cooked",
+        "7": "cooked",
+        "8": "cooked"
+      },
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "vegetables": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "foam": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "livers": {
+      "step_introduced": 4,
+      "states": {
+        "3": "cooked",
+        "4": "cooked",
+        "5": "cooked",
+        "6": "cooked",
+        "7": "cooked",
+        "8": "cooked"
+      },
+      "used_in": [
+        4,
+        5
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "eggs": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "milk": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "vegetable mixture": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dill": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "veal": {
+      "step_introduced": 6,
+      "states": {
+        "6": "cooked",
+        "7": "cooked",
+        "8": "cooked"
+      },
+      "used_in": [
+        9,
+        7,
+        8
+      ],
+      "defined_in": [
+        6,
+        7
+      ],
+      "consumed_in": []
+    },
+    "as much excess fat": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "veal breast": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "pocket": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "1-inch border": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "opening": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "outside": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        6
+      ],
+      "consumed_in": []
+    },
+    "platter": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 25,
+    "num_questions": 12
+  }
+}

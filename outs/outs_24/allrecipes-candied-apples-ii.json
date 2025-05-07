@@ -1,0 +1,119 @@
+{
+  "title": "Candy Apples",
+  "instructions": {
+    "1": "Gather all ingredients.",
+    "2": "Lightly grease cookie sheets. Insert craft sticks into whole, stemmed apples.",
+    "3": "Combine sugar, water, and corn syrup in a medium saucepan over medium-high heat. Bring to a boil and insert candy thermometer; continue to boil, without stirring, until temperature reaches 300 to 310 degrees F (149 to 154 degrees C) or until a small amount of syrup dropped into cold water forms hard, brittle threads.",
+    "4": "Remove from heat and stir in food coloring.",
+    "5": "Holding each apple by its stick, dip in syrup, remove and turn to coat evenly. Place on prepared sheets to harden."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is all ingredients from Step 1 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is all ingredients live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we remove (Step 4) and hold (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "all ingredients": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "whole, stemmed apples": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "corn syrup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "hard, brittle threads": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "food coloring": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "each apple": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "syrup": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 9,
+    "num_questions": 3
+  }
+}

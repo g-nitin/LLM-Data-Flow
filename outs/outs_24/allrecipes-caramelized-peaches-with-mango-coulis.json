@@ -1,0 +1,120 @@
+{
+  "title": "Caramelized Peaches With Mango Coulis",
+  "instructions": {
+    "1": "PREHEAT broiler. Line baking sheet with foil.",
+    "2": "COMBINE nectar, cornstarch and nutmeg in a small saucepan; stir until cornstarch is dissolved. Cook over medium heat, stirring frequently for 6 to 8 minutes, or until mixture just reaches a boil. Remove from heat.",
+    "3": "PLACE peach halves cut side up on prepared baking sheet; sprinkle sugar evenly over peach halves. Broil for 5 to 6 minutes or until sugar is caramelized and golden. Transfer to wire rack to cool slightly.",
+    "4": "TO SERVE, place about 1/4 cup mango coulis on each serving plate. Top with one peach half, caramelized side up. Garnish with mint."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is broiler from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is broiler live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "5 to 6 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 2) and serve (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "broiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "nectar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cornstarch": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "nutmeg": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mint": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 8,
+    "num_questions": 4
+  }
+}

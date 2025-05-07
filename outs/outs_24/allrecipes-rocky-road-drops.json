@@ -1,0 +1,88 @@
+{
+  "title": "Rocky Road Drops",
+  "instructions": {
+    "1": "In the top of a double boiler, melt the chocolate and butterscotch chips.",
+    "2": "In a large bowl, combine the raisins, peanuts, marshmallows and chow mein noodles. Add melted chocolate mixture and quickly mix well.",
+    "3": "Drop by tablespoons onto wax paper; allow to sit until hardened."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is double boiler from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is double boiler live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 2) and drop (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "double boiler": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chocolate and butterscotch chips": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "raisins": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "peanuts": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "marshmallows": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chow mein noodles": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 3
+  }
+}

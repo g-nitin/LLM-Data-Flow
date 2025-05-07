@@ -1,0 +1,138 @@
+{
+  "title": "Sausages with Hot Slaw",
+  "instructions": {
+    "1": "Slash each sausage 3 or 4 times on each side. Pour oil into a 10- to 12-inch nonstick frying pan over medium heat. Add sausages and cook, turning often, until hot in thickest part (5 to 7 minutes; cut to test). Lift sausages from pan and keep warm on a serving plate.",
+    "2": "To same pan, add vinegar, sugar, cumin seeds, and onion; bring to a boil, stirring to loosen pan drippings. Remove pan from heat and add coleslaw mix. Mix lightly to coat with onion mixture.",
+    "3": "Spoon coleslaw alongside sausages. Offer mustard to add to taste."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is sugar from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is cumin seeds live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "5 to 7 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we add (Step 2) and spoon (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "each sausage": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "vinegar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cumin seeds": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pan drippings": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coleslaw mix": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "coleslaw": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sausages": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "mustard": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}

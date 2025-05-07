@@ -1,0 +1,109 @@
+{
+  "title": "Delicious Tangy Pork Chops",
+  "instructions": {
+    "1": "Combine the pork chops, lemon juice, Worcestershire sauce, vegetable oil, and garlic in a large resealable plastic bag. Squeeze as much excess air from bag as possible. Marinate in refrigerator 4 to 24 hours.",
+    "2": "Preheat an outdoor grill for medium-high heat, and lightly oil the grate.",
+    "3": "Remove the pork chops from the marinade directly to the grill. Discard the marinade.",
+    "4": "Cook until the pork is no longer pink in the center, about 5 minutes per side. An instant-read thermometer inserted into the center should read 145 degrees F (63 degrees C)."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is as much excess air from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is worcestershire sauce live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "4 to 24 hours"
+    }
+  ],
+  "entities": {
+    "pork chops": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "worcestershire sauce": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "as much excess air": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "marinade": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        3
+      ]
+    },
+    "pork": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 8,
+    "num_questions": 3
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "title": "Cavatelli with Sausage, Eggplant and Saffron Cream",
+  "instructions": {
+    "1": "Bring a large pot of water to a boil, salt it, add the pasta and cook until al dente (5 to 7 minutes for frozen; 12 to 14 minutes for dried). Set aside a ladle of pasta cooking water. Drain the pasta.",
+    "2": "While the pasta is working, in a large, deep skillet, heat 3 tablespoons EVOO, 3 turns of the pan, the saffron and the fennel seeds over medium-high heat. Add the pork, crumbling it into bits with a wooden spoon, and cook until browned, 3 to 4 minutes. Season with salt, pepper, the garlic and crushed red pepper.",
+    "3": "Push the meat to the side of the pan and add the remaining 1 tablespoon oil and the eggplant to the center of the pan; season with salt. Cook the eggplant, stirring, until just tender, about 5 minutes. Combine with the meat. Add the thyme and toss, then stir in the broth and bring to a boil. Stir in the cream and reduce the heat to low. Adjust the seasonings.",
+    "4": "Stir the pasta into the sauce and toss with 1/2 cup cheese until combined, adding the reserved pasta cooking water to loosen if needed. Pass more cheese around the table."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is skillet from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is garlic live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "3 to 4 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we push (Step 3) and stir (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "pasta": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "saffron": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "fennel seeds": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "pork": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "eggplant": {
+      "step_introduced": 3,
+      "states": {
+        "2": "cooked",
+        "3": "cooked"
+      },
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cream": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "seasonings": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "more cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "table": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 14,
+    "num_questions": 4
+  }
+}

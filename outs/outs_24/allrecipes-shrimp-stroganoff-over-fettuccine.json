@@ -1,0 +1,145 @@
+{
+  "title": "Shrimp Stroganoff Over Fettuccine",
+  "instructions": {
+    "1": "Melt 2 tablespoons of the butter in a 10- to 12-inch nonstick frying pan over medium-high heat. Add shrimp and cook, stirring often, until they are just opaque in center (cut to test), 4 to 5 minutes. Remove shrimp from pan and keep warm.",
+    "2": "Melt remaining butter in pan. Add mushrooms and cook, stirring often, for 2 minutes. Add onion and garlic; cook, stirring often, until onion is soft but not browned, about 3 minutes. Blend in flour and cook, stirring, until bubbly. Remove from heat and gradually stir in broth, whisking to prevent lumps.",
+    "3": "Return to heat and cook, stirring often, until sauce boils and thickens. Stir in sour cream, catsup, chopped dill, and shrimp. Stir just until heated through; do not boil.",
+    "4": "Remove from heat and season to taste with salt and pepper. Place fettuccine in a large serving bowl and top with stroganoff. Garnish with dill sprigs."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is flour from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is sour cream live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we return (Step 3) and remove (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "shrimp": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "mushrooms": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "flour": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lumps": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "catsup": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "fettuccine": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "stroganoff": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 11,
+    "num_questions": 4
+  }
+}

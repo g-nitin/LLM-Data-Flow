@@ -1,0 +1,76 @@
+{
+  "title": "Cheesy Italian Pizza Loaf",
+  "instructions": {
+    "1": "Heat oven to 400 degrees F.",
+    "2": "Mix first 4 ingredients.",
+    "3": "Spread onto cut sides of bread; top with Parmesan.",
+    "4": "Bake 8 to 10 min. or until lightly browned."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is oven from Step 1 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is oven live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "8 to 10 min."
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we spread (Step 3) and bake (Step 4) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "first 4 ingredients": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "parmesan": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 4,
+    "num_entities": 4,
+    "num_questions": 4
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "title": "Amazing Artichoke and Spinach Dip",
+  "instructions": {
+    "1": "Preheat oven to 425 degrees F (220 degrees C).",
+    "2": "Combine the artichoke hearts, onion, salad dressing, mayonnaise, sour cream, Swiss cheese, mozzarella cheese, 1/2 cup Parmesan cheese, Romano cheese, garlic powder, salt, and pepper in a large mixing bowl; mix evenly. Gently fold the spinach into the mixture; spread into the bottom of an 8x8 casserole pan. Sprinkle 1/4 cup Parmesan cheese over the top. Cover with aluminum foil.",
+    "3": "Bake in preheated oven 15 minutes. Remove the aluminum foil and bake until top begins to brown, about 10 minutes more. Allow to cool 10 to 15 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is garlic powder from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is salad dressing live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "10 to 15 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we combine (Step 2) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "artichoke hearts": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "salad dressing": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mayonnaise": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mozzarella cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "spinach": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

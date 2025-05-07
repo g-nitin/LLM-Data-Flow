@@ -1,0 +1,189 @@
+{
+  "title": "Cerdos en una Manta (Pigs in a Blanket)",
+  "instructions": {
+    "1": "Preheat oven to 450 degrees F (230 degrees C).",
+    "2": "Heat a large skillet over medium-high heat. Cook and stir chorizo in the hot skillet until browned and crumbly, 5 to 7 minutes. Remove chorizo with a slotted spoon to a plate lined with paper towel to drain, retaining drippings in the skillet.",
+    "3": "Saute red bell pepper, red onion, and jalapeno pepper in reserved chorizo drippings until tender, 5 to 7 minutes. Remove with a slotted spoon to a plate lined with paper towel to drain.",
+    "4": "Flatten biscuit roll dough into 4 4x6-inch rectangles, pressing seams together where needed. Mix chorizo and vegetable mixture in a bowl; spoon into the center of each rectangle and top with cheese. Roll dough, taking care to seal contents inside the dough. Arrange 'blankets' on a baking sheet so the seams are down. Check for holes and seal as found.",
+    "5": "Bake in preheated oven until golden brown, 10 to 12 minutes; transfer to a serving platter and season with hot sauce."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is blankets from Step 4 still available in Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is drippings live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "5 to 7 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we saute (Step 3) and bake (Step 5) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chorizo": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        2
+      ]
+    },
+    "drippings": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "red bell pepper": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "red onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "biscuit roll dough": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "seams": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "chorizo and vegetable mixture": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "each rectangle": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        4
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "contents": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "blankets": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "holes": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "serving platter": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "hot sauce": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 16,
+    "num_questions": 4
+  }
+}

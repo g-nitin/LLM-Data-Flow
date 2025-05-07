@@ -1,0 +1,135 @@
+{
+  "title": "Pan Fried Daikon Cake",
+  "instructions": {
+    "1": "Place daikon in a large bowl; sprinkle with salt. Refrigerate for 30 minutes. Drain daikon. Transfer to a bowl.",
+    "2": "Add onion, bread crumbs, egg, garlic, black pepper, paprika, and chili garlic sauce to daikon; mix well. Form into 8 patties.",
+    "3": "Pour oil into a large skillet over medium heat. Add patties; fry until firm and nicely brown, about 3 minutes per side. Drain on paper towels."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is chili garlic sauce from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is paprika live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "3 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we add (Step 2) and pour (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "daikon": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [],
+      "consumed_in": [
+        1
+      ]
+    },
+    "onion": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bread crumbs": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "egg": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "black pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "paprika": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chili garlic sauce": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "patties": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 10,
+    "num_questions": 4
+  }
+}

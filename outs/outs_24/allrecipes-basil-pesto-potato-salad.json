@@ -1,0 +1,94 @@
+{
+  "title": "Basil Pesto Potato Salad",
+  "instructions": {
+    "1": "Place potatoes into a large pot and cover with lightly salted water; bring to a boil. Reduce heat to medium-low and simmer until just tender, about 10 minutes. Drain and cool until easily handled, 5 to 10 minutes.",
+    "2": "Peel potatoes and cut into 1/4-inch thick slices. Place in a large bowl. Sprinkle with salt. Add white wine, olive oil, and lemon juice; toss lightly to combine.",
+    "3": "Mix mayonnaise and pesto together in a small bowl. Pour over potato salad and toss gently. Garnish with red onion. Chill until serving."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is potatoes from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is potatoes live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 1?",
+      "answer": "5 to 10 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we peel (Step 2) and mix (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "potatoes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1,
+        2
+      ],
+      "consumed_in": []
+    },
+    "white wine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mayonnaise": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "pesto": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "potato salad": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "red onion": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 6,
+    "num_questions": 4
+  }
+}

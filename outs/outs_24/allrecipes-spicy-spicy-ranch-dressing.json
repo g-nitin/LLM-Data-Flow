@@ -1,0 +1,77 @@
+{
+  "title": "Spicy Spicy Ranch Dressing",
+  "instructions": {
+    "1": "Gather the ingredients.",
+    "2": "Combine salad dressing, hot pepper sauces, cayenne pepper, and chili powder in a bowl.",
+    "3": "Chill in the refrigerator for at least 1 hour."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is cayenne pepper from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is hot pepper sauces live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "1 hour"
+    }
+  ],
+  "entities": {
+    "salad dressing": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "hot pepper sauces": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "chili powder": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "refrigerator": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 3
+  }
+}

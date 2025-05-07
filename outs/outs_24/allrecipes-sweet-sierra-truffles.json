@@ -1,0 +1,173 @@
+{
+  "title": "Sweet Sierra Truffles",
+  "instructions": {
+    "1": "Melt semisweet chocolate in a heatproof bowl set over a pan of barely simmering water. If you want to decorate with chocolate, reserve 1/2 cup of chocolate chips. Stir occasionally until melted and smooth. Remove from the heat.",
+    "2": "In a large bowl, beat cream cheese with an electric mixer until soft and fluffy. Gradually mix in the confectioners' sugar until completely incorporated. Stir in the melted chocolate and wine. Cover and refrigerate the dough for 1 hour, or until firm.",
+    "3": "Shape the mixture into 3/4 inch balls and place on a baking tray lined with waxed paper. Melt reserved chocolate chips in a small bowl in the microwave until you can stir it smooth. Use a fork to drizzle chocolate over the truffles for decoration."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is semisweet chocolate from Step 1 still available in Step 2?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is semisweet chocolate live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "1 hour"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we beat (Step 2) and shape (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "semisweet chocolate": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chocolate chips": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cream cheese": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "confectioners' sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "melted chocolate": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "wine": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "dough": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "baking tray": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "microwave": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "chocolate": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "truffles": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "decoration": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 14,
+    "num_questions": 4
+  }
+}

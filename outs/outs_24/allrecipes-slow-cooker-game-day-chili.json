@@ -1,0 +1,191 @@
+{
+  "title": "Slow Cooker Game Day Chili",
+  "instructions": {
+    "1": "Line a 5- to 6-quart slow cooker with a Reynolds Kitchen Slow Cooker Liner. Fit liner snugly against the bottom and sides of the bowl; pull top of liner over the rim. Set aside.",
+    "2": "Cook and stir ground beef, bell peppers, and onions in a large skillet over medium-high heat, stirring occasionally, until beef is browned and crumbly. Drain grease.",
+    "3": "Spoon beef mixture into the lined slow cooker. Add beans, tomato sauce, diced tomatoes and green chiles, and seasoning mix to beef mixture; stir gently with a wooden or plastic spoon.",
+    "4": "Cover and cook until hot and bubbly throughout, Low for 6 to 7 hours or High for 3 to 3 1/2 hours.",
+    "5": "Carefully remove the lid to allow steam to escape. Stir gently, then top with cheese and dollops of sour cream. Serve chili directly from the slow cooker liner."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is beef mixture from Step 3 still available in Step 4?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is ground beef live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 4?",
+      "answer": "1/2 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we cook (Step 2) and spoon (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "reynolds kitchen slow cooker liner": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "rim": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "ground beef": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "bell peppers": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "onions": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "skillet": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beef mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomato sauce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "green chiles": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "seasoning mix": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "cheese": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "dollops": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "sour cream": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "chili": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        5
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "slow cooker liner": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 5,
+    "num_entities": 16,
+    "num_questions": 4
+  }
+}

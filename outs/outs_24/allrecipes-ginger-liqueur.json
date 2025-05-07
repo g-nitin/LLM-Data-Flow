@@ -1,0 +1,100 @@
+{
+  "title": "Ginger Liqueur",
+  "instructions": {
+    "1": "Blend ginger and water together in a blender until smooth.",
+    "2": "Strain orange juice through a fine-mesh strainer into a bowl. Stir ginger-water mixture, brandy, sugar, and vanilla into the orange juice until the sugar dissolves completely.",
+    "3": "Refrigerate until cold, at least 20 minutes."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is vanilla from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is blender live after Step 1?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "20 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we blend (Step 1) and refrigerate (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "ginger": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "fine-mesh strainer": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "ginger-water mixture": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "brandy": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "sugar": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "vanilla": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 7,
+    "num_questions": 4
+  }
+}

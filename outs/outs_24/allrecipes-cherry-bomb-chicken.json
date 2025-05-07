@@ -1,0 +1,249 @@
+{
+  "title": "Cherry Bomb Chicken",
+  "instructions": {
+    "1": "Combine water, sugar, and kosher salt in a saucepan over low heat; cook until sugar and salt dissolve, 4 to 5 minutes. Set aside to cool to room temperature.",
+    "2": "Score skin side of chicken pieces 2 to 3 times, about 1/8-inch deep; place in a large bowl or lidded container.",
+    "3": "Combine cherry tomatoes, habanero peppers, garlic, and allspice with sugar and salt mixture in a blender; blend until smooth.",
+    "4": "Pour tomato brine over chicken pieces, making sure all pieces are covered. Cover bowl or container; refrigerate 4 to 6 hours.",
+    "5": "Transfer chicken pieces from brine to a plate or baking sheet lined with paper towels, shaking off excess. Pat chicken pieces dry with more paper towels. Discard brine.",
+    "6": "Preheat an outdoor grill for high, indirect heat and lightly oil the grate.",
+    "7": "Combine oil, thyme, cumin, black pepper, and cayenne pepper in a small bowl; brush onto chicken pieces",
+    "8": "Cook chicken, skin sides down, on the preheated grill for 1 to 2 minutes; flip chicken and move to indirect heat. Cook until well-browned and meat is no longer pink in the center, 30 to 35 minutes. An instant-read thermometer inserted near the bone should read 165 degrees F (74 degrees C).",
+    "9": "Brush chicken pieces with chili sauce; transfer to a plate and rest 10 minutes before serving."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 8, is the grill from Step 6 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is grill from Step 6 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is blender from Step 3 still available in Step 9?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is allspice live after Step 3?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 9?",
+      "answer": "10 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 6, is it still valid to use the grill in Step 8?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we score (Step 2) and combine (Step 7) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "sugar": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "kosher salt": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "saucepan": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "cherry tomatoes": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "habanero peppers": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "garlic": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "allspice": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "sugar and salt mixture": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    },
+    "tomato brine": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "brine": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        5
+      ]
+    },
+    "excess": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [
+        6,
+        8
+      ],
+      "defined_in": [
+        6,
+        8
+      ],
+      "consumed_in": []
+    },
+    "thyme": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cumin": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "cayenne pepper": {
+      "step_introduced": 7,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        7
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 8,
+      "states": {
+        "7": "cooked",
+        "8": "cooked"
+      },
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "meat": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "bone": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "chili sauce": {
+      "step_introduced": 9,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        9
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 9,
+    "num_entities": 20,
+    "num_questions": 7
+  }
+}

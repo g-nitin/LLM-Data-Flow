@@ -1,0 +1,342 @@
+{
+  "title": "Grilled New York Strip Steak with Fire Roasted Salsa and Grilled Mushrooms and Asparagus",
+  "instructions": {
+    "1": "Coat onion slices, asparagus, tomatoes and jalapenos in 2 tablespoons olive oil. Season with salt and pepper and add to the hot grill.",
+    "2": "Cook for 4 minutes on each side and remove from the grill.",
+    "3": "Set asparagus aside and keep warm while preparing salsa.",
+    "4": "To make salsa, remove charred loose rings from the onion rounds and place in the blender.",
+    "5": "Remove and the skins and seeds from the tomatoes and add remaining tomato to the blender.",
+    "6": "Remove and discard the skin and the seeds from the jalapenos.",
+    "7": "Mince the jalapenos and add to the blender.",
+    "8": "Add the basil leaves, olive oil and balsamic vinegar and pulse until chunky.",
+    "9": "Reserve until serving.",
+    "10": "Season steaks with salt, pepper and olive oil and place on the hottest part of the grill.",
+    "11": "Toss the mushroom caps in 2 tablespoons olive oil and season with salt and freshly ground black pepper.",
+    "12": "Place the mushrooms on the heat with smaller mushrooms around the edges of the grill.",
+    "13": "Cook the steak for 4 minutes on each side for medium rare, 8 minutes on each side for well done.",
+    "14": "Cook the portobellos for 2 minutes on each side, the shiitakes for about 1 to 2 minutes on each side.",
+    "15": "Slice the steak and portobellos on a bias and place on a platter with the grilled asparagus, shiitakes and tomato salsa.",
+    "16": "Drizzle with extra-virgin olive oil and balsamic vinegar before serving."
+  },
+  "questions": [
+    {
+      "type": "Reaching Definitions",
+      "question": "In Step 5, is the blender from Step 4 being used?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is asparagus from Step 1 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is jalapenos from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is grill from Step 1 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is blender from Step 4 used in multiple future steps without being redefined?",
+      "answer": true
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is seeds from Step 5 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is steak from Step 13 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Very Busy Expressions",
+      "question": "Is portobellos from Step 14 used in multiple future steps without being redefined?",
+      "answer": false
+    },
+    {
+      "type": "Available Expressions",
+      "question": "Is shiitakes from Step 15 still available in Step 16?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is seeds live after Step 5?",
+      "answer": true
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "4 minutes"
+    },
+    {
+      "type": "Type-State Analysis",
+      "question": "If we skip Step 14, is it still valid to use the portobellos in Step 15?",
+      "answer": false
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we mince (Step 7) and drizzle (Step 16) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "asparagus": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        3
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "tomatoes": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        5
+      ]
+    },
+    "jalapenos": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        6,
+        7
+      ],
+      "defined_in": [
+        1,
+        7
+      ],
+      "consumed_in": []
+    },
+    "grill": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1,
+        10,
+        12
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        2
+      ]
+    },
+    "salsa": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3,
+        4
+      ],
+      "consumed_in": []
+    },
+    "charred loose rings": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "onion rounds": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "blender": {
+      "step_introduced": 4,
+      "states": {},
+      "used_in": [
+        5,
+        7
+      ],
+      "defined_in": [
+        4
+      ],
+      "consumed_in": []
+    },
+    "skins": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        5
+      ]
+    },
+    "seeds": {
+      "step_introduced": 5,
+      "states": {},
+      "used_in": [
+        6
+      ],
+      "defined_in": [
+        5
+      ],
+      "consumed_in": []
+    },
+    "skin": {
+      "step_introduced": 6,
+      "states": {},
+      "used_in": [],
+      "defined_in": [],
+      "consumed_in": [
+        6
+      ]
+    },
+    "basil leaves": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "balsamic vinegar": {
+      "step_introduced": 8,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        8
+      ],
+      "consumed_in": []
+    },
+    "steaks": {
+      "step_introduced": 10,
+      "states": {},
+      "used_in": [
+        10
+      ],
+      "defined_in": [
+        10
+      ],
+      "consumed_in": []
+    },
+    "mushroom caps": {
+      "step_introduced": 11,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        11
+      ],
+      "consumed_in": []
+    },
+    "smaller mushrooms": {
+      "step_introduced": 12,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        12
+      ],
+      "consumed_in": []
+    },
+    "steak": {
+      "step_introduced": 13,
+      "states": {
+        "12": "cooked",
+        "13": "cooked",
+        "14": "cooked",
+        "15": "cooked"
+      },
+      "used_in": [
+        13,
+        15
+      ],
+      "defined_in": [
+        13,
+        15
+      ],
+      "consumed_in": []
+    },
+    "portobellos": {
+      "step_introduced": 14,
+      "states": {
+        "13": "cooked",
+        "14": "cooked",
+        "15": "cooked"
+      },
+      "used_in": [
+        14,
+        15
+      ],
+      "defined_in": [
+        14
+      ],
+      "consumed_in": []
+    },
+    "bias": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [
+        15
+      ],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "platter": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "grilled asparagus": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "shiitakes": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    },
+    "tomato salsa": {
+      "step_introduced": 15,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        15
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 16,
+    "num_entities": 23,
+    "num_questions": 13
+  }
+}

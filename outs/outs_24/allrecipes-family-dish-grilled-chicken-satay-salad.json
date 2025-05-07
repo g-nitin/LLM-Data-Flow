@@ -1,0 +1,92 @@
+{
+  "title": "Family Dish: Grilled Chicken Satay Salad",
+  "instructions": {
+    "1": "For marinade, in small bowl, whisk 3/4 cup Dressing and Skippy\u00ae Creamy Peanut Butter. Spread until smooth.",
+    "2": "In large, shallow non-aluminum baking dish or plastic bag, pour 1/2 cup Dressing mixture over chicken; turn to coat. Cover, or close bag, and marinate in refrigerator, turning occasionally, 30 minutes to 3 hours. Refrigerate remaining marinade.",
+    "3": "Remove chicken from marinade, discarding marinade. Grill or broil chicken, turning once and brushing with refrigerated marinade, until chicken is thoroughly cooked. To serve, arrange sliced chicken over lettuce tossed with remaining 1/4 cup Dressing."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is marinade from Step 1 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is marinade live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 2?",
+      "answer": "3 hours"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we whisk (Step 1) and pour (Step 2) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "marinade": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [
+        1
+      ],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "skippy\u00ae creamy peanut butter": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "chicken": {
+      "step_introduced": 2,
+      "states": {
+        "2": "cooked"
+      },
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": [
+        3
+      ]
+    },
+    "refrigerator": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "lettuce": {
+      "step_introduced": 3,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        3
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 5,
+    "num_questions": 4
+  }
+}

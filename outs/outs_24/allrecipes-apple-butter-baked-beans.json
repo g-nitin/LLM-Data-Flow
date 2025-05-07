@@ -1,0 +1,75 @@
+{
+  "title": "Apple Butter Baked Beans",
+  "instructions": {
+    "1": "Heat oven to 375 degrees F.",
+    "2": "Mix all ingredients except beans in large bowl. Stir in beans. Pour into 2-quart baking dish or casserole.",
+    "3": "Bake 50-60 minutes or until hot and bubbly."
+  },
+  "questions": [
+    {
+      "type": "Available Expressions",
+      "question": "Is all ingredients from Step 2 still available in Step 3?",
+      "answer": true
+    },
+    {
+      "type": "Live Variable Analysis",
+      "question": "Is all ingredients live after Step 2?",
+      "answer": false
+    },
+    {
+      "type": "Interval Analysis",
+      "question": "What is the last time interval specified in Step 3?",
+      "answer": "50-60 minutes"
+    },
+    {
+      "type": "Concurrency Analysis",
+      "question": "Can we mix (Step 2) and bake (Step 3) at the same time?",
+      "answer": false
+    }
+  ],
+  "entities": {
+    "oven": {
+      "step_introduced": 1,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        1
+      ],
+      "consumed_in": []
+    },
+    "all ingredients": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "beans": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [
+        2
+      ],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    },
+    "casserole": {
+      "step_introduced": 2,
+      "states": {},
+      "used_in": [],
+      "defined_in": [
+        2
+      ],
+      "consumed_in": []
+    }
+  },
+  "metadata": {
+    "num_steps": 3,
+    "num_entities": 4,
+    "num_questions": 4
+  }
+}
