@@ -6,6 +6,7 @@ import re
 from shutil import rmtree
 
 import pandas as pd
+from helpers import constants
 
 
 # Helper function to parse goal and step count from prompt text
@@ -86,7 +87,7 @@ def convert_csv(input_folder, output_folder):
 
             # Process 'answer' column if it exists
             if "answer" in df.columns:
-                df["answer"] = df["answer"].replace({True: "Yes", False: "No"})
+                df["answer"] = df["answer"].replace(constants.BOOLEAN_TO_YES_NO_MAP)
                 # Optional: Check if the `answer` column has only Yes/No values after conversion
                 if (
                     not df["answer"].isin(["Yes", "No", "yes", "no"]).all()
@@ -133,16 +134,10 @@ def convert_csv(input_folder, output_folder):
     # Print statistics
     print("\n--- Dataset Statistics ---")
     # Custom titles for better readability
-    stat_titles = {
-        "total_procedures": "Total Procedures",
-        "avg_steps_per_procedure": "Avg. Steps per Procedure",
-        "min_steps": "Min Steps",
-        "max_steps": "Max Steps",
-        "total_qa_pairs_generated": "Total QA Pairs Generated",
-        "qa_pairs_used": "QA Pairs Used (in final dataset)",
-    }
     for key, value in stats.items():
-        title = stat_titles.get(key, key.replace("_", " ").title())
+        title = constants.POST_PROCESSING_STAT_TITLES.get(
+            key, key.replace("_", " ").title()
+        )
         print(f"{title}: {value}")
 
     # Save statistics to a JSON file

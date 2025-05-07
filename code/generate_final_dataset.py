@@ -7,6 +7,7 @@ from shutil import rmtree
 
 import loguru
 import pandas as pd
+from helpers import constants
 from tqdm import tqdm
 
 
@@ -83,28 +84,13 @@ def check_question_relevance(
         True if the question is relevant (either type doesn't need check or primary entity matches), False otherwise.
     """
     # Types that don't require a specific entity match in the question text
-    types_to_skip_entity_check = {
-        "Interval Analysis",
-        "Concurrency Analysis",
-    }
-    if q_type in types_to_skip_entity_check:
+    if q_type in constants.IGNORE_TYPES:
         loguru.logger.trace(
             f"Skipping entity check for type '{q_type}': {question_text}"
         )
         return True
 
-    # Define regex patterns to extract the primary entity phrase for each relevant type
-    # The patterns capture the group assumed to be the (potentially malformed) entity name
-    patterns = {
-        "Reaching Definitions": r"In Step \d+, is the (.*?) from Step \d+ being used\?",
-        "Very Busy Expressions": r"Is (.*?) from Step \d+ used in multiple future steps.*?",
-        "Available Expressions": r"Is (.*?) from Step \d+ still available in Step \d+\?",
-        "Live Variable Analysis": r"Is (.*?) live after Step \d+\?",
-        "Type-State Analysis": r"If we skip Step \d+, is it still valid to .+ the (.*?) in Step \d+\?",
-        "Taint Analysis": r"Does using (.*?) in Step \d+ introduce.*?",
-    }
-
-    pattern = patterns.get(q_type)
+    pattern = constants.FINAL_DATASET_QUESTION_TYPE_REGEX_PATTERNS.get(q_type)
     if not pattern:
         loguru.logger.warning(
             f"No specific regex pattern defined for question type '{q_type}'. Cannot perform strict entity check for: {question_text}"
@@ -212,7 +198,7 @@ def main():
 
     # Configure logging
     loguru.logger.remove()
-    log_file_path = output_csv_dir / "csv_generation.log"
+    log_file_path = output_csv_dir / constants.FILENAME_CSV_GENERATION_LOG
     loguru.logger.add(log_file_path, level=args.log_level.upper())
     loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level="INFO")
 
@@ -237,19 +223,7 @@ def main():
 
     # Filter out known non-recipe JSONs from the original output
     recipe_files = [
-        f
-        for f in recipe_files
-        if f.name
-        not in {
-            "all_entities.json",
-            "all_questions.json",
-            "question_counts.json",
-            "processing_stats.json",
-            "final_entity_subset.txt",
-            "subset_finding.log",
-            "final_verification_report.json",
-            "final_entity_subset.txt",
-        }
+        f for f in recipe_files if f.name not in constants.NON_RECIPE_JSON_FILENAMES
     ]
 
     if not recipe_files:
@@ -473,16 +447,7 @@ def main():
             )
 
     # Check for missing types
-    all_expected_types = {
-        "Reaching Definitions",
-        "Very Busy Expressions",
-        "Available Expressions",
-        "Live Variable Analysis",
-        "Interval Analysis",
-        "Type-State Analysis",
-        "Taint Analysis",
-        "Concurrency Analysis",
-    }
+    all_expected_types = constants.ANALYSIS_TYPES
     missing_types = all_expected_types - generated_types
     if missing_types:
         all_targets_met = False

@@ -7,115 +7,8 @@ from math import ceil
 from shutil import rmtree
 
 import loguru
+from helpers import constants
 from tqdm import tqdm
-
-# Explicit list of common cooking verbs (lemmas) to filter out
-VERB_STOP_LIST = {
-    "preheat",
-    "heat",
-    "warm",
-    "cool",
-    "chill",
-    "freeze",
-    "bake",
-    "roast",
-    "grill",
-    "broil",
-    "toast",
-    "fry",
-    "saute",
-    "sear",
-    "boil",
-    "simmer",
-    "poach",
-    "steam",
-    "reduce",
-    "mix",
-    "stir",
-    "combine",
-    "blend",
-    "whisk",
-    "fold",
-    "beat",
-    "whip",
-    "add",
-    "incorporate",
-    "introduce",
-    "remove",
-    "discard",
-    "take",
-    "set",
-    "aside",
-    "reserve",
-    "drain",
-    "strain",
-    "sift",
-    "measure",
-    "weigh",
-    "chop",
-    "dice",
-    "slice",
-    "mince",
-    "grate",
-    "zest",
-    "peel",
-    "core",
-    "trim",
-    "mash",
-    "puree",
-    "crush",
-    "grease",
-    "oil",
-    "butter",
-    "season",
-    "salt",
-    "pepper",
-    "cover",
-    "wrap",
-    "seal",
-    "soak",
-    "marinate",
-    "serve",
-    "plate",
-    "garnish",
-    "cook",
-    "prepare",
-    "make",
-    "create",
-    "start",
-    "begin",
-    "continue",
-    "finish",
-    "let",
-    "allow",
-    "ensure",
-    "check",
-    "test",
-    "adjust",
-    "repeat",
-    "follow",
-    "place",
-    "put",
-    "transfer",
-    "pour",
-    "sprinkle",
-    "drizzle",
-    "spread",
-    "layer",
-    "turn",
-    "flip",
-    "rotate",
-    "bring",
-    "work",
-    "use",
-    "need",
-    "require",
-    "taste",
-    "look",
-    "feel",
-    "smell",
-    "watch",
-}
 
 
 def load_json(file_path: str):
@@ -149,7 +42,7 @@ def is_likely_valid_entity(entity_name: str) -> bool:
 
     # Check if the first word is a verb from the stop list
     first_word = entity_name.split(" ", 1)[0].lower()
-    if first_word in VERB_STOP_LIST:
+    if first_word in constants.VERB_STOP_LIST_FOR_ENTITY_FILTERING:
         loguru.logger.debug(
             f"Filtering out entity '{entity_name}' because it starts with verb '{first_word}'"
         )
@@ -194,16 +87,7 @@ def verify_subset(
     relevant_questions_indices = set()  # Store indices of questions matched
 
     # Ensure all expected types are initialized
-    expected_types = {
-        "Reaching Definitions",
-        "Very Busy Expressions",
-        "Available Expressions",
-        "Live Variable Analysis",
-        "Interval Analysis",
-        "Type-State Analysis",
-        "Taint Analysis",
-        "Concurrency Analysis",
-    }
+    expected_types = set(constants.ANALYSIS_TYPES)
     for q_type in expected_types:
         counts_per_type[q_type] = 0
 
@@ -253,7 +137,7 @@ def find_entity_subset(
         return None, None
 
     # Types where the entity mention heuristic is unreliable/irrelevant
-    heuristic_ignore_types = {"Interval Analysis", "Concurrency Analysis"}
+    heuristic_ignore_types = constants.IGNORE_TYPES
     loguru.logger.info(
         f"Heuristic Check: Will ignore {heuristic_ignore_types} when determining sufficiency."
     )
@@ -353,7 +237,7 @@ def main():
     )
     parser.add_argument(
         "input_folder",
-        help="Folder containing the output files from the previous run (all_entities.json, all_questions.json)",
+        help=f"Folder containing the output files from the previous run ({constants.FILENAME_ALL_ENTITIES_JSON}, {constants.FILENAME_ALL_QUESTIONS_JSON})",
     )
     parser.add_argument(
         "output_folder",
@@ -405,7 +289,9 @@ def main():
     os.makedirs(args.output_folder, exist_ok=True)
 
     loguru.logger.remove()
-    log_file_path = os.path.join(args.output_folder, "subset_finding.log")
+    log_file_path = os.path.join(
+        args.output_folder, constants.FILENAME_SUBSET_FINDING_LOG
+    )
     loguru.logger.add(log_file_path, level=args.log_level)
     loguru.logger.add(
         lambda msg: tqdm.write(msg, end=""), level="INFO"
@@ -416,8 +302,12 @@ def main():
         loguru.logger.info("*** Mode: Finding and Proposing Entity Subset ***")
 
         # Load required data
-        entities_path = os.path.join(args.input_folder, "all_entities.json")
-        questions_path = os.path.join(args.input_folder, "all_questions.json")
+        entities_path = os.path.join(
+            args.input_folder, constants.FILENAME_ALL_ENTITIES_JSON
+        )
+        questions_path = os.path.join(
+            args.input_folder, constants.FILENAME_ALL_QUESTIONS_JSON
+        )
 
         entity_data = load_json(entities_path)
         all_questions = load_json(questions_path)
@@ -429,7 +319,7 @@ def main():
         original_entity_counts = entity_data.get("entity_counts", {})
         if not original_entity_counts:
             loguru.logger.error(
-                "No 'entity_counts' found in all_entities.json. Exiting."
+                f"No 'entity_counts' found in {constants.FILENAME_ALL_ENTITIES_JSON}. Exiting."
             )
             return
 
@@ -463,7 +353,7 @@ def main():
         if proposed_subset_names:
             # Save the proposed subset for manual review
             proposed_list_path = os.path.join(
-                args.output_folder, "proposed_entity_subset.txt"
+                args.output_folder, constants.FILENAME_PROPOSED_SUBSET_TXT
             )
             # Sort alphabetically for easier review
             proposed_subset_names.sort()
@@ -557,7 +447,9 @@ def main():
             return
 
         # Load questions data
-        questions_path = os.path.join(args.input_folder, "all_questions.json")
+        questions_path = os.path.join(
+            args.input_folder, constants.FILENAME_ALL_QUESTIONS_JSON
+        )
         all_questions = load_json(questions_path)
         if not all_questions:
             loguru.logger.error("Failed to load questions data. Exiting.")
@@ -574,7 +466,7 @@ def main():
 
         # Determine if all *relevant* types met the target according to the heuristic
         all_relevant_heuristic_targets_met = True
-        heuristic_ignore_types = {"Interval Analysis", "Concurrency Analysis"}
+        heuristic_ignore_types = constants.IGNORE_TYPES
         for q_type, count in final_heuristic_counts.items():
             if q_type not in heuristic_ignore_types:
                 if count < args.target_count:
@@ -582,7 +474,9 @@ def main():
                     break
 
         # Save the final report
-        report_path = os.path.join(args.output_folder, "final_verification_report.json")
+        report_path = os.path.join(
+            args.output_folder, constants.FILENAME_FINAL_VERIFICATION_REPORT_JSON
+        )
         report_data = {
             "manual_list_path": manual_list_path,
             "final_entity_subset_size": len(manual_subset),
@@ -627,7 +521,9 @@ def main():
             )
 
         # Save the final list used for verification
-        final_list_path = os.path.join(args.output_folder, "final_entity_subset.txt")
+        final_list_path = os.path.join(
+            args.output_folder, constants.FILENAME_FINAL_ENTITY_SUBSET_TXT
+        )
         sorted_manual_list = sorted(list(manual_subset))
         with open(final_list_path, "w", encoding="utf-8") as f:
             for entity in sorted_manual_list:

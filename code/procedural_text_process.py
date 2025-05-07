@@ -9,13 +9,13 @@ from typing import Any, Dict, List, Optional
 import loguru
 import matplotlib.pyplot as plt
 import spacy
-from helpers import ProceduralText, QuestionGenerator
+from helpers import ProceduralText, QuestionGenerator, constants
 from tqdm import tqdm
 
 # Load spaCy model for NLP processing
 spacy.require_gpu()
-# nlp = spacy.load("en_core_web_sm")  # Smaller model for faster processing
-nlp = spacy.load("en_core_web_trf")  # Larger model for better accuracy
+# nlp = spacy.load(constants.NLP_MODEL_SM)  # Smaller model for faster processing
+nlp = spacy.load(constants.NLP_MODEL_TRF)  # Larger model for better accuracy
 
 
 def plot_entity_frequency(entity_counter: Counter, output_folder: str) -> None:
@@ -25,8 +25,8 @@ def plot_entity_frequency(entity_counter: Counter, output_folder: str) -> None:
     :param entity_counter: Counter object with entity counts
     :param output_folder: Folder where to save the plot
     """
-    # Get the most common entities (top 20)
-    most_common = entity_counter.most_common(20)
+    # Get the most common entities (top n)
+    most_common = entity_counter.most_common(constants.PLOT_TOP_N_ENTITIES_MAIN)
 
     if not most_common:
         loguru.logger.warning("No entities to plot.")
@@ -50,32 +50,39 @@ def plot_entity_frequency(entity_counter: Counter, output_folder: str) -> None:
         )
 
     plt.xticks(range(len(entities)), entities, rotation=45, ha="right")
-    plt.title("Top 20 Most Frequent Entities")
+    plt.title(f"Top {constants.PLOT_TOP_N_ENTITIES_MAIN} Most Frequent Entities")
     plt.xlabel("Entity")
     plt.ylabel("Frequency")
     plt.tight_layout()
 
     # Save the plot
-    plot_path = os.path.join(output_folder, "entity_frequency.png")
+    plot_path = os.path.join(output_folder, constants.FILENAME_ENTITY_FREQ_PLOT)
     plt.savefig(plot_path)
     loguru.logger.info(f"Entity frequency plot saved to {plot_path}")
 
-    # Create a more detailed plot for the top 50 entities
-    if len(entity_counter) > 20:
-        top_50 = entity_counter.most_common(50)
-        entities_50, counts_50 = zip(*top_50)
+    # Create a more detailed plot
+    if len(entity_counter) > constants.PLOT_TOP_N_ENTITIES_MAIN:
+        extended_n = entity_counter.most_common(constants.PLOT_TOP_N_ENTITIES_EXTENDED)
+        entities_extended, counts_extended = zip(*extended_n)
 
         plt.figure(figsize=(15, 10))
-        plt.bar(range(len(entities_50)), counts_50, color="lightgreen")
-        plt.xticks(range(len(entities_50)), entities_50, rotation=45)
-        plt.title("Top 50 Most Frequent Entities")
+        plt.bar(range(len(entities_extended)), counts_extended, color="lightgreen")
+        plt.xticks(range(len(entities_extended)), entities_extended, rotation=45)
+        plt.title(
+            f"Top {constants.PLOT_TOP_N_ENTITIES_EXTENDED} Most Frequent Entities"
+        )
         plt.xlabel("Entity")
         plt.ylabel("Frequency")
         plt.tight_layout()
 
-        plot_path_50 = os.path.join(output_folder, "entity_frequency_top50.png")
-        plt.savefig(plot_path_50)
-        loguru.logger.info(f"Extended entity frequency plot saved to {plot_path_50}")
+        plot_path_extended = os.path.join(
+            output_folder,
+            f"entity_frequency_top{constants.PLOT_TOP_N_ENTITIES_EXTENDED}.png",
+        )
+        plt.savefig(plot_path_extended)
+        loguru.logger.info(
+            f"Extended entity frequency plot saved to {plot_path_extended}"
+        )
 
 
 def process_single_recipe(title: str, instructions: List[str]) -> Dict[str, Any]:
@@ -165,16 +172,7 @@ def process_recipe_folder(
     random.shuffle(json_files)  # Shuffle to get a random selection
 
     # Track questions by type
-    question_counts = {
-        "Reaching Definitions": 0,
-        "Very Busy Expressions": 0,
-        "Available Expressions": 0,
-        "Live Variable Analysis": 0,
-        "Interval Analysis": 0,
-        "Type-State Analysis": 0,
-        "Taint Analysis": 0,
-        "Concurrency Analysis": 0,
-    }
+    question_counts = {q_type: 0 for q_type in constants.ANALYSIS_TYPES}
 
     # Process each file until we reach the limit for all question types
     all_entities = Counter()
@@ -209,9 +207,9 @@ def process_recipe_folder(
                 )
                 continue
 
-            if len(instructions) < 3:
+            if len(instructions) < constants.MIN_RECIPE_STEPS_FOR_PROCESSING:
                 loguru.logger.warning(
-                    f"Recipe {file_name} has fewer than 3 steps, skipping."
+                    f"Recipe {file_name} has fewer than {constants.MIN_RECIPE_STEPS_FOR_PROCESSING} steps, skipping."
                 )
                 continue
 
@@ -315,7 +313,9 @@ def process_recipe_folder(
 
     # Save the entity counts
     with open(
-        os.path.join(output_folder, "all_entities.json"), "w", encoding="utf-8"
+        os.path.join(output_folder, constants.FILENAME_ALL_ENTITIES_JSON),
+        "w",
+        encoding="utf-8",
     ) as f:
         json.dump(
             {"entities": list(all_entities.keys()), "entity_counts": all_entities},
@@ -328,19 +328,25 @@ def process_recipe_folder(
 
     # Save all collected questions
     with open(
-        os.path.join(output_folder, "all_questions.json"), "w", encoding="utf-8"
+        os.path.join(output_folder, constants.FILENAME_ALL_QUESTIONS_JSON),
+        "w",
+        encoding="utf-8",
     ) as f:
         json.dump(all_questions, f, indent=2)
 
     # Save question counts by type
     with open(
-        os.path.join(output_folder, "question_counts.json"), "w", encoding="utf-8"
+        os.path.join(output_folder, constants.FILENAME_QUESTION_COUNTS_JSON),
+        "w",
+        encoding="utf-8",
     ) as f:
         json.dump(question_counts, f, indent=2)
 
     # Save processing statistics
     with open(
-        os.path.join(output_folder, "processing_stats.json"), "w", encoding="utf-8"
+        os.path.join(output_folder, constants.FILENAME_PROCESSING_STATS_JSON),
+        "w",
+        encoding="utf-8",
     ) as f:
         json.dump(
             {
@@ -391,12 +397,12 @@ def main():
     # Configure logging
     loguru.logger.remove()
     loguru.logger.add(
-        os.path.join(args.output_folder, "processing.log"),
+        os.path.join(args.output_folder, constants.FILENAME_PROCESSING_LOG),
         level=args.log_level,
     )
     loguru.logger.add(lambda msg: tqdm.write(msg, end=""), level=args.log_level)
 
-    random.seed(13)
+    random.seed(constants.RANDOM_SEED)
 
     loguru.logger.info(
         f"Starting recipe processing. Input: '{args.input_folder}', Output: '{args.output_folder}', Limit/Type: {args.limit}, Log Level: {args.log_level}"

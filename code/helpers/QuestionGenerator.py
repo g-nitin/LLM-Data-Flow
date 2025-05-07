@@ -4,103 +4,8 @@ from typing import List, Optional, Tuple
 
 import loguru
 
+from . import constants
 from .ProceduralText import ProceduralText
-
-# Verbs for identifying potentially misleading scenarios
-# Verbs indicating background resource prep or simple state changes often done early
-BACKGROUND_PREP_VERBS = {
-    "preheat",
-    "heat",
-    "warm",
-    "cool",
-    "chill",
-    "freeze",
-    "grease",
-    "oil",
-    "butter",
-    "flour",
-    "line",
-    "prepare",
-    "boil",
-    "melt",
-    "toast",
-    "set",
-    "start",
-    "begin",
-    "measure",
-    "weigh",
-    "sift",
-    "drain",
-    "rinse",
-    "soak",
-    "reserve",
-    "get",
-    "gather",
-    "have",
-    "ensure",
-    "check",
-    "adjust",
-    "allow",
-    "let",
-    "place",
-    "put",
-    "remove",
-    "take",
-    "discard",
-    "cover",
-    "combine",
-}
-
-# Verbs indicating active mixing, chopping, or combining actions often done concurrently with background prep
-ACTIVE_PREP_VERBS = {
-    "mix",
-    "stir",
-    "combine",
-    "blend",
-    "whisk",
-    "fold",
-    "beat",
-    "whip",
-    "add",
-    "incorporate",
-    "chop",
-    "dice",
-    "slice",
-    "mince",
-    "grate",
-    "zest",
-    "peel",
-    "core",
-    "trim",
-    "mash",
-    "puree",
-    "crush",
-    "season",
-    "sprinkle",
-    "pour",
-    "layer",
-    "spread",
-    "make",
-    "create",
-    "cook",
-    "continue",
-    "work",
-    "use",
-    "follow",
-    "repeat",
-    "taste",
-    "look",
-    "feel",
-    "smell",
-    "watch",
-    "dissolve",
-    "cream",
-    "knead",
-    "roll",
-    "cut",
-    "shape",
-    "form",
-}
 
 
 class QuestionGenerator:
@@ -469,14 +374,13 @@ class QuestionGenerator:
         """
         potential_concerns = []
         # This list contains lowercase entity names that are inherently unsafe if not cooked.
-        unsafe_entity_names = {"egg", "eggs", "raw chicken", "raw beef", "raw pork"}
 
         for entity_name, entity in self.text.entities.items():
             # entity.name is expected to be lowercase from ProceduralText parsing.
 
             # Determine if the entity is potentially unsafe initially.
             is_potentially_unsafe_initially = False
-            if entity_name in unsafe_entity_names:
+            if entity_name in constants.QGEN_UNSAFE_ENTITY_NAMES_TAINT:
                 is_potentially_unsafe_initially = True
             elif entity_name.startswith("raw "):  # e.g., entity name is "raw fish"
                 is_potentially_unsafe_initially = True
@@ -624,16 +528,18 @@ class QuestionGenerator:
             if ground_truth is False:
                 # Check if it's a background prep + active prep verb combination
                 combo1 = (
-                    action1 in BACKGROUND_PREP_VERBS and action2 in ACTIVE_PREP_VERBS
+                    action1 in constants.QGEN_BACKGROUND_PREP_VERBS
+                    and action2 in constants.QGEN_ACTIVE_PREP_VERBS
                 )
                 combo2 = (
-                    action2 in BACKGROUND_PREP_VERBS and action1 in ACTIVE_PREP_VERBS
+                    action2 in constants.QGEN_BACKGROUND_PREP_VERBS
+                    and action1 in constants.QGEN_ACTIVE_PREP_VERBS
                 )
 
                 # Also check if both are background verbs (e.g., measure and sift) which might also be misleading if False
                 combo3 = (
-                    action1 in BACKGROUND_PREP_VERBS
-                    and action2 in BACKGROUND_PREP_VERBS
+                    action1 in constants.QGEN_BACKGROUND_PREP_VERBS
+                    and action2 in constants.QGEN_BACKGROUND_PREP_VERBS
                 )
 
                 if combo1 or combo2 or combo3:
