@@ -1,0 +1,51 @@
+2025-05-07 11:05:34.893 | INFO     | __main__:main:302 - *** Mode: Finding and Proposing Entity Subset ***
+2025-05-07 11:05:34.906 | INFO     | __main__:main:327 - Filtering 3711 entities based on rules (e.g., removing those starting with verbs)...
+2025-05-07 11:05:34.908 | INFO     | __main__:main:335 - Retained 3655 entities after filtering.
+2025-05-07 11:05:34.908 | INFO     | __main__:find_entity_subset:141 - Heuristic Check: Will ignore {'Concurrency Analysis', 'Interval Analysis'} when determining sufficiency.
+2025-05-07 11:05:34.908 | INFO     | __main__:find_entity_subset:164 - Total unique *filtered* entities: 3655. Target questions/type: 100
+2025-05-07 11:05:34.908 | INFO     | __main__:find_entity_subset:167 - Starting with initial 1.0% (37 entities).
+2025-05-07 11:05:34.908 | INFO     | __main__:find_entity_subset:170 - Will increment by 1.0% (37 entities) if needed.
+2025-05-07 11:05:34.911 | INFO     | __main__:find_entity_subset:183 - 
+*** Verifying subset of size 37 ***
+2025-05-07 11:05:34.975 | SUCCESS  | __main__:find_entity_subset:209 - Found a sufficient subset (for heuristic-relevant types) with 37 entities.
+2025-05-07 11:05:34.975 | SUCCESS  | __main__:main:364 - Proposed entity subset saved to: outs/outs_24_subset_analysis/proposed_entity_subset.txt
+2025-05-07 11:05:34.975 | INFO     | __main__:main:367 - Proposed subset size: 37
+2025-05-07 11:05:34.975 | INFO     | __main__:main:368 - Heuristic verification counts with this proposed subset:
+2025-05-07 11:05:34.975 | INFO     | __main__:main:371 - (Counts based on entity mentions in question text)
+2025-05-07 11:05:34.975 | INFO     | __main__:main:384 - - Available Expressions: 117 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Concurrency Analysis: 0  (Ignored for sufficiency check)
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Interval Analysis: 0  (Ignored for sufficiency check)
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Live Variable Analysis: 123 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Reaching Definitions: 127 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Taint Analysis: 200 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Type-State Analysis: 128 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:384 - - Very Busy Expressions: 123 (Target: 100 - MET) 
+2025-05-07 11:05:34.976 | INFO     | __main__:main:390 - 
+*** Explanation & Action Required ***
+2025-05-07 11:05:34.976 | INFO     | __main__:main:391 - The script filtered the initial entity list (e.g., removing items starting with verbs) and then found a subset where *most* question types meet the target count based on a simple text-mention heuristic.
+2025-05-07 11:05:34.976 | INFO     | __main__:main:394 - Types like 'Interval Analysis' and 'Concurrency Analysis' were ignored during this check because the heuristic is unreliable for them (questions often don't mention specific entities).
+2025-05-07 11:05:34.976 | INFO     | __main__:main:397 - However, your *original* run successfully generated >100 questions for these types, indicating the underlying recipe data supports them.
+2025-05-07 11:05:34.976 | INFO     | __main__:main:400 - Therefore, this proposed subset is likely sufficient for the *actual* generation process.
+2025-05-07 11:05:34.976 | INFO     | __main__:main:403 - 1. Please review the file: outs/outs_24_subset_analysis/proposed_entity_subset.txt
+2025-05-07 11:05:34.976 | INFO     | __main__:main:404 - 2. Edit the file: Remove any *remaining* entities you consider incorrect, noisy, or irrelevant (e.g., units, generic terms like 'mixture' if unwanted).
+2025-05-07 11:05:34.976 | INFO     | __main__:main:407 - 3. Save the edited file (you can overwrite it or save with a new name).
+2025-05-07 11:05:34.976 | INFO     | __main__:main:410 - 4. Re-run this script using the --verify-manual-list flag, pointing to your edited file:
+2025-05-07 11:05:34.976 | INFO     | __main__:main:413 -    uv run python code/diminish.py outs/outs_24 outs/outs_24_subset_analysis --verify-manual-list YOUR_EDITED_LIST.txt --target-count 100
+2025-05-07 11:05:34.976 | INFO     | __main__:main:416 - ***
+2025-05-07 11:06:38.284 | INFO     | __main__:main:424 - *** Mode: Verifying Manually Edited Entity Subset ***
+2025-05-07 11:06:38.292 | INFO     | __main__:main:438 - Loaded 36 entities from manual list: outs/outs_24_subset_analysis/manual_entity_subset.txt
+2025-05-07 11:06:38.294 | INFO     | __main__:main:459 - Verifying the manually provided subset using the entity-mention heuristic...
+2025-05-07 11:06:38.351 | SUCCESS  | __main__:main:494 - Final verification report saved to: outs/outs_24_subset_analysis/final_verification_report.json
+2025-05-07 11:06:38.351 | INFO     | __main__:main:495 - *** Final Heuristic Verification Results ***
+2025-05-07 11:06:38.351 | INFO     | __main__:main:496 - Using 36 entities from outs/outs_24_subset_analysis/manual_entity_subset.txt:
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Available Expressions: 115 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Concurrency Analysis: 0 (Heuristic unreliable/ignored for sufficiency)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Interval Analysis: 0 (Heuristic unreliable/ignored for sufficiency)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Live Variable Analysis: 122 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Reaching Definitions: 127 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Taint Analysis: 200 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Type-State Analysis: 128 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | INFO     | __main__:main:506 - - Very Busy Expressions: 123 (Target: 100 - MET)
+2025-05-07 11:06:38.351 | SUCCESS  | __main__:main:509 - All heuristic targets for *relevant* types were met with the provided entity list.
+2025-05-07 11:06:38.351 | INFO     | __main__:main:512 - Assume targets for ignored types can also be met based on original run.
+2025-05-07 11:06:38.351 | INFO     | __main__:main:531 - Final entity list used for verification saved to: outs/outs_24_subset_analysis/final_entity_subset.txt

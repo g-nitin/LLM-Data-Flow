@@ -447,7 +447,7 @@ def main():
             )
 
     # Check for missing types
-    all_expected_types = constants.ANALYSIS_TYPES
+    all_expected_types = set(constants.ANALYSIS_TYPES)
     missing_types = all_expected_types - generated_types
     if missing_types:
         all_targets_met = False
