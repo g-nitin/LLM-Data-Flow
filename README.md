@@ -1,10 +1,10 @@
-# Automated Question Generation for Procedural Text Analysis
+# Automated Question Generation for Procedural Text Analysis in Recipes
 
-_Does LLMs understanding of data-flow change with content representation?_
+_Does LLMs understanding of data-flow change with content representation of recipes?_
 
 ## Overview
 
-This project provides a framework for analyzing procedural texts, such as recipes, plans, or instructions, by applying concepts borrowed from software program analysis. The goal is to understand the underlying structure, dependencies, and flow of these texts and to automatically generate questions that test this understanding.
+This project provides a framework for analyzing procedural texts, such as recipes, by applying concepts borrowed from software program analysis. The goal is to understand the underlying structure, dependencies, and flow of these texts and to automatically generate questions that test this understanding.
 
 The core idea is to represent a procedural text as a structured object, extract key entities (ingredients, tools, intermediate products) and their relationships, model the dependencies between steps, and then apply various analyses (like reaching definitions, liveness, concurrency) to probe the procedure's properties.
 
