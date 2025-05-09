@@ -1,6 +1,6 @@
 # Automated Question Generation for Procedural Text Analysis
 
-## Procedural Text Processing
+## 1. Procedural Text Processing (`procedural_text_process.py`)
 
 This codebase provides a framework for analyzing procedural texts (like recipes or instructions) using concepts from program analysis. It extracts entities, their relationships, and dependencies between steps, then generates questions that test understanding of the procedural flow.
 
@@ -49,10 +49,14 @@ This codebase provides a framework for analyzing procedural texts (like recipes 
 An example of processing up to 100 recipes from the input folder, save the results to the output folder, and log at the INFO level.
 
 ```bash
-uv run python code/procedural_text_process.py /path/to/recipes /path/to/output --limit 100 --log-level INFO
+uv run python code/procedural_text_process.py \
+    /path/to/recipes \
+    /path/to/output \
+    --limit 100 \
+    --log-level INFO
 ```
 
-## Diminishing
+## 2. Diminishing (`diminish.py`)
 
 This script will take the outputs from the `procedural_text_processing.py`'s run (`all_entities.json`, `all_questions.json`) and help find a minimal subset of _frequently occurring_ entities that likely contributed to generating at least 100 questions per category. It includes a step for manual review.
 
@@ -72,25 +76,30 @@ This script will take the outputs from the `procedural_text_processing.py`'s run
 1.  Ensure Inputs: Make sure you have the `all_entities.json` and `all_questions.json` files from your original run in a known input folder (here `path/to/output`).
 2.  Run - Step 1 (Propose Subset):
     ```bash
-    uv run python code/diminish.py outs/outs_1/ outs/outs_1_subset_analysis/
+    uv run python code/diminish.py \
+        outs/diminished_outptus/ \
+        outs/diminished_outptus_subset_analysis/
     ```
-    - The script will run and create `subset_analysis/proposed_entity_subset.txt` and `subset_analysis/subset_finding.log` within `outs_1_sub/`.
+    - The script will run and create `diminished_outptus_subset_analysis/proposed_entity_subset.txt` and `diminished_outptus_subset_analysis/subset_finding.log`.
 3.  Manual Review:
-    - Open `subset_analysis/proposed_entity_subset.txt`.
+    - Open `diminished_outptus_subset_analysis/proposed_entity_subset.txt`.
     - Delete any lines containing entities that seem like parsing errors (e.g., "medium heat", "minutes", single letters, verbs, etc.) or are too generic ("mixture", "batter" might be okay depending on your goal, but "ingredients" probably isn't).
-    - Save the edited file. You can overwrite it or save it as, for example, `subset_analysis/manual_entity_subset.txt`.
+    - Save the edited file. You can overwrite it or save it as, for example, `diminished_outptus_subset_analysis/manual_entity_subset.txt`.
 4.  Run - Step 2 (Verify Manual List):
     ```bash
-    uv run python code/diminish.py outs/outs_1 outs/outs_1_subset_analysis --verify-manual-list outs/outs_1_subset_analysis/manual_entity_subset.txt
+    uv run python code/diminish.py \
+        outs/diminished_outptus \
+        outs/diminished_outptus_subset_analysis \
+        --verify-manual-list outs/diminished_outptus_subset_analysis/manual_entity_subset.txt
     ```
     - Make sure the path after `--verify-manual-list` points to the _edited_ file.
     - The script will now use _only_ the entities in your edited list to count the relevant questions.
-    - It will output the final counts and save `subset_analysis/final_verification_report.json` and `subset_analysis/final_entity_subset.txt`.
+    - It will output the final counts and save `diminished_outptus_subset_analysis/final_verification_report.json` and `diminished_outptus_subset_analysis/final_entity_subset.txt`.
 5.  Analyze Results: Check the `final_verification_report.json` and the console output. If all counts are >= 100, your manually curated list is sufficient according to the heuristic. If not, you might need to be less strict in your manual filtering or accept the lower counts.
 
-## Final Dataset Generation
+## 3. Pre-Final Dataset Generation (`generate_final_dataset.py`)
 
-After the previous two script, we have a curated list of trusted entities (e.g. `final_entity_subset.txt`). Now, we also want to use the _original_ pool of generated questions (`all_questions.json` or equivalent data from the processed recipe files) and select exactly `target_count` (e.g., 100) questions for each analysis category. The selection should prioritize questions coming from recipes that involve your curated entities and ideally contribute questions to multiple analysis types. The final output should be separate CSV files per category, each containing the prompt (recipe + question) and the answer.
+After the previous two scripts, we have a curated list of trusted entities (e.g. `final_entity_subset.txt`). Now, we also want to use the _original_ pool of generated questions (`all_questions.json` or equivalent data from the processed recipe files) and select exactly `target_count` (e.g., 100) questions for each analysis category. The selection should prioritize questions coming from recipes that involve your curated entities and ideally contribute questions to multiple analysis types. The final output should be separate CSV files per category, each containing the prompt (recipe + question) and the answer. **These serve as the input for manual annotation.**
 
 ### Script Logic
 
@@ -124,25 +133,89 @@ After the previous two script, we have a curated list of trusted entities (e.g. 
 ### How to Use
 
 1.  **Ensure Inputs:**
-    - Have the folder containing the _original_ processed recipe JSONs (e.g., `outs/outs_6/`).
-    - Have your final curated entity list (e.g., `outs/outs_6_sub/final_entity_subset.txt`).
+    - Have the folder containing the _original_ processed recipe JSONs (e.g., `outs/diminished_outptus/`).
+    - Have your final curated entity list (e.g., `outs/diminished_outptus_subset_analysis/final_entity_subset.txt`).
     - Decide on an output folder for the CSVs (e.g., `final_csv_datasets`).
 2.  **Run the Script:**
     ```bash
-    uv run python code/generate_final_dataset.py outs/outs_1/ outs/outs_1_subset_analysis/final_entity_subset.txt outs/outs_1_subsetted_final_datasets
+    uv run python code/generate_final_dataset.py \
+        outs/diminished_outptus/ \
+        outs/diminished_outptus_subset_analysis/final_entity_subset.txt \
+        outs/initial_final_csv_datasets
     ```
 3.  **Check Output:** The script will create the `final_csv_datasets` folder (or whatever you named it) and populate it with CSV files, one for each analysis category (e.g., `Reaching_Definitions_questions.csv`, `Taint_Analysis_questions.csv`, etc.). Each CSV will contain exactly 100 rows (or fewer if not enough eligible questions were found for that category), with `prompt` and `answer` columns.
 
-## (Final) Post-Processing
+## 4. Interactive Dataset Finalization (`finalize_corrected_dataset.py`)
 
-Lastly, to adhere with the format and naming requirements, we need to rename the CSV files and columns. This is a simple script that takes the final dataset folder and renames the files and columns accordingly.
+After the `generate_final_dataset.py` script produces an initial set of CSVs, these files undergo manual annotation. Annotators add a `corrected_answer` column and mark any incorrect original answers. The `finalize_corrected_dataset.py` script then processes these annotated CSVs to produce the final, verified dataset.
+
+### Script Logic
+
+1.  **Load Annotated Data:**
+
+ted CSV file (e.g., `recipe_available_expressions_annotated.csv`). These files are expected to have `prompt`, `answer`, and `corrected_answer` columns. - Loads the full pool of initially generated questions (`all_questions.json` from `procedural_text_process.py`) for gap-filling. - Loads processed recipe JSONs (from `procedural_text_process.py`) to access recipe instructions for formatting prompts.
+
+2.  **Process Corrections (Interactive):**
+
+    - For each question in an annotated CSV:
+      - If the `corrected_answer` is blank or matches the original `answer`, the question-answer pair is considered correct and kept.
+      - If `corrected_answer` indicates the original `answer` was wrong:
+        - The script attempts to generate a _new_ question for the _same recipe_ and _same analysis type_.
+        - This newly generated question and its proposed answer are presented to the user via a Command Line Interface (CLI).
+        - The user interactively verifies if the new Q&A is correct (`y`), incorrect (`n`), or if they want to skip trying to find a replacement for this specific recipe and type (`s`).
+        - If accepted (`y`), the new Q&A replaces the original incorrect one.
+        - If rejected (`n`), the script may try a few more times.
+        - If skipped (`s`), or if no suitable replacement is found after retries, the incorrect Q&A is dropped, and the slot will be filled later if needed.
+
+3.  **Fill Gaps (Interactive):**
+
+    - After processing all annotated questions for an analysis type, if the number of verified Q&A pairs is less than the `target_count` (e.g., 100):
+      - The script attempts to source additional questions from the `all_questions.json` pool for that specific analysis type.
+      - Candidate questions (and their original recipes/answers) are presented to the user one by one via the CLI for interactive verification.
+      - If the user accepts a candidate (`y`), it's added to the dataset for that analysis type until the `target_count` is reached.
+
+4.  **Output Final CSVs:**
+    - For each analysis type, a final CSV file is generated (e.g., `recipe_available_expressions.csv`).
+    - These CSVs contain exactly `target_count` (or fewer, if gap-filling was unsuccessful) verified question-answer pairs.
+    - The output CSVs only have two columns: `prompt` and `answer`.
 
 ### How to Use
 
 1.  **Ensure Inputs:**
-    - Have the folder containing the final CSV datasets (e.g., `outs/outs_1_subsetted_final_datasets/`).
+
+    - A folder containing your manually annotated CSV files. Each CSV should be named like `recipe_<analysis_type>_annotated.csv` and have `prompt`, `answer`, `corrected_answer` columns.
+    - The output folder from `procedural_text_process.py` (containing individual processed recipe JSONs).
+    - The `all_questions.json` file from `procedural_text_process.py`.
+    - An output folder for the final, verified CSVs.
+
+2.  **Run the Script:**
+
+    ```bash
+    # Example:
+    uv run python code/finalize_corrected_dataset.py \
+        /path/to/annotated_csv_datasets \
+        /path/to/diminished_outptus \
+        /path/to/diminished_outptus/all_questions.json \
+        /path/to/final_corrected_datasets \
+        /path/to/final_datasets/
+    ```
+
+    - The script will guide you through interactive verification for replacements and gap-filling.
+
+3.  **Check Output:** The script will populate the specified output folder with the final CSVs, each aiming for `target_count` rows and containing only `prompt` and `answer` columns.
+
+## 5. (Optional) Post-Processing (`post_processing.py`)
+
+**Note:** This step is integrated within the `finalize_corrected_dataset.py` script, but can also be run separately if needed. It serves to ensure the final datasets are in the correct format and naming conventions for release.
+
+To adhere with the format and naming requirements, and to generate final dataset statistics, we use the `post_processing.py` script. This script takes the output folder from `finalize_corrected_dataset.py`.
+
+### How to Use
+
+1.  **Ensure Inputs:**
+    - Have the folder containing the final corrected CSV datasets (e.g., `/path/to/final_corrected_datasets/`).
 2.  **Run the Script:**
     ```bash
-    uv run python code/post_processing.py outs/outs_1_subsetted_final_datasets/ outs/final_recipes/
+    uv run python code/post_processing.py /path/to/final_corrected_datasets/ /path/to/final_datasets_for_release/
     ```
-3.  **Check Output:** The script will create the `outs/final_recipes/` folder and populate it with the renamed CSV files and columns.
+3.  **Check Output:** The script will create the `/path/to/final_datasets_for_release/` folder and populate it with the renamed CSV files (if any renaming rules are applied), `answer` columns converted (e.g., booleans to Yes/No), and a `dataset_statistics.json` file.

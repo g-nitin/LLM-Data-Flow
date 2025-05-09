@@ -19,34 +19,49 @@ Starting from raw recipe data, this codebase allows you to generate structured d
 # Output: Folder with processed JSONs per recipe (entities, questions), plus aggregate files (all_entities.json, all_questions.json, etc.)
 uv run python code/procedural_text_process.py /path/to/raw_recipes /path/to/initial_output
 
-# Step 2: Propose Curated Entity Subset
+# Step 2a: Propose Curated Entity Subset
 # Analyzes entity frequency and question coverage (heuristic) to propose a smaller, likely sufficient list of entities.
 # Input: Folder from Step 1 (e.g., /path/to/initial_output)
 # Output: Folder with proposed list (proposed_entity_subset.txt) and analysis logs.
 uv run python code/diminish.py /path/to/initial_output /path/to/subset_analysis
 
-# --- MANUAL STEP ---
+# ***** MANUAL STEP *****
 # Review and edit the proposed_entity_subset.txt file.
 # Remove incorrect/noisy entities. Save the cleaned list (e.g., as final_entity_subset.txt).
-# --- END MANUAL STEP ---
 
-# Step 3: Verify Curated Entity Subset
+# Step 2b: Verify Curated Entity Subset
 # Verifies the manually edited entity list against the question pool using the heuristic.
 # Input: Folder from Step 1, Path to manually edited entity list.
 # Output: Folder with verification report (final_verification_report.json) and the final list used (final_entity_subset.txt).
 uv run python code/diminish.py /path/to/initial_output /path/to/subset_analysis --verify-manual-list /path/to/subset_analysis/final_entity_subset.txt
 
-# Step 4: Generate Final Datasets (CSV)
-# Filters the original question pool based on the curated entity list and recipe relevance, selects the target number of questions per type, and generates final CSVs.
+# Step 3: Generate Initial Final Datasets (CSV)
+# Filters the original question pool based on the curated entity list and recipe relevance, selects the target number of questions per type, and generates initial final CSVs.
 # Input: Folder from Step 1, Path to the final curated entity list (from Step 3).
 # Output: Folder containing one CSV per analysis type (e.g., Reaching_Definitions_questions.csv).
-uv run python code/generate_final_dataset.py /path/to/initial_output /path/to/subset_analysis/final_entity_subset.txt /path/to/final_csv_datasets --target-count 100 # Adjust target as needed
+uv run python code/generate_final_dataset.py /path/to/initial_output /path/to/subset_analysis/final_entity_subset.txt /path/to/final_csv_datasets --target-count 100
 
-# Step 5: Post-Process Final Datasets (Optional Renaming/Formatting)
-# Renames CSV files and columns to a specific required format if needed.
-# Input: Folder from Step 4.
-# Output: Folder with potentially renamed/reformatted CSVs.
-uv run python code/post_processing.py /path/to/final_csv_datasets /path/to/final_formatted_datasets
+# ***** MANUAL ANNOTATION STEP *****
+# 1. Make 8 copies of the initial_final_csv_datasets folder (e.g., to /path/to/annotated_csv_datasets).
+# 2. For each CSV file in the copied folder (e.g., Reaching_Definitions_questions.csv):
+#    a. Rename it to include "_annotated" (e.g., recipe_reaching_definitions_annotated.csv).
+#    b. Add a third column named `corrected_answer`.
+#    c. For each question:
+#       - If the original `answer` is correct, leave `corrected_answer` blank or copy the `answer`.
+#       - If the original `answer` is incorrect, put the correct answer in the `corrected_answer` column.
+
+# Step 4: Finalize Corrected Datasets (Interactive)
+# Processes the annotated CSVs. For incorrect questions, it attempts to generate and interactively verify replacements.
+# Fills any gaps to reach the target count per type, also with interactive verification.
+# Input: Folder with annotated CSVs, Folder from Step 1 (initial_output), Path to all_questions.json (from Step 1).
+# Output: Folder with final, manually verified CSVs (e.g., /path/to/final_corrected_datasets).
+uv run python code/finalize_corrected_dataset.py /path/to/annotated_csv_datasets /path/to/initial_output /path/to/initial_output/all_questions.json /path/to/final_corrected_datasets /path/to/final_datasets_for_release
+
+# Step 5 (Optional): Post-Process Final Datasets (Renaming/Formatting & Stats)
+# Renames CSV files and columns to a specific required format if needed, converts boolean answers to Yes/No, and generates dataset statistics.
+# Input: Folder from Step 5 (e.g., /path/to/final_corrected_datasets).
+# Output: Folder with potentially renamed/reformatted CSVs and dataset_statistics.json (e.g., /path/to/final_datasets_for_release).
+uv run python code/post_processing.py /path/to/final_corrected_datasets /path/to/final_datasets_for_release
 ```
 
 ## Data-Flow Analyses Analogies for Recipes
